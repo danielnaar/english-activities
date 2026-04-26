@@ -8,18 +8,63 @@
         body { font-family: 'Montserrat', sans-serif; background-color: #F8F9FA; color: #121212; margin: 0; text-align: center; }
         header { background-color: #0B192C; padding: 3rem; border-bottom: 4px solid #D4AF37; }
         h1 { font-family: 'Playfair Display', serif; color: #FFFFFF; font-size: 3rem; margin: 0; }
-        .container { max-width: 600px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* Contenedor principal (oculto al inicio) */
+        #main-content { display: none; }
+        
+        .container { max-width: 600px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .session-link { display: block; padding: 1.5rem; margin: 1rem 0; background: #0B192C; color: #D4AF37; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s; }
         .session-link:hover { background: #121212; transform: translateY(-3px); }
+        
+        /* Estilos de la pantalla de acceso (Login) */
+        #login-container { max-width: 400px; margin: 5rem auto; padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 4px solid #0B192C; }
+        #login-container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-top: 0; margin-bottom: 1rem; }
+        .login-desc { font-size: 0.9rem; color: #666; margin-bottom: 2rem; }
+        input[type="password"] { width: 85%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; }
+        input[type="password"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
+        button { background-color: #0B192C; color: #D4AF37; border: none; padding: 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
+        button:hover { background-color: #121212; }
+        #error-message { color: #d32f2f; font-size: 0.85rem; margin-top: 1.5rem; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
     <header>
         <h1>Premium English</h1>
     </header>
-    <div class="container">
-        <h2 style="font-family: 'Playfair Display';">Interactive Sessions</h2>
+    
+    <div id="login-container">
+        <h2>Exclusive Access</h2>
+        <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
+        <input type="password" id="password-input" placeholder="Access Code">
+        <button onclick="checkPassword()">Unlock Access</button>
+        <p id="error-message">Incorrect access code. Please try again.</p>
+    </div>
+
+    <div id="main-content" class="container">
+        <h2 style="font-family: 'Playfair Display'; color: #0B192C;">Interactive Sessions</h2>
         <a href="./STEP-1/SESSION-1/transposition.html" class="session-link">SESSION 1: The Wrong Suitcase</a>
     </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password-input").value;
+            
+            // Verificación de la contraseña
+            if (password === "deltanovember-30-12-2003") {
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+        }
+
+        // Permite al usuario presionar la tecla "Enter" para ingresar
+        document.getElementById("password-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
+    </script>
 </body>
 </html>
