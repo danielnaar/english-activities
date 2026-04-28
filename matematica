@@ -1,0 +1,10 @@
+flowchart LR
+    I[Integral con \u221a(...)] -->|caso √(a²-x²)| A[x = a·senθ]
+    I -->|caso √(a²+x²)| B[x = a·tanθ]
+    I -->|caso √(x²-a²)| C[x = a·secθ]
+    A --> D{Simplificar con identidades}
+    B --> D
+    C --> D
+    D --> E[Integrar función trigonométrica]
+    E --> F[Reconvertir a x usando triángulo]
+    F --> G[Resultado final en x]
