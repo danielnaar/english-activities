@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creador de Collage de Lujo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .marco-dorado-container {
+            background-color: #ffffff;
+            /* CAMBIO: Proporción más ancha (3:4 en lugar de 2:3) */
+            aspect-ratio: 3 / 4;
+            position: relative;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
+            width: 100%;
+            /* CAMBIO: Aumentado el ancho máximo visual en la web */
+            max-width: 360px; 
+        }
+        
+        .borde-dorado {
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .borde-dorado::before,
+        .borde-dorado::after,
+        .borde-dorado-inner::before,
+        .borde-dorado-inner::after {
+            content: '';
+            position: absolute;
+            background-color: #D4AF37;
+        }
+
+        .borde-dorado::before { top: 0; left: -4px; right: -4px; height: 1px; }
+        .borde-dorado::after { bottom: 0; left: -4px; right: -4px; height: 1px; }
+        .borde-dorado-inner::before { top: -4px; bottom: -4px; left: 0; width: 1px; }
+        .borde-dorado-inner::after { top: -4px; bottom: -4px; right: 0; width: 1px; }
+        
+        .espacio-aire {
+            position: absolute;
+            top: 32px; left: 32px; right: 32px; bottom: 32px; 
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.5s ease;
+        }
+
+        .img-draggable {
+            position: absolute;
+            cursor: grab;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out; 
+            max-width: none !important; 
+        }
+
+        .img-draggable:active {
+            cursor: grabbing;
+        }
+
+        .guide-line {
+            position: absolute;
+            background-color: #00d2ff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 30;
+            transition: opacity 0.2s;
+            box-shadow: 0 0 5px rgba(0, 210, 255, 0.8);
+        }
+        .guide-line.vertical { top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%); }
+        .guide-line.horizontal { left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%); }
+        .guide-line.active { opacity: 1; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8 px-4 font-sans text-gray-800">
+
+    <header class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2" style="font-family: 'Playfair Display', serif;">Creador de Collage Exclusivo</h1>
+        <p class="text-gray-600">6 imágenes en formato 3x2. Listas para exportar a PowerPoint en 1920x1080.</p>
+    </header>
+
+    <main class="bg-white p-6 rounded-xl shadow-lg w-full max-w-[1200px]">
+        
+        <!-- CUADRÍCULA 3x2 ESTRICTA (Forzada a 3 columnas siempre) -->
+        <div class="w-full overflow-x-auto hide-scrollbar pb-6">
+            <!-- CAMBIO: Mayor separación horizontal en la vista web (gap-x-12) -->
+            <div id="collage-workspace" class="grid grid-cols-3 gap-x-12 gap-y-8 justify-items-center min-w-[1024px] mx-auto">
+                
+                <!-- MARCOS (Generados por un script para mantener limpio el HTML, ya que son idénticos) -->
+            </div>
+        </div>
+
+        <div class="mt-10 flex justify-center border-t pt-8">
+            <button onclick="downloadCollage()" class="bg-[#D4AF37] hover:bg-[#b8952b] text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Guardar Diapositiva Final
+            </button>
+        </div>
+    </main>
+
+    <script>
+        const TOTAL_IMAGES = 6;
+        
+        // Inicializar los 6 slots dinámicamente
+        const slots = Array.from({length: TOTAL_IMAGES}, (_, i) => ({
+            id: i, x: 0, y: 0, scale: 1, baseW: 0, baseH: 0, isLoaded: false, isDragging: false, startX: 0, startY: 0, bgColor: '#ffffff'
+        }));
+
+        // Renderizar el HTML de los 6 marcos dinámicamente para no saturar el código de repetiones
+        const workspace = document.getElementById('collage-workspace');
+        for (let i = 0; i < TOTAL_IMAGES; i++) {
+            workspace.innerHTML += `
+            <div class="flex flex-col items-center w-full max-w-[360px]">
+                <div class="marco-dorado-container w-full">
+                    <div class="borde-dorado"><div class="borde-dorado-inner"></div></div>
+                    <div id="frame-${i}" class="espacio-aire bg-white">
+                        <div id="guide-v-${i}" class="guide-line vertical"></div>
+                        <div id="guide-h-${i}" class="guide-line horizontal"></div>
+                        <span class="text-gray-400 absolute pointer-events-none z-0 text-center px-4 font-medium" id="placeholder-${i}">
+                            Sube la imagen ${i + 1}
+                        </span>
+                        <img id="img-${i}" class="img-draggable z-10" style="display:none;" draggable="false" alt="Imagen ${i + 1}">
+                    </div>
+                </div>
+                <div class="mt-6 w-full flex flex-col gap-3">
+                    <input type="file" accept="image/*" class="text-sm w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#fcf9f2] file:text-[#b8952b] hover:file:bg-[#f7f0df] cursor-pointer transition-colors" onchange="handleFileUpload(event, ${i})">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs text-gray-500 font-semibold flex justify-between">
+                            <span>Zoom</span> <span id="zoom-val-${i}">1x</span>
+                        </label>
+                        <input type="range" id="zoom-${i}" min="0.01" max="4" step="0.01" value="1" class="w-full accent-[#D4AF37] cursor-pointer" disabled oninput="handleZoom(event, ${i})">
+                    </div>
+                    <div class="flex items-center justify-between gap-2 mt-1">
+                        <label class="text-xs text-gray-500 font-semibold">Color de Fondo</label>
+                        <input type="color" id="color-${i}" value="#ffffff" oninput="handleBgColor(event, ${i})" class="w-8 h-8 rounded cursor-pointer border-0 p-0" disabled>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        // FUNCIONES DE COLOR
+        function handleBgColor(event, index) {
+            const newColor = event.target.value;
+            slots[index].bgColor = newColor;
+            document.getElementById(`frame-${index}`).style.backgroundColor = newColor;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + [r, g, b].map(x => {
+                const hex = x.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+
+        // CARGA DE IMAGEN
+        function handleFileUpload(event, index) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById(`img-${index}`);
+                const placeholder = document.getElementById(`placeholder-${index}`);
+                const slider = document.getElementById(`zoom-${index}`);
+                
+                img.onload = () => setupImage(index, img);
+                img.src = e.target.result;
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
+                slider.disabled = false;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function setupImage(index, img) {
+            const frame = document.getElementById(`frame-${index}`);
+            const slot = slots[index];
+            
+            try {
+                const tmpCanvas = document.createElement('canvas');
+                const ctx = tmpCanvas.getContext('2d', { willReadFrequently: true });
+                tmpCanvas.width = img.naturalWidth;
+                tmpCanvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+                
+                const sampleX = Math.floor(img.naturalWidth * 0.05);
+                const sampleY = Math.floor(img.naturalHeight * 0.05);
+                
+                const pixel = ctx.getImageData(sampleX, sampleY, 1, 1).data;
+                const hexColor = rgbToHex(pixel[0], pixel[1], pixel[2]);
+                
+                frame.style.backgroundColor = hexColor;
+                slot.bgColor = hexColor; 
+
+                const colorPicker = document.getElementById(`color-${index}`);
+                if (colorPicker) {
+                    colorPicker.value = hexColor;
+                    colorPicker.disabled = false;
+                }
+            } catch(e) {
+                console.error("No se pudo detectar el color:", e);
+            }
+
+            const fw = frame.clientWidth;
+            const fh = frame.clientHeight;
+            const nw = img.naturalWidth;
+            const nh = img.naturalHeight;
+
+            slot.baseW = nw;
+            slot.baseH = nh;
+            img.style.width = `${slot.baseW}px`;
+            img.style.height = `${slot.baseH}px`;
+
+            slot.x = (fw - slot.baseW) / 2;
+            slot.y = (fh - slot.baseH) / 2;
+            
+            const minScaleToFit = Math.min(fw / nw, fh / nh);
+            const slider = document.getElementById(`zoom-${index}`);
+            slider.min = Math.min(0.01, minScaleToFit * 0.1).toFixed(3);
+            slider.max = Math.max(4, minScaleToFit * 5).toFixed(3);
+            
+            slot.scale = 1;
+            slider.value = 1;
+            document.getElementById(`zoom-val-${index}`).innerText = '1.00x';
+
+            slot.isLoaded = true;
+            updateImageCSS(index);
+            
+            // Asegurar que el evento solo se añade una vez
+            img.onmousedown = null;
+            window.onmousemove = null;
+            window.onmouseup = null;
+            setupDraggingEvents(index, img);
+        }
+
+        function handleZoom(event, index) {
+            slots[index].scale = parseFloat(event.target.value);
+            document.getElementById(`zoom-val-${index}`).innerText = `${slots[index].scale.toFixed(2)}x`;
+            updateImageCSS(index);
+        }
+
+        function updateImageCSS(index) {
+            const slot = slots[index];
+            const img = document.getElementById(`img-${index}`);
+            img.style.left = `${slot.x}px`;
+            img.style.top = `${slot.y}px`;
+            img.style.transform = `scale(${slot.scale})`;
+        }
+
+        function setupDraggingEvents(index, img) {
+            const slot = slots[index];
+
+            const startDrag = (clientX, clientY) => {
+                slot.isDragging = true;
+                slot.startX = clientX - slot.x;
+                slot.startY = clientY - slot.y;
+                img.style.transition = 'none';
+            };
+
+            const doDrag = (clientX, clientY) => {
+                if (!slot.isDragging) return;
+                
+                let rawX = clientX - slot.startX;
+                let rawY = clientY - slot.startY;
+
+                const frame = document.getElementById(`frame-${index}`);
+                const perfectX = (frame.clientWidth - slot.baseW) / 2;
+                const perfectY = (frame.clientHeight - slot.baseH) / 2;
+                
+                const snapThreshold = 15; 
+
+                const guideV = document.getElementById(`guide-v-${index}`);
+                const guideH = document.getElementById(`guide-h-${index}`);
+
+                if (Math.abs(rawX - perfectX) < snapThreshold) {
+                    slot.x = perfectX;
+                    guideV.classList.add('active'); 
+                } else {
+                    slot.x = rawX;
+                    guideV.classList.remove('active');
+                }
+
+                if (Math.abs(rawY - perfectY) < snapThreshold) {
+                    slot.y = perfectY;
+                    guideH.classList.add('active'); 
+                } else {
+                    slot.y = rawY;
+                    guideH.classList.remove('active');
+                }
+
+                updateImageCSS(index);
+            };
+
+            const endDrag = () => {
+                if (!slot.isDragging) return;
+                slot.isDragging = false;
+                img.style.transition = 'transform 0.1s ease-out';
+                
+                document.getElementById(`guide-v-${index}`).classList.remove('active');
+                document.getElementById(`guide-h-${index}`).classList.remove('active');
+            };
+
+            img.onmousedown = (e) => startDrag(e.clientX, e.clientY);
+            
+            // Para prevenir múltiples listeners, usamos el window pero ligado
+            const onMouseMove = (e) => doDrag(e.clientX, e.clientY);
+            const onMouseUp = () => {
+                endDrag();
+                window.removeEventListener('mousemove', onMouseMove);
+                window.removeEventListener('mouseup', onMouseUp);
+            };
+
+            img.onmousedown = (e) => {
+                startDrag(e.clientX, e.clientY);
+                window.addEventListener('mousemove', onMouseMove);
+                window.addEventListener('mouseup', onMouseUp);
+            };
+
+            img.addEventListener('touchstart', (e) => {
+                startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+
+            img.addEventListener('touchmove', (e) => {
+                if (slot.isDragging) e.preventDefault();
+                doDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+
+            img.addEventListener('touchend', endDrag);
+        }
+
+        // --- EXPORTAR AL CANVAS 3x2 ---
+        function downloadCollage() {
+            const isAnyLoaded = slots.some(s => s.isLoaded);
+            if (!isAnyLoaded) {
+                alert("Por favor, sube al menos una imagen antes de guardar.");
+                return;
+            }
+
+            // 1. Lienzo del Collage con 3 Columnas y 2 Filas
+            const collageCanvas = document.createElement('canvas');
+            const ctx = collageCanvas.getContext('2d');
+            
+            // CAMBIO: Dimensiones más anchas y espacios asimétricos
+            const exportFrameW = 1200; // Marcos más anchos
+            const exportFrameH = 1600; // Proporción 3:4
+            const gapX = 350; // Mucho más espacio horizontal entre marcos
+            const gapY = 150; // Menos espacio vertical para no limitar el tamaño
+            const cols = 3;
+            const rows = 2;
+            
+            collageCanvas.width = (exportFrameW * cols) + (gapX * (cols - 1));
+            collageCanvas.height = (exportFrameH * rows) + (gapY * (rows - 1));
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, collageCanvas.width, collageCanvas.height);
+
+            slots.forEach((slot, index) => {
+                // Cálculo de posición en X y Y basado en columnas y filas
+                const col = index % cols;
+                const row = Math.floor(index / cols);
+                
+                const offsetX = col * (exportFrameW + gapX);
+                const offsetY = row * (exportFrameH + gapY);
+                
+                // Dibujar bloque base
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(offsetX, offsetY, exportFrameW, exportFrameH);
+
+                // Dibujar Borde Dorado
+                const bOffset = 36;
+                ctx.strokeStyle = '#D4AF37';
+                ctx.lineWidth = 3;
+                
+                ctx.strokeRect(offsetX + bOffset, offsetY + bOffset, exportFrameW - (bOffset * 2), exportFrameH - (bOffset * 2));
+                
+                const ext = 12;
+                ctx.beginPath();
+                // Líneas Horizontales Superior e Inferior
+                ctx.moveTo(offsetX + bOffset - ext, offsetY + bOffset); 
+                ctx.lineTo(offsetX + exportFrameW - bOffset + ext, offsetY + bOffset);
+                ctx.moveTo(offsetX + bOffset - ext, offsetY + exportFrameH - bOffset); 
+                ctx.lineTo(offsetX + exportFrameW - bOffset + ext, offsetY + exportFrameH - bOffset);
+                // Líneas Verticales Izquierda y Derecha
+                ctx.moveTo(offsetX + bOffset, offsetY + bOffset - ext); 
+                ctx.lineTo(offsetX + bOffset, offsetY + exportFrameH - bOffset + ext);
+                ctx.moveTo(offsetX + exportFrameW - bOffset, offsetY + bOffset - ext); 
+                ctx.lineTo(offsetX + exportFrameW - bOffset, offsetY + exportFrameH - bOffset + ext);
+                ctx.stroke();
+
+                // Dibujar Espacio de Aire (Passepartout)
+                const padding = 96;
+                const innerX = offsetX + padding;
+                const innerY = offsetY + padding; // <-- ¡Usando offsetY ahora!
+                const innerW = exportFrameW - (padding * 2);
+                const innerH = exportFrameH - (padding * 2);
+
+                ctx.fillStyle = slot.bgColor || '#ffffff';
+                ctx.fillRect(innerX, innerY, innerW, innerH);
+
+                // Dibujar la Imagen real recortada
+                if (slot.isLoaded) {
+                    const img = document.getElementById(`img-${index}`);
+                    
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(innerX, innerY, innerW, innerH);
+                    ctx.clip();
+
+                    const uiInnerW = document.getElementById(`frame-${index}`).clientWidth;
+                    const scaleRatio = innerW / uiInnerW;
+                    
+                    const scaledW = slot.baseW * scaleRatio;
+                    const scaledH = slot.baseH * scaleRatio;
+                    const scaledX = slot.x * scaleRatio;
+                    const scaledY = slot.y * scaleRatio;
+
+                    const centerX = scaledX + (scaledW / 2);
+                    const centerY = scaledY + (scaledH / 2);
+
+                    ctx.translate(innerX + centerX, innerY + centerY);
+                    ctx.scale(slot.scale, slot.scale);
+                    ctx.drawImage(img, -scaledW / 2, -scaledH / 2, scaledW, scaledH);
+
+                    ctx.restore();
+                }
+            });
+
+            // 2. Lienzo Final PPT (1920x1080)
+            const pptCanvas = document.createElement('canvas');
+            pptCanvas.width = 1920;
+            pptCanvas.height = 1080;
+            const pptCtx = pptCanvas.getContext('2d');
+
+            pptCtx.fillStyle = '#ffffff';
+            pptCtx.fillRect(0, 0, pptCanvas.width, pptCanvas.height);
+
+            // CAMBIO: Reducimos el margen global para maximizar el tamaño en pantalla (al 96% en lugar del 90%)
+            const marginFactor = 0.96; 
+            const scaleToFit = Math.min(pptCanvas.width / collageCanvas.width, pptCanvas.height / collageCanvas.height) * marginFactor;
+            
+            const finalW = collageCanvas.width * scaleToFit;
+            const finalH = collageCanvas.height * scaleToFit;
+            
+            const dx = (pptCanvas.width - finalW) / 2;
+            const dy = (pptCanvas.height - finalH) / 2;
+
+            pptCtx.drawImage(collageCanvas, dx, dy, finalW, finalH);
+
+            const link = document.createElement('a');
+            link.download = 'diapositiva-collage-3x2.png';
+            link.href = pptCanvas.toDataURL('image/png', 1.0);
+            link.click();
+        }
+    </script>
+</body>
+</html>
