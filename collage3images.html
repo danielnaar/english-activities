@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creador de Collage de Lujo</title>
+    <!-- Incluimos Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* * ==========================================
+         * DISEÑO DEL MARCO "DORADO ÉXITO" CON REMATES
+         * ========================================== */
+        .marco-dorado-container {
+            background-color: #ffffff;
+            aspect-ratio: 2 / 3;
+            position: relative;
+            /* Una sombra muy sutil para separarlo del fondo de la app */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
+        }
+        
+        /* El borde extremadamente fino */
+        .borde-dorado {
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            pointer-events: none; /* Permite clickear la imagen a través de él */
+            z-index: 20;
+        }
+
+        /* Remates Serif: Extendemos las líneas formando pequeñas cruces en los ángulos */
+        .borde-dorado::before,
+        .borde-dorado::after,
+        .borde-dorado-inner::before,
+        .borde-dorado-inner::after {
+            content: '';
+            position: absolute;
+            background-color: #D4AF37; /* Color Dorado Éxito */
+        }
+
+        /* Líneas horizontales superior e inferior (se extienden -4px hacia los lados) */
+        .borde-dorado::before { top: 0; left: -4px; right: -4px; height: 1px; }
+        .borde-dorado::after { bottom: 0; left: -4px; right: -4px; height: 1px; }
+        
+        /* Líneas verticales izquierda y derecha (se extienden -4px hacia arriba y abajo) */
+        .borde-dorado-inner::before { top: -4px; bottom: -4px; left: 0; width: 1px; }
+        .borde-dorado-inner::after { top: -4px; bottom: -4px; right: 0; width: 1px; }
+        
+        /* El "Aire" (Passepartout). El contenedor interno donde vive la imagen */
+        .espacio-aire {
+            position: absolute;
+            /* 32px de distancia desde el borde exterior = mucho aire */
+            top: 32px; left: 32px; right: 32px; bottom: 32px; 
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Transición suave cuando detecta y cambia al color del fondo de la imagen */
+            transition: background-color 0.5s ease;
+        }
+
+        /* La imagen manipulable */
+        .img-draggable {
+            position: absolute;
+            cursor: grab;
+            transform-origin: center center;
+            transition: transform 0.1s ease-out; 
+            max-width: none !important; /* Mantiene proporciones reales */
+        }
+
+        .img-draggable:active {
+            cursor: grabbing;
+        }
+
+        /* NUEVO: Guías de alineación tipo Instagram */
+        .guide-line {
+            position: absolute;
+            background-color: #00d2ff; /* Color cyan visible tipo app */
+            opacity: 0;
+            pointer-events: none;
+            z-index: 30;
+            transition: opacity 0.2s;
+            box-shadow: 0 0 5px rgba(0, 210, 255, 0.8);
+        }
+        .guide-line.vertical {
+            top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%);
+        }
+        .guide-line.horizontal {
+            left: 0; right: 0; top: 50%; height: 2px; transform: translateY(-50%);
+        }
+        .guide-line.active {
+            opacity: 1; /* Se muestran cuando la imagen encaja en el centro */
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8 px-4 font-sans text-gray-800">
+
+    <header class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2" style="font-family: 'Playfair Display', serif;">Creador de Collage Exclusivo</h1>
+        <p class="text-gray-600">Sube imágenes horizontales. Detectaremos el fondo automáticamente para rellenar los espacios.</p>
+    </header>
+
+    <main class="bg-white p-6 rounded-xl shadow-lg w-full max-w-[1200px]">
+        
+        <!-- Controles de navegación horizontal -->
+        <div class="flex justify-between items-center mb-6 lg:hidden">
+            <button onclick="scrollWorkspace(-340)" class="bg-[#fcf9f2] text-[#b8952b] border border-[#b8952b] hover:bg-[#f7f0df] px-5 py-2 rounded-full font-bold shadow-sm transition-colors">&larr; Deslizar Izq.</button>
+            <button onclick="scrollWorkspace(340)" class="bg-[#fcf9f2] text-[#b8952b] border border-[#b8952b] hover:bg-[#f7f0df] px-5 py-2 rounded-full font-bold shadow-sm transition-colors">Deslizar Der. &rarr;</button>
+        </div>
+
+        <div id="collage-workspace" class="flex flex-row gap-8 overflow-x-auto hide-scrollbar pb-6 snap-x justify-start lg:justify-center scroll-smooth">
+            
+            <!-- ================= MARCO 1 ================= -->
+            <div class="flex flex-col items-center flex-shrink-0 w-[320px] snap-center">
+                <!-- Estructura del Marco de Lujo -->
+                <div class="marco-dorado-container w-full">
+                    <div class="borde-dorado"><div class="borde-dorado-inner"></div></div>
+                    
+                    <!-- Contenedor interno que recibirá el color de fondo -->
+                    <div id="frame-0" class="espacio-aire bg-white">
+                        <!-- NUEVO: Líneas guía -->
+                        <div id="guide-v-0" class="guide-line vertical"></div>
+                        <div id="guide-h-0" class="guide-line horizontal"></div>
+
+                        <span class="text-gray-400 absolute pointer-events-none z-0 text-center px-4 font-medium" id="placeholder-0">
+                            Sube la 1ra imagen
+                        </span>
+                        <img id="img-0" class="img-draggable z-10" style="display:none;" draggable="false" alt="Imagen 1">
+                    </div>
+                </div>
+
+                <div class="mt-6 w-full flex flex-col gap-3">
+                    <input type="file" accept="image/*" class="text-sm w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#fcf9f2] file:text-[#b8952b] hover:file:bg-[#f7f0df] cursor-pointer transition-colors" onchange="handleFileUpload(event, 0)">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs text-gray-500 font-semibold flex justify-between">
+                            <span>Zoom</span> <span id="zoom-val-0">1x</span>
+                        </label>
+                        <input type="range" id="zoom-0" min="0.01" max="4" step="0.01" value="1" class="w-full accent-[#D4AF37] cursor-pointer" disabled oninput="handleZoom(event, 0)">
+                    </div>
+                    <!-- NUEVO: Selector de Color -->
+                    <div class="flex items-center justify-between gap-2 mt-1">
+                        <label class="text-xs text-gray-500 font-semibold">Color de Fondo</label>
+                        <input type="color" id="color-0" value="#ffffff" oninput="handleBgColor(event, 0)" class="w-8 h-8 rounded cursor-pointer border-0 p-0" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= MARCO 2 ================= -->
+            <div class="flex flex-col items-center flex-shrink-0 w-[320px] snap-center">
+                <div class="marco-dorado-container w-full">
+                    <div class="borde-dorado"><div class="borde-dorado-inner"></div></div>
+                    <div id="frame-1" class="espacio-aire bg-white">
+                        <!-- NUEVO: Líneas guía -->
+                        <div id="guide-v-1" class="guide-line vertical"></div>
+                        <div id="guide-h-1" class="guide-line horizontal"></div>
+
+                        <span class="text-gray-400 absolute pointer-events-none z-0 text-center px-4 font-medium" id="placeholder-1">
+                            Sube la 2da imagen
+                        </span>
+                        <img id="img-1" class="img-draggable z-10" style="display:none;" draggable="false" alt="Imagen 2">
+                    </div>
+                </div>
+                <div class="mt-6 w-full flex flex-col gap-3">
+                    <input type="file" accept="image/*" class="text-sm w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#fcf9f2] file:text-[#b8952b] hover:file:bg-[#f7f0df] cursor-pointer transition-colors" onchange="handleFileUpload(event, 1)">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs text-gray-500 font-semibold flex justify-between">
+                            <span>Zoom</span> <span id="zoom-val-1">1x</span>
+                        </label>
+                        <input type="range" id="zoom-1" min="0.01" max="4" step="0.01" value="1" class="w-full accent-[#D4AF37] cursor-pointer" disabled oninput="handleZoom(event, 1)">
+                    </div>
+                    <!-- NUEVO: Selector de Color -->
+                    <div class="flex items-center justify-between gap-2 mt-1">
+                        <label class="text-xs text-gray-500 font-semibold">Color de Fondo</label>
+                        <input type="color" id="color-1" value="#ffffff" oninput="handleBgColor(event, 1)" class="w-8 h-8 rounded cursor-pointer border-0 p-0" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= MARCO 3 ================= -->
+            <div class="flex flex-col items-center flex-shrink-0 w-[320px] snap-center">
+                <div class="marco-dorado-container w-full">
+                    <div class="borde-dorado"><div class="borde-dorado-inner"></div></div>
+                    <div id="frame-2" class="espacio-aire bg-white">
+                        <!-- NUEVO: Líneas guía -->
+                        <div id="guide-v-2" class="guide-line vertical"></div>
+                        <div id="guide-h-2" class="guide-line horizontal"></div>
+
+                        <span class="text-gray-400 absolute pointer-events-none z-0 text-center px-4 font-medium" id="placeholder-2">
+                            Sube la 3ra imagen
+                        </span>
+                        <img id="img-2" class="img-draggable z-10" style="display:none;" draggable="false" alt="Imagen 3">
+                    </div>
+                </div>
+                <div class="mt-6 w-full flex flex-col gap-3">
+                    <input type="file" accept="image/*" class="text-sm w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#fcf9f2] file:text-[#b8952b] hover:file:bg-[#f7f0df] cursor-pointer transition-colors" onchange="handleFileUpload(event, 2)">
+                    <div class="flex flex-col gap-1">
+                        <label class="text-xs text-gray-500 font-semibold flex justify-between">
+                            <span>Zoom</span> <span id="zoom-val-2">1x</span>
+                        </label>
+                        <input type="range" id="zoom-2" min="0.01" max="4" step="0.01" value="1" class="w-full accent-[#D4AF37] cursor-pointer" disabled oninput="handleZoom(event, 2)">
+                    </div>
+                    <!-- NUEVO: Selector de Color -->
+                    <div class="flex items-center justify-between gap-2 mt-1">
+                        <label class="text-xs text-gray-500 font-semibold">Color de Fondo</label>
+                        <input type="color" id="color-2" value="#ffffff" oninput="handleBgColor(event, 2)" class="w-8 h-8 rounded cursor-pointer border-0 p-0" disabled>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-10 flex justify-center border-t pt-8">
+            <button onclick="downloadCollage()" class="bg-[#D4AF37] hover:bg-[#b8952b] text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Guardar Collage Final
+            </button>
+        </div>
+    </main>
+
+    <script>
+        const slots = [
+            { id: 0, x: 0, y: 0, scale: 1, baseW: 0, baseH: 0, isLoaded: false, isDragging: false, startX: 0, startY: 0, bgColor: '#ffffff' },
+            { id: 1, x: 0, y: 0, scale: 1, baseW: 0, baseH: 0, isLoaded: false, isDragging: false, startX: 0, startY: 0, bgColor: '#ffffff' },
+            { id: 2, x: 0, y: 0, scale: 1, baseW: 0, baseH: 0, isLoaded: false, isDragging: false, startX: 0, startY: 0, bgColor: '#ffffff' }
+        ];
+
+        // NUEVAS FUNCIONES PARA NAVEGACIÓN Y COLOR
+        function scrollWorkspace(amount) {
+            document.getElementById('collage-workspace').scrollBy({ left: amount, behavior: 'smooth' });
+        }
+
+        function handleBgColor(event, index) {
+            const newColor = event.target.value;
+            slots[index].bgColor = newColor;
+            document.getElementById(`frame-${index}`).style.backgroundColor = newColor;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + [r, g, b].map(x => {
+                const hex = x.toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+
+        function handleFileUpload(event, index) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById(`img-${index}`);
+                const placeholder = document.getElementById(`placeholder-${index}`);
+                const slider = document.getElementById(`zoom-${index}`);
+                
+                img.onload = () => setupImage(index, img);
+                img.src = e.target.result;
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
+                slider.disabled = false;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function setupImage(index, img) {
+            const frame = document.getElementById(`frame-${index}`);
+            const slot = slots[index];
+            
+            // --- NUEVO: Detectar el color de fondo de la imagen ---
+            try {
+                const tmpCanvas = document.createElement('canvas');
+                const ctx = tmpCanvas.getContext('2d', { willReadFrequently: true });
+                tmpCanvas.width = img.naturalWidth;
+                tmpCanvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+                
+                // Muestreamos el color un 5% hacia adentro para esquivar los bordes oscuros de las capturas de pantalla
+                const sampleX = Math.floor(img.naturalWidth * 0.05);
+                const sampleY = Math.floor(img.naturalHeight * 0.05);
+                
+                // Extraer el color del pixel y convertirlo a Hexadecimal
+                const pixel = ctx.getImageData(sampleX, sampleY, 1, 1).data;
+                const hexColor = rgbToHex(pixel[0], pixel[1], pixel[2]);
+                
+                // Aplicar el color autodetectado al fondo del área de la imagen
+                frame.style.backgroundColor = hexColor;
+                slot.bgColor = hexColor; 
+
+                // Habilitamos el selector manual con el color detectado para que puedas ajustarlo
+                const colorPicker = document.getElementById(`color-${index}`);
+                if (colorPicker) {
+                    colorPicker.value = hexColor;
+                    colorPicker.disabled = false;
+                }
+            } catch(e) {
+                console.error("No se pudo detectar el color:", e);
+            }
+
+            // Configurar dimensiones
+            const fw = frame.clientWidth;
+            const fh = frame.clientHeight;
+            const nw = img.naturalWidth;
+            const nh = img.naturalHeight;
+
+            slot.baseW = nw;
+            slot.baseH = nh;
+            img.style.width = `${slot.baseW}px`;
+            img.style.height = `${slot.baseH}px`;
+
+            slot.x = (fw - slot.baseW) / 2;
+            slot.y = (fh - slot.baseH) / 2;
+            
+            const minScaleToFit = Math.min(fw / nw, fh / nh);
+            const slider = document.getElementById(`zoom-${index}`);
+            slider.min = Math.min(0.01, minScaleToFit * 0.1).toFixed(3);
+            slider.max = Math.max(4, minScaleToFit * 5).toFixed(3);
+            
+            slot.scale = 1;
+            slider.value = 1;
+            document.getElementById(`zoom-val-${index}`).innerText = '1.00x';
+
+            slot.isLoaded = true;
+            updateImageCSS(index);
+            setupDraggingEvents(index, img);
+        }
+
+        function handleZoom(event, index) {
+            slots[index].scale = parseFloat(event.target.value);
+            document.getElementById(`zoom-val-${index}`).innerText = `${slots[index].scale.toFixed(2)}x`;
+            updateImageCSS(index);
+        }
+
+        function updateImageCSS(index) {
+            const slot = slots[index];
+            const img = document.getElementById(`img-${index}`);
+            img.style.left = `${slot.x}px`;
+            img.style.top = `${slot.y}px`;
+            img.style.transform = `scale(${slot.scale})`;
+        }
+
+        function setupDraggingEvents(index, img) {
+            const slot = slots[index];
+
+            const startDrag = (clientX, clientY) => {
+                slot.isDragging = true;
+                slot.startX = clientX - slot.x;
+                slot.startY = clientY - slot.y;
+                img.style.transition = 'none';
+            };
+
+            const doDrag = (clientX, clientY) => {
+                if (!slot.isDragging) return;
+                
+                // Coordenadas crudas donde está apuntando el cursor
+                let rawX = clientX - slot.startX;
+                let rawY = clientY - slot.startY;
+
+                // NUEVO: Lógica de Snap (imán) al centro
+                const frame = document.getElementById(`frame-${index}`);
+                // Estas son las coordenadas perfectas para estar en el medio
+                const perfectX = (frame.clientWidth - slot.baseW) / 2;
+                const perfectY = (frame.clientHeight - slot.baseH) / 2;
+                
+                // Sensibilidad del imán (Píxeles de distancia para que encaje)
+                const snapThreshold = 15; 
+
+                const guideV = document.getElementById(`guide-v-${index}`);
+                const guideH = document.getElementById(`guide-h-${index}`);
+
+                // Imán Horizontal (Eje X / Línea Vertical)
+                if (Math.abs(rawX - perfectX) < snapThreshold) {
+                    slot.x = perfectX;
+                    guideV.classList.add('active'); // Mostrar línea guía
+                } else {
+                    slot.x = rawX;
+                    guideV.classList.remove('active');
+                }
+
+                // Imán Vertical (Eje Y / Línea Horizontal)
+                if (Math.abs(rawY - perfectY) < snapThreshold) {
+                    slot.y = perfectY;
+                    guideH.classList.add('active'); // Mostrar línea guía
+                } else {
+                    slot.y = rawY;
+                    guideH.classList.remove('active');
+                }
+
+                updateImageCSS(index);
+            };
+
+            const endDrag = () => {
+                if (!slot.isDragging) return;
+                slot.isDragging = false;
+                img.style.transition = 'transform 0.1s ease-out';
+                
+                // Ocultar las guías al soltar la imagen
+                document.getElementById(`guide-v-${index}`).classList.remove('active');
+                document.getElementById(`guide-h-${index}`).classList.remove('active');
+            };
+
+            img.onmousedown = (e) => startDrag(e.clientX, e.clientY);
+            window.addEventListener('mousemove', (e) => doDrag(e.clientX, e.clientY));
+            window.addEventListener('mouseup', endDrag);
+
+            img.addEventListener('touchstart', (e) => {
+                startDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+
+            img.addEventListener('touchmove', (e) => {
+                if (slot.isDragging) e.preventDefault();
+                doDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+
+            window.addEventListener('touchend', endDrag);
+        }
+
+        // --- EXPORTAR AL CANVAS ALTA CALIDAD CON EL MARCO DORADO ---
+        function downloadCollage() {
+            const isAnyLoaded = slots.some(s => s.isLoaded);
+            if (!isAnyLoaded) {
+                alert("Por favor, sube al menos una imagen antes de guardar.");
+                return;
+            }
+
+            // 1. Crear el lienzo temporal para dibujar el collage en su resolución original (alta calidad)
+            const collageCanvas = document.createElement('canvas');
+            const ctx = collageCanvas.getContext('2d');
+            
+            const exportFrameW = 960;
+            const exportFrameH = 1440;
+            const gap = 120;
+            
+            collageCanvas.width = (exportFrameW * 3) + (gap * 2);
+            collageCanvas.height = exportFrameH;
+
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, collageCanvas.width, collageCanvas.height);
+
+            slots.forEach((slot, index) => {
+                const offsetX = index * (exportFrameW + gap);
+                
+                // Dibujar el bloque base del marco
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(offsetX, 0, exportFrameW, exportFrameH);
+
+                // Dibujar el Borde Dorado con Remates
+                const bOffset = 36;
+                ctx.strokeStyle = '#D4AF37';
+                ctx.lineWidth = 3;
+                
+                ctx.strokeRect(offsetX + bOffset, bOffset, exportFrameW - (bOffset * 2), exportFrameH - (bOffset * 2));
+                
+                const ext = 12;
+                ctx.beginPath();
+                ctx.moveTo(offsetX + bOffset - ext, bOffset); 
+                ctx.lineTo(offsetX + exportFrameW - bOffset + ext, bOffset);
+                ctx.moveTo(offsetX + bOffset - ext, exportFrameH - bOffset); 
+                ctx.lineTo(offsetX + exportFrameW - bOffset + ext, exportFrameH - bOffset);
+                ctx.moveTo(offsetX + bOffset, bOffset - ext); 
+                ctx.lineTo(offsetX + bOffset, exportFrameH - bOffset + ext);
+                ctx.moveTo(offsetX + exportFrameW - bOffset, bOffset - ext); 
+                ctx.lineTo(offsetX + exportFrameW - bOffset, exportFrameH - bOffset + ext);
+                ctx.stroke();
+
+                // Dibujar el Espacio de Aire (Passepartout) con el Color Autodetectado
+                const padding = 96;
+                const innerX = offsetX + padding;
+                const innerY = padding;
+                const innerW = exportFrameW - (padding * 2);
+                const innerH = exportFrameH - (padding * 2);
+
+                ctx.fillStyle = slot.bgColor || '#ffffff';
+                ctx.fillRect(innerX, innerY, innerW, innerH);
+
+                // Dibujar la Imagen real recortada
+                if (slot.isLoaded) {
+                    const img = document.getElementById(`img-${index}`);
+                    
+                    ctx.save();
+                    
+                    ctx.beginPath();
+                    ctx.rect(innerX, innerY, innerW, innerH);
+                    ctx.clip();
+
+                    const uiInnerW = document.getElementById(`frame-${index}`).clientWidth;
+                    const scaleRatio = innerW / uiInnerW;
+                    
+                    const scaledW = slot.baseW * scaleRatio;
+                    const scaledH = slot.baseH * scaleRatio;
+                    const scaledX = slot.x * scaleRatio;
+                    const scaledY = slot.y * scaleRatio;
+
+                    const centerX = scaledX + (scaledW / 2);
+                    const centerY = scaledY + (scaledH / 2);
+
+                    ctx.translate(innerX + centerX, innerY + centerY);
+                    ctx.scale(slot.scale, slot.scale);
+                    ctx.drawImage(img, -scaledW / 2, -scaledH / 2, scaledW, scaledH);
+
+                    ctx.restore();
+                }
+            });
+
+            // 2. Crear el Lienzo Final con Dimensiones de PowerPoint (1920x1080 - 16:9 Widescreen)
+            const pptCanvas = document.createElement('canvas');
+            pptCanvas.width = 1920;
+            pptCanvas.height = 1080;
+            const pptCtx = pptCanvas.getContext('2d');
+
+            // Fondo de la diapositiva en blanco puro para que se funda con los marcos
+            pptCtx.fillStyle = '#ffffff';
+            pptCtx.fillRect(0, 0, pptCanvas.width, pptCanvas.height);
+
+            // 3. Escalar y centrar la obra dentro del formato de la diapositiva
+            // Usamos un factor de 0.90 para dejar un 10% de margen ("aire") alrededor de toda la composición
+            const marginFactor = 0.90; 
+            const scaleToFit = Math.min(pptCanvas.width / collageCanvas.width, pptCanvas.height / collageCanvas.height) * marginFactor;
+            
+            const finalW = collageCanvas.width * scaleToFit;
+            const finalH = collageCanvas.height * scaleToFit;
+            
+            const dx = (pptCanvas.width - finalW) / 2;
+            const dy = (pptCanvas.height - finalH) / 2;
+
+            pptCtx.drawImage(collageCanvas, dx, dy, finalW, finalH);
+
+            // 4. Descargar el archivo listo para insertar
+            const link = document.createElement('a');
+            link.download = 'collage-presentacion.png';
+            link.href = pptCanvas.toDataURL('image/png', 1.0);
+            link.click();
+        }
+    </script>
+</body>
+</html>
