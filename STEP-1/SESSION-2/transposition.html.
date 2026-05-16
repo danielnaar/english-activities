@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - S2 Transpositions</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        noche: '#0B192C',
+                        dorado: '#D4AF37',
+                        ebano: '#121212',
+                        claro: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        montserrat: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { background-color: #F8F9FA; color: #121212; }
+        strong { color: #D4AF37; font-weight: 700; }
+        .reveal-text { opacity: 0; transform: translateX(-15px); transition: all 0.5s ease-out; }
+        .reveal-text.visible { opacity: 1; transform: translateX(0); }
+    </style>
+</head>
+<body class="font-montserrat antialiased min-h-screen flex flex-col">
+
+    <header class="bg-noche text-white shadow-lg border-b-4 border-dorado py-6">
+        <div class="max-w-5xl mx-auto px-6 flex justify-between items-center">
+            <h1 class="font-playfair text-3xl font-bold tracking-wide">Premium English</h1>
+            <div class="text-right">
+                <span class="block text-xs tracking-widest uppercase font-semibold text-dorado">Step 1 - Session 2</span>
+                <span class="text-[10px] text-gray-400 italic">An Actor and a Musician</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12 px-6">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="mb-10 text-center">
+                <h2 class="font-playfair text-4xl text-noche font-bold mb-4">Transposition Drill</h2>
+                <h3 class="text-xl text-ebano font-medium mb-6 italic text-gray-500">Script: An Actor and a Musician</h3>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Cambia la oración base incorporando la palabra de la izquierda. 
+                    Presta especial atención a los artículos <strong>A / AN</strong> y al verbo <strong>To Be</strong>.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                <div class="p-8">
+                    
+                    <div class="flex flex-col md:flex-row items-center border-b border-gray-100 pb-6 mb-6">
+                        <div class="w-full md:w-1/3 mb-4 md:mb-0 pr-6">
+                            <div class="text-gray-400 font-semibold uppercase tracking-wider text-sm px-4 text-center md:text-left">Initial Sentence</div>
+                        </div>
+                        <div class="w-full md:w-2/3 pl-4 border-l-4 border-dorado">
+                            <p class="text-2xl font-playfair text-noche">I am an actor.</p>
+                        </div>
+                    </div>
+
+                    <div id="exercise-container" class="space-y-4"></div>
+
+                    <div id="completion-message" class="hidden text-center mt-12 mb-4">
+                        <h4 class="font-playfair text-2xl text-dorado font-bold mb-2">Wonderful Adventure!</h4>
+                        <p class="text-noche font-medium">Session 2 Transpositions: Completed.</p>
+                        <button onclick="location.reload()" class="mt-6 px-8 py-3 bg-noche text-white font-semibold rounded hover:bg-opacity-90 transition-colors">
+                            Restart Drill
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <a href="../../index.html" class="text-noche hover:text-dorado transition-colors text-sm font-semibold uppercase tracking-widest">← Back to Menu</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Data basada en el guion "An Actor and a Musician"
+        const exercises = [
+            { prompt: "(él) He", sentence: "<strong>He is</strong> an actor." },
+            { prompt: "(músico) Musician", sentence: "He is <strong>a musician</strong>." },
+            { prompt: "(interrogativo) ?", sentence: "<strong>Is he</strong> a musician?" },
+            { prompt: "(yo) I", sentence: "<strong>I am</strong> a musician." },
+            { prompt: "(guitarra) Guitar", sentence: "I <strong>have a guitar</strong>." },
+            { prompt: "(acústica) Acoustic", sentence: "I have <strong>an acoustic</strong> guitar." },
+            { prompt: "(ella) She", sentence: "<strong>She has</strong> an acoustic guitar." },
+            { prompt: "(audición) Audition", sentence: "She has <strong>an audition</strong> today." },
+            { prompt: "(video musical) Music video", sentence: "She <strong>wants a role in a</strong> music video." },
+            { prompt: "(nosotros) We", sentence: "<strong>We want</strong> a role in a music video." },
+            { prompt: "(negativo) Not", sentence: "We <strong>do not want</strong> a role in a music video." },
+            { prompt: "(acuerdo) Agreement", sentence: "Let's <strong>make an agreement</strong>!" }
+        ];
+
+        const container = document.getElementById('exercise-container');
+        const completionMessage = document.getElementById('completion-message');
+
+        exercises.forEach((ex, index) => {
+            const row = document.createElement('div');
+            row.className = "flex flex-col md:flex-row items-center group";
+            
+            const leftCol = document.createElement('div');
+            leftCol.className = "w-full md:w-1/3 mb-3 md:mb-0 pr-0 md:pr-6";
+            
+            const btn = document.createElement('button');
+            btn.id = `btn-${index}`;
+            btn.innerHTML = `<span class="block truncate">${ex.prompt}</span>`;
+            
+            if (index === 0) {
+                btn.className = "w-full text-left px-6 py-4 rounded bg-noche text-white font-semibold shadow-md hover:bg-opacity-90 transition-all border border-noche focus:outline-none focus:ring-2 focus:ring-dorado focus:ring-offset-2";
+            } else {
+                btn.className = "w-full text-left px-6 py-4 rounded bg-gray-50 text-gray-400 font-medium border border-gray-200 cursor-not-allowed transition-all";
+                btn.disabled = true;
+            }
+            
+            leftCol.appendChild(btn);
+
+            const rightCol = document.createElement('div');
+            rightCol.className = "w-full md:w-2/3 pl-0 md:pl-6 min-h-[3rem] flex items-center";
+            
+            const sentence = document.createElement('p');
+            sentence.id = `sentence-${index}`;
+            sentence.className = "text-xl text-ebano reveal-text hidden";
+            sentence.innerHTML = ex.sentence;
+            
+            rightCol.appendChild(sentence);
+            row.appendChild(leftCol);
+            row.appendChild(rightCol);
+            container.appendChild(row);
+
+            btn.addEventListener('click', () => {
+                sentence.classList.remove('hidden');
+                setTimeout(() => { sentence.classList.add('visible'); }, 10);
+                btn.className = "w-full text-left px-6 py-4 rounded bg-white text-noche font-semibold border-2 border-dorado transition-all cursor-default";
+                btn.disabled = true;
+
+                const nextIndex = index + 1;
+                if (nextIndex < exercises.length) {
+                    const nextBtn = document.getElementById(`btn-${nextIndex}`);
+                    nextBtn.disabled = false;
+                    nextBtn.className = "w-full text-left px-6 py-4 rounded bg-noche text-white font-semibold shadow-md hover:bg-opacity-90 transition-all border border-noche transform scale-[1.02]";
+                    setTimeout(() => { nextBtn.classList.remove('scale-[1.02]'); }, 200);
+                } else {
+                    setTimeout(() => { completionMessage.classList.remove('hidden'); }, 600);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
