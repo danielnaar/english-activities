@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium English - PowerPoint Generator</title>
+    <title>Premium English - Inteligencia Generativa</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0B192C; /* Azul Noche Premium */
+            background-color: #0B192C; 
             color: #FFFFFF;
             display: flex;
             justify-content: center;
@@ -20,10 +20,10 @@
         }
 
         .container {
-            background-color: #121212; /* Negro Ébano */
+            background-color: #121212; 
             padding: 40px;
             border-radius: 8px;
-            border-top: 6px solid #D4AF37; /* Dorado Éxito */
+            border-top: 6px solid #D4AF37; 
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             width: 100%;
             max-width: 650px;
@@ -59,7 +59,7 @@
             color: #D4AF37;
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             background-color: #1a1a1a;
             border: 1px solid #333;
@@ -71,13 +71,18 @@
             border-radius: 4px;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #D4AF37;
         }
 
+        select {
+            cursor: pointer;
+            appearance: none;
+        }
+
         textarea {
-            height: 200px;
+            height: 150px;
             resize: vertical;
         }
 
@@ -108,49 +113,72 @@
             font-size: 1rem;
             font-weight: bold;
         }
-        
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #D4AF37;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: 0.3s;
-            font-weight: bold;
-        }
-        
-        .back-link:hover {
-            color: #FFFFFF;
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Premium English</h1>
-    <p class="subtitle">Generador de PowerPoint Oficial</p>
+    <p class="subtitle">Generador de PowerPoint Inteligente</p>
     
     <div class="form-group">
         <label for="titulo">Título de la Clase</label>
-        <input type="text" id="titulo" placeholder="Ej: Clase 2: An Actor and a Musician">
+        <input type="text" id="titulo" placeholder="Ej: Clase 4: Phrasal Verbs">
+    </div>
+
+    <!-- NUEVO: Menú desplegable con el cerebro gramatical -->
+    <div class="form-group">
+        <label for="tema-gramatical">Tema Gramatical (El programa detectará las palabras automáticamente)</label>
+        <select id="tema-gramatical">
+            <option value="ninguno">Ninguno (No resaltar nada especial)</option>
+            <option value="possessive_adjectives">Adjetivos Posesivos (my, your, his...)</option>
+            <option value="verb_to_be">Verbo To Be (am, is, are, was...)</option>
+            <option value="wh_questions">Wh- Questions (what, where, why...)</option>
+            <option value="pronouns_subject">Pronombres Personales (I, you, he...)</option>
+            <option value="pronouns_object">Pronombres Objeto (me, you, him...)</option>
+            <option value="frequency_adverbs">Adverbios de Frecuencia (always, never...)</option>
+            <option value="phrasal_verbs">Phrasal Verbs Comunes (get up, turn on...)</option>
+            <option value="articles">Artículos (a, an, the)</option>
+        </select>
     </div>
 
     <div class="form-group">
         <label for="script">Guion o Diálogo</label>
-        <textarea id="script" placeholder="Pega el guion aquí. Los nombres como 'Alex:' se borrarán automáticamente..."></textarea>
+        <textarea id="script" placeholder="Pega el guion aquí..."></textarea>
     </div>
 
     <button onclick="generarPowerPoint()" id="btn-generar">Descargar PowerPoint</button>
     <div id="status"></div>
-    
-    <a href="index.html" class="back-link">← Volver al Hub Interactivo</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/PptxGenJS@3.12.0/dist/pptxgen.bundle.js"></script>
 
 <script>
+    // --- EL CEREBRO LINGÜÍSTICO (Base de Conocimiento) ---
+    // Aquí puedes agregar más palabras a las listas si en el futuro lo necesitas.
+    const diccionarioTemas = {
+        "ninguno": [],
+        "possessive_adjectives": ["my", "your", "his", "her", "its", "our", "their"],
+        "verb_to_be": ["am", "is", "are", "was", "were", "'m", "'s", "'re", "isn't", "aren't", "wasn't", "weren't"],
+        "wh_questions": ["what", "when", "where", "who", "why", "how", "which", "whose", "whom"],
+        "pronouns_subject": ["i", "you", "he", "she", "it", "we", "they"],
+        "pronouns_object": ["me", "you", "him", "her", "it", "us", "them"],
+        "frequency_adverbs": ["always", "usually", "often", "sometimes", "hardly ever", "rarely", "never"],
+        "articles": ["a", "an", "the"],
+        "phrasal_verbs": [
+            "get up", "wake up", "turn on", "turn off", "look for", "look after", 
+            "give up", "put on", "take off", "go out", "work out", "find out", 
+            "grow up", "set up", "break down", "calm down", "catch up", "carry on"
+        ]
+    };
+
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
     function generarPowerPoint() {
         const tituloInput = document.getElementById('titulo').value.trim();
+        const temaSeleccionado = document.getElementById('tema-gramatical').value;
         const scriptInput = document.getElementById('script').value.trim();
         const status = document.getElementById('status');
         const btn = document.getElementById('btn-generar');
@@ -161,19 +189,22 @@
             return;
         }
 
-        btn.innerText = "Generando Archivo...";
+        btn.innerText = "Analizando texto y generando...";
         btn.disabled = true;
         status.style.color = "#D4AF37";
-        status.innerText = "Procesando manual de marca y generando archivo PPTX...";
+        status.innerText = "Identificando estructuras gramaticales...";
 
-        // 1. Procesar el guion (limpiar nombres de personajes)
+        // 1. Cargar las palabras a buscar según el tema elegido
+        const palabrasClave = diccionarioTemas[temaSeleccionado];
+
+        // 2. Procesar guion
         const lineas = scriptInput.split('\n')
             .map(linea => linea.replace(/^.*?:/g, '').trim())
             .filter(linea => linea.length > 0);
 
-        // 2. Inicializar PPTX
+        // 3. Inicializar PPTX
         let pptx = new PptxGenJS();
-        pptx.layout = 'LAYOUT_WIDE'; // Formato 16:9
+        pptx.layout = 'LAYOUT_WIDE'; 
 
         const AZUL_NOCHE = "0B192C";
         const DORADO_EXITO = "D4AF37";
@@ -181,113 +212,87 @@
         const NEGRO = "121212";
         const GRIS_LINEA = "E0E0E0";
 
-        const palabrasClave = ["a", "an", "What", "Why", "Where", "Who", "When", "How"];
-
-        // 3. Crear Diapositivas
+        // 4. Crear Diapositivas
         lineas.forEach((frase, index) => {
             let slide = pptx.addSlide();
             const esUltima = (index === lineas.length - 1);
 
-            // Secuencia estricta de Fondos (1W, 2B, 3W, 4W, 5B...)
             let colorFondo = BLANCO;
-            if (index === 0) {
-                colorFondo = BLANCO;
-            } else if ((index - 1) % 3 === 0) {
-                colorFondo = AZUL_NOCHE;
-            } else {
-                colorFondo = BLANCO;
-            }
+            if (index === 0) { colorFondo = BLANCO; } 
+            else if ((index - 1) % 3 === 0) { colorFondo = AZUL_NOCHE; } 
+            else { colorFondo = BLANCO; }
 
-            // Mantenemos la regla de oro: la última diapositiva siempre debe ser Azul
             if (esUltima) colorFondo = AZUL_NOCHE;
-            
             slide.background = { fill: colorFondo };
 
-            // Parámetros de texto predeterminados
             let colorTexto = (colorFondo === AZUL_NOCHE) ? BLANCO : NEGRO;
             let colorResaltado = DORADO_EXITO;
             let fuente = "Montserrat";
             let tamano = 36;
             let alineacion = 'left';
             let yPos = 2.0;
-
-            // CONFIGURACIONES ESPECÍFICAS
             
-            // Slide 1: Especial con Título
             if (index === 0) {
-                // Título en Negrita
-                slide.addText(tituloInput, {
-                    x: 0.5, y: 0.5, w: "90%", h: 1,
-                    fontSize: 44,
-                    fontFace: "Playfair Display",
-                    color: AZUL_NOCHE,
-                    bold: true
-                });
-                // Línea divisoria
-                slide.addShape(pptx.ShapeType.line, {
-                    x: 0.5, y: 1.4, w: 8.5, h: 0,
-                    line: { color: GRIS_LINEA, width: 1.5 }
-                });
+                slide.addText(tituloInput, { x: 0.5, y: 0.5, w: "90%", h: 1, fontSize: 44, fontFace: "Playfair Display", color: AZUL_NOCHE, bold: true });
+                slide.addShape(pptx.ShapeType.line, { x: 0.5, y: 1.4, w: 8.5, h: 0, line: { color: GRIS_LINEA, width: 1.5 } });
                 yPos = 2.2;
             }
 
-            // Slide Final: Estilo Elegante
             if (esUltima) {
                 colorTexto = DORADO_EXITO;
-                colorResaltado = BLANCO; // Resaltado blanco sobre texto dorado
+                colorResaltado = BLANCO; 
                 fuente = "Playfair Display";
                 tamano = 42;
                 alineacion = 'center';
                 yPos = 1.5;
             }
 
-            // Lógica de resaltado (Parsing de palabras clave por límite de palabra)
             let textObjects = [];
-            const regex = new RegExp(`(\\b${palabrasClave.join('\\b|\\b')}\\b)`, 'gi');
-            const parts = frase.split(regex);
 
-            parts.forEach(part => {
-                if (!part) return; // Evitar partes vacías
+            // Si hay palabras que buscar en el diccionario
+            if (palabrasClave && palabrasClave.length > 0) {
+                // Ordenar las palabras de la más larga a la más corta (Importante para que "look after" se detecte antes que "look")
+                const palabrasOrdenadas = [...palabrasClave].sort((a, b) => b.length - a.length);
+                const regexParts = palabrasOrdenadas.map(p => `\\b${escapeRegExp(p)}\\b`);
+                const regex = new RegExp(`(${regexParts.join('|')})`, 'gi');
                 
-                // Comprobar si esta parte es una palabra clave
-                const esClave = palabrasClave.some(p => p.toLowerCase() === part.toLowerCase());
-                
-                textObjects.push({
-                    text: part,
-                    options: {
-                        color: esClave ? colorResaltado : colorTexto,
-                        bold: esClave ? true : false,
-                        fontSize: tamano,
-                        fontFace: fuente
-                    }
+                const parts = frase.split(regex);
+
+                parts.forEach(part => {
+                    if (!part) return; 
+                    const esClave = palabrasClave.some(p => p.toLowerCase() === part.toLowerCase());
+                    
+                    textObjects.push({
+                        text: part,
+                        options: {
+                            color: esClave ? colorResaltado : colorTexto,
+                            bold: esClave ? true : false,
+                            fontSize: tamano,
+                            fontFace: fuente
+                        }
+                    });
                 });
-            });
+            } else {
+                textObjects.push({ text: frase, options: { color: colorTexto, bold: false, fontSize: tamano, fontFace: fuente }});
+            }
 
-            // Añadir la frase procesada a la diapositiva
-            slide.addText(textObjects, {
-                x: 0.5, y: yPos, w: "90%", h: 3,
-                align: alineacion,
-                valign: 'middle',
-                lineSpacing: 50
-            });
+            slide.addText(textObjects, { x: 0.5, y: yPos, w: "90%", h: 3, align: alineacion, valign: 'middle', lineSpacing: 50 });
         });
 
-        // 4. Guardar y Descargar archivo PPTX
+        // 5. Guardar y Descargar archivo
         let nombreArchivo = tituloInput.replace(/[^a-z0-9]/gi, '_').toLowerCase() || "clase_premium_english";
         
-        pptx.writeFile({ fileName: nombreArchivo + ".pptx" })
-            .then(() => {
-                status.style.color = "#4cff4c";
-                status.innerText = "¡Descarga completada con éxito!";
-                btn.innerText = "Descargar PowerPoint";
-                btn.disabled = false;
-            })
-            .catch(err => {
-                status.style.color = "#ff4c4c";
-                status.innerText = "Error al generar: " + err;
-                btn.innerText = "Reintentar";
-                btn.disabled = false;
-            });
+        pptx.writeFile({ fileName: nombreArchivo + ".pptx" }).then(() => {
+            status.style.color = "#4cff4c";
+            status.innerText = "¡Descarga completada con éxito!";
+            btn.innerText = "Descargar PowerPoint";
+            btn.disabled = false;
+        }).catch(err => {
+            status.style.color = "#ff4c4c";
+            status.innerText = "Error al generar: " + err;
+            btn.innerText = "Reintentar";
+            btn.disabled = false;
+        });
     }
 </script>
 
