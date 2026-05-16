@@ -23,4 +23,17 @@
         .login-desc { font-size: 0.9rem; color: #666; margin-bottom: 2rem; }
         input[type="password"] { width: 85%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; }
         input[type="password"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
-        button { background-color: #0B19
+        button { background-color: #0B192C; color: #D4AF37; border: none; padding: 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
+        button:hover { background-color: #121212; }
+        #error-message { color: #d32f2f; font-size: 0.85rem; margin-top: 1.5rem; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Premium English</h1>
+    </header>
+    
+    <div id="login-container">
+        <h2>Exclusive Access</h2>
+        <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
+        <input type="password" id="password-input" placeholder="
