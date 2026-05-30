@@ -21,8 +21,11 @@
         #login-container { max-width: 400px; margin: 5rem auto; padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 4px solid #0B192C; }
         #login-container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-top: 0; margin-bottom: 1rem; }
         .login-desc { font-size: 0.9rem; color: #666; margin-bottom: 2rem; }
-        input[type="password"] { width: 85%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; }
+        
+        /* Corrección del input para que no se desborde */
+        input[type="password"] { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; box-sizing: border-box; }
         input[type="password"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
+        
         button { background-color: #0B192C; color: #D4AF37; border: none; padding: 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
         button:hover { background-color: #121212; }
         #error-message { color: #d32f2f; font-size: 0.85rem; margin-top: 1.5rem; font-weight: bold; display: none; }
@@ -36,4 +39,52 @@
     <div id="login-container">
         <h2>Exclusive Access</h2>
         <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
-        <input type="password" id="password-input" placeholder="
+        
+        <input type="password" id="password-input" placeholder="Enter Code">
+        <button onclick="checkPassword()">Access</button>
+        <p id="error-message">Incorrect code. Please try again.</p>
+    </div>
+
+    <div id="main-content">
+        <div class="container">
+            <h2>Interactive Applications</h2>
+            
+            <a href="collage.html" class="session-link">Collage</a>
+            <a href="collage6.html" class="session-link">Collage 6 Images</a>
+            <a href="generador-ppt.html" class="session-link">PPT Generator</a>
+            <a href="STEP-1/SESSION-1/transposition.html" class="session-link">Step 1 | Session 1: Transposition</a>
+            <a href="STEP-1/SESSION-2/transposition.html" class="session-link">Step 1 | Session 2: Transposition</a>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password-input").value;
+            const errorMessage = document.getElementById("error-message");
+            const loginContainer = document.getElementById("login-container");
+            const mainContent = document.getElementById("main-content");
+
+            // *** IMPORTANTE: CAMBIA TU CONTRASEÑA AQUÍ ***
+            const correctPassword = "admin"; 
+
+            if (password === correctPassword) {
+                // Si la clave es correcta, oculta el login y muestra el menú
+                loginContainer.style.display = "none";
+                mainContent.style.display = "block";
+                errorMessage.style.display = "none";
+            } else {
+                // Si es incorrecta, muestra el mensaje de error
+                errorMessage.style.display = "block";
+            }
+        }
+
+        // Esto permite que el usuario presione la tecla "Enter" para acceder sin usar el mouse
+        document.getElementById("password-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
