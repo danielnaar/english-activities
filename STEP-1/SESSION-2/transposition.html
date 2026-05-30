@@ -93,19 +93,18 @@
     </main>
 
     <script>
-        // Data estructurada con un flujo lineal perfecto y Prompts Pivote
+        // Data estructurada con un flujo lineal perfecto según la progresión solicitada
         const exercises = [
             { prompt: "(quién) Who", sentence: "<strong>Who</strong> is an actor?" },
             { prompt: "(músico) Musician", sentence: "Who is <strong>a musician</strong>?" },
             { prompt: "(qué) What", sentence: "<strong>What</strong> is a musician?" },
             { prompt: "(guitarra) Guitar", sentence: "What is <strong>a guitar</strong>?" },
-            { prompt: "(acústica) Acoustic", sentence: "What is <strong>an acoustic</strong> guitar?" },
             
-            // --- INICIO DE LOS PROMPTS PIVOTE ---
-            { prompt: "(quién tiene) Who has", sentence: "<strong>Who has</strong> an acoustic guitar?" },
+            // Transición controlada: Cambio de verbo condicionado por la nueva palabra Wh-
+            { prompt: "(quién) Who", sentence: "<strong>Who has</strong> a guitar?" },
+            
+            { prompt: "(acústica) Acoustic", sentence: "Who has <strong>an acoustic</strong> guitar?" },
             { prompt: "(por qué él) Why does he", sentence: "<strong>Why does he have</strong> an acoustic guitar?" },
-            // --- FIN DE LOS PROMPTS PIVOTE ---
-
             { prompt: "(audición) Audition", sentence: "Why does he have <strong>an audition</strong>?" },
             { prompt: "(cuándo) When", sentence: "<strong>When</strong> does he have an audition?" },
             { prompt: "(dónde) Where", sentence: "<strong>Where</strong> does he have an audition?" },
