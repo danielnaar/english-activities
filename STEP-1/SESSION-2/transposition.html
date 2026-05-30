@@ -57,7 +57,7 @@
                 <h3 class="text-xl text-ebano font-medium mb-6 italic text-gray-500">Script: An Actor and a Musician</h3>
                 <p class="text-gray-600 max-w-2xl mx-auto">
                     Cambia la oración base incorporando la palabra de la izquierda. 
-                    Presta especial atención a los artículos <strong>A / AN</strong> y al verbo <strong>To Have/To Be</strong>.
+                    Presta especial atención a los artículos <strong>A / AN</strong> y a las preguntas con <strong>Wh- (Who, What, Where...)</strong>.
                 </p>
             </div>
 
@@ -93,20 +93,20 @@
     </main>
 
     <script>
-        // Data reestructurada para mantener un flujo cognitivo progresivo
+        // Data enfocada en Wh- Questions y Artículos A/AN, manteniendo el hilo conductor
         const exercises = [
-            { prompt: "(él) He", sentence: "<strong>He is</strong> an actor." },
-            { prompt: "(músico) Musician", sentence: "He is <strong>a musician</strong>." },
-            { prompt: "(interrogativo) ?", sentence: "<strong>Is he</strong> a musician?" },
-            { prompt: "(yo) I", sentence: "<strong>I am</strong> a musician." },
-            { prompt: "(guitarra) Guitar", sentence: "I <strong>have a guitar</strong>." },
-            { prompt: "(acústica) Acoustic", sentence: "I have <strong>an acoustic</strong> guitar." },
-            { prompt: "(ella) She", sentence: "<strong>She has</strong> an acoustic guitar." },
-            { prompt: "(audición) Audition", sentence: "She has <strong>an audition</strong> today." },
-            { prompt: "(video musical) Music video", sentence: "She has an audition for a <strong>music video</strong>." },
-            { prompt: "(nosotros) We", sentence: "<strong>We have</strong> an audition for a music video." },
-            { prompt: "(negativo) Not", sentence: "We <strong>do not have</strong> an audition for a music video." },
-            { prompt: "(acuerdo) Agreement", sentence: "We do not have an <strong>agreement</strong>." }
+            { prompt: "(quién) Who", sentence: "<strong>Who</strong> is an actor?" },
+            { prompt: "(músico) Musician", sentence: "Who is <strong>a musician</strong>?" },
+            { prompt: "(qué) What", sentence: "<strong>What</strong> is a musician?" },
+            { prompt: "(guitarra) Guitar", sentence: "Who has <strong>a guitar</strong>?" },
+            { prompt: "(acústica) Acoustic", sentence: "Who has <strong>an acoustic</strong> guitar?" },
+            { prompt: "(por qué) Why", sentence: "<strong>Why</strong> does he have an acoustic guitar?" },
+            { prompt: "(audición) Audition", sentence: "Why does he have <strong>an audition</strong>?" },
+            { prompt: "(cuándo) When", sentence: "<strong>When</strong> does he have an audition?" },
+            { prompt: "(dónde) Where", sentence: "<strong>Where</strong> does he have an audition?" },
+            { prompt: "(video musical) Music video", sentence: "Where does he have <strong>a music video</strong>?" },
+            { prompt: "(cómo) How", sentence: "<strong>How</strong> does he have a music video?" },
+            { prompt: "(acuerdo) Agreement", sentence: "How does he have <strong>an agreement</strong>?" }
         ];
 
         const container = document.getElementById('exercise-container');
