@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - The Executive Guide to Colors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0B192C',
+                            gold: '#D4AF37',
+                            black: '#121212',
+                            bg: '#F8F9FA',
+                            white: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        montserrat: ['"Montserrat"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #e5e7eb; padding: 2rem 0; }
+        .infographic-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #F8F9FA;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-montserrat text-brand-black antialiased">
+
+    <!-- INFOGRAPHIC CANVAS -->
+    <div class="infographic-container relative">
+        
+        <!-- HEADER -->
+        <header class="bg-brand-blue text-brand-white py-10 px-12 relative border-b-8 border-brand-gold">
+            <div class="flex justify-between items-end">
+                <div>
+                    <h2 class="text-brand-gold font-montserrat font-bold tracking-[0.2em] text-xs uppercase mb-2">Premium English</h2>
+                    <h1 class="font-playfair text-4xl md:text-5xl font-bold leading-tight">
+                        The Executive Guide <br> 
+                        <span class="italic font-light text-brand-white/90">to Colors</span>
+                    </h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="w-16 h-16 border-2 border-brand-gold rounded-full flex items-center justify-center">
+                        <span class="font-playfair text-2xl font-bold text-brand-gold">PE</span>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-6 font-montserrat text-sm font-light text-brand-bg max-w-xl leading-relaxed">
+                Domine el vocabulario cromático con precisión. Una guía diseñada para comunicarse con exactitud y elegancia en cualquier entorno profesional.
+            </p>
+        </header>
+
+        <!-- SECTION 1: THE ESSENTIALS -->
+        <section class="py-12 px-12 bg-brand-white">
+            <div class="flex items-center gap-4 mb-8">
+                <span class="h-px bg-brand-gold w-12 block"></span>
+                <h3 class="font-playfair text-2xl font-bold text-brand-blue">I. Essential Colors</h3>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-8">
+                <!-- Red -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#E53E3E] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Red</span>
+                </div>
+                <!-- Blue -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#3182CE] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Blue</span>
+                </div>
+                <!-- Green -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#38A169] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Green</span>
+                </div>
+                <!-- Yellow -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#D69E2E] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Yellow</span>
+                </div>
+                <!-- Purple -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#805AD5] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Purple</span>
+                </div>
+                <!-- Orange -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#DD6B20] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Orange</span>
+                </div>
+                <!-- Pink -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#D53F8C] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Pink</span>
+                </div>
+                <!-- Black -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full shadow-md bg-[#121212] border border-gray-200"></div>
+                    <span class="mt-4 font-montserrat font-semibold text-brand-black tracking-wide">Black</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: SHADES & TONES -->
+        <section class="py-12 px-12 bg-brand-bg">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="h-px bg-brand-gold w-12 block"></span>
+                <h3 class="font-playfair text-2xl font-bold text-brand-blue">II. Mastering Shades</h3>
+            </div>
+            
+            <div class="mb-8">
+                <p class="font-montserrat text-sm leading-relaxed text-brand-black max-w-2xl">
+                    En inglés, lograr precisión en el color es sencillo. Utilizamos los adjetivos <strong class="text-brand-blue font-bold">Light</strong> (claro) y <strong class="text-brand-blue font-bold">Dark</strong> (oscuro) <span class="italic">antes</span> del nombre del color base para especificar su tonalidad.
+                </p>
+            </div>
+
+            <div class="bg-brand-white p-8 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-12">
+                
+                <!-- Blue Example -->
+                <div class="flex-1">
+                    <h4 class="font-playfair italic text-lg text-brand-blue mb-4 border-b border-gray-100 pb-2">The Blue Spectrum</h4>
+                    <div class="flex items-end justify-between">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-md bg-[#90CDF4] shadow-sm mb-3"></div>
+                            <span class="text-xs font-bold text-brand-gold uppercase tracking-wider mb-1">Light</span>
+                            <span class="font-semibold text-sm">Light Blue</span>
+                            <span class="text-xs text-gray-400 mt-1">Celeste / Azul claro</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-20 h-20 rounded-md bg-[#3182CE] shadow-md mb-3 transform -translate-y-2"></div>
+                            <span class="text-xs font-bold text-transparent uppercase tracking-wider mb-1">Base</span>
+                            <span class="font-bold text-base text-brand-blue">Blue</span>
+                            <span class="text-xs text-gray-400 mt-1">Azul base</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-md bg-[#2A4365] shadow-sm mb-3"></div>
+                            <span class="text-xs font-bold text-brand-black uppercase tracking-wider mb-1">Dark</span>
+                            <span class="font-semibold text-sm">Dark Blue</span>
+                            <span class="text-xs text-gray-400 mt-1">Azul oscuro</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-px bg-gray-200 hidden md:block"></div>
+
+                <!-- Green Example -->
+                <div class="flex-1">
+                    <h4 class="font-playfair italic text-lg text-brand-blue mb-4 border-b border-gray-100 pb-2">The Green Spectrum</h4>
+                    <div class="flex items-end justify-between">
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-md bg-[#9AE6B4] shadow-sm mb-3"></div>
+                            <span class="text-xs font-bold text-brand-gold uppercase tracking-wider mb-1">Light</span>
+                            <span class="font-semibold text-sm">Light Green</span>
+                            <span class="text-xs text-gray-400 mt-1">Verde claro</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-20 h-20 rounded-md bg-[#38A169] shadow-md mb-3 transform -translate-y-2"></div>
+                            <span class="text-xs font-bold text-transparent uppercase tracking-wider mb-1">Base</span>
+                            <span class="font-bold text-base text-brand-blue">Green</span>
+                            <span class="text-xs text-gray-400 mt-1">Verde base</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-16 h-16 rounded-md bg-[#22543D] shadow-sm mb-3"></div>
+                            <span class="text-xs font-bold text-brand-black uppercase tracking-wider mb-1">Dark</span>
+                            <span class="font-semibold text-sm">Dark Green</span>
+                            <span class="text-xs text-gray-400 mt-1">Verde oscuro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXOTIC COLORS -->
+        <section class="py-12 px-12 bg-brand-white">
+            <div class="flex items-center gap-4 mb-6">
+                <span class="h-px bg-brand-gold w-12 block"></span>
+                <h3 class="font-playfair text-2xl font-bold text-brand-blue">III. Advanced Vocabulary</h3>
+            </div>
+            
+            <p class="font-montserrat text-sm leading-relaxed text-brand-black mb-8 max-w-2xl">
+                Para el ejecutivo que busca un vocabulario sofisticado, presentamos tonalidades específicas que elevarán su nivel de expresión en presentaciones de diseño, producto o moda.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Fuchsia -->
+                <div class="flex items-center p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-[#FF00FF] shadow-inner mr-4 shrink-0"></div>
+                    <div>
+                        <h5 class="font-montserrat font-bold text-brand-blue text-sm">Fuchsia</h5>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Fucsia</p>
+                    </div>
+                </div>
+                
+                <!-- Aquamarine -->
+                <div class="flex items-center p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-[#7FFFD4] shadow-inner mr-4 shrink-0"></div>
+                    <div>
+                        <h5 class="font-montserrat font-bold text-brand-blue text-sm">Aquamarine</h5>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Aguamarina</p>
+                    </div>
+                </div>
+
+                <!-- Teal -->
+                <div class="flex items-center p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-[#008080] shadow-inner mr-4 shrink-0"></div>
+                    <div>
+                        <h5 class="font-montserrat font-bold text-brand-blue text-sm">Teal</h5>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Verde azulado</p>
+                    </div>
+                </div>
+
+                <!-- Burgundy -->
+                <div class="flex items-center p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-[#800020] shadow-inner mr-4 shrink-0"></div>
+                    <div>
+                        <h5 class="font-montserrat font-bold text-brand-blue text-sm">Burgundy</h5>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Borgoña / Vino</p>
+                    </div>
+                </div>
+
+                <!-- Navy -->
+                <div class="flex items-center p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-[#000080] shadow-inner mr-4 shrink-0"></div>
+                    <div>
+                        <h5 class="font-montserrat font-bold text-brand-blue text-sm">Navy</h5>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Azul marino</p>
+                    </div>
+                </div>
+
+                <!-- Beige -->
+                <div class="flex items-center p-4 border border-gray-100 rounded-lg shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-12 h-12 rounded-full bg-[#F5F5DC] shadow-inner mr-4 shrink-0 border border-gray-200"></div>
+                    <div>
+                        <h5 class="font-montserrat font-bold text-brand-blue text-sm">Beige</h5>
+                        <p class="text-xs text-gray-500 font-medium mt-1">Beige</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bg-brand-blue text-center py-6 border-t border-brand-blue/20">
+            <p class="font-playfair italic text-brand-gold text-sm tracking-wide">
+                Excellence in Communication.
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
