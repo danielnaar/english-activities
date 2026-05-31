@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium English | Interactive Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #F8F9FA; color: #121212; margin: 0; text-align: center; }
         header { background-color: #0B192C; padding: 3rem; border-bottom: 4px solid #D4AF37; }
@@ -13,22 +13,51 @@
         /* Contenedor principal (oculto al inicio) */
         #main-content { display: none; }
         
-        .container { max-width: 600px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .session-link { display: block; padding: 1.5rem; margin: 1rem 0; background: #0B192C; color: #D4AF37; text-decoration: none; font-weight: bold; border-radius: 4px; transition: 0.3s; }
-        .session-link:hover { background: #121212; transform: translateY(-3px); }
-        
-        /* Estilos de la pantalla de acceso (Login) */
+        .container { max-width: 700px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-bottom: 2rem; font-size: 2rem; }
+
+        /* Pantalla de acceso (Login) */
         #login-container { max-width: 400px; margin: 5rem auto; padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 4px solid #0B192C; }
         #login-container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-top: 0; margin-bottom: 1rem; }
         .login-desc { font-size: 0.9rem; color: #666; margin-bottom: 2rem; }
-        
-        /* Corrección del input para que no se desborde */
         input[type="password"] { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; box-sizing: border-box; }
         input[type="password"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
-        
         button { background-color: #0B192C; color: #D4AF37; border: none; padding: 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
         button:hover { background-color: #121212; }
         #error-message { color: #d32f2f; font-size: 0.85rem; margin-top: 1.5rem; font-weight: bold; display: none; }
+
+        /* =========================================
+           SISTEMA DE CARPETAS DESPLEGABLES 
+           ========================================= */
+        
+        /* Nivel 1: Step / General */
+        details.folder { margin-bottom: 1rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); overflow: hidden; background: #fff; }
+        details.folder > summary { background-color: #0B192C; color: #D4AF37; padding: 1.25rem 1.5rem; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; list-style: none; position: relative; text-align: left; transition: 0.3s; }
+        details.folder > summary::-webkit-details-marker { display: none; }
+        details.folder > summary:hover { background-color: #121212; }
+        details.folder > summary::after { content: '+'; position: absolute; right: 1.5rem; font-size: 1.5rem; top: 50%; transform: translateY(-50%); transition: 0.3s; }
+        details.folder[open] > summary::after { content: '-'; color: #fff; }
+
+        /* Nivel 2: Sessions */
+        details.sub-folder { margin: 1rem; border: 1px solid #e5e7eb; border-radius: 4px; overflow: hidden; }
+        details.sub-folder > summary { background-color: #F8F9FA; color: #0B192C; padding: 1rem 1.5rem; font-weight: bold; font-size: 1rem; cursor: pointer; list-style: none; position: relative; text-align: left; border-left: 4px solid #D4AF37; transition: 0.2s; }
+        details.sub-folder > summary::-webkit-details-marker { display: none; }
+        details.sub-folder > summary:hover { background-color: #eef0f3; }
+        details.sub-folder > summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; top: 50%; transform: translateY(-50%); transition: transform 0.3s; }
+        details.sub-folder[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
+        details.sub-folder[open] > summary { border-bottom: 1px solid #e5e7eb; }
+
+        /* Enlaces de los materiales */
+        .link-list { background: #fff; display: flex; flex-direction: column; }
+        .link-item { padding: 1rem 1.5rem; color: #333; text-decoration: none; text-align: left; border-bottom: 1px solid #f1f1f1; font-weight: 500; font-size: 0.95rem; display: flex; items-center; transition: 0.2s; }
+        .link-item:last-child { border-bottom: none; }
+        .link-item:hover { background-color: #fcfaf5; padding-left: 2rem; color: #0B192C; }
+
+        /* Etiquetas para la jerarquía de materiales */
+        .tag { font-size: 0.65rem; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; margin-right: 12px; font-weight: bold; letter-spacing: 0.5px; display: inline-flex; align-items: center; justify-content: center; min-width: 90px; }
+        .tag-info { background: #e0f2fe; color: #0369a1; }     /* Infografías */
+        .tag-trans { background: #fef08a; color: #854d0e; }    /* Transpositions */
+        .tag-tool { background: #f3e8ff; color: #7e22ce; }     /* Herramientas (Generales) */
     </style>
 </head>
 <body>
@@ -47,22 +76,66 @@
 
     <div id="main-content">
         <div class="container">
-            <h2>Interactive Applications</h2>
+            <h2>Interactive Hub</h2>
             
-            <!-- APLICACIONES GENERALES -->
-            <a href="collage.html" class="session-link">Collage</a>
-            <a href="collage6.html" class="session-link">Collage 6 Images</a>
-            <a href="generador-ppt.html" class="session-link">PPT Generator</a>
-            
-            <!-- SESIÓN 1 -->
-            <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="session-link">Step 1 | Session 1: Possessive Adjectives</a>
-            <a href="STEP-1/SESSION-1/transposition.html" class="session-link">Step 1 | Session 1: Transposition</a>
-            
-            <!-- SESIÓN 2 -->
-            <a href="STEP-1/SESSION-2/transposition.html" class="session-link">Step 1 | Session 2: Transposition</a>
-            
-            <!-- SESIÓN 3 -->
-            <a href="STEP-1/SESSION-3/Learning_Colors.html" class="session-link">Step 1 | Session 3: The Executive Guide to Colors</a>
+            <!-- CARPETA: STEP 1 (Nivel del curso) -->
+            <details class="folder" open>
+                <summary>Step 1</summary>
+                
+                <!-- CARPETA: SESSION 1 -->
+                <details class="sub-folder">
+                    <summary>Session 1</summary>
+                    <div class="link-list">
+                        <!-- 1. Infografía -->
+                        <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="link-item">
+                            <span class="tag tag-info">Infographic</span> Possessive Adjectives
+                        </a>
+                        <!-- 4. Transposition -->
+                        <a href="STEP-1/SESSION-1/transposition.html" class="link-item">
+                            <span class="tag tag-trans">Transposition</span> Drill: Session 1
+                        </a>
+                    </div>
+                </details>
+
+                <!-- CARPETA: SESSION 2 -->
+                <details class="sub-folder">
+                    <summary>Session 2</summary>
+                    <div class="link-list">
+                        <!-- 4. Transposition -->
+                        <a href="STEP-1/SESSION-2/transposition.html" class="link-item">
+                            <span class="tag tag-trans">Transposition</span> Drill: An Actor and a Musician
+                        </a>
+                    </div>
+                </details>
+
+                <!-- CARPETA: SESSION 3 -->
+                <details class="sub-folder">
+                    <summary>Session 3</summary>
+                    <div class="link-list">
+                        <!-- 1. Infografía -->
+                        <a href="STEP-1/SESSION-3/Learning_Colors.html" class="link-item">
+                            <span class="tag tag-info">Infographic</span> The Executive Guide to Colors
+                        </a>
+                    </div>
+                </details>
+            </details>
+
+            <!-- CARPETA: GENERAL TOOLS (Para tus collages y generadores) -->
+            <details class="folder">
+                <summary>General Tools</summary>
+                <div class="link-list">
+                    <a href="collage.html" class="link-item">
+                        <span class="tag tag-tool">Tool</span> Collage Activity
+                    </a>
+                    <a href="collage6.html" class="link-item">
+                        <span class="tag tag-tool">Tool</span> Collage 6 Images
+                    </a>
+                    <a href="generador-ppt.html" class="link-item">
+                        <span class="tag tag-tool">Tool</span> PPT Generator
+                    </a>
+                </div>
+            </details>
+
         </div>
     </div>
 
