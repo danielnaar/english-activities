@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numbers in English - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Estilo para los números gigantes de fondo */
+        .bg-number {
+            position: absolute;
+            right: 1rem;
+            top: -2rem;
+            font-size: 10rem;
+            font-weight: 900;
+            color: #f1f5f9; /* Gris muy claro/casi blanco */
+            z-index: 0;
+            line-height: 1;
+            font-family: 'Playfair Display', serif;
+            user-select: none;
+            pointer-events: none;
+        }
+        /* Ajuste responsivo para los números gigantes */
+        @media (min-width: 768px) {
+            .bg-number {
+                right: 3rem;
+                font-size: 14rem;
+            }
+        }
+    </style>
+</head>
+<body class="py-8 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212]">
+
+    <!-- Contenedor principal del documento -->
+    <div class="w-full max-w-4xl bg-white shadow-2xl overflow-hidden rounded-sm relative">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-20 pb-16 px-8 relative">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] md:tracking-[0.3em] text-xs font-bold mb-4 font-serif-custom">
+                PREMIUM ENGLISH METHODOLOGY
+            </p>
+            <h1 class="text-5xl md:text-7xl font-serif-custom font-bold text-white mb-2">
+                Numbers in English
+            </h1>
+            <h2 class="text-3xl md:text-4xl font-serif-custom font-bold text-[#D4AF37] italic mb-8">
+                Made Easy
+            </h2>
+            <div class="w-48 h-px bg-gray-500 mx-auto mb-8"></div>
+            <p class="text-white text-sm md:text-base font-bold max-w-lg mx-auto leading-relaxed">
+                No need to memorize hundreds of words!<br>
+                Just understand the logic and you'll be able to count from 1 to infinity.
+            </p>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL: TIMELINE -->
+        <div class="relative pt-16 pb-20 px-8 md:px-16 overflow-hidden">
+            
+            <!-- Línea dorada vertical (Timeline) -->
+            <div class="absolute left-8 md:left-16 top-16 bottom-0 w-[2px] bg-[#D4AF37] z-10 hidden sm:block"></div>
+
+            <!-- PASO 01: Numbers from 1 to 10 -->
+            <div class="relative mb-24 sm:pl-12">
+                <!-- Punto en la línea -->
+                <div class="hidden sm:block absolute left-[-4px] top-4 w-2.5 h-2.5 bg-[#D4AF37] rounded-full z-20"></div>
+                
+                <!-- Número de fondo -->
+                <div class="bg-number">01</div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-6">Numbers from 1 to 10</h3>
+                    
+                    <div class="bg-white rounded-sm shadow-[0_4px_15px_-3px_rgba(0,0,0,0.1)] border border-gray-100 p-6 flex flex-wrap gap-x-4 gap-y-2 text-lg">
+                        <span><strong class="text-[#D4AF37]">1</strong> = one,</span>
+                        <span><strong class="text-[#D4AF37]">2</strong> = two,</span>
+                        <span><strong class="text-[#D4AF37]">3</strong> = three,</span>
+                        <span class="text-gray-400 px-2">... ,</span>
+                        <span><strong class="text-[#D4AF37]">10</strong> = ten</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 02: Teen Numbers -->
+            <div class="relative mb-24 sm:pl-12 mt-12">
+                <!-- Punto en la línea -->
+                <div class="hidden sm:block absolute left-[-4px] top-4 w-2.5 h-2.5 bg-[#D4AF37] rounded-full z-20"></div>
+                
+                <!-- Número de fondo -->
+                <div class="bg-number" style="top: -4rem;">02</div>
+                
+                <div class="relative z-10">
+                    <div class="flex items-baseline gap-4 mb-6">
+                        <h3 class="text-3xl font-serif-custom font-bold text-[#0B192C]">Teen Numbers</h3>
+                        <span class="text-gray-500 text-sm font-bold italic">(11 to 19)</span>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row shadow-[0_4px_15px_-3px_rgba(0,0,0,0.1)]">
+                        <!-- Mitad Izquierda (Excepciones) -->
+                        <div class="bg-[#F8F9FA] border-l-4 border-[#D4AF37] p-8 md:w-1/2">
+                            <p class="text-gray-400 text-xs font-bold tracking-widest mb-4">EXCEPTIONS</p>
+                            <p class="text-xl mb-2"><strong class="text-[#121212]">11</strong> = eleven</p>
+                            <p class="text-xl"><strong class="text-[#121212]">12</strong> = twelve</p>
+                        </div>
+                        
+                        <!-- Mitad Derecha (Regla) -->
+                        <div class="bg-[#0B192C] p-8 md:w-1/2 text-white">
+                            <p class="text-[#D4AF37] text-xs font-bold tracking-widest mb-4">FROM 13 TO 19</p>
+                            <p class="font-bold mb-4">Say the last number and add "teen":</p>
+                            <p class="text-xl mb-1"><strong class="text-[#D4AF37]">13</strong> = thirteen</p>
+                            <p class="text-xl mb-1"><strong class="text-[#D4AF37]">14</strong> = fourteen</p>
+                            <p class="text-xl text-gray-500">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 03: Tens -->
+            <div class="relative mb-24 sm:pl-12 mt-12">
+                <!-- Punto en la línea -->
+                <div class="hidden sm:block absolute left-[-4px] top-4 w-2.5 h-2.5 bg-[#D4AF37] rounded-full z-20"></div>
+                
+                <!-- Número de fondo -->
+                <div class="bg-number" style="top: -3rem;">03</div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-6">Tens</h3>
+                    <p class="text-lg mb-6">
+                        20 = twenty, 30 = thirty, 40 = forty, 50 = fifty...
+                    </p>
+                    
+                    <div class="bg-white rounded-sm shadow-[0_4px_15px_-3px_rgba(0,0,0,0.1)] border border-gray-100 p-6">
+                        <p class="text-[#D4AF37] text-[10px] font-bold tracking-widest mb-2 uppercase">Combine Them</p>
+                        <p class="text-lg">21 = twenty-one, 35 = thirty-five, etc.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PASO 04: Hundreds, Thousands, & Millions -->
+            <div class="relative sm:pl-12 mt-12 pb-8">
+                <!-- Punto en la línea (último punto) -->
+                <div class="hidden sm:block absolute left-[-4px] top-4 w-2.5 h-2.5 bg-[#D4AF37] rounded-full z-20"></div>
+                
+                <!-- Número de fondo -->
+                <div class="bg-number" style="top: -3rem;">04</div>
+                
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-8">Hundreds, Thousands, & Millions</h3>
+                    
+                    <!-- Columnas de números grandes -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                        <div>
+                            <p class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-2 border-b-2 border-[#D4AF37] inline-block pb-1">100</p>
+                            <p class="text-gray-500 text-xs font-bold tracking-wider uppercase mt-2">One Hundred</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-2 border-b-2 border-[#D4AF37] inline-block pb-1">1,000</p>
+                            <p class="text-gray-500 text-xs font-bold tracking-wider uppercase mt-2">One Thousand</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-2 border-b-2 border-[#D4AF37] inline-block pb-1">1,000,000</p>
+                            <p class="text-gray-500 text-xs font-bold tracking-wider uppercase mt-2">One Million</p>
+                        </div>
+                    </div>
+
+                    <!-- Example Box -->
+                    <div class="bg-white rounded-sm shadow-[0_4px_15px_-3px_rgba(0,0,0,0.1)] border border-gray-100 border-l-4 border-l-[#0B192C] p-6">
+                        <p class="text-gray-500 text-[10px] font-bold tracking-widest mb-3 uppercase">Example</p>
+                        <p class="text-xl font-bold text-[#121212] mb-2">1,234,567 =</p>
+                        <p class="text-[#121212] leading-relaxed">one million two hundred thirty-four thousand five hundred sixty-seven</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- SECCIÓN OSCURA: THE VISUAL FORMULA -->
+        <div class="bg-[#121212] px-8 py-20 border-t-8 border-[#D4AF37]">
+            <h2 class="text-4xl font-serif-custom font-bold text-[#D4AF37] text-center mb-8">
+                The Visual Formula
+            </h2>
+            
+            <p class="text-white font-bold text-center max-w-lg mx-auto mb-16 leading-relaxed text-sm md:text-base">
+                One, two, three, four, five, six, seven, eight, nine...<br>
+                No need to memorise numbers. Just learn num-<br>
+                bers from 1 to...infinite with the following model:
+            </p>
+            
+            <!-- Caja con la fórmula -->
+            <div class="max-w-xl mx-auto border border-[#D4AF37] py-6 px-4 md:py-8 md:px-12 text-center mb-16">
+                <span class="text-4xl md:text-6xl font-serif-custom font-bold text-[#D4AF37] tracking-widest">
+                    XXX.XXX.XXX
+                </span>
+            </div>
+            
+            <!-- Detalles importantes -->
+            <div class="max-w-3xl mx-auto relative border border-gray-500 p-8 pt-10">
+                <!-- Etiqueta flotante -->
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#121212] px-4">
+                    <p class="text-gray-400 text-[10px] font-bold tracking-widest uppercase">IMPORTANT DETAILS</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm md:text-base">
+                    <!-- Izquierda -->
+                    <div class="flex items-start text-gray-300">
+                        <span class="text-[#D4AF37] text-[10px] mr-3 mt-1.5">&#9632;</span>
+                        <p><strong class="text-[#D4AF37]">Regional Rule:</strong> In British English (BR), use "hundred AND" (mandatory).</p>
+                    </div>
+                    <!-- Derecha -->
+                    <div class="flex items-start text-gray-300">
+                        <span class="text-[#D4AF37] text-[10px] mr-3 mt-1.5">&#9632;</span>
+                        <p><strong class="text-[#D4AF37]">American Rule:</strong> No "and" between thousands and hundreds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN BLANCA: PRO TIPS FOR FLUENCY -->
+        <div class="bg-white py-20 px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif-custom font-bold text-[#0B192C] mb-4">
+                Pro Tips for Fluency
+            </h2>
+            <div class="w-12 h-0.5 bg-[#D4AF37] mx-auto mb-16"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto relative px-4">
+                
+                <!-- Tip 1 -->
+                <div class="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 p-8 pt-12 relative flex items-center justify-center min-h-[160px]">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center shadow-sm">
+                        <span class="text-[#D4AF37] font-bold text-sm">1</span>
+                    </div>
+                    <p class="text-[#121212] font-bold text-sm">Say each group<br>clearly and in order.</p>
+                </div>
+                
+                <!-- Tip 2 -->
+                <div class="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 p-8 pt-12 relative flex items-center justify-center flex-col min-h-[160px]">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center shadow-sm">
+                        <span class="text-[#D4AF37] font-bold text-sm">2</span>
+                    </div>
+                    <p class="text-[#121212] font-bold text-sm mb-2">In written English, use a hy-<br>phen for compound numbers</p>
+                    <p class="text-gray-400 italic text-xs">(twenty-one, seventy-eight)</p>
+                </div>
+                
+                <!-- Tip 3 -->
+                <div class="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-gray-100 p-8 pt-12 relative flex items-center justify-center min-h-[160px]">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center shadow-sm">
+                        <span class="text-[#D4AF37] font-bold text-sm">3</span>
+                    </div>
+                    <p class="text-[#121212] font-bold text-sm">Group digits in 3s to read<br>large numbers easily.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PIE DE PÁGINA (Footer Mini) -->
+        <div class="bg-[#0B192C] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Visual Corporate Identity
+            </div>
+            <div class="italic">
+                Based on a logical model to avoid memorization.
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
