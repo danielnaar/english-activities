@@ -4,60 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium English | Interactive Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* ESTILOS BASE */
         body { font-family: 'Montserrat', sans-serif; background-color: #F8F9FA; color: #121212; margin: 0; text-align: center; }
         header { background-color: #0B192C; padding: 3rem; border-bottom: 4px solid #D4AF37; }
         h1 { font-family: 'Playfair Display', serif; color: #FFFFFF; font-size: 3rem; margin: 0; }
         
-        /* Contenedor principal (oculto al inicio) */
         #main-content { display: none; }
+        .container { max-width: 600px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-bottom: 2rem; }
         
-        .container { max-width: 700px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-bottom: 2rem; font-size: 2rem; }
-
-        /* Pantalla de acceso (Login) */
+        /* LOGIN */
         #login-container { max-width: 400px; margin: 5rem auto; padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 4px solid #0B192C; }
         #login-container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-top: 0; margin-bottom: 1rem; }
         .login-desc { font-size: 0.9rem; color: #666; margin-bottom: 2rem; }
         input[type="password"] { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; box-sizing: border-box; }
         input[type="password"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
-        button { background-color: #0B192C; color: #D4AF37; border: none; padding: 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
-        button:hover { background-color: #121212; }
+        .btn-login { background-color: #0B192C; color: #D4AF37; border: none; padding: 1rem; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: 'Montserrat', sans-serif; width: 100%; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-login:hover { background-color: #121212; }
         #error-message { color: #d32f2f; font-size: 0.85rem; margin-top: 1.5rem; font-weight: bold; display: none; }
 
         /* =========================================
-           SISTEMA DE CARPETAS DESPLEGABLES 
+           SISTEMA DE CARPETAS DESPLEGABLES
            ========================================= */
+        details { margin-bottom: 1rem; text-align: left; }
+        summary { list-style: none; cursor: pointer; position: relative; transition: 0.3s; }
+        summary::-webkit-details-marker { display: none; } /* Oculta la flechita por defecto */
         
-        /* Nivel 1: Step / General */
-        details.folder { margin-bottom: 1rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); overflow: hidden; background: #fff; }
-        details.folder > summary { background-color: #0B192C; color: #D4AF37; padding: 1.25rem 1.5rem; font-weight: bold; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; list-style: none; position: relative; text-align: left; transition: 0.3s; }
-        details.folder > summary::-webkit-details-marker { display: none; }
-        details.folder > summary:hover { background-color: #121212; }
-        details.folder > summary::after { content: '+'; position: absolute; right: 1.5rem; font-size: 1.5rem; top: 50%; transform: translateY(-50%); transition: 0.3s; }
-        details.folder[open] > summary::after { content: '-'; color: #fff; }
+        /* NIVEL 1: STEP (Carpeta Principal) */
+        .folder-summary {
+            background-color: #0B192C;
+            color: #D4AF37;
+            padding: 1.5rem;
+            font-weight: bold;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .folder-summary:hover { background-color: #121212; }
+        /* Icono de flecha animado */
+        .folder-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.9rem; transition: transform 0.3s; }
+        details[open] > .folder-summary::after { transform: rotate(180deg); }
 
-        /* Nivel 2: Sessions */
-        details.sub-folder { margin: 1rem; border: 1px solid #e5e7eb; border-radius: 4px; overflow: hidden; }
-        details.sub-folder > summary { background-color: #F8F9FA; color: #0B192C; padding: 1rem 1.5rem; font-weight: bold; font-size: 1rem; cursor: pointer; list-style: none; position: relative; text-align: left; border-left: 4px solid #D4AF37; transition: 0.2s; }
-        details.sub-folder > summary::-webkit-details-marker { display: none; }
-        details.sub-folder > summary:hover { background-color: #eef0f3; }
-        details.sub-folder > summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; top: 50%; transform: translateY(-50%); transition: transform 0.3s; }
-        details.sub-folder[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
-        details.sub-folder[open] > summary { border-bottom: 1px solid #e5e7eb; }
+        /* NIVEL 2: SESSIONS (Subcarpetas) */
+        .sub-details { margin: 0.5rem 0 0.5rem 1.5rem; } /* Sangría a la derecha */
+        .sub-summary {
+            background-color: #1A2E4C; /* Un azul ligeramente más claro para diferenciar */
+            color: #D4AF37;
+            padding: 1.2rem 1.5rem;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+        .sub-summary:hover { background-color: #23395B; }
+        .sub-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
+        .sub-details[open] > .sub-summary::after { transform: rotate(180deg); }
 
-        /* Enlaces de los materiales */
-        .link-list { background: #fff; display: flex; flex-direction: column; }
-        .link-item { padding: 1rem 1.5rem; color: #333; text-decoration: none; text-align: left; border-bottom: 1px solid #f1f1f1; font-weight: 500; font-size: 0.95rem; display: flex; items-center; transition: 0.2s; }
-        .link-item:last-child { border-bottom: none; }
-        .link-item:hover { background-color: #fcfaf5; padding-left: 2rem; color: #0B192C; }
+        /* NIVEL 3: MATERIAL DE CLASE (Enlaces finales) */
+        .material-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            margin: 0.5rem 0 0.5rem 1.5rem;
+            background-color: #F8F9FA;
+            color: #0B192C;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            border-left: 4px solid #D4AF37; /* Detalle dorado a la izquierda */
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        .material-link:hover { background-color: #eef0f3; transform: translateX(5px); }
 
-        /* Etiquetas para la jerarquía de materiales */
-        .tag { font-size: 0.65rem; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; margin-right: 12px; font-weight: bold; letter-spacing: 0.5px; display: inline-flex; align-items: center; justify-content: center; min-width: 90px; }
-        .tag-info { background: #e0f2fe; color: #0369a1; }     /* Infografías */
-        .tag-trans { background: #fef08a; color: #854d0e; }    /* Transpositions */
-        .tag-tool { background: #f3e8ff; color: #7e22ce; }     /* Herramientas (Generales) */
+        /* Etiquetas visuales pequeñas */
+        .tag { font-size: 0.65rem; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; margin-right: 8px; font-weight: bold; background: #e2e8f0; color: #475569; }
     </style>
 </head>
 <body>
@@ -68,9 +90,8 @@
     <div id="login-container">
         <h2>Exclusive Access</h2>
         <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
-        
         <input type="password" id="password-input" placeholder="Enter Code">
-        <button onclick="checkPassword()">Access</button>
+        <button class="btn-login" onclick="checkPassword()">Access</button>
         <p id="error-message">Incorrect code. Please try again.</p>
     </div>
 
@@ -78,95 +99,36 @@
         <div class="container">
             <h2>Interactive Hub</h2>
             
-            <!-- CARPETA: STEP 1 (Nivel del curso) -->
-            <details class="folder" open>
-                <summary>Step 1</summary>
+            <details open>
+                <summary class="folder-summary">Step 1</summary>
                 
-                <!-- CARPETA: SESSION 1 -->
-                <details class="sub-folder">
-                    <summary>Session 1</summary>
-                    <div class="link-list">
-                        <!-- 1. Infografía -->
-                        <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="link-item">
-                            <span class="tag tag-info">Infographic</span> Possessive Adjectives
-                        </a>
-                        <!-- 4. Transposition -->
-                        <a href="STEP-1/SESSION-1/transposition.html" class="link-item">
-                            <span class="tag tag-trans">Transposition</span> Drill: Session 1
-                        </a>
-                    </div>
+                <details class="sub-details">
+                    <summary class="sub-summary">Session 1</summary>
+                    <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link">
+                        <span class="tag">Infographic</span> Possessive Adjectives
+                    </a>
+                    <a href="STEP-1/SESSION-1/transposition.html" class="material-link">
+                        <span class="tag">Transposition</span> Drill: Session 1
+                    </a>
                 </details>
 
-                <!-- CARPETA: SESSION 2 -->
-                <details class="sub-folder">
-                    <summary>Session 2</summary>
-                    <div class="link-list">
-                        <!-- 4. Transposition -->
-                        <a href="STEP-1/SESSION-2/transposition.html" class="link-item">
-                            <span class="tag tag-trans">Transposition</span> Drill: An Actor and a Musician
-                        </a>
-                    </div>
+                <details class="sub-details">
+                    <summary class="sub-summary">Session 2</summary>
+                    <a href="STEP-1/SESSION-2/transposition.html" class="material-link">
+                        <span class="tag">Transposition</span> Drill: An Actor and a Musician
+                    </a>
                 </details>
 
-                <!-- CARPETA: SESSION 3 -->
-                <details class="sub-folder">
-                    <summary>Session 3</summary>
-                    <div class="link-list">
-                        <!-- 1. Infografía -->
-                        <a href="STEP-1/SESSION-3/Learning_Colors.html" class="link-item">
-                            <span class="tag tag-info">Infographic</span> The Executive Guide to Colors
-                        </a>
-                    </div>
+                <details class="sub-details">
+                    <summary class="sub-summary">Session 3</summary>
+                    <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link">
+                        <span class="tag">Infographic</span> The Executive Guide to Colors
+                    </a>
                 </details>
-            </details>
 
-            <!-- CARPETA: GENERAL TOOLS (Para tus collages y generadores) -->
-            <details class="folder">
-                <summary>General Tools</summary>
-                <div class="link-list">
-                    <a href="collage.html" class="link-item">
-                        <span class="tag tag-tool">Tool</span> Collage Activity
-                    </a>
-                    <a href="collage6.html" class="link-item">
-                        <span class="tag tag-tool">Tool</span> Collage 6 Images
-                    </a>
-                    <a href="generador-ppt.html" class="link-item">
-                        <span class="tag tag-tool">Tool</span> PPT Generator
-                    </a>
-                </div>
-            </details>
-
-        </div>
-    </div>
-
-    <script>
-        function checkPassword() {
-            const password = document.getElementById("password-input").value;
-            const errorMessage = document.getElementById("error-message");
-            const loginContainer = document.getElementById("login-container");
-            const mainContent = document.getElementById("main-content");
-
-            // *** IMPORTANTE: CAMBIA TU CONTRASEÑA AQUÍ ***
-            const correctPassword = "admin"; 
-
-            if (password === correctPassword) {
-                // Si la clave es correcta, oculta el login y muestra el menú
-                loginContainer.style.display = "none";
-                mainContent.style.display = "block";
-                errorMessage.style.display = "none";
-            } else {
-                // Si es incorrecta, muestra el mensaje de error
-                errorMessage.style.display = "block";
-            }
-        }
-
-        // Esto permite que el usuario presione la tecla "Enter" para acceder sin usar el mouse
-        document.getElementById("password-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                checkPassword();
-            }
-        });
-    </script>
-</body>
-</html>
+            </details> <details>
+                <summary class="folder-summary">General Tools</summary>
+                
+                <div class="sub-details">
+                    <a href="collage.html" class="material-link">Collage Activity</a>
+                    <a href="collage6.html" class="material-
