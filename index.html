@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium English | Interactive Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         /* ESTILOS BASE */
         body { font-family: 'Montserrat', sans-serif; background-color: #F8F9FA; color: #121212; margin: 0; text-align: center; }
@@ -15,9 +15,9 @@
         .container { max-width: 600px; margin: 3rem auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-bottom: 2rem; }
         
-        /* LOGIN */
-        #login-container { max-width: 400px; margin: 5rem auto; padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 4px solid #0B192C; }
-        #login-container h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-top: 0; margin-bottom: 1rem; }
+        /* FORMULARIO DE LOGIN (CORREGIDO) */
+        #login-form { max-width: 400px; margin: 5rem auto; padding: 2.5rem; background: #fff; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 4px solid #0B192C; }
+        #login-form h2 { font-family: 'Playfair Display', serif; color: #0B192C; margin-top: 0; margin-bottom: 1rem; }
         .login-desc { font-size: 0.9rem; color: #666; margin-bottom: 2rem; }
         input[type="password"] { width: 100%; padding: 1rem; margin-bottom: 1.5rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; text-align: center; box-sizing: border-box; }
         input[type="password"]:focus { outline: none; border-color: #D4AF37; box-shadow: 0 0 5px rgba(212, 175, 55, 0.5); }
@@ -30,7 +30,7 @@
            ========================================= */
         details { margin-bottom: 1rem; text-align: left; }
         summary { list-style: none; cursor: pointer; position: relative; transition: 0.3s; }
-        summary::-webkit-details-marker { display: none; } /* Oculta la flechita por defecto */
+        summary::-webkit-details-marker { display: none; } /* Oculta flecha nativa */
         
         /* NIVEL 1: STEP (Carpeta Principal) */
         .folder-summary {
@@ -45,20 +45,19 @@
             letter-spacing: 2px;
         }
         .folder-summary:hover { background-color: #121212; }
-        /* Icono de flecha animado */
         .folder-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.9rem; transition: transform 0.3s; }
         details[open] > .folder-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 2: SESSIONS (Subcarpetas) */
-        .sub-details { margin: 0.5rem 0 0.5rem 1.5rem; } /* Sangría a la derecha */
+        /* NIVEL 2: SESSIONS (Subcarpetas con el mismo color unificado) */
+        .sub-details { margin: 0.5rem 0 0.5rem 1.5rem; } 
         .sub-summary {
-            background-color: #1A2E4C; /* Un azul ligeramente más claro para diferenciar */
-            color: #D4AF37;
+            background-color: #0B192C; /* Mismo azul noche exacto */
+            color: #D4AF37;            /* Mismo dorado exacto */
             padding: 1.2rem 1.5rem;
             font-weight: bold;
             border-radius: 4px;
         }
-        .sub-summary:hover { background-color: #23395B; }
+        .sub-summary:hover { background-color: #121212; }
         .sub-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
         .sub-details[open] > .sub-summary::after { transform: rotate(180deg); }
 
@@ -72,13 +71,13 @@
             text-decoration: none;
             font-weight: bold;
             border-radius: 4px;
-            border-left: 4px solid #D4AF37; /* Detalle dorado a la izquierda */
+            border-left: 4px solid #D4AF37; 
             transition: 0.3s;
             font-size: 0.95rem;
         }
         .material-link:hover { background-color: #eef0f3; transform: translateX(5px); }
 
-        /* Etiquetas visuales pequeñas */
+        /* Etiquetas informativas */
         .tag { font-size: 0.65rem; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; margin-right: 8px; font-weight: bold; background: #e2e8f0; color: #475569; }
     </style>
 </head>
@@ -87,13 +86,13 @@
         <h1>Premium English</h1>
     </header>
     
-    <div id="login-container">
+    <form id="login-form" onsubmit="event.preventDefault(); checkPassword();">
         <h2>Exclusive Access</h2>
         <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
-        <input type="password" id="password-input" placeholder="Enter Code">
-        <button class="btn-login" onclick="checkPassword()">Access</button>
+        <input type="password" id="password-input" placeholder="Enter Code" required>
+        <button type="submit" class="btn-login">Access</button>
         <p id="error-message">Incorrect code. Please try again.</p>
-    </div>
+    </form>
 
     <div id="main-content">
         <div class="container">
@@ -126,9 +125,38 @@
                     </a>
                 </details>
 
-            </details> <details>
+            </details>
+
+            <details>
                 <summary class="folder-summary">General Tools</summary>
-                
                 <div class="sub-details">
                     <a href="collage.html" class="material-link">Collage Activity</a>
-                    <a href="collage6.html" class="material-
+                    <a href="collage6.html" class="material-link">Collage 6 Images</a>
+                    <a href="generador-ppt.html" class="material-link">PPT Generator</a>
+                </div>
+            </details>
+
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password-input").value;
+            const errorMessage = document.getElementById("error-message");
+            const loginForm = document.getElementById("login-form");
+            const mainContent = document.getElementById("main-content");
+
+            // Recuerda cambiar "admin" por tu contraseña real
+            const correctPassword = "admin"; 
+
+            if (password === correctPassword) {
+                loginForm.style.display = "none";
+                mainContent.style.display = "block";
+                errorMessage.style.display = "none";
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
