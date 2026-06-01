@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstratives Challenge - Premium English</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        
+        /* Animación para respuestas incorrectas */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+            75% { transform: translateX(-8px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+    </style>
+</head>
+<body class="py-8 px-4 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-center">
+
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- ENCABEZADO -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-2">
+                Demonstratives Challenge
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light">
+                Match the sentence with the correct image. Focus on distance and quantity!
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10">
+            
+            <!-- TABLERO DE IMÁGENES (3 Zonas de Soltado) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" id="drop-zones-container">
+                
+                <!-- ZONA 1: CITY -->
+                <div class="drop-zone bg-white rounded-xl border-4 border-dashed border-gray-300 aspect-[3/4] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full max-w-sm mx-auto" data-target="city" id="zone-city">
+                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-cover rounded-lg absolute inset-0 z-0 pointer-events-none">
+                    <!-- Overlay oscuro para resaltar el texto al soltar -->
+                    <div class="absolute inset-0 bg-black/10 z-0 rounded-lg pointer-events-none"></div>
+                    <!-- El contenedor de la oración caerá aquí encima -->
+                    <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
+                </div>
+
+                <!-- ZONA 2: NATURE/PARK -->
+                <div class="drop-zone bg-white rounded-xl border-4 border-dashed border-gray-300 aspect-[3/4] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full max-w-sm mx-auto" data-target="nature" id="zone-nature">
+                    <img src="tigreperico.jpg" alt="Nature Park" class="w-full h-full object-cover rounded-lg absolute inset-0 z-0 pointer-events-none">
+                    <div class="absolute inset-0 bg-black/10 z-0 rounded-lg pointer-events-none"></div>
+                    <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
+                </div>
+
+                <!-- ZONA 3: STORE -->
+                <div class="drop-zone bg-white rounded-xl border-4 border-dashed border-gray-300 aspect-[3/4] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full max-w-sm mx-auto" data-target="store" id="zone-store">
+                    <img src="tiendaderopa.jpg" alt="Clothing Store" class="w-full h-full object-cover rounded-lg absolute inset-0 z-0 pointer-events-none">
+                    <div class="absolute inset-0 bg-black/10 z-0 rounded-lg pointer-events-none"></div>
+                    <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
+                </div>
+
+            </div>
+
+            <!-- ÁREA DE ORACIONES (Pool dinámico) -->
+            <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 md:p-8 text-center relative overflow-hidden">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                    <h2 class="text-2xl font-serif-custom font-bold text-[#0B192C]">Match the sentence!</h2>
+                    <div class="text-[#D4AF37] font-bold text-lg bg-[#0B192C] px-6 py-2 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                        Score: <span id="score-display" class="ml-2 text-white">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white">10</span>
+                    </div>
+                </div>
+                
+                <p class="text-gray-500 mb-6 text-sm md:text-base">
+                    <strong class="text-[#0B192C]">PC:</strong> Drag the sentence to the correct image.<br>
+                    <strong class="text-[#0B192C]">Mobile:</strong> Tap the sentence, then tap the image.
+                </p>
+                
+                <!-- Contenedor donde aparecerá solo UNA oración a la vez -->
+                <div id="sentence-pool" class="min-h-[80px] flex justify-center items-center w-full">
+                    <!-- Inyectado vía JS -->
+                </div>
+
+                <!-- Pantalla de victoria (Oculta hasta ganar) -->
+                <div id="end-screen" class="hidden absolute inset-0 bg-white/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center p-6">
+                    <div class="w-20 h-20 bg-[#0B192C] rounded-full flex items-center justify-center mb-6 shadow-lg border-4 border-[#D4AF37]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                    </div>
+                    <h3 class="text-4xl font-serif-custom font-bold text-[#0B192C] mb-2 text-center">Excellent Work!</h3>
+                    <p class="text-lg text-gray-600 mb-8 text-center">You have successfully completed the demonstratives challenge.</p>
+                    <button onclick="resetGame()" class="bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-lg transform transition hover:scale-105 border border-[#D4AF37] tracking-wider uppercase text-sm">Play Again</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DE PROGRAMACIÓN DEL JUEGO -->
+    <script>
+        // 10 Oraciones diseñadas para encajar con los elementos de tus 3 imágenes
+        const sentencesData = [
+            // ZONA 1: CITY (imagendetaxi.jpeg)
+            { text: "This taxi is waiting on the street.", target: "city" },
+            { text: "Those tall buildings have many windows.", target: "city" },
+            { text: "That airplane is flying in the sky.", target: "city" },
+            
+            // ZONA 2: NATURE/PARK (tigreperico.jpg)
+            { text: "This boy is holding a soccer ball.", target: "nature" },
+            { text: "These blue shoes are on the ground.", target: "nature" },
+            { text: "That tiger is walking in the grass.", target: "nature" },
+            { text: "Those mountains look beautiful.", target: "nature" },
+            
+            // ZONA 3: STORE (tiendaderopa.jpg)
+            { text: "This red dress is perfect for her.", target: "store" },
+            { text: "Those colorful shirts are on the rack.", target: "store" },
+            { text: "That sale sign is on the wall.", target: "store" }
+        ];
+
+        let currentSentenceIndex = 0;
+        let score = 0;
+        let selectedSentence = null;
+        let randomizedData = [];
+
+        // Elementos del DOM
+        const sentencePool = document.getElementById('sentence-pool');
+        const scoreDisplay = document.getElementById('score-display');
+        const endScreen = document.getElementById('end-screen');
+        const dropZones = document.querySelectorAll('.drop-zone');
+
+        function initGame() {
+            // Mezclar las 10 oraciones aleatoriamente
+            randomizedData = [...sentencesData].sort(() => Math.random() - 0.5);
+            currentSentenceIndex = 0;
+            score = 0;
+            scoreDisplay.textContent = score;
+            endScreen.classList.add('hidden');
+            selectedSentence = null;
+
+            // Limpiar oraciones previas de las imágenes
+            document.querySelectorAll('.dropped-sentence-container').forEach(container => {
+                container.innerHTML = '';
+            });
+
+            loadNextSentence();
+        }
+
+        function loadNextSentence() {
+            sentencePool.innerHTML = '';
+            selectedSentence = null;
+
+            if (currentSentenceIndex >= randomizedData.length) {
+                // Fin del juego (10 de 10)
+                endScreen.classList.remove('hidden');
+                return;
+            }
+
+            const data = randomizedData[currentSentenceIndex];
+
+            // Crear el elemento de la oración
+            const el = document.createElement('div');
+            el.className = 'bg-white border-2 border-[#0B192C] text-[#0B192C] font-semibold py-3 px-6 md:py-4 md:px-8 rounded-lg shadow-sm cursor-grab hover:bg-slate-50 transition-colors w-full max-w-xl text-base md:text-lg select-none';
+            el.draggable = true;
+            el.dataset.target = data.target;
+            el.textContent = data.text;
+
+            // Eventos para Computadora (Drag & Drop)
+            el.addEventListener('dragstart', handleDragStart);
+            el.addEventListener('dragend', handleDragEnd);
+
+            // Eventos para Celulares (Tap)
+            el.addEventListener('click', handleSentenceClick);
+
+            sentencePool.appendChild(el);
+        }
+
+        function handleDragStart(e) {
+            selectedSentence = e.target;
+            e.target.classList.add('opacity-50');
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('opacity-50');
+        }
+
+        // Eventos para las zonas de destino (imágenes)
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('border-[#D4AF37]', 'ring-4', 'ring-[#D4AF37]/50');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('border-[#D4AF37]', 'ring-4', 'ring-[#D4AF37]/50');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('border-[#D4AF37]', 'ring-4', 'ring-[#D4AF37]/50');
+
+                if (!selectedSentence) return;
+                checkMatch(zone.dataset.target, selectedSentence.dataset.target, zone);
+            });
+
+            // Tap en celulares
+            zone.addEventListener('click', () => {
+                if (!selectedSentence) return;
+                checkMatch(zone.dataset.target, selectedSentence.dataset.target, zone);
+            });
+        });
+
+        function handleSentenceClick(e) {
+            if (selectedSentence) {
+                // Quitar estilo activo al anterior
+                selectedSentence.classList.remove('ring-4', 'ring-[#D4AF37]', 'bg-[#0B192C]', 'text-white');
+                selectedSentence.classList.add('bg-white', 'text-[#0B192C]');
+            }
+            // Poner estilo activo al nuevo
+            selectedSentence = e.target;
+            selectedSentence.classList.remove('bg-white', 'text-[#0B192C]');
+            selectedSentence.classList.add('ring-4', 'ring-[#D4AF37]', 'bg-[#0B192C]', 'text-white');
+        }
+
+        function checkMatch(zoneTarget, sentenceTarget, zoneElement) {
+            if (zoneTarget === sentenceTarget) {
+                // RESPUESTA CORRECTA
+                score++;
+                scoreDisplay.textContent = score;
+
+                // Animación de victoria sobre la imagen
+                const container = zoneElement.querySelector('.dropped-sentence-container');
+                container.innerHTML = ''; // Limpiar si había otra antes
+                
+                const successEl = document.createElement('div');
+                successEl.className = 'bg-[#0B192C]/90 backdrop-blur-sm text-white font-bold text-sm md:text-base p-3 rounded-lg shadow-xl transform transition-all duration-300 scale-100 text-center mb-2 border border-[#D4AF37]';
+                successEl.innerHTML = '<span class="text-[#D4AF37] mr-1">&#10003;</span> ' + selectedSentence.textContent;
+                container.appendChild(successEl);
+
+                selectedSentence.remove();
+                selectedSentence = null;
+
+                // Esperar 1 segundo para que se lea, luego avanzar
+                setTimeout(() => {
+                    successEl.classList.replace('scale-100', 'scale-0');
+                    successEl.classList.add('opacity-0');
+                    setTimeout(() => {
+                        successEl.remove();
+                        currentSentenceIndex++;
+                        loadNextSentence();
+                    }, 300);
+                }, 1200);
+
+            } else {
+                // RESPUESTA INCORRECTA
+                selectedSentence.classList.add('animate-shake');
+                
+                // Efecto rojo temporal
+                const originalBg = selectedSentence.classList.contains('bg-[#0B192C]') ? 'bg-[#0B192C]' : 'bg-white';
+                const originalText = selectedSentence.classList.contains('text-white') ? 'text-white' : 'text-[#0B192C]';
+                const originalBorder = 'border-[#0B192C]';
+
+                selectedSentence.classList.remove(originalBg, originalText, originalBorder, 'ring-[#D4AF37]');
+                selectedSentence.classList.add('bg-red-500', 'text-white', 'border-red-600', 'ring-red-400');
+
+                setTimeout(() => {
+                    selectedSentence.classList.remove('animate-shake', 'bg-red-500', 'text-white', 'border-red-600', 'ring-red-400');
+                    selectedSentence.classList.add(originalBg, originalText, originalBorder);
+                    if(originalBg === 'bg-[#0B192C]') selectedSentence.classList.add('ring-[#D4AF37]');
+                }, 500);
+            }
+        }
+
+        // Iniciar el juego al cargar la página
+        window.onload = initGame;
+    </script>
+</body>
+</html>
