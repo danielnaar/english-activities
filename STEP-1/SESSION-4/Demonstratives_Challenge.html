@@ -16,7 +16,6 @@
         }
         .font-serif-custom { font-family: 'Playfair Display', serif; }
         
-        /* Animación para respuestas incorrectas */
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-8px); }
@@ -28,7 +27,7 @@
 </head>
 <body class="py-8 px-4 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-center">
 
-    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+    <div class="w-full max-w-6xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
         
         <!-- ENCABEZADO -->
         <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
@@ -46,28 +45,30 @@
         <div class="p-6 md:p-10">
             
             <!-- TABLERO DE IMÁGENES (3 Zonas de Soltado) -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-8" id="drop-zones-container">
+            <!-- sm:grid-cols-3 fuerza a que estén siempre una al lado de la otra en pantallas grandes -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8 mb-8" id="drop-zones-container">
                 
                 <!-- ZONA 1: CITY -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] max-h-[450px] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="city" id="zone-city">
-                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
-                    <!-- Overlay oscuro para resaltar el texto al soltar -->
-                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
+                <!-- aspect-[1294/2560] asegura la proporción perfecta sin dejar huecos -->
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full shadow-lg hover:shadow-xl" data-target="city" id="zone-city">
+                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none">
+                    <!-- Overlay oscuro sutil en la base para que el texto resalte -->
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent z-0 pointer-events-none"></div>
                     <!-- El contenedor de la oración caerá aquí encima -->
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
                 <!-- ZONA 2: NATURE/PARK -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] max-h-[450px] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="nature" id="zone-nature">
-                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
-                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full shadow-lg hover:shadow-xl" data-target="nature" id="zone-nature">
+                    <img src="tigreperico.jpg" alt="Nature Park" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none">
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent z-0 pointer-events-none"></div>
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
                 <!-- ZONA 3: STORE -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] max-h-[450px] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="store" id="zone-store">
-                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
-                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full shadow-lg hover:shadow-xl" data-target="store" id="zone-store">
+                    <img src="tiendaderopa.jpg" alt="Clothing Store" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none">
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent z-0 pointer-events-none"></div>
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
@@ -81,11 +82,6 @@
                         Score: <span id="score-display" class="ml-2 text-white">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white">10</span>
                     </div>
                 </div>
-                
-                <p class="text-gray-500 mb-6 text-sm md:text-base">
-                    <strong class="text-[#0B192C]">PC:</strong> Drag the sentence to the correct image.<br>
-                    <strong class="text-[#0B192C]">Mobile:</strong> Tap the sentence, then tap the image.
-                </p>
                 
                 <!-- Contenedor donde aparecerá solo UNA oración a la vez -->
                 <div id="sentence-pool" class="min-h-[80px] flex justify-center items-center w-full">
@@ -115,13 +111,13 @@
             { text: "Those tall buildings have many windows.", target: "city" },
             { text: "That airplane is flying in the sky.", target: "city" },
             
-            // ZONA 2: NATURE/PARK (tigreperico.jpeg)
+            // ZONA 2: NATURE/PARK (tigreperico.jpg)
             { text: "This boy is holding a soccer ball.", target: "nature" },
             { text: "These blue shoes are on the ground.", target: "nature" },
             { text: "That tiger is walking in the grass.", target: "nature" },
             { text: "Those mountains look beautiful.", target: "nature" },
             
-            // ZONA 3: STORE (tiendaderopa.jpeg)
+            // ZONA 3: STORE (tiendaderopa.jpg)
             { text: "This red dress is perfect for her.", target: "store" },
             { text: "Those colorful shirts are on the rack.", target: "store" },
             { text: "That sale sign is on the wall.", target: "store" }
@@ -169,7 +165,7 @@
 
             // Crear el elemento de la oración
             const el = document.createElement('div');
-            el.className = 'bg-white border-2 border-[#0B192C] text-[#0B192C] font-semibold py-3 px-6 md:py-4 md:px-8 rounded-lg shadow-sm cursor-grab hover:bg-slate-50 transition-colors w-full max-w-xl text-base md:text-lg select-none';
+            el.className = 'bg-white border-2 border-[#0B192C] text-[#0B192C] font-semibold py-3 px-4 md:px-8 rounded-lg shadow-sm cursor-grab hover:bg-slate-50 transition-colors w-full max-w-xl text-sm md:text-lg select-none text-center';
             el.draggable = true;
             el.dataset.target = data.target;
             el.textContent = data.text;
@@ -242,7 +238,7 @@
                 container.innerHTML = ''; // Limpiar si había otra antes
                 
                 const successEl = document.createElement('div');
-                successEl.className = 'bg-[#0B192C]/90 backdrop-blur-sm text-white font-bold text-sm md:text-base p-3 rounded-lg shadow-xl transform transition-all duration-300 scale-100 text-center mb-2 border border-[#D4AF37]';
+                successEl.className = 'bg-[#0B192C]/95 backdrop-blur-sm text-white font-bold text-xs sm:text-sm p-2 md:p-3 rounded-lg shadow-xl transform transition-all duration-300 scale-100 text-center mb-2 border border-[#D4AF37] mx-1 md:mx-2';
                 successEl.innerHTML = '<span class="text-[#D4AF37] mr-1">&#10003;</span> ' + selectedSentence.textContent;
                 container.appendChild(successEl);
 
