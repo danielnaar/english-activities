@@ -46,28 +46,28 @@
         <div class="p-6 md:p-10">
             
             <!-- TABLERO DE IMÁGENES (3 Zonas de Soltado) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8" id="drop-zones-container">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8" id="drop-zones-container">
                 
                 <!-- ZONA 1: CITY -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-dashed border-gray-300 aspect-[3/4] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full max-w-sm mx-auto" data-target="city" id="zone-city">
-                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-cover rounded-lg absolute inset-0 z-0 pointer-events-none">
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="city" id="zone-city">
+                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
                     <!-- Overlay oscuro para resaltar el texto al soltar -->
-                    <div class="absolute inset-0 bg-black/10 z-0 rounded-lg pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
                     <!-- El contenedor de la oración caerá aquí encima -->
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
                 <!-- ZONA 2: NATURE/PARK -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-dashed border-gray-300 aspect-[3/4] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full max-w-sm mx-auto" data-target="nature" id="zone-nature">
-                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-full object-cover rounded-lg absolute inset-0 z-0 pointer-events-none">
-                    <div class="absolute inset-0 bg-black/10 z-0 rounded-lg pointer-events-none"></div>
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="nature" id="zone-nature">
+                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
+                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
                 <!-- ZONA 3: STORE -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-dashed border-gray-300 aspect-[3/4] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full max-w-sm mx-auto" data-target="store" id="zone-store">
-                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-full object-cover rounded-lg absolute inset-0 z-0 pointer-events-none">
-                    <div class="absolute inset-0 bg-black/10 z-0 rounded-lg pointer-events-none"></div>
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="store" id="zone-store">
+                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
+                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
