@@ -46,11 +46,11 @@
         <div class="p-6 md:p-10">
             
             <!-- TABLERO DE IMÁGENES (3 Zonas de Soltado) -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8" id="drop-zones-container">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8 mb-8" id="drop-zones-container">
                 
                 <!-- ZONA 1: CITY -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="city" id="zone-city">
-                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] max-h-[450px] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="city" id="zone-city">
+                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
                     <!-- Overlay oscuro para resaltar el texto al soltar -->
                     <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
                     <!-- El contenedor de la oración caerá aquí encima -->
@@ -58,15 +58,15 @@
                 </div>
 
                 <!-- ZONA 2: NATURE/PARK -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="nature" id="zone-nature">
-                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] max-h-[450px] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="nature" id="zone-nature">
+                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
                     <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
 
                 <!-- ZONA 3: STORE -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="store" id="zone-store">
-                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
+                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] max-h-[450px] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="store" id="zone-store">
+                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-full object-cover absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
                     <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
                     <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
                 </div>
@@ -115,13 +115,13 @@
             { text: "Those tall buildings have many windows.", target: "city" },
             { text: "That airplane is flying in the sky.", target: "city" },
             
-            // ZONA 2: NATURE/PARK (tigreperico.jpg)
+            // ZONA 2: NATURE/PARK (tigreperico.jpeg)
             { text: "This boy is holding a soccer ball.", target: "nature" },
             { text: "These blue shoes are on the ground.", target: "nature" },
             { text: "That tiger is walking in the grass.", target: "nature" },
             { text: "Those mountains look beautiful.", target: "nature" },
             
-            // ZONA 3: STORE (tiendaderopa.jpg)
+            // ZONA 3: STORE (tiendaderopa.jpeg)
             { text: "This red dress is perfect for her.", target: "store" },
             { text: "Those colorful shirts are on the rack.", target: "store" },
             { text: "That sale sign is on the wall.", target: "store" }
@@ -278,6 +278,11 @@
                     if(originalBg === 'bg-[#0B192C]') selectedSentence.classList.add('ring-[#D4AF37]');
                 }, 500);
             }
+        }
+
+        // Función para reiniciar el juego
+        function resetGame() {
+            initGame();
         }
 
         // Iniciar el juego al cargar la página
