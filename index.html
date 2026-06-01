@@ -77,8 +77,12 @@
         }
         .material-link:hover { background-color: #eef0f3; transform: translateX(5px); }
 
-        /* Etiquetas informativas */
-        .tag { font-size: 0.65rem; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; margin-right: 8px; font-weight: bold; background: #e2e8f0; color: #475569; }
+        /* Etiquetas informativas (NUEVA ETIQUETA SCRIPT AGREGADA) */
+        .tag { font-size: 0.65rem; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; margin-right: 8px; font-weight: bold; display: inline-flex; min-width: 80px; justify-content: center; }
+        .tag-info { background: #e0f2fe; color: #0369a1; }     /* Azul claro para Infographics */
+        .tag-script { background: #dcfce7; color: #15803d; }   /* Verde claro para Scripts */
+        .tag-trans { background: #fef08a; color: #854d0e; }    /* Amarillo/Dorado para Transpositions */
+        .tag-tool { background: #f3e8ff; color: #7e22ce; }     /* Morado para Tools */
     </style>
 </head>
 <body>
@@ -108,16 +112,16 @@
                 <details class="sub-details">
                     <summary class="sub-summary">Session 1</summary>
                     <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link">
-                        <span class="tag">Infographic</span> Possessive Adjectives
+                        <span class="tag tag-info">Infographic</span> Possessive Adjectives
                     </a>
                     
                     <!-- NUEVO SCRIPT AGREGADO AQUÍ -->
                     <a href="STEP-1/SESSION-1/The_Wrong_Suitcase.html" class="material-link">
-                        <span class="tag">Script</span> The Wrong Suitcase
+                        <span class="tag tag-script">Script</span> The Wrong Suitcase
                     </a>
-
+                    
                     <a href="STEP-1/SESSION-1/transposition.html" class="material-link">
-                        <span class="tag">Transposition</span> Drill: Session 1
+                        <span class="tag tag-trans">Transposition</span> Drill: Session 1
                     </a>
                 </details>
 
@@ -126,19 +130,26 @@
                     <summary class="sub-summary">Session 2</summary>
                     
                     <a href="STEP-1/SESSION-2/Wh_Question_Words.html" class="material-link">
-                        <span class="tag">Infographic</span> WH-Question Words
+                        <span class="tag tag-info">Infographic</span> WH-Question Words
                     </a>
                     <a href="STEP-1/SESSION-2/Numbers_in_English.html" class="material-link">
-                        <span class="tag">Infographic</span> Numbers in English
+                        <span class="tag tag-info">Infographic</span> Numbers in English
                     </a>
                     <a href="STEP-1/SESSION-2/Teen_vs_Ty-Numbers.html" class="material-link">
-                        <span class="tag">Infographic</span> Teen vs Ty Numbers
+                        <span class="tag tag-info">Infographic</span> Teen vs Ty Numbers
                     </a>
                     <a href="STEP-1/SESSION-2/How_to_Say_Phone_Numbers_in_English.html" class="material-link">
-                        <span class="tag">Infographic</span> How to Say Phone Numbers in English
+                        <span class="tag tag-info">Infographic</span> Phone Numbers
                     </a>
+
+                    <!-- NUEVO SCRIPT AGREGADO AQUÍ -->
+                    <a href="STEP-1/SESSION-2/An_Actor_and_a_Musician.html" class="material-link">
+                        <span class="tag tag-script">Script</span> An Actor and a Musician
+                    </a>
+
+                    <!-- TRANSPOSITION -->
                     <a href="STEP-1/SESSION-2/transposition.html" class="material-link">
-                        <span class="tag">Transposition</span> Drill: An Actor and a Musician
+                        <span class="tag tag-trans">Transposition</span> Drill: Actor & Musician
                     </a>
                 </details>
 
@@ -146,13 +157,13 @@
                 <details class="sub-details">
                     <summary class="sub-summary">Session 3</summary>
                     <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link">
-                        <span class="tag">Infographic</span> Learning Colors
+                        <span class="tag tag-info">Infographic</span> Learning Colors
                     </a>
                     <a href="STEP-1/SESSION-3/Demonstratives.html" class="material-link">
-                        <span class="tag">Infographic</span> Demonstratives
+                        <span class="tag tag-info">Infographic</span> Demonstratives
                     </a>
                     <a href="STEP-1/SESSION-3/To_Have_Got.html" class="material-link">
-                        <span class="tag">Infographic</span> To Have Got
+                        <span class="tag tag-info">Infographic</span> To Have Got
                     </a>
                 </details>
 
@@ -162,9 +173,15 @@
             <details>
                 <summary class="folder-summary">General Tools</summary>
                 <div class="sub-details">
-                    <a href="collage.html" class="material-link">Collage Activity</a>
-                    <a href="collage6.html" class="material-link">Collage 6 Images</a>
-                    <a href="generador-ppt.html" class="material-link">PPT Generator</a>
+                    <a href="collage.html" class="material-link">
+                        <span class="tag tag-tool">Tool</span> Collage Activity
+                    </a>
+                    <a href="collage6.html" class="material-link">
+                        <span class="tag tag-tool">Tool</span> Collage 6 Images
+                    </a>
+                    <a href="generador-ppt.html" class="material-link">
+                        <span class="tag tag-tool">Tool</span> PPT Generator
+                    </a>
                 </div>
             </details>
 
