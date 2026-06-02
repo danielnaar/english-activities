@@ -48,26 +48,36 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8" id="drop-zones-container">
                 
                 <!-- ZONA 1: CITY -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="city" id="zone-city">
-                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
-                    <!-- Overlay oscuro para resaltar el texto al soltar -->
-                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
-                    <!-- El contenedor de la oración caerá aquí encima -->
-                    <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
+                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer" data-target="city" id="zone-city">
+                    <!-- La imagen dicta el tamaño real del marco (w-full h-auto block) -->
+                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-auto block pointer-events-none select-none">
+                    <div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
+                    <!-- Contenedor de la oración pegado al fondo -->
+                    <div class="absolute inset-x-0 bottom-0 p-3 z-10 flex flex-col justify-end min-h-[80px] pointer-events-none">
+                        <div class="dropped-sentence-container w-full pointer-events-auto"></div>
+                    </div>
                 </div>
 
                 <!-- ZONA 2: NATURE/PARK -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="nature" id="zone-nature">
-                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
-                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
-                    <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
+                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer" data-target="nature" id="zone-nature">
+                    <!-- La imagen dicta el tamaño real del marco -->
+                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-auto block pointer-events-none select-none">
+                    <div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
+                    <!-- Contenedor de la oración pegado al fondo -->
+                    <div class="absolute inset-x-0 bottom-0 p-3 z-10 flex flex-col justify-end min-h-[80px] pointer-events-none">
+                        <div class="dropped-sentence-container w-full pointer-events-auto"></div>
+                    </div>
                 </div>
 
                 <!-- ZONA 3: STORE -->
-                <div class="drop-zone bg-white rounded-xl border-4 border-solid border-[#D4AF37] aspect-[1294/2560] flex flex-col items-center justify-end p-4 group relative overflow-hidden transition-all duration-300 w-full mx-auto shadow-lg hover:shadow-xl" data-target="store" id="zone-store">
-                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-full object-contain absolute inset-0 z-0 pointer-events-none bg-[#F8F9FA]">
-                    <div class="absolute inset-0 bg-black/10 z-0 pointer-events-none"></div>
-                    <div class="dropped-sentence-container w-full min-h-[60px] z-10 flex flex-col justify-end"></div>
+                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer" data-target="store" id="zone-store">
+                    <!-- La imagen dicta el tamaño real del marco -->
+                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-auto block pointer-events-none select-none">
+                    <div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
+                    <!-- Contenedor de la oración pegado al fondo -->
+                    <div class="absolute inset-x-0 bottom-0 p-3 z-10 flex flex-col justify-end min-h-[80px] pointer-events-none">
+                        <div class="dropped-sentence-container w-full pointer-events-auto"></div>
+                    </div>
                 </div>
 
             </div>
@@ -109,13 +119,13 @@
             { text: "Those tall buildings have many windows.", target: "city" },
             { text: "That airplane is flying in the sky.", target: "city" },
             
-            // ZONA 2: NATURE/PARK (tigreperico.jpg)
+            // ZONA 2: NATURE/PARK (tigreperico.jpeg)
             { text: "This boy is holding a soccer ball.", target: "nature" },
             { text: "These blue shoes are on the ground.", target: "nature" },
             { text: "That tiger is walking in the grass.", target: "nature" },
             { text: "Those mountains look beautiful.", target: "nature" },
             
-            // ZONA 3: STORE (tiendaderopa.jpg)
+            // ZONA 3: STORE (tiendaderopa.jpeg)
             { text: "This red dress is perfect for her.", target: "store" },
             { text: "Those colorful shirts are on the rack.", target: "store" },
             { text: "That sale sign is on the wall.", target: "store" }
