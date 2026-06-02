@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Clothing Item - Premium English</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-6px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+        
+        /* Asegurar que los emojis se vean limpios y grandes */
+        .emoji-display {
+            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+        }
+    </style>
+</head>
+<body class="py-8 px-4 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-center">
+
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200 flex flex-col">
+        
+        <!-- ENCABEZADO -->
+        <div class="bg-[#0B192C] text-center pt-8 pb-6 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-2 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-2">
+                Find the Clothing Item
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light">
+                Listen or read the word and tap on the correct item below.
+            </p>
+        </div>
+
+        <div class="p-6 md:p-8 flex-grow flex flex-col">
+            
+            <!-- ZONA DE INSTRUCCIÓN ACTIVA (Lo que hay que buscar) -->
+            <div id="active-game-area" class="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-md border border-gray-200 p-6 mb-8 text-center relative">
+                
+                <div class="absolute top-4 right-6 text-[#D4AF37] font-bold text-sm sm:text-base bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37]">
+                    Score: <span id="score-display" class="text-white">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white" id="total-score">10</span>
+                </div>
+
+                <p class="text-gray-500 uppercase tracking-widest text-xs font-bold mb-2 mt-4 md:mt-0">Current Target</p>
+                <div class="flex items-center justify-center gap-3">
+                    <span class="text-2xl md:text-3xl text-[#0B192C]">Click on:</span>
+                    <span id="target-word" class="text-3xl md:text-5xl font-serif-custom font-bold text-[#D4AF37] underline decoration-2 underline-offset-8">
+                        ...
+                    </span>
+                </div>
+            </div>
+
+            <!-- TABLERO DE PRENDAS DE VESTIR (Grid) -->
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 md:gap-6" id="clothing-grid">
+                <!-- Los items se inyectarán aquí mediante JavaScript -->
+            </div>
+
+            <!-- PANTALLA DE VICTORIA (Oculta hasta terminar) -->
+            <div id="end-screen" class="hidden flex-col items-center justify-center py-10 bg-white rounded-xl shadow-md border border-gray-200">
+                <div class="w-20 h-20 bg-[#0B192C] rounded-full flex items-center justify-center mb-6 shadow-lg border-4 border-[#D4AF37]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h3 class="text-4xl font-serif-custom font-bold text-[#0B192C] mb-2 text-center">Excellent Work!</h3>
+                <p class="text-lg text-gray-600 mb-8 text-center">You found all the clothing items perfectly.</p>
+                <button onclick="resetGame()" class="bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-lg transform transition hover:scale-105 border border-[#D4AF37] tracking-wider uppercase text-sm">Play Again</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DE PROGRAMACIÓN DEL JUEGO -->
+    <script>
+        // Base de datos de las 18 prendas de vestir 100% Emojis (Sin repetidos y adaptados culturalmente)
+        const allClothingItems = [
+            { id: 'swimsuit', name: 'Swimsuit', emoji: '🩱' },
+            { id: 'pants', name: 'Pants', emoji: '👖' },
+            { id: 'coat', name: 'Coat', emoji: '🧥' }, // Antes Jacket
+            { id: 'dress', name: 'Dress', emoji: '👗' }, // Antes Skirt (Es claramente un vestido)
+            { id: 'scarf', name: 'Scarf', emoji: '🧣' }, // Reemplaza a Pajamas (Kimono)
+            { id: 'sneakers', name: 'Sneakers', emoji: '👟' },
+            { id: 'blouse', name: 'Blouse', emoji: '👚' }, // Único emoji de top femenino existente
+            { id: 'vest', name: 'Vest', emoji: '🦺' }, 
+            { id: 'sandals', name: 'Sandals', emoji: '🩴' },
+            { id: 'bathrobe', name: 'Bathrobe', emoji: '🥋' },
+            { id: 'high-heels', name: 'High Heels', emoji: '👠' },
+            { id: 'hat', name: 'Hat', emoji: '👒' },
+            { id: 'shirt', name: 'Shirt', emoji: '👔' },
+            { id: 'socks', name: 'Socks', emoji: '🧦' },
+            { id: 'mittens', name: 'Mittens', emoji: '🧤' },
+            { id: 'shorts', name: 'Shorts', emoji: '🩳' },
+            { id: 't-shirt', name: 'T-Shirt', emoji: '👕' },
+            { id: 'winter-boots', name: 'Winter Boots', emoji: '🥾' }
+        ];
+
+        let targetSequence = [];
+        let currentTargetIndex = 0;
+        let score = 0;
+        const totalItemsToFind = 10; // 10 prendas por partida
+
+        // Elementos del DOM
+        const gridContainer = document.getElementById('clothing-grid');
+        const targetWordEl = document.getElementById('target-word');
+        const scoreDisplay = document.getElementById('score-display');
+        const totalScoreDisplay = document.getElementById('total-score');
+        const endScreen = document.getElementById('end-screen');
+        const activeGameArea = document.getElementById('active-game-area');
+
+        function initGame() {
+            // Reiniciar variables
+            score = 0;
+            currentTargetIndex = 0;
+            scoreDisplay.textContent = score;
+            totalScoreDisplay.textContent = totalItemsToFind;
+            
+            // Mostrar UI activa, ocultar pantalla final
+            activeGameArea.classList.remove('hidden');
+            gridContainer.classList.remove('hidden');
+            endScreen.classList.add('hidden');
+            endScreen.classList.remove('flex');
+
+            // Mezclar aleatoriamente el tablero
+            const shuffledBoard = [...allClothingItems].sort(() => Math.random() - 0.5);
+            
+            // Seleccionar 10 prendas a buscar
+            targetSequence = [...allClothingItems].sort(() => Math.random() - 0.5).slice(0, totalItemsToFind);
+
+            renderGrid(shuffledBoard);
+            setNextTarget();
+        }
+
+        function renderGrid(items) {
+            gridContainer.innerHTML = '';
+            
+            items.forEach(item => {
+                // Contenedor de cada prenda
+                const card = document.createElement('div');
+                card.className = 'clothing-card bg-white rounded-xl shadow-sm hover:shadow-md border-[3px] border-transparent transition-all duration-300 aspect-square flex flex-col items-center justify-center p-2 cursor-pointer relative overflow-hidden group select-none';
+                card.dataset.id = item.id;
+                
+                // Mostrar únicamente el emoji nativo
+                card.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center text-6xl sm:text-7xl md:text-8xl emoji-display transition-transform duration-300 group-hover:scale-110">
+                        ${item.emoji}
+                    </div>
+                    
+                    <!-- Capa de éxito (El check dorado) -->
+                    <div class="success-overlay absolute inset-0 bg-[#0B192C]/90 z-20 hidden flex-col items-center justify-center backdrop-blur-sm transition-all duration-300">
+                        <span class="text-[#D4AF37] text-4xl mb-1 drop-shadow-md">&#10003;</span>
+                        <span class="text-white text-xs sm:text-sm font-bold uppercase tracking-wider text-center px-1">${item.name}</span>
+                    </div>
+                `;
+
+                // Añadir evento de clic
+                card.addEventListener('click', () => handleItemClick(card, item.id));
+                gridContainer.appendChild(card);
+            });
+        }
+
+        function setNextTarget() {
+            if (currentTargetIndex >= totalItemsToFind) {
+                // Ganó el juego
+                activeGameArea.classList.add('hidden');
+                gridContainer.classList.add('hidden');
+                endScreen.classList.remove('hidden');
+                endScreen.classList.add('flex');
+                return;
+            }
+            
+            // Mostrar la palabra a buscar
+            const currentItem = targetSequence[currentTargetIndex];
+            targetWordEl.textContent = currentItem.name;
+            
+            // Trigger animación de pop
+            targetWordEl.classList.remove('animate-pop');
+            void targetWordEl.offsetWidth;
+            targetWordEl.classList.add('animate-pop');
+        }
+
+        function handleItemClick(cardElement, clickedId) {
+            if (cardElement.classList.contains('found') || currentTargetIndex >= totalItemsToFind) return;
+
+            const currentTargetId = targetSequence[currentTargetIndex].id;
+
+            if (clickedId === currentTargetId) {
+                // RESPUESTA CORRECTA
+                score++;
+                scoreDisplay.textContent = score;
+                
+                // Marcar como encontrado
+                cardElement.classList.add('found', 'border-[#D4AF37]', 'scale-95');
+                const overlay = cardElement.querySelector('.success-overlay');
+                overlay.classList.remove('hidden');
+                overlay.classList.add('flex', 'animate-pop');
+
+                currentTargetIndex++;
+                setTimeout(setNextTarget, 600); // Pausa corta
+            } else {
+                // RESPUESTA INCORRECTA
+                cardElement.classList.add('animate-shake', 'border-red-500', 'bg-red-50');
+                
+                setTimeout(() => {
+                    cardElement.classList.remove('animate-shake', 'border-red-500', 'bg-red-50');
+                }, 400);
+            }
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        // Iniciar al cargar
+        window.onload = initGame;
+    </script>
+</body>
+</html>
