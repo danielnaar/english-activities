@@ -48,9 +48,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8" id="drop-zones-container">
                 
                 <!-- ZONA 1: CITY -->
-                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer" data-target="city" id="zone-city">
-                    <!-- La imagen dicta el tamaño real del marco (w-full h-auto block) -->
-                    <img src="imagendetaxi.jpeg" alt="City Street" class="w-full h-auto block pointer-events-none select-none">
+                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer aspect-[1294/2500]" data-target="city" id="zone-city">
+                    <!-- Imagen en modo cover para garantizar rellenar 100% del marco recortando el excedente -->
+                    <img src="imagendetaxi.jpeg" alt="City Street" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
                     <div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
                     <!-- Contenedor de la oración pegado al fondo -->
                     <div class="absolute inset-x-0 bottom-0 p-3 z-10 flex flex-col justify-end min-h-[80px] pointer-events-none">
@@ -59,9 +59,9 @@
                 </div>
 
                 <!-- ZONA 2: NATURE/PARK -->
-                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer" data-target="nature" id="zone-nature">
-                    <!-- La imagen dicta el tamaño real del marco -->
-                    <img src="tigreperico.jpeg" alt="Nature Park" class="w-full h-auto block pointer-events-none select-none">
+                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer aspect-[1294/2500]" data-target="nature" id="zone-nature">
+                    <!-- Imagen en modo cover para garantizar rellenar 100% del marco recortando el excedente -->
+                    <img src="tigreperico.jpeg" alt="Nature Park" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
                     <div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
                     <!-- Contenedor de la oración pegado al fondo -->
                     <div class="absolute inset-x-0 bottom-0 p-3 z-10 flex flex-col justify-end min-h-[80px] pointer-events-none">
@@ -70,9 +70,9 @@
                 </div>
 
                 <!-- ZONA 3: STORE -->
-                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer" data-target="store" id="zone-store">
-                    <!-- La imagen dicta el tamaño real del marco -->
-                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="w-full h-auto block pointer-events-none select-none">
+                <div class="drop-zone relative bg-white rounded-xl border-[4px] border-solid border-[#D4AF37] overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 w-full cursor-pointer aspect-[1294/2500]" data-target="store" id="zone-store">
+                    <!-- Imagen en modo cover para garantizar rellenar 100% del marco recortando el excedente -->
+                    <img src="tiendaderopa.jpeg" alt="Clothing Store" class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none">
                     <div class="absolute inset-0 bg-black/5 z-0 pointer-events-none"></div>
                     <!-- Contenedor de la oración pegado al fondo -->
                     <div class="absolute inset-x-0 bottom-0 p-3 z-10 flex flex-col justify-end min-h-[80px] pointer-events-none">
