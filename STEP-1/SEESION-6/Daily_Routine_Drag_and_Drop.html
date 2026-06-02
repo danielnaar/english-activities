@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Routine - Premium English</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-6px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        .sortable-item { transition: transform 0.2s, box-shadow 0.2s; }
+        .sortable-item.dragging { 
+            opacity: 0.5; 
+            background-color: #f8fafc;
+            border-color: #D4AF37;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .sortable-item.drag-over {
+            border-top: 4px solid #D4AF37;
+        }
+    </style>
+</head>
+<body class="py-8 px-4 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-2">
+                Daily Routine Sequence
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light">
+                Look at the storyboard and put the actions in the correct chronological order.
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10">
+            
+            <div class="mb-10 max-w-3xl mx-auto">
+                <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 text-center">Storyboard</p>
+                <!-- Marco que "abraza" la imagen como un guante -->
+                <div class="w-full rounded-xl border-[4px] border-[#D4AF37] shadow-lg overflow-hidden">
+                    <img src="storyboard.png" alt="Daily Routine Storyboard" 
+                         class="w-full h-auto block"
+                         onerror="this.src='https://placehold.co/800x400/0B192C/D4AF37?text=Upload+storyboard.png+to+GitHub'">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 md:p-8 relative overflow-hidden">
+                
+                <div id="active-game-area">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 border-b border-gray-100 pb-4">
+                        <div class="text-left">
+                            <h2 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-1">Order the events</h2>
+                            <p class="text-xs text-gray-500 font-medium">Drag & Drop (PC) or use the arrows (Mobile).</p>
+                        </div>
+                        <div class="text-[#D4AF37] font-bold text-base bg-[#0B192C] px-5 py-2 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                            Score: <span id="score-display" class="ml-2 text-white">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white">12</span>
+                        </div>
+                    </div>
+                    
+                    <ul id="sortable-list" class="space-y-3">
+                        <!-- Items inyectados vía JS -->
+                    </ul>
+                </div>
+
+                <div id="end-screen" class="hidden flex-col items-center justify-center py-10">
+                    <div class="w-20 h-20 bg-[#0B192C] rounded-full flex items-center justify-center mb-6 shadow-lg border-4 border-[#D4AF37]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                    </div>
+                    <h3 class="text-4xl font-serif-custom font-bold text-[#0B192C] mb-2 text-center">Perfect Sequence!</h3>
+                    <p class="text-lg text-gray-600 mb-8 text-center">You have successfully organized the daily routine.</p>
+                    <button onclick="resetGame()" class="bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-lg transform transition hover:scale-105 border border-[#D4AF37] tracking-wider uppercase text-sm">Play Again</button>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-8" id="action-buttons">
+                <button onclick="checkAnswers()" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-12 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // La secuencia lógica y correcta basada en el Storyboard
+        const correctSequence = [
+            "He wakes up and turns off the alarm.",
+            "He takes a shower.",
+            "He gets dressed.",
+            "He eats breakfast.",
+            "He runs to the office.",
+            "He gets on time to the office.",
+            "He munches on something before work.",
+            "He works on his computer.",
+            "He gets home early today.",
+            "He has dinner with his wife.",
+            "He watches TV with the kids.",
+            "He goes to bed and falls asleep."
+        ];
+
+        const listContainer = document.getElementById('sortable-list');
+        const scoreDisplay = document.getElementById('score-display');
+        const endScreen = document.getElementById('end-screen');
+        const activeGameArea = document.getElementById('active-game-area');
+        const actionButtons = document.getElementById('action-buttons');
+        
+        let dragSrcEl = null;
+
+        function initGame() {
+            // Reiniciar UI
+            activeGameArea.classList.remove('hidden');
+            actionButtons.classList.remove('hidden');
+            endScreen.classList.add('hidden');
+            endScreen.classList.remove('flex');
+            scoreDisplay.textContent = '0';
+            listContainer.innerHTML = '';
+
+            // Crear un array de objetos con su índice correcto
+            let items = correctSequence.map((text, index) => ({ text, correctIndex: index }));
+            
+            // Mezclar aleatoriamente para el reto
+            items.sort(() => Math.random() - 0.5);
+
+            // Renderizar la lista
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'sortable-item flex items-center justify-between bg-[#F8F9FA] border-2 border-gray-200 p-3 rounded-lg cursor-grab text-sm md:text-base text-[#121212] font-medium';
+                li.draggable = true;
+                li.dataset.correctIndex = item.correctIndex;
+                
+                li.innerHTML = `
+                    <div class="flex items-center flex-grow">
+                        <div class="cursor-grab text-gray-400 mr-3 hidden sm:block">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        </div>
+                        <span class="number-badge bg-[#0B192C] text-[#D4AF37] font-bold text-xs w-6 h-6 flex items-center justify-center rounded-full mr-3 shrink-0"></span>
+                        <span class="item-text">${item.text}</span>
+                    </div>
+                    
+                    <!-- Botones para Móviles -->
+                    <div class="flex flex-col ml-2 space-y-1 shrink-0">
+                        <button onclick="moveUp(this)" class="bg-gray-200 hover:bg-gray-300 rounded px-2 py-0.5 text-gray-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+                        </button>
+                        <button onclick="moveDown(this)" class="bg-gray-200 hover:bg-gray-300 rounded px-2 py-0.5 text-gray-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                        </button>
+                    </div>
+                `;
+
+                // Eventos Drag & Drop
+                li.addEventListener('dragstart', handleDragStart);
+                li.addEventListener('dragenter', handleDragEnter);
+                li.addEventListener('dragover', handleDragOver);
+                li.addEventListener('dragleave', handleDragLeave);
+                li.addEventListener('drop', handleDrop);
+                li.addEventListener('dragend', handleDragEnd);
+
+                listContainer.appendChild(li);
+            });
+
+            updateNumbers();
+        }
+
+        function moveUp(btn) {
+            const li = btn.closest('li');
+            const prev = li.previousElementSibling;
+            if (prev) {
+                listContainer.insertBefore(li, prev);
+                updateNumbers();
+                resetStyles();
+            }
+        }
+
+        function moveDown(btn) {
+            const li = btn.closest('li');
+            const next = li.nextElementSibling;
+            if (next) {
+                listContainer.insertBefore(next, li);
+                updateNumbers();
+                resetStyles();
+            }
+        }
+
+        function handleDragStart(e) {
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+            this.classList.add('dragging');
+            resetStyles();
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) { e.preventDefault(); }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) { e.stopPropagation(); }
+            if (dragSrcEl !== this) {
+                // Intercambiar elementos de la lista en el DOM en lugar de innerHTML para mantener eventos
+                const list = Array.from(listContainer.children);
+                const srcIndex = list.indexOf(dragSrcEl);
+                const targetIndex = list.indexOf(this);
+                
+                if (srcIndex < targetIndex) {
+                    this.parentNode.insertBefore(dragSrcEl, this.nextSibling);
+                } else {
+                    this.parentNode.insertBefore(dragSrcEl, this);
+                }
+                updateNumbers();
+            }
+            return false;
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            let items = document.querySelectorAll('.sortable-item');
+            items.forEach(item => item.classList.remove('drag-over'));
+        }
+
+        function updateNumbers() {
+            const items = document.querySelectorAll('.sortable-item');
+            items.forEach((item, index) => {
+                item.querySelector('.number-badge').textContent = index + 1;
+            });
+        }
+
+        function resetStyles() {
+            const items = document.querySelectorAll('.sortable-item');
+            items.forEach(item => {
+                item.classList.remove('border-green-500', 'bg-green-50', 'border-red-500', 'bg-red-50', 'animate-shake');
+                item.classList.add('border-gray-200', 'bg-[#F8F9FA]');
+            });
+        }
+
+        function checkAnswers() {
+            let currentScore = 0;
+            const items = document.querySelectorAll('.sortable-item');
+            const total = items.length;
+
+            items.forEach((item, index) => {
+                const correctIndex = parseInt(item.dataset.correctIndex);
+                
+                item.classList.remove('border-gray-200', 'bg-[#F8F9FA]', 'border-green-500', 'bg-green-50', 'border-red-500', 'bg-red-50', 'animate-shake');
+                
+                if (correctIndex === index) {
+                    // Posición Correcta
+                    item.classList.add('border-green-500', 'bg-green-50');
+                    currentScore++;
+                } else {
+                    // Posición Incorrecta
+                    item.classList.add('border-red-500', 'bg-red-50', 'animate-shake');
+                    setTimeout(() => {
+                        item.classList.remove('animate-shake');
+                    }, 400);
+                }
+            });
+
+            scoreDisplay.textContent = currentScore;
+
+            if (currentScore === total) {
+                setTimeout(() => {
+                    activeGameArea.classList.add('hidden');
+                    actionButtons.classList.add('hidden');
+                    endScreen.classList.remove('hidden');
+                    endScreen.classList.add('flex');
+                }, 800);
+            }
+        }
+
+        function resetGame() {
+            initGame();
+        }
+
+        // Iniciar
+        window.onload = initGame;
+    </script>
+</body>
+</html>
