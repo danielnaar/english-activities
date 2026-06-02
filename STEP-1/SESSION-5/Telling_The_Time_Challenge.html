@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telling the Time Challenge - Premium English</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+
+        /* Estilos del Reloj Analógico CSS */
+        .clock {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #0B192C;
+            border-radius: 50%;
+            position: relative;
+            background-color: white;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            margin: 0 auto 1.5rem auto;
+        }
+        .clock-center {
+            width: 8px;
+            height: 8px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            border-radius: 4px;
+        }
+        .hour-hand {
+            width: 4px;
+            height: 35px;
+            background-color: #0B192C;
+            transform: translateX(-50%) rotate(0deg); /* Se ajusta con JS */
+            z-index: 5;
+        }
+        .minute-hand {
+            width: 3px;
+            height: 48px;
+            background-color: #121212;
+            transform: translateX(-50%) rotate(0deg); /* Se ajusta con JS */
+            z-index: 4;
+        }
+        
+        /* Marcas del reloj (ticks) */
+        .tick {
+            position: absolute;
+            width: 2px;
+            height: 6px;
+            background-color: #9ca3af;
+            top: 4px;
+            left: 50%;
+            transform-origin: 50% 56px; /* Radio (60) - padding aprox */
+        }
+        .tick-main {
+            width: 3px;
+            height: 10px;
+            background-color: #0B192C;
+        }
+
+        /* Input Styles */
+        .time-input {
+            width: 100%;
+            text-align: center;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        .time-input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+        .input-correct {
+            border-color: #10b981 !important;
+            background-color: #ecfdf5 !important;
+            color: #065f46 !important;
+        }
+        .input-incorrect {
+            border-color: #ef4444 !important;
+            background-color: #fef2f2 !important;
+            color: #991b1b !important;
+            animation: shake 0.4s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
+        }
+    </style>
+</head>
+<body class="py-8 px-4 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-center">
+
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- ENCABEZADO -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-2">
+                Telling the Time Challenge
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light">
+                Look at the clocks and type the time in words (e.g. "half past two").
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10">
+            
+            <div class="flex justify-end mb-6">
+                 <div class="text-[#D4AF37] font-bold text-sm bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37]">
+                    Score: <span id="score-display" class="text-white">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white">6</span>
+                </div>
+            </div>
+
+            <!-- GRID DE RELOJES (6 Relojes) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-10" id="clocks-container">
+                <!-- Los relojes se generan dinámicamente con JS -->
+            </div>
+
+            <!-- BOTONES DE ACCIÓN -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-gray-200">
+                <button onclick="checkAnswers()" id="btn-check" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    Check Answers
+                </button>
+                <button onclick="initGame()" id="btn-reset" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-10 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Play Again
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const numWordsFull = ["twelve", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"];
+        
+        // Diccionario para los minutos exactos
+        const minuteWords = {
+            5: "five", 10: "ten", 15: "fifteen", 20: "twenty", 25: "twenty five",
+            30: "thirty", 35: "thirty five", 40: "forty", 45: "forty five", 50: "fifty", 55: "fifty five"
+        };
+        
+        let clocksData = [];
+
+        function getValidAnswers(h, m) {
+            let answers = [];
+            let currentHourWord = numWordsFull[h];
+            let nextHourWord = numWordsFull[h === 12 ? 1 : h + 1];
+
+            if (m === 0) {
+                answers.push(`${currentHourWord} o'clock`);
+                answers.push(`${currentHourWord} o clock`);
+                answers.push(currentHourWord);
+            } else if (m === 15) {
+                answers.push(`a quarter past ${currentHourWord}`);
+                answers.push(`quarter past ${currentHourWord}`);
+                answers.push(`fifteen past ${currentHourWord}`);
+                answers.push(`${currentHourWord} fifteen`);
+            } else if (m === 30) {
+                answers.push(`half past ${currentHourWord}`);
+                answers.push(`${currentHourWord} thirty`);
+                answers.push(`${currentHourWord} and a half`);
+            } else if (m === 45) {
+                answers.push(`a quarter to ${nextHourWord}`);
+                answers.push(`quarter to ${nextHourWord}`);
+                answers.push(`fifteen to ${nextHourWord}`);
+                answers.push(`${currentHourWord} forty five`);
+            } else {
+                // Para el resto de intervalos de 5 minutos (5, 10, 20, 25, 35, 40, 50, 55)
+                let minWord = minuteWords[m];
+                
+                // Formato digital básico (ej. "one twenty")
+                answers.push(`${currentHourWord} ${minWord}`);
+                
+                // Excepción para los primeros 9 minutos (ej. "one oh five")
+                if (m === 5) {
+                    answers.push(`${currentHourWord} oh five`);
+                }
+
+                // Formato Británico/Clásico (past / to)
+                if (m < 30) {
+                    // Minutos pasados (past)
+                    let pastWord = minuteWords[m];
+                    answers.push(`${pastWord} past ${currentHourWord}`);
+                    answers.push(`${pastWord} minutes past ${currentHourWord}`);
+                } else {
+                    // Minutos para la siguiente (to)
+                    let diff = 60 - m;
+                    let toWord = minuteWords[diff];
+                    answers.push(`${toWord} to ${nextHourWord}`);
+                    answers.push(`${toWord} minutes to ${nextHourWord}`);
+                }
+            }
+
+            return answers;
+        }
+
+        function createClockTicks() {
+            let ticksHTML = '';
+            for (let i = 0; i < 12; i++) {
+                let rotation = i * 30;
+                let isMain = (i % 3 === 0) ? 'tick-main' : '';
+                ticksHTML += `<div class="tick ${isMain}" style="transform: translateX(-50%) rotate(${rotation}deg)"></div>`;
+            }
+            return ticksHTML;
+        }
+
+        function initGame() {
+            const container = document.getElementById('clocks-container');
+            container.innerHTML = '';
+            clocksData = [];
+            
+            // Reiniciar UI
+            document.getElementById('score-display').textContent = '0';
+            document.getElementById('btn-check').classList.remove('hidden');
+            document.getElementById('btn-reset').classList.add('hidden');
+
+            const ticksMarkup = createClockTicks();
+
+            // REGLA ESTRICTA DE HORAS ÚNICAS (del 1 al 12, se eligen 6)
+            const plannedHours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].sort(() => Math.random() - 0.5).slice(0, 6);
+
+            // TODOS LOS INTERVALOS DE 5 MINUTOS POSIBLES
+            const allMinutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+
+            // Generar los 6 relojes
+            for (let i = 0; i < 6; i++) {
+                let hour = plannedHours[i]; 
+                
+                // Toma un escenario de minutos completamente al azar
+                let minute = allMinutes[Math.floor(Math.random() * allMinutes.length)]; 
+                
+                let answers = getValidAnswers(hour, minute);
+                clocksData.push({ h: hour, m: minute, answers: answers, id: `input-${i}` });
+
+                // Calcular rotación de agujas visuales
+                let minDeg = minute * 6;
+                let hourDeg = (hour % 12) * 30 + (minute * 0.5);
+
+                const clockHTML = `
+                    <div class="flex flex-col items-center bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-[#D4AF37] font-bold text-sm mb-4">Clock ${i+1}</div>
+                        
+                        <div class="clock">
+                            ${ticksMarkup}
+                            <div class="clock-center"></div>
+                            <div class="hand hour-hand" style="transform: translateX(-50%) rotate(${hourDeg}deg)"></div>
+                            <div class="hand minute-hand" style="transform: translateX(-50%) rotate(${minDeg}deg)"></div>
+                        </div>
+
+                        <div class="w-full relative mt-2">
+                            <input type="text" id="input-${i}" autocomplete="off" spellcheck="false"
+                                placeholder="Type the time" 
+                                class="time-input bg-gray-50 text-[#121212] py-2.5 px-4 rounded-lg font-medium text-sm sm:text-base">
+                            
+                            <div id="icon-${i}" class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden"></div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += clockHTML;
+            }
+        }
+
+        function checkAnswers() {
+            let score = 0;
+
+            clocksData.forEach((clock, index) => {
+                const inputEl = document.getElementById(clock.id);
+                const iconEl = document.getElementById(`icon-${index}`);
+                
+                // Limpiar texto: minúsculas, cambiar guiones/comas por espacios, y quitar espacios dobles
+                let userAnswer = inputEl.value.toLowerCase().trim().replace(/[-.,]/g, " ").replace(/\s+/g, " ");
+                
+                inputEl.classList.remove('input-correct', 'input-incorrect');
+                iconEl.className = 'absolute right-3 top-1/2 transform -translate-y-1/2'; 
+
+                // Verificar respuestas (también limpiando las respuestas válidas por si acaso)
+                let isCorrect = clock.answers.some(ans => {
+                    let cleanAns = ans.toLowerCase().replace(/[-.,]/g, " ").replace(/\s+/g, " ");
+                    return userAnswer === cleanAns;
+                });
+
+                if (isCorrect) {
+                    inputEl.classList.add('input-correct');
+                    inputEl.disabled = true; 
+                    iconEl.innerHTML = '<span class="text-green-600 font-bold">&#10003;</span>';
+                    iconEl.classList.remove('hidden');
+                    score++;
+                } else {
+                    inputEl.classList.add('input-incorrect');
+                    iconEl.innerHTML = '<span class="text-red-500 font-bold">&#10005;</span>';
+                    iconEl.classList.remove('hidden');
+                }
+            });
+
+            document.getElementById('score-display').textContent = score;
+
+            if(score === 6) {
+                document.getElementById('btn-check').classList.add('hidden');
+                document.getElementById('btn-reset').classList.remove('hidden');
+            }
+        }
+
+        window.onload = initGame;
+    </script>
+</body>
+</html>
