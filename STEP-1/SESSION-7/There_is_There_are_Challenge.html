@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>There is / There are Challenge - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Select Dropdown Styling */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230B192C%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat, repeat;
+            background-position: right .7em top 50%, 0 0;
+            background-size: .65em auto, 100%;
+        }
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5); /* Gold shadow on focus */
+        }
+        
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- HEADER (Premium Blue Night) -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-3 leading-tight">
+                There is / There are
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto">
+                Look at the picture and complete each sentence using <strong class="text-[#D4AF37]">There is</strong>, <strong class="text-[#D4AF37]">There are</strong>, <strong class="text-[#D4AF37]">There isn't</strong>, or <strong class="text-[#D4AF37]">There aren't</strong>.
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10 relative">
+            
+            <!-- Score Display -->
+            <div class="absolute top-6 right-6 md:top-10 md:right-10 z-10 hidden" id="score-container">
+                <div class="text-[#D4AF37] font-bold text-sm bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                    Score: <span id="score-display" class="text-white ml-2">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white" id="total-score">10</span>
+                </div>
+            </div>
+
+            <!-- IMAGE SECTION -->
+            <div class="mb-10 flex justify-center w-full px-2">
+                <div class="inline-block rounded-xl border-[4px] border-[#D4AF37] shadow-lg overflow-hidden">
+                    <img src="tiendaderopa2.jpeg" alt="Clothing Store" class="max-w-full lg:max-w-3xl h-auto block" onerror="this.src='https://placehold.co/800x500/0B192C/D4AF37?text=Upload+tiendaderopa2.jpeg+to+GitHub'">
+                </div>
+            </div>
+
+            <!-- SENTENCES CONTAINER (2 Columns) -->
+            <div id="sentences-container" class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 mb-10">
+                <!-- Sentences injected here via JS -->
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-gray-200" id="action-buttons">
+                <button onclick="checkAnswers()" id="check-btn" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-12 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+                <button onclick="resetGame()" id="reset-btn" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-12 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Try Again
+                </button>
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div id="success-message" class="hidden mt-8 p-8 bg-[#0B192C] rounded-xl border-l-[8px] border-[#D4AF37] animate-pop shadow-lg">
+                <h3 class="text-2xl font-serif-custom font-bold text-[#D4AF37] mb-2">Excellent Work!</h3>
+                <p class="text-white text-[15px] mb-4">You have correctly identified the grammar structures and analyzed the picture perfectly.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Structure for the sentences
+        const sentencesData = [
+            { id: 1, post: "a red dress on the mannequin.", correct: "There isn't" },
+            { id: 2, post: "three shirts hanging on the left side.", correct: "There aren't" },
+            { id: 3, post: "a green sofa in the store.", correct: "There isn't" },
+            { id: 4, post: "many pairs of shoes on the shelves.", correct: "There are" },
+            { id: 5, post: "a big yellow hat on the table.", correct: "There isn't" },
+            { id: 6, post: "sunglasses on the green table.", correct: "There are" },
+            { id: 7, post: "two red bags on the wall.", correct: "There aren't" },
+            { id: 8, post: "a plant on the shelf.", correct: "There is" },
+            { id: 9, post: "pictures on the wall.", correct: "There are" },
+            { id: 10, post: "a mirror next to the curtain.", correct: "There is" }
+        ];
+
+        const container = document.getElementById('sentences-container');
+        
+        function initGame() {
+            container.innerHTML = '';
+            document.getElementById('score-container').classList.remove('hidden');
+            document.getElementById('score-display').textContent = '0';
+            document.getElementById('success-message').classList.add('hidden');
+            document.getElementById('check-btn').classList.remove('hidden');
+            document.getElementById('reset-btn').classList.add('hidden');
+
+            sentencesData.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.className = `flex flex-wrap items-center gap-2 p-4 rounded-lg border-l-[4px] border-[#0B192C] bg-white shadow-sm hover:shadow-md transition-shadow text-[15px] md:text-base w-full`;
+                
+                const options = ["There is", "There are", "There isn't", "There aren't"];
+                let optionsHTML = `<option value="" disabled selected>--Select--</option>`;
+                options.forEach(opt => {
+                    optionsHTML += `<option value="${opt}">${opt}</option>`;
+                });
+
+                row.innerHTML = `
+                    <div class="flex items-center text-[#D4AF37] font-bold w-5 shrink-0">
+                        ${index + 1}.
+                    </div>
+                    
+                    <div class="flex-grow sm:flex-grow-0 min-w-[130px]">
+                        <select id="select-${item.id}" class="w-full bg-gray-50 border border-gray-300 text-[#0B192C] font-semibold rounded-md py-1.5 px-3 cursor-pointer transition-colors focus:border-[#D4AF37] focus:bg-white text-sm">
+                            ${optionsHTML}
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center flex-1">
+                        <span class="text-[#121212] leading-relaxed ml-1">${item.post}</span>
+                        <!-- Status Icon Container -->
+                        <div id="status-${item.id}" class="w-6 h-6 flex-shrink-0 flex items-center justify-center hidden ml-2"></div>
+                    </div>
+                `;
+                
+                container.appendChild(row);
+
+                // Clear error styles on change
+                document.getElementById(`select-${item.id}`).addEventListener('change', function() {
+                    this.classList.remove('border-red-500', 'bg-red-50', 'animate-shake');
+                    this.classList.add('border-gray-300', 'bg-gray-50');
+                    document.getElementById(`status-${item.id}`).classList.add('hidden');
+                });
+            });
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            let allAnswered = true;
+
+            sentencesData.forEach(item => {
+                const selectEl = document.getElementById(`select-${item.id}`);
+                const statusEl = document.getElementById(`status-${item.id}`);
+                const selectedValue = selectEl.value;
+
+                if (!selectedValue) {
+                    allAnswered = false;
+                    selectEl.classList.add('border-yellow-400', 'bg-yellow-50');
+                    return; 
+                }
+
+                selectEl.classList.remove('border-yellow-400', 'bg-yellow-50', 'border-gray-300', 'bg-gray-50', 'border-red-500', 'bg-red-50', 'animate-shake', 'border-green-500', 'bg-green-50');
+
+                if (selectedValue === item.correct) {
+                    // CORRECT
+                    score++;
+                    selectEl.classList.add('border-green-500', 'bg-green-50', 'text-green-800');
+                    selectEl.disabled = true;
+                    statusEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>';
+                    statusEl.classList.remove('hidden');
+                } else {
+                    // INCORRECT
+                    selectEl.classList.add('border-red-500', 'bg-red-50', 'text-red-800', 'animate-shake');
+                    statusEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>';
+                    statusEl.classList.remove('hidden');
+                    
+                    // Remove shake class after animation
+                    setTimeout(() => {
+                        selectEl.classList.remove('animate-shake');
+                    }, 400);
+                }
+            });
+
+            document.getElementById('score-display').textContent = score;
+
+            if (score === sentencesData.length) {
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('reset-btn').classList.remove('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Scroll to success message
+                setTimeout(() => {
+                    document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        function resetGame() {
+            initGame();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = initGame;
+    </script>
+</body>
+</html>
