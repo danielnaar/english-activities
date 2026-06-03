@@ -43,7 +43,7 @@
         
         @keyframes pop {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
         .animate-pop { animation: pop 0.3s ease-in-out; }
@@ -60,10 +60,10 @@
                 PREMIUM ENGLISH
             </p>
             <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-3 leading-tight">
-                Choose the Correct Adverb
+                Choose the Logical Adverb
             </h1>
             <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto">
-                Look at the percentage <strong class="text-[#D4AF37]">(%)</strong> in each sentence and select the adverb of frequency that matches it perfectly.
+                Try to guess the correct frequency based on the context. Stuck? Click the <strong class="text-[#D4AF37] bg-white/10 px-1 rounded">?</strong> icon for a percentage hint!
             </p>
         </div>
 
@@ -96,26 +96,25 @@
             <!-- SUCCESS MESSAGE -->
             <div id="success-message" class="hidden mt-8 p-6 bg-[#0B192C] rounded-xl border border-[#D4AF37] text-center animate-pop shadow-lg">
                 <h3 class="text-2xl font-serif-custom font-bold text-[#D4AF37] mb-2">Excellent Work!</h3>
-                <p class="text-white text-sm">You have correctly identified all the adverbs of frequency based on their percentages.</p>
+                <p class="text-white text-sm">You have correctly identified all the adverbs of frequency.</p>
             </div>
 
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Data Structure for the sentences with Percentages
+        // Base de datos de Oraciones Ejecutivas con todos los adverbios de la tabla
         const sentencesData = [
-            { id: 1, emoji: '🧠', percentage: '0%', pre: "I", post: "change my head when I get home.", correct: "never", options: ["usually", "sometimes", "never"] },
-            { id: 2, emoji: '😺', percentage: '0%', pre: "My cat", post: "speaks fluent French.", correct: "never", options: ["often", "always", "never"] },
-            { id: 3, emoji: '🧀', percentage: '100%', pre: "I", post: "eat cheese with a spoon.", correct: "always", options: ["normally", "always", "never"] },
-            { id: 4, emoji: '👵', percentage: '0%', pre: "My grandmother", post: "skydives into volcanoes.", correct: "never", options: ["frequently", "occasionally", "never"] },
-            { id: 5, emoji: '📱', percentage: '50%', pre: "I", post: "check my phone during meetings.", correct: "sometimes", options: ["never", "sometimes", "always"] },
-            { id: 6, emoji: '🐶', percentage: '0%', pre: "My dog", post: "flushes the toilet after using it.", correct: "never", options: ["usually", "seldom", "never"] },
-            { id: 7, emoji: '🎂', percentage: '5%', pre: "I", post: "forget my own birthday.", correct: "hardly ever", options: ["often", "hardly ever", "usually"] },
-            { id: 8, emoji: '🐧', percentage: '0%', pre: "Penguins", post: "wear leather gloves in winter.", correct: "never", options: ["always", "sometimes", "never"] },
-            { id: 9, emoji: '🎤', percentage: '70%', pre: "I", post: "sing opera in the shower.", correct: "often", options: ["often", "seldom", "never"] },
-            { id: 10, emoji: '☀️', percentage: '100%', pre: "The sun", post: "rises in the east.", correct: "always", options: ["sometimes", "rarely", "always"] }
+            { id: 1, emoji: '☕', percentage: '90%', pre: "I", post: "drink coffee in the morning.", correct: "usually", options: ["usually", "never", "seldom"] },
+            { id: 2, emoji: '✈️', percentage: '70%', pre: "Corporate executives", post: "travel for business.", correct: "often", options: ["often", "occasionally", "always"] },
+            { id: 3, emoji: '📧', percentage: '100%', pre: "I", post: "reply to urgent emails immediately.", correct: "always", options: ["sometimes", "always", "hardly ever"] },
+            { id: 4, emoji: '🌧️', percentage: '50%', pre: "It", post: "rains heavily during April.", correct: "sometimes", options: ["never", "sometimes", "usually"] },
+            { id: 5, emoji: '🍷', percentage: '30%', pre: "I", post: "have a glass of wine with dinner.", correct: "occasionally", options: ["occasionally", "often", "never"] },
+            { id: 6, emoji: '📺', percentage: '10%', pre: "I", post: "watch television on busy weekdays.", correct: "seldom", options: ["always", "seldom", "normally"] },
+            { id: 7, emoji: '🥗', percentage: '5%', pre: "I eat very healthy food, so I", post: "get sick.", correct: "hardly ever", options: ["often", "usually", "hardly ever"] },
+            { id: 8, emoji: '🏢', percentage: '80%', pre: "We", post: "finish our meetings on time.", correct: "normally", options: ["normally", "never", "rarely"] },
+            { id: 9, emoji: '🔒', percentage: '0%', pre: "I", post: "share confidential company information.", correct: "never", options: ["always", "sometimes", "never"] },
+            { id: 10, emoji: '⛄', percentage: '5%', pre: "It", post: "snows in tropical countries.", correct: "rarely", options: ["always", "rarely", "usually"] }
         ];
 
         const container = document.getElementById('sentences-container');
@@ -140,7 +139,10 @@
                 row.innerHTML = `
                     <div class="flex items-center w-full sm:w-auto mb-2 sm:mb-0">
                         <span class="text-xl mr-2 w-8 text-center">${item.emoji}</span>
-                        <span class="bg-[#0B192C] text-[#D4AF37] font-bold text-xs px-2 py-1 rounded mr-3 shadow-sm">${item.percentage}</span>
+                        <!-- Botón de Pista (Hint) con tamaño fijo -->
+                        <button id="hint-${item.id}" type="button" onclick="revealHint(${item.id}, '${item.percentage}')" class="bg-slate-200 text-slate-500 hover:bg-slate-300 font-bold text-xs rounded mr-3 shadow-sm transition-all duration-300 w-12 h-6 flex items-center justify-center shrink-0 cursor-pointer" title="Get a hint!">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>
+                        </button>
                         <span class="text-[#121212] font-medium whitespace-nowrap">${item.pre}</span>
                     </div>
                     
@@ -152,20 +154,27 @@
                     
                     <div class="flex items-center ml-3">
                         <span class="text-[#121212] leading-relaxed">${item.post}</span>
-                        <!-- Status Icon Container (Exactly at the end of the sentence) -->
                         <div id="status-${item.id}" class="w-6 h-6 flex-shrink-0 flex items-center justify-center hidden ml-2"></div>
                     </div>
                 `;
                 
                 container.appendChild(row);
 
-                // Add event listener to clear error styles on change
                 document.getElementById(`select-${item.id}`).addEventListener('change', function() {
                     this.classList.remove('border-red-500', 'bg-red-50', 'animate-shake');
                     this.classList.add('border-gray-300', 'bg-gray-50');
                     document.getElementById(`status-${item.id}`).classList.add('hidden');
                 });
             });
+        }
+
+        function revealHint(id, percentage) {
+            const btn = document.getElementById(`hint-${id}`);
+            // Actualiza el texto y los colores, remueve cursor y evento onclick
+            btn.innerHTML = percentage;
+            btn.className = 'bg-[#0B192C] text-[#D4AF37] font-bold text-xs rounded mr-3 shadow-sm transition-all duration-300 w-12 h-6 flex items-center justify-center shrink-0 animate-pop';
+            btn.onclick = null;
+            btn.removeAttribute('title');
         }
 
         function checkAnswers() {
@@ -198,7 +207,6 @@
                     statusEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>';
                     statusEl.classList.remove('hidden');
                     
-                    // Remove shake class after animation
                     setTimeout(() => {
                         selectEl.classList.remove('animate-shake');
                     }, 400);
