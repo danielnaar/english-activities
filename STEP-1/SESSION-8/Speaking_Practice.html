@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Describe the Scene - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-6xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-12 pb-10 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • ORAL PRODUCTION
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-2 leading-tight relative z-10">
+                Describe the Scene
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto relative z-10 italic">
+                At the Moulin Rouge
+            </p>
+        </div>
+
+        <!-- CONTENIDO (Grid de 2 Columnas) -->
+        <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 bg-white items-start">
+            
+            <!-- COLUMNA IZQUIERDA: PINTURA (Ocupa 7 de 12 columnas) -->
+            <div class="lg:col-span-7 flex justify-center lg:justify-end items-start">
+                <div class="relative inline-block group">
+                    <!-- Efecto de resplandor de museo -->
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-[#D4AF37] to-[#8C6D1F] rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
+                    
+                    <!-- Marco que abraza la imagen -->
+                    <div class="relative inline-flex rounded-xl border-[4px] border-[#D4AF37] shadow-lg overflow-hidden bg-white">
+                        <img src="picture.png" alt="At the Moulin Rouge Painting" class="max-w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]" onerror="this.src='https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop'; this.alt='Placeholder Painting'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: INSTRUCCIONES (Ocupa 5 de 12 columnas) -->
+            <div class="lg:col-span-5 flex flex-col space-y-6">
+                
+                <h3 class="text-2xl font-serif-custom font-bold text-[#0B192C] border-b border-gray-200 pb-3">
+                    Instructions
+                </h3>
+
+                <ul class="space-y-5 text-[15px] md:text-base text-gray-700">
+                    <li class="flex items-start">
+                        <div class="bg-[#0B192C] text-[#D4AF37] p-2 rounded-lg mr-4 mt-0.5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                        </div>
+                        <div>
+                            <strong class="text-[#121212] block mb-1">Look carefully</strong>
+                            Look at the painting. Use <em class="text-[#0B192C] font-semibold bg-gray-100 px-1 rounded">there is / there are</em> and prepositions of place (optional but recommended).
+                        </div>
+                    </li>
+                    
+                    <li class="flex items-start">
+                        <div class="bg-[#0B192C] text-[#D4AF37] p-2 rounded-lg mr-4 mt-0.5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <div>
+                            <strong class="text-[#121212] block mb-1">Imagine</strong>
+                            What are the people doing, thinking or saying?
+                        </div>
+                    </li>
+
+                    <li class="flex items-start">
+                        <div class="bg-[#0B192C] text-[#D4AF37] p-2 rounded-lg mr-4 mt-0.5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>
+                        </div>
+                        <div>
+                            <strong class="text-[#121212] block mb-1">Speak out loud</strong>
+                            Present your description in front of your classmates and teacher.
+                        </div>
+                    </li>
+
+                    <li class="flex items-start">
+                        <div class="bg-[#0B192C] text-[#D4AF37] p-2 rounded-lg mr-4 mt-0.5 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        </div>
+                        <div>
+                            <strong class="text-[#121212] block mb-1">Be creative!</strong>
+                            Don't just describe what you see, invent a story!
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- CAJA DE EJEMPLO -->
+                <div class="mt-8 bg-gray-50 border-l-[6px] border-[#D4AF37] p-6 rounded-r-lg shadow-sm">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-3">Example Description</p>
+                    <p class="text-[#121212] font-serif-custom italic text-lg leading-relaxed text-gray-700">
+                        "There are more than a dozen people possibly waiting for a dance show..."
+                    </p>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excelencia, exclusividad y resultados garantizados.
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
