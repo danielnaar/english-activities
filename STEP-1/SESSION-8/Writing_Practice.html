@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing Test - Premium English</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-center">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-4xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- HEADER -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Writing Test Preparation
+            </h1>
+            
+            <div class="w-24 h-px bg-gray-500 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Soon, you'll face your first Midterm Test. Written Composition is a vital part of it. Let's practice before the test.
+            </p>
+        </div>
+
+        <!-- CONTENT SECTION -->
+        <div class="p-8 md:p-12 bg-white flex flex-col items-center">
+            
+            <!-- Target Topic Box -->
+            <div class="bg-[#F8F9FA] border-[4px] border-[#0B192C] rounded-xl p-8 shadow-sm w-full max-w-2xl text-center relative mb-10">
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#0B192C] px-6 py-1.5 rounded-full shadow-md border border-[#D4AF37]">
+                    <span class="text-[#D4AF37] font-bold text-xs uppercase tracking-widest">Current Topic</span>
+                </div>
+                
+                <h2 class="text-xl md:text-2xl text-gray-500 font-medium mb-3 mt-4">Write about:</h2>
+                <h3 id="current-topic" class="text-3xl md:text-5xl font-serif-custom font-bold text-[#0B192C] text-center">
+                    At the Airport
+                </h3>
+            </div>
+
+            <!-- Requirements & Action Area -->
+            <div class="flex flex-col md:flex-row items-stretch justify-between w-full max-w-2xl gap-6">
+                
+                <!-- Requirements List -->
+                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex-1">
+                    <h4 class="font-bold text-[#0B192C] text-sm uppercase tracking-wider mb-4 border-b border-gray-100 pb-2">Requirements</h4>
+                    <ul class="space-y-3 text-sm text-gray-600 font-medium">
+                        <li class="flex items-center">
+                            <span class="text-[#D4AF37] mr-3 font-bold text-lg">&bull;</span> 
+                            <span>Minimum <strong class="text-[#121212] mx-1">5 lines</strong> or <strong class="text-[#121212] mx-1">50 words</strong>.</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-[#D4AF37] mr-3 font-bold text-lg">&bull;</span> 
+                            <span>Check spelling and grammar.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col gap-4 flex-1 justify-center">
+                    <!-- Download Word Button -->
+                    <button onclick="downloadWordDoc()" class="w-full bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-4 px-6 rounded-xl shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-xs flex justify-center items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download Template
+                    </button>
+                    
+                    <!-- Randomize Topic Button -->
+                    <button onclick="generateNewTopic()" class="w-full bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-6 rounded-xl shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-xs flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        New Topic
+                    </button>
+                </div>
+                
+            </div>
+            
+            <p class="text-gray-400 text-xs mt-8 text-center italic">
+                * Click "Download Template" to get an official Word document file to write your composition.
+            </p>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excelencia, exclusividad y resultados garantizados.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Lista de temas aleatorios adecuados para Nivel 1 (A1)
+        const topics = [
+            "At the Airport",
+            "My Family",
+            "My Daily Routine",
+            "My House",
+            "My Favorite Food",
+            "My Best Friend",
+            "My Hobbies and Free Time",
+            "My Favorite Clothes"
+        ];
+
+        function generateNewTopic() {
+            const topicElement = document.getElementById('current-topic');
+            const currentTopic = topicElement.textContent.trim();
+            
+            // Elegir un tema que no sea el actual
+            let newTopic = currentTopic;
+            while(newTopic === currentTopic) {
+                newTopic = topics[Math.floor(Math.random() * topics.length)];
+            }
+            
+            topicElement.textContent = newTopic;
+            
+            // Animación de cambio
+            topicElement.classList.remove('animate-pop');
+            void topicElement.offsetWidth; // Trigger reflow
+            topicElement.classList.add('animate-pop');
+        }
+
+        function downloadWordDoc() {
+            const currentTopic = document.getElementById('current-topic').textContent.trim();
+            
+            // Crear el contenido del archivo de Word (formato HTML básico interpretado por MS Word)
+            const htmlContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head><meta charset='utf-8'><title>Writing Task</title>
+                <style>
+                    body { font-family: 'Arial', sans-serif; padding: 40px; color: #121212; }
+                    .header { display: flex; justify-content: space-between; border-bottom: 2px solid #0B192C; padding-bottom: 10px; margin-bottom: 30px; }
+                    .title-brand { color: #0B192C; font-weight: bold; text-transform: uppercase; font-size: 12px; }
+                    h1 { color: #0B192C; font-family: 'Georgia', serif; text-align: center; margin-top: 40px; }
+                    h2 { color: #D4AF37; text-align: center; margin-bottom: 50px; font-style: italic; }
+                    .info-box { font-weight: bold; color: #0B192C; }
+                    p { line-height: 2; font-size: 14px; }
+                </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <div class="title-brand">PREMIUM ENGLISH - WRITING TASK</div>
+                    </div>
+                    <div class="info-box">
+                        Student Name: _________________________________________ <br><br>
+                        Date: ________________________
+                    </div>
+                    
+                    <h1>Topic: ${currentTopic}</h1>
+                    <h2>(Minimum 5 lines or 50 words)</h2>
+                    
+                    <p>Start writing here...</p>
+                </body>
+                </html>
+            `;
+
+            // Convertir el HTML a un Blob (archivo)
+            const blob = new Blob(['\ufeff', htmlContent], {
+                type: 'application/msword'
+            });
+            
+            // Crear un enlace temporal para forzar la descarga
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            // Nombre del archivo que se descargará
+            link.download = `Writing_Task_${currentTopic.replace(/\s+/g, '_')}.doc`; 
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+</body>
+</html>
