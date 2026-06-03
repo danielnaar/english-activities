@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Test Preparation - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado en web */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* ESTILOS ESTRICTOS DE IMPRESIÓN / PDF (Manteniendo el diseño Premium) */
+        @media print {
+            @page { margin: 1.5cm; }
+            /* Forzar al navegador a imprimir los colores de fondo exactamente como se ven en pantalla */
+            body, * { 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+            }
+            .no-print { display: none !important; }
+            .print-break-inside-avoid { break-inside: avoid; }
+            
+            /* Forzar 2 columnas en papel siempre */
+            .print-grid-2 { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 1.5rem !important; }
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start print:py-0 print:px-0">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- ENCABEZADO (Mantiene el Azul Noche Premium en Impresión) -->
+        <div class="bg-[#0B192C] text-center pt-12 pb-10 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • STEP 1
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-2 leading-tight relative z-10">
+                Midterm Test Preparation
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto relative z-10">
+                A comprehensive review of Grammar, Vocabulary, and Syntax.
+            </p>
+        </div>
+
+        <!-- SECCIÓN DE IDENTIFICACIÓN (Nombre, Fecha, Nota) -->
+        <div class="bg-white border-b-2 border-gray-200 p-6 md:px-10 flex flex-wrap sm:flex-nowrap justify-between items-end gap-6 pb-8">
+            <div class="w-full sm:flex-1">
+                <label class="font-bold text-[#0B192C] text-sm uppercase tracking-wider">Student Name:</label>
+                <div class="border-b border-gray-400 w-full mt-6"></div>
+            </div>
+            <div class="w-full sm:w-48">
+                <label class="font-bold text-[#0B192C] text-sm uppercase tracking-wider">Date:</label>
+                <div class="border-b border-gray-400 w-full mt-6"></div>
+            </div>
+            <div class="w-full sm:w-32 hidden sm:block">
+                <label class="font-bold text-[#0B192C] text-sm uppercase tracking-wider">Score:</label>
+                <div class="border-b border-gray-400 w-full mt-6 text-center text-gray-400 italic">/ 20</div>
+            </div>
+        </div>
+
+        <!-- BARRA DE INSTRUCCIONES Y BOTÓN (Se oculta al imprimir) -->
+        <div class="bg-[#F8F9FA] border-b border-gray-200 p-6 md:px-10 flex flex-col sm:flex-row items-center justify-between no-print">
+            <div class="flex items-center mb-4 sm:mb-0">
+                <div class="w-10 h-10 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center mr-4 shrink-0 shadow-sm border border-[#D4AF37]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                </div>
+                <div>
+                    <h2 class="font-bold text-[#0B192C] text-lg">Instructions</h2>
+                    <p class="text-gray-600 text-sm">Circle the correct letter for each question. Only <strong class="text-[#0B192C]">one</strong> option is correct.</p>
+                </div>
+            </div>
+            
+            <button onclick="window.print()" class="bg-white border-2 border-[#0B192C] text-[#0B192C] hover:bg-[#0B192C] hover:text-[#D4AF37] font-bold py-2 px-6 rounded-full transition-colors duration-300 text-sm flex items-center shadow-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                Print Exam / Save as PDF
+            </button>
+        </div>
+
+        <!-- CONTENEDOR DEL EXAMEN (2 Columnas) -->
+        <div class="p-6 md:p-10 bg-white print:p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 print-grid-2 gap-6 lg:gap-8">
+                
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="space-y-6">
+                    
+                    <!-- Question 1 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">1.</span> What's the correct sentence?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There is cats on the roof.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There are cat on the roof.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There is a cat on the roof.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There are a cat on the roof.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">2.</span> Choose the correct preposition: <em class="font-normal text-gray-600 block mt-1">"The phone is _____ the table."</em></h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> at</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> on</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> in</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> under</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">3.</span> What's the plural form?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There is two apples.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There is an apples.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There be two apples.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There are two apples.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">4.</span> Select the correct question:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There is a chair in the room?</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There is chair in room?</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> Is there chair in the room?</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> Is there a chair in the room?</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">5.</span> Where is the boy?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> The boy is on the school.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> The boy is in front of the school.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> The boy is next the school.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> The boy is under the school.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">6.</span> Choose the correct article: <em class="font-normal text-gray-600 block mt-1">"____ cat"</em></h3>
+                        <div class="grid grid-cols-2 gap-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> cat</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> a apple</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> a cat</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> an cat</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">7.</span> Choose the contraction: <em class="font-normal text-gray-600 block mt-1">"There is a big box."</em></h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There're a big box.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There's a big box.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There is a big boxes.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There is not a big box.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">8.</span> Choose the negative form:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There aren't two dogs.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There is not two dog.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There isn't two dogs.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There are not dog.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">9.</span> Where is the pencil?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> The pencil is next the book.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> The pencil is in the book.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> The pencil is under the book.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> The pencil is on the book.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">10.</span> Select the plural noun:</h3>
+                        <div class="grid grid-cols-2 gap-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> apple</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> an apples</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> apples</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> a apple</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUMNA DERECHA -->
+                <div class="space-y-6">
+
+                    <!-- Question 11 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">11.</span> Choose the correct preposition: <em class="font-normal text-gray-600 block mt-1">"The lamp is _____ the table."</em></h3>
+                        <div class="grid grid-cols-2 gap-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> on</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> under</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> at</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> in</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 12 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">12.</span> Find the correct negative form:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There isn't spiders.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There aren't a spider in the box.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There isn't a spider in the box.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There not a spider.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 13 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">13.</span> Where's the dog?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> The dog is in front the couch.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> The dog is under the couch.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> The dog is behind the couch.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> The dog is on the couch.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 14 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">14.</span> What is correct?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There is a sandwich in my bag.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There are sandwich in my bag.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There is sandwichs in my bag.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There be a sandwich in my bag.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 15 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">15.</span> Select the correct contraction:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There's are a book on the desk.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There's a book on the desk.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There're a book on the desk.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There is book on desk.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 16 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">16.</span> Choose the best answer:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There is many students.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There are many student.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There be many students.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There are many students.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 17 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">17.</span> What's correct for one object?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There are a pen.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There is pens.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There is a pen.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There pen is.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 18 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">18.</span> How do you say this correctly?</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There are a TV in the room.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There are TV.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There be a TV.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There is a TV in the room.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 19 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">19.</span> Identify the error-free sentence:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> There're four person.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> There is four people at the bus stop.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> There are peoples at bus stop.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> There are four people at the bus stop.</p>
+                        </div>
+                    </div>
+
+                    <!-- Question 20 -->
+                    <div class="bg-[#F8F9FA] rounded-xl p-6 shadow-sm border border-gray-100 print-break-inside-avoid">
+                        <h3 class="font-bold text-[#0B192C] mb-4 text-base"><span class="text-[#D4AF37] mr-1">20.</span> Choose the correct phrase:</h3>
+                        <div class="space-y-3 pl-2">
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">A.</span> The ball is under the table.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">B.</span> The ball is next the table.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">C.</span> The ball is on the table.</p>
+                            <p class="text-[#121212] text-[15px] flex items-start"><span class="w-6 inline-block text-gray-500 font-serif-custom font-bold">D.</span> The ball is in front the table.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- PIE DE PÁGINA (Se oculta al imprimir) -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800 no-print">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excelencia, exclusividad y resultados garantizados.
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
