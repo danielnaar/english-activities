@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick-Fire Challenge: Some vs Any - Premium English</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        
+        /* Animación suave para la tarjeta */
+        .card-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Ocultar/Mostrar difuminado */
+        .fade-in { animation: fadeIn 0.4s ease-in forwards; }
+        .fade-out { animation: fadeOut 0.4s ease-out forwards; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        /* Progress Bar Transition */
+        .progress-smooth { transition: width 0.3s ease; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-center">
+
+    <div class="w-full max-w-4xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200 flex flex-col">
+        
+        <!-- ENCABEZADO -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH • ORAL PRACTICE
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-3">
+                Quick-Fire Challenge
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto">
+                Speak the complete sentence out loud using <strong class="text-[#D4AF37]">"some"</strong> or <strong class="text-[#D4AF37]">"any"</strong> before the answer is revealed!
+            </p>
+        </div>
+
+        <div class="p-6 md:p-12 flex-grow flex flex-col items-center justify-center min-h-[400px]">
+            
+            <!-- PANTALLA DE INICIO -->
+            <div id="start-screen" class="text-center w-full max-w-xl">
+                <div class="w-20 h-20 bg-[#D4AF37] rounded-full flex items-center justify-center mx-auto mb-6 shadow-md border-4 border-[#0B192C]">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#0B192C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" /></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-[#0B192C] mb-4">Are you ready to speak?</h2>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    10 random sentences will appear. You have a few seconds to say the answer out loud. Tap the button when you're ready.
+                </p>
+                <button onclick="startGame()" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-4 px-12 rounded-full shadow-lg transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm">
+                    Start Challenge
+                </button>
+            </div>
+
+            <!-- ÁREA DE JUEGO ACTIVO -->
+            <div id="game-area" class="w-full max-w-2xl hidden flex-col w-full">
+                
+                <!-- Barra de progreso -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-8">
+                    <div id="progress-bar" class="bg-[#D4AF37] h-2.5 rounded-full progress-smooth" style="width: 0%"></div>
+                </div>
+                
+                <div class="text-center text-sm font-bold text-gray-400 uppercase tracking-widest mb-2" id="question-counter">
+                    Sentence 1 of 10
+                </div>
+
+                <!-- Tarjeta Principal (Pregunta) -->
+                <div id="flashcard" class="bg-white border-[3px] border-[#0B192C] rounded-2xl p-8 md:p-12 shadow-xl text-center flex flex-col items-center justify-center min-h-[200px] mb-8 relative overflow-hidden card-transition">
+                    
+                    <!-- Context Clue Flotante (+ , - , ?) -->
+                    <div id="context-clue" class="absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold opacity-30"></div>
+
+                    <!-- El texto de la frase -->
+                    <h3 id="sentence-text" class="text-2xl md:text-3xl lg:text-4xl font-serif-custom font-bold text-[#121212] leading-tight">
+                        I need <span class="text-transparent bg-gray-200 px-8 rounded border-b-2 border-[#0B192C] inline-block mx-1">___</span> coffee.
+                    </h3>
+
+                    <!-- Respuesta revelada (se inserta aquí via JS) -->
+                    <div id="answer-reveal" class="hidden mt-6 text-xl md:text-2xl font-bold text-[#D4AF37]">
+                        <!-- Inyectado JS -->
+                    </div>
+                </div>
+
+                <!-- Botones de Control en Juego -->
+                <div class="flex justify-center gap-4">
+                    <button onclick="revealAnswer()" id="btn-reveal" class="w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-8 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-xs">
+                        Reveal Answer
+                    </button>
+                    <button onclick="nextSentence()" id="btn-next" class="hidden w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-8 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-xs">
+                        Next Sentence &rarr;
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- PANTALLA FINAL -->
+            <div id="end-screen" class="text-center w-full max-w-xl hidden">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm border border-green-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h2 class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-2">Practice Complete!</h2>
+                <p class="text-gray-600 mb-8">Great job practicing your oral fluency. Repetition is key to mastery.</p>
+                <button onclick="showStartScreen()" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-lg transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm">
+                    Play Again
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DEL JUEGO -->
+    <script>
+        // Banco de oraciones de nivel A1/A2.
+        // Se usarán 10 al azar en cada partida.
+        const sentenceBank = [
+            // Positivas (some)
+            { type: '+', pre: "I bought", post: "apples at the market.", answer: "some" },
+            { type: '+', pre: "There is", post: "milk in the fridge.", answer: "some" },
+            { type: '+', pre: "We have", post: "time to relax today.", answer: "some" },
+            { type: '+', pre: "I need", post: "help with this homework.", answer: "some" },
+            { type: '+', pre: "She found", post: "money on the street.", answer: "some" },
+            { type: '+', pre: "Let's listen to", post: "music.", answer: "some" },
+            // Negativas (any)
+            { type: '-', pre: "I don't have", post: "friends in this city.", answer: "any" },
+            { type: '-', pre: "There aren't", post: "chairs in the room.", answer: "any" },
+            { type: '-', pre: "We didn't buy", post: "flowers.", answer: "any" },
+            { type: '-', pre: "She hasn't got", post: "brothers or sisters.", answer: "any" },
+            { type: '-', pre: "I can't see", post: "cars on the road.", answer: "any" },
+            { type: '-', pre: "There isn't", post: "sugar left.", answer: "any" },
+            // Preguntas (any)
+            { type: '?', pre: "Are there", post: "eggs in the kitchen?", answer: "any" },
+            { type: '?', pre: "Do you have", post: "questions?", answer: "any" },
+            { type: '?', pre: "Is there", post: "ice in the freezer?", answer: "any" },
+            { type: '?', pre: "Did you take", post: "photos?", answer: "any" },
+            // Excepciones/Ofertas/Peticiones (some)
+            { type: 'offer', pre: "Would you like", post: "coffee?", answer: "some" },
+            { type: 'request', pre: "Can I have", post: "water, please?", answer: "some" },
+            { type: 'offer', pre: "Do you want", post: "biscuits?", answer: "some" },
+            { type: 'request', pre: "Could you lend me", post: "paper?", answer: "some" }
+        ];
+
+        let playQueue = [];
+        let currentIndex = 0;
+        const totalQuestions = 10;
+
+        const startScreen = document.getElementById('start-screen');
+        const gameArea = document.getElementById('game-area');
+        const endScreen = document.getElementById('end-screen');
+        const flashcard = document.getElementById('flashcard');
+        
+        function showStartScreen() {
+            startScreen.classList.remove('hidden');
+            gameArea.classList.add('hidden');
+            gameArea.classList.remove('flex');
+            endScreen.classList.add('hidden');
+        }
+
+        function startGame() {
+            // Seleccionar 10 oraciones al azar del banco
+            playQueue = [...sentenceBank].sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
+            currentIndex = 0;
+
+            startScreen.classList.add('hidden');
+            gameArea.classList.remove('hidden');
+            gameArea.classList.add('flex');
+            endScreen.classList.add('hidden');
+
+            loadSentence();
+        }
+
+        function loadSentence() {
+            const data = playQueue[currentIndex];
+            
+            // Actualizar UI
+            document.getElementById('question-counter').textContent = `Sentence ${currentIndex + 1} of ${totalQuestions}`;
+            document.getElementById('progress-bar').style.width = `${((currentIndex) / totalQuestions) * 100}%`;
+            
+            // Mostrar texto en la flashcard (ocultando respuesta)
+            const sentenceText = document.getElementById('sentence-text');
+            sentenceText.innerHTML = `${data.pre} <span id="blank-space" class="text-transparent bg-gray-100 px-6 sm:px-8 py-1 rounded border-b-2 border-[#0B192C] inline-block mx-1">_____</span> ${data.post}`;
+            
+            document.getElementById('answer-reveal').classList.add('hidden');
+            
+            // Pista visual de contexto
+            const clue = document.getElementById('context-clue');
+            if(data.type === '+') { clue.innerHTML = '+'; clue.className = "absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold opacity-40 bg-green-500"; }
+            else if(data.type === '-') { clue.innerHTML = '-'; clue.className = "absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold opacity-40 bg-red-500"; }
+            else if(data.type === '?') { clue.innerHTML = '?'; clue.className = "absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold opacity-40 bg-blue-500"; }
+            else { clue.innerHTML = '★'; clue.className = "absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold opacity-40 bg-[#D4AF37]"; }
+
+            // Configurar botones
+            document.getElementById('btn-reveal').classList.remove('hidden');
+            document.getElementById('btn-next').classList.add('hidden');
+            
+            // Animación de entrada
+            flashcard.classList.remove('fade-in');
+            void flashcard.offsetWidth; // trigger reflow
+            flashcard.classList.add('fade-in');
+        }
+
+        function revealAnswer() {
+            const data = playQueue[currentIndex];
+            
+            // Llenar el espacio en blanco con dorado
+            const blankSpace = document.getElementById('blank-space');
+            blankSpace.textContent = data.answer;
+            blankSpace.className = "text-[#D4AF37] font-bold px-2 inline-block mx-1 transition-all duration-300";
+            
+            // Cambiar botones
+            document.getElementById('btn-reveal').classList.add('hidden');
+            document.getElementById('btn-next').classList.remove('hidden');
+            
+            // Animación sutil
+            flashcard.classList.add('border-[#D4AF37]');
+            setTimeout(() => { flashcard.classList.remove('border-[#D4AF37]'); }, 400);
+        }
+
+        function nextSentence() {
+            currentIndex++;
+            if(currentIndex >= totalQuestions) {
+                // Terminar juego
+                document.getElementById('progress-bar').style.width = `100%`;
+                setTimeout(() => {
+                    gameArea.classList.add('hidden');
+                    gameArea.classList.remove('flex');
+                    endScreen.classList.remove('hidden');
+                }, 300);
+            } else {
+                loadSentence();
+            }
+        }
+    </script>
+</body>
+</html>
