@@ -48,19 +48,19 @@
         .folder-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.9rem; transition: transform 0.3s; }
         details[open] > .folder-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 2: MITADES (First Half / Second Half) */
+        /* NIVEL 2: MITADES (First Half / Second Half) - COLORES INVERTIDOS */
         .half-details { margin: 0.5rem 0 0.5rem 1.5rem; } 
         .half-summary {
-            background-color: #0B192C; 
-            color: #D4AF37;            
+            background-color: #D4AF37; /* Fondo Dorado */
+            color: #0B192C;            /* Letras Azules */
             padding: 1.2rem 1.5rem;
             font-weight: bold;
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .half-summary:hover { background-color: #121212; }
-        .half-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
+        .half-summary:hover { background-color: #C5A028; } /* Dorado más oscuro al pasar el ratón */
+        .half-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; color: #0B192C; }
         .half-details[open] > .half-summary::after { transform: rotate(180deg); }
 
         /* NIVEL 3: SESSIONS (Subcarpetas de cada mitad) */
