@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Much / How Many Challenge - Premium English</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        
+        /* Custom Select Dropdown Styling for a Premium Look */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230B192C%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat, repeat;
+            background-position: right .7em top 50%, 0 0;
+            background-size: .65em auto, 100%;
+        }
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5); /* Gold shadow on focus */
+        }
+        
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <div class="w-full max-w-4xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- HEADER (Premium Blue Night) -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-3 leading-tight">
+                How Much / How Many
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto">
+                Choose the correct option to complete each question. Remember to analyze if the noun is <strong class="text-[#D4AF37]">countable</strong> or <strong class="text-[#D4AF37]">uncountable</strong>!
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10 relative">
+            
+            <!-- Score Display -->
+            <div class="absolute top-6 right-6 md:top-10 md:right-10 z-10 hidden" id="score-container">
+                <div class="text-[#D4AF37] font-bold text-sm bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                    Score: <span id="score-display" class="text-white ml-2">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white" id="total-score">10</span>
+                </div>
+            </div>
+
+            <!-- SENTENCES CONTAINER -->
+            <div id="sentences-container" class="space-y-4 mb-10 mt-6 md:mt-0">
+                <!-- Sentences injected here via JS -->
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-gray-200" id="action-buttons">
+                <button onclick="checkAnswers()" id="check-btn" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+                <button onclick="resetGame()" id="reset-btn" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-10 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Try Again
+                </button>
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div id="success-message" class="hidden mt-8 p-6 bg-[#0B192C] rounded-xl border border-[#D4AF37] text-center animate-pop shadow-lg">
+                <h3 class="text-2xl font-serif-custom font-bold text-[#D4AF37] mb-2">Excellent Work!</h3>
+                <p class="text-white text-sm">You have correctly identified all the countable and uncountable nouns.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Data Structure for the sentences
+        const sentencesData = [
+            { id: 1, emoji: '🌊', post: "water is in the ocean?", correct: "How much" },
+            { id: 2, emoji: '🍞', post: "bread is eaten per day?", correct: "How much" },
+            { id: 3, emoji: '✨', post: "stars are there in the sky?", correct: "How many" },
+            { id: 4, emoji: '🌍', post: "countries are there in the world?", correct: "How many" },
+            { id: 5, emoji: '💰', post: "money is in a bank?", correct: "How much" },
+            { id: 6, emoji: '🏜️', post: "sand is there in the deserts?", correct: "How much" },
+            { id: 7, emoji: '💻', post: "information is there on the internet?", correct: "How much" },
+            { id: 8, emoji: '🦴', post: "bones are there in the human body?", correct: "How many" },
+            { id: 9, emoji: '🏝️', post: "people live on islands?", correct: "How many" },
+            { id: 10, emoji: '🦅', post: "birds are there?", correct: "How many" }
+        ];
+
+        const options = ["How much", "How many"];
+        const container = document.getElementById('sentences-container');
+        
+        function initGame() {
+            container.innerHTML = '';
+            document.getElementById('score-container').classList.remove('hidden');
+            document.getElementById('score-display').textContent = '0';
+            document.getElementById('success-message').classList.add('hidden');
+            document.getElementById('check-btn').classList.remove('hidden');
+            document.getElementById('reset-btn').classList.add('hidden');
+
+            sentencesData.forEach((item, index) => {
+                const row = document.createElement('div');
+                row.className = `flex flex-wrap items-center gap-2 md:gap-3 p-4 rounded-lg border-l-[4px] border-[#0B192C] bg-white shadow-sm hover:shadow-md transition-shadow text-[15px] md:text-base`;
+                
+                let optionsHTML = `<option value="" disabled selected>-- Choose --</option>`;
+                options.forEach(opt => {
+                    optionsHTML += `<option value="${opt}">${opt}</option>`;
+                });
+
+                row.innerHTML = `
+                    <div class="flex items-center w-full sm:w-auto mb-2 sm:mb-0">
+                        <span class="text-[#D4AF37] font-bold mr-2 w-5 text-right">${index + 1}.</span>
+                        <span class="text-xl mr-2 w-8 text-center">${item.emoji}</span>
+                    </div>
+                    
+                    <div class="flex-grow sm:flex-grow-0 min-w-[140px]">
+                        <select id="select-${item.id}" class="w-full bg-gray-50 border border-gray-300 text-[#0B192C] font-semibold rounded-md py-1.5 px-3 cursor-pointer transition-colors focus:border-[#D4AF37] focus:bg-white">
+                            ${optionsHTML}
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center ml-1 flex-1">
+                        <span class="text-[#121212] leading-relaxed">${item.post}</span>
+                        <!-- Status Icon Container -->
+                        <div id="status-${item.id}" class="w-6 h-6 flex-shrink-0 flex items-center justify-center hidden ml-2"></div>
+                    </div>
+                `;
+                
+                container.appendChild(row);
+
+                // Add event listener to clear error styles on change
+                document.getElementById(`select-${item.id}`).addEventListener('change', function() {
+                    this.classList.remove('border-red-500', 'bg-red-50', 'animate-shake');
+                    this.classList.add('border-gray-300', 'bg-gray-50');
+                    document.getElementById(`status-${item.id}`).classList.add('hidden');
+                });
+            });
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            let allAnswered = true;
+
+            sentencesData.forEach(item => {
+                const selectEl = document.getElementById(`select-${item.id}`);
+                const statusEl = document.getElementById(`status-${item.id}`);
+                const selectedValue = selectEl.value;
+
+                if (!selectedValue) {
+                    allAnswered = false;
+                    selectEl.classList.add('border-yellow-400', 'bg-yellow-50');
+                    return; 
+                }
+
+                selectEl.classList.remove('border-yellow-400', 'bg-yellow-50', 'border-gray-300', 'bg-gray-50', 'border-red-500', 'bg-red-50', 'animate-shake', 'border-green-500', 'bg-green-50');
+
+                if (selectedValue === item.correct) {
+                    // CORRECT
+                    score++;
+                    selectEl.classList.add('border-green-500', 'bg-green-50', 'text-green-800');
+                    selectEl.disabled = true;
+                    statusEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>';
+                    statusEl.classList.remove('hidden');
+                } else {
+                    // INCORRECT
+                    selectEl.classList.add('border-red-500', 'bg-red-50', 'text-red-800', 'animate-shake');
+                    statusEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>';
+                    statusEl.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        selectEl.classList.remove('animate-shake');
+                    }, 400);
+                }
+            });
+
+            document.getElementById('score-display').textContent = score;
+
+            if (score === sentencesData.length) {
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('reset-btn').classList.remove('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Scroll down to success message smoothly
+                setTimeout(() => {
+                    document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+        }
+
+        function resetGame() {
+            initGame();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.onload = initGame;
+    </script>
+</body>
+</html>
