@@ -32,7 +32,7 @@
         summary { list-style: none; cursor: pointer; position: relative; transition: 0.3s; }
         summary::-webkit-details-marker { display: none; } 
         
-        /* NIVEL 1: STEP */
+        /* NIVEL 1: STEP (Categoría Principal) */
         .folder-summary {
             background-color: #0B192C;
             color: #D4AF37;
@@ -48,7 +48,22 @@
         .folder-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.9rem; transition: transform 0.3s; }
         details[open] > .folder-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 2: SESSIONS */
+        /* NIVEL 2: MITADES (First Half / Second Half) */
+        .half-details { margin: 0.5rem 0 0.5rem 1.5rem; } 
+        .half-summary {
+            background-color: #0B192C; 
+            color: #D4AF37;            
+            padding: 1.2rem 1.5rem;
+            font-weight: bold;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .half-summary:hover { background-color: #121212; }
+        .half-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
+        .half-details[open] > .half-summary::after { transform: rotate(180deg); }
+
+        /* NIVEL 3: SESSIONS (Subcarpetas de cada mitad) */
         .sub-details { margin: 0.5rem 0 0.5rem 1.5rem; } 
         .sub-summary {
             background-color: #0B192C; 
@@ -61,7 +76,7 @@
         .sub-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
         .sub-details[open] > .sub-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 3: MATERIAL DE CLASE */
+        /* NIVEL 4: MATERIAL DE CLASE (Enlaces) */
         .material-link {
             display: block;
             padding: 1rem 1.5rem;
@@ -109,139 +124,150 @@
             <details open>
                 <summary class="folder-summary">Step 1</summary>
                 
-                <!-- NIVEL 2: SESSION 1 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 1</summary>
-                    <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Possessive Adjectives
-                    </a>
-                    <a href="STEP-1/SESSION-1/The_Wrong_Suitcase.html" class="material-link">
-                        <span class="tag tag-script">Script</span> The Wrong Suitcase
-                    </a>
-                    <a href="STEP-1/SESSION-1/transposition.html" class="material-link">
-                        <span class="tag tag-trans">Transposition</span> Drill: Session 1
-                    </a>
-                </details>
+                <!-- NIVEL 2: FIRST HALF (Sesiones 1 a 8) -->
+                <details class="half-details" open>
+                    <summary class="half-summary">First Half</summary>
 
-                <!-- NIVEL 2: SESSION 2 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 2</summary>
-                    <a href="STEP-1/SESSION-2/Wh_Question_Words.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> WH-Question Words
-                    </a>
-                    <a href="STEP-1/SESSION-2/Numbers_in_English.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Numbers in English
-                    </a>
-                    <a href="STEP-1/SESSION-2/Teen_vs_Ty-Numbers.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Teen vs Ty Numbers
-                    </a>
-                    <a href="STEP-1/SESSION-2/How_to_Say_Phone_Numbers_in_English.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Phone Numbers
-                    </a>
-                    <a href="STEP-1/SESSION-2/An_Actor_and_a_Musician.html" class="material-link">
-                        <span class="tag tag-script">Script</span> An Actor and a Musician
-                    </a>
-                    <a href="STEP-1/SESSION-2/transposition.html" class="material-link">
-                        <span class="tag tag-trans">Transposition</span> Drill: Actor & Musician
-                    </a>
-                </details>
+                    <!-- NIVEL 3: SESSION 1 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 1</summary>
+                        <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Possessive Adjectives
+                        </a>
+                        <a href="STEP-1/SESSION-1/The_Wrong_Suitcase.html" class="material-link">
+                            <span class="tag tag-script">Script</span> The Wrong Suitcase
+                        </a>
+                        <a href="STEP-1/SESSION-1/transposition.html" class="material-link">
+                            <span class="tag tag-trans">Transposition</span> Drill: Session 1
+                        </a>
+                    </details>
 
-                <!-- NIVEL 2: SESSION 3 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 3</summary>
-                    <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Learning Colors
-                    </a>
-                    <a href="STEP-1/SESSION-3/Demonstratives.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Demonstratives
-                    </a>
-                    <a href="STEP-1/SESSION-3/To_Have_Got.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> To Have Got
-                    </a>
-                    <a href="STEP-1/SESSION-3/Is_This_Jacket_For_You.html" class="material-link">
-                        <span class="tag tag-script">Script</span> Is This Jacket For You?
-                    </a>
-                </details>
+                    <!-- NIVEL 3: SESSION 2 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 2</summary>
+                        <a href="STEP-1/SESSION-2/Wh_Question_Words.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> WH-Question Words
+                        </a>
+                        <a href="STEP-1/SESSION-2/Numbers_in_English.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Numbers in English
+                        </a>
+                        <a href="STEP-1/SESSION-2/Teen_vs_Ty-Numbers.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Teen vs Ty Numbers
+                        </a>
+                        <a href="STEP-1/SESSION-2/How_to_Say_Phone_Numbers_in_English.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Phone Numbers
+                        </a>
+                        <a href="STEP-1/SESSION-2/An_Actor_and_a_Musician.html" class="material-link">
+                            <span class="tag tag-script">Script</span> An Actor and a Musician
+                        </a>
+                        <a href="STEP-1/SESSION-2/transposition.html" class="material-link">
+                            <span class="tag tag-trans">Transposition</span> Drill: Actor & Musician
+                        </a>
+                    </details>
 
-                <!-- NIVEL 2: SESSION 4 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 4</summary>
-                    <a href="STEP-1/SESSION-4/Adjectives.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Adjectives
-                    </a>
-                    <a href="STEP-1/SESSION-4/Demonstratives_Challenge.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Demonstratives Challenge
-                    </a>
-                    <a href="STEP-1/SESSION-4/Find_The_Clothing_Item.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Find The Clothing Item
-                    </a>
-                    <a href="STEP-1/SESSION-4/Adjectives_Drag_and_Drop.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Adjectives Drag and Drop
-                    </a>
-                </details>
+                    <!-- NIVEL 3: SESSION 3 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 3</summary>
+                        <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Learning Colors
+                        </a>
+                        <a href="STEP-1/SESSION-3/Demonstratives.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Demonstratives
+                        </a>
+                        <a href="STEP-1/SESSION-3/To_Have_Got.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> To Have Got
+                        </a>
+                        <a href="STEP-1/SESSION-3/Is_This_Jacket_For_You.html" class="material-link">
+                            <span class="tag tag-script">Script</span> Is This Jacket For You?
+                        </a>
+                    </details>
 
-                <!-- NIVEL 2: SESSION 5 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 5</summary>
-                    <a href="STEP-1/SESSION-5/Simple_Present.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Simple Present
-                    </a>
-                    <a href="STEP-1/SESSION-5/Telling_The_Time_Challenge.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Telling The Time Challenge
-                    </a>
-                </details>
+                    <!-- NIVEL 3: SESSION 4 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 4</summary>
+                        <a href="STEP-1/SESSION-4/Adjectives.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Adjectives
+                        </a>
+                        <a href="STEP-1/SESSION-4/Demonstratives_Challenge.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Demonstratives Challenge
+                        </a>
+                        <a href="STEP-1/SESSION-4/Find_The_Clothing_Item.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Find The Clothing Item
+                        </a>
+                        <a href="STEP-1/SESSION-4/Adjectives_Drag_and_Drop.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Adjectives Drag and Drop
+                        </a>
+                    </details>
 
-                <!-- NIVEL 2: SESSION 6 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 6</summary>
-                    <a href="STEP-1/SESSION-6/Adverbs_of_Frequency.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Adverbs of Frequency
-                    </a>
-                    <a href="STEP-1/SESSION-6/Choose_The_Correct_Adverb.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Choose The Correct Adverb
-                    </a>
-                    <a href="STEP-1/SESSION-6/Daily_Routine_Drag_and_Drop.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Daily Routine Drag and Drop
-                    </a>
-                </details>
+                    <!-- NIVEL 3: SESSION 5 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 5</summary>
+                        <a href="STEP-1/SESSION-5/Simple_Present.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Simple Present
+                        </a>
+                        <a href="STEP-1/SESSION-5/Telling_The_Time_Challenge.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Telling The Time Challenge
+                        </a>
+                    </details>
 
-                <!-- NIVEL 2: SESSION 7 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 7</summary>
-                    <a href="STEP-1/SESSION-7/There_is_There_are.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> There is / There are
-                    </a>
-                    <a href="STEP-1/SESSION-7/Prepositions_of_Place.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Prepositions of Place
-                    </a>
-                    <a href="STEP-1/SESSION-7/There_is_There_are_Challenge.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> There is / There are Challenge
-                    </a>
-                    <a href="STEP-1/SESSION-7/Describe_The_House_Challenge.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Describe The House Challenge
-                    </a>
-                    <a href="STEP-1/SESSION-7/Reading_Comprehension.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Reading Comprehension
-                    </a>
-                </details>
+                    <!-- NIVEL 3: SESSION 6 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 6</summary>
+                        <a href="STEP-1/SESSION-6/Adverbs_of_Frequency.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Adverbs of Frequency
+                        </a>
+                        <a href="STEP-1/SESSION-6/Choose_The_Correct_Adverb.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Choose The Correct Adverb
+                        </a>
+                        <a href="STEP-1/SESSION-6/Daily_Routine_Drag_and_Drop.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Daily Routine Drag and Drop
+                        </a>
+                    </details>
 
-                <!-- NIVEL 2: SESSION 8 -->
-                <details class="sub-details">
-                    <summary class="sub-summary">Session 8</summary>
-                    <a href="STEP-1/SESSION-8/Prepositions_of_Place_2.html" class="material-link">
-                        <span class="tag tag-info">Infographic</span> Prepositions of Place 2
-                    </a>
-                    
-                    <!-- NUEVAS ACTIVIDADES AÑADIDAS AQUÍ -->
-                    <a href="STEP-1/SESSION-8/Speaking_Practice.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Speaking Practice
-                    </a>
-                    <a href="STEP-1/SESSION-8/Midterm_Test_Preparation.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Midterm Test Preparation
-                    </a>
-                    <a href="STEP-1/SESSION-8/Writing_Practice.html" class="material-link">
-                        <span class="tag tag-act">Activity</span> Writing Practice
-                    </a>
+                    <!-- NIVEL 3: SESSION 7 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 7</summary>
+                        <a href="STEP-1/SESSION-7/There_is_There_are.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> There is / There are
+                        </a>
+                        <a href="STEP-1/SESSION-7/Prepositions_of_Place.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Prepositions of Place
+                        </a>
+                        <a href="STEP-1/SESSION-7/There_is_There_are_Challenge.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> There is / There are Challenge
+                        </a>
+                        <a href="STEP-1/SESSION-7/Describe_The_House_Challenge.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Describe The House Challenge
+                        </a>
+                        <a href="STEP-1/SESSION-7/Reading_Comprehension.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Reading Comprehension
+                        </a>
+                    </details>
+
+                    <!-- NIVEL 3: SESSION 8 -->
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 8</summary>
+                        <a href="STEP-1/SESSION-8/Prepositions_of_Place_2.html" class="material-link">
+                            <span class="tag tag-info">Infographic</span> Prepositions of Place 2
+                        </a>
+                        <a href="STEP-1/SESSION-8/Speaking_Practice.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Speaking Practice
+                        </a>
+                        <a href="STEP-1/SESSION-8/Midterm_Test_Preparation.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Midterm Test Preparation
+                        </a>
+                        <a href="STEP-1/SESSION-8/Writing_Practice.html" class="material-link">
+                            <span class="tag tag-act">Activity</span> Writing Practice
+                        </a>
+                    </details>
+                </details> <!-- Fin de First Half -->
+
+                <!-- NIVEL 2: SECOND HALF (Preparado para el futuro) -->
+                <details class="half-details">
+                    <summary class="half-summary">Second Half</summary>
+                    <div style="padding: 1.5rem; text-align: center; color: #666; font-style: italic; font-size: 0.9rem;">
+                        Upcoming sessions will be unlocked here...
+                    </div>
                 </details>
 
             </details>
