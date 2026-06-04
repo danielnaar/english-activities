@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Containers & Quantities - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* 3D Flip Card CSS */
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            cursor: pointer;
+            z-index: 1; 
+        }
+        .flip-card.flipped, .flip-card:hover {
+            z-index: 10; 
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            top: 0;  
+            left: 0; 
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; 
+            backface-visibility: hidden;
+            border-radius: 0.75rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .flip-card-front {
+            background-color: #ffffff;
+            border: 2px solid #e5e7eb;
+            color: black;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .flip-card:hover .flip-card-front {
+            border-color: #D4AF37;
+            box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.2), 0 4px 6px -2px rgba(212, 175, 55, 0.1);
+        }
+        .flip-card-back {
+            background-color: #0B192C;
+            border: 2px solid #D4AF37;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* Emojis limpios */
+        .emoji-display {
+            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-6xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-12 pb-10 px-6 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • VOCABULARY
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-4 leading-tight relative z-10">
+                Containers & Quantities
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto relative z-10">
+                Click on any card to reveal its container or quantity. Expand your vocabulary without downloading a single image!
+            </p>
+        </div>
+
+        <!-- CONTROLES Y CUADRÍCULA -->
+        <div class="p-6 md:p-10 bg-[#F8F9FA]">
+            
+            <!-- Controles del Profesor -->
+            <div class="flex justify-center sm:justify-end gap-3 mb-6">
+                <button onclick="flipAll(false)" class="bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-2 px-6 rounded-full shadow-sm border border-gray-300 transition-colors text-xs uppercase tracking-wider">
+                    Hide All
+                </button>
+                <button onclick="flipAll(true)" class="bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-2 px-6 rounded-full shadow-sm border border-[#D4AF37] transition-colors text-xs uppercase tracking-wider">
+                    Reveal All
+                </button>
+            </div>
+
+            <!-- Cuadrícula de Tarjetas (Grid) -->
+            <div id="cards-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+                <!-- Las tarjetas se inyectan mediante JavaScript -->
+            </div>
+
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Smart & interactive learning solutions.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT DE GENERACIÓN E INTERACCIÓN -->
+    <script>
+        // Base de datos de los 20 elementos. ¡CERO IMÁGENES REQUERIDAS!
+        // Añadí 'color' para darle un look de "App Premium" a cada círculo de fondo.
+        const vocabularyData = [
+            { id: 1, emoji: '🛍️', container: 'A bag', example: 'of chips / flour / cookies', color: 'bg-red-50' },
+            { id: 2, emoji: '🍾', container: 'A bottle', example: 'of soda / ketchup / mayo', color: 'bg-orange-50' },
+            { id: 3, emoji: '📦', container: 'A box', example: 'of cereal / matches / napkins', color: 'bg-amber-50' },
+            { id: 4, emoji: '🍇', container: 'A bunch', example: 'of bananas / grapes / carrots', color: 'bg-purple-50' },
+            { id: 5, emoji: '🥫', container: 'A can', example: 'of soda / beans / tuna', color: 'bg-lime-50' },
+            { id: 6, emoji: '🧃', container: 'A carton', example: 'of juice / eggs', color: 'bg-orange-50' },
+            { id: 7, emoji: '🥡', container: 'A container', example: 'of ice cream / strawberries / grapes', color: 'bg-emerald-50' },
+            { id: 8, emoji: '🥚', container: 'A dozen', example: 'eggs', color: 'bg-teal-50' },
+            { id: 9, emoji: '🥬', container: 'A head', example: 'of green / purple lettuce', color: 'bg-cyan-50' },
+            { id: 10, emoji: '🫙', container: 'A jar', example: 'of pickles / olives / peaches', color: 'bg-emerald-50' },
+            { id: 11, emoji: '🍞', container: 'A loaf', example: 'of sliced bread', color: 'bg-yellow-50' },
+            { id: 12, emoji: '🍬', container: 'A pack', example: 'of gum', color: 'bg-rose-50' },
+            { id: 13, emoji: '🥯', container: 'A package', example: 'of buns / arepas', color: 'bg-amber-100' },
+            { id: 14, emoji: '🧻', container: 'A roll', example: 'of paper towels / aluminum foil', color: 'bg-gray-100' },
+            { id: 15, emoji: '🥤', container: 'A six-pack', example: 'of water / soda', color: 'bg-cyan-50' },
+            { id: 16, emoji: '🧈', container: 'A stick', example: 'of butter', color: 'bg-pink-50' },
+            { id: 17, emoji: '🪥', container: 'A tube', example: 'of toothpaste', color: 'bg-rose-50' },
+            { id: 18, emoji: '🍨', container: 'A tub', example: 'of ice cream', color: 'bg-slate-100' },
+            { id: 19, emoji: '🧃', container: 'A carton', example: 'of milkshake / milk', color: 'bg-orange-50' },
+            { id: 20, emoji: '🍾', container: 'A bottle', example: 'of soda / Canada Dry', color: 'bg-blue-50' }
+        ];
+
+        const grid = document.getElementById('cards-grid');
+
+        function initCards() {
+            grid.innerHTML = '';
+
+            vocabularyData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'flip-card w-full aspect-square group'; 
+                card.onclick = () => toggleFlip(card);
+
+                card.innerHTML = `
+                    <div class="flip-card-inner">
+                        
+                        <!-- Lado Frontal (Ilustración Premium) -->
+                        <div class="flip-card-front relative p-2 md:p-4">
+                            <!-- Número de insignia -->
+                            <div class="absolute top-2 left-2 w-6 h-6 rounded-full border border-gray-200 bg-white flex items-center justify-center text-[10px] font-bold text-gray-500 shadow-sm z-20">
+                                ${item.id}
+                            </div>
+                            
+                            <!-- Círculo de color con Emoji -->
+                            <div class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 ${item.color} rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-inner">
+                                <span class="text-4xl sm:text-5xl md:text-6xl emoji-display drop-shadow-sm">${item.emoji}</span>
+                            </div>
+                            
+                            <div class="absolute bottom-3 text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                Tap to reveal
+                            </div>
+                        </div>
+
+                        <!-- Lado Trasero (Azul Noche con Texto) -->
+                        <div class="flip-card-back p-3 md:p-4">
+                            <!-- Número de insignia (versión oscura) -->
+                            <div class="absolute top-2 left-2 w-6 h-6 rounded-full border border-[#D4AF37]/50 bg-white/10 flex items-center justify-center text-[10px] font-bold text-[#D4AF37]">
+                                ${item.id}
+                            </div>
+                            
+                            <!-- Contenedor -->
+                            <h3 class="font-serif-custom font-bold text-[#D4AF37] text-lg sm:text-xl md:text-2xl leading-tight mb-2">
+                                ${item.container}
+                            </h3>
+                            
+                            <!-- Línea separadora -->
+                            <div class="w-6 md:w-8 h-px bg-white/30 mb-2"></div>
+                            
+                            <!-- Ejemplo -->
+                            <p class="text-white/90 text-xs sm:text-sm md:text-[15px] font-medium italic text-center leading-snug">
+                                ${item.example}
+                            </p>
+                        </div>
+                        
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleFlip(cardElement) {
+            cardElement.classList.toggle('flipped');
+        }
+
+        function flipAll(show) {
+            const cards = document.querySelectorAll('.flip-card');
+            cards.forEach(card => {
+                if (show) {
+                    card.classList.add('flipped');
+                } else {
+                    card.classList.remove('flipped');
+                }
+            });
+        }
+
+        window.onload = initCards;
+    </script>
+</body>
+</html>
