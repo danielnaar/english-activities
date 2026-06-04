@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>At the Market Challenge - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Animaciones */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+        
+        /* Estilo para el espacio en blanco de las oraciones */
+        .blank-space {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 4rem;
+            min-height: 1.5rem;
+            border-bottom: 2px solid #9ca3af;
+            margin: 0 0.25rem;
+            padding: 0 0.5rem;
+            color: #D4AF37;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- HEADER (Premium Blue Night) -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37] relative">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom relative z-10">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-4 leading-tight relative z-10">
+                You're at the Market!
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto relative z-10">
+                Choose the correct word for each situation. Think: <strong class="text-[#D4AF37]">countable</strong> or <strong class="text-[#D4AF37]">uncountable</strong>?
+            </p>
+            
+            <!-- Icono decorativo sutil -->
+            <div class="absolute top-4 left-4 opacity-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            </div>
+        </div>
+
+        <div class="p-6 md:p-10 relative">
+            
+            <!-- Score Display -->
+            <div class="absolute top-6 right-6 md:top-10 md:right-10 z-10 hidden" id="score-container">
+                <div class="text-[#D4AF37] font-bold text-sm bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                    Score: <span id="score-display" class="text-white ml-2">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white">10</span>
+                </div>
+            </div>
+
+            <!-- QUESTIONS GRID (2 Columns) -->
+            <div id="questions-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+                <!-- Inyectado vía JS -->
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-gray-200" id="action-buttons">
+                <button onclick="checkAnswers()" id="check-btn" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-12 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+                <button onclick="resetGame()" id="reset-btn" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-12 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Try Again
+                </button>
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div id="success-message" class="hidden mt-8 p-6 md:p-8 bg-[#0B192C] rounded-xl border-l-[8px] border-[#D4AF37] shadow-lg animate-pop">
+                <h3 class="text-3xl font-serif-custom font-bold text-[#D4AF37] mb-2">Shopping Complete!</h3>
+                <p class="text-white text-base font-light">You have successfully identified all countable and uncountable nouns. Excellent work.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const questionsData = [
+            { id: 1, pre: "How", post: "apples do you want?", opt1: "many", opt2: "much", correct: "many" },
+            { id: 2, pre: "How", post: "water is in the bottle?", opt1: "many", opt2: "much", correct: "much" },
+            { id: 3, pre: "I need", post: "bottle of oil.", opt1: "a", opt2: "some", correct: "a" },
+            { id: 4, pre: "I want", post: "cheese for my sandwich.", opt1: "a", opt2: "some", correct: "some" },
+            { id: 5, pre: "There aren't", post: "chairs in the room.", opt1: "much", opt2: "many", correct: "many" },
+            { id: 6, pre: "She gave me", post: "advice before the meeting.", opt1: "some", opt2: "an", correct: "some" },
+            { id: 7, pre: "I'd like", post: "piece of cake, please.", opt1: "a", opt2: "some", correct: "a" },
+            { id: 8, pre: "There isn't", post: "sugar left.", opt1: "many", opt2: "much", correct: "much" },
+            { id: 9, pre: "How", post: "eggs do you usually eat?", opt1: "many", opt2: "much", correct: "many" },
+            { id: 10, pre: "Let's buy", post: "rice for dinner.", opt1: "a", opt2: "some", correct: "some" }
+        ];
+
+        let userAnswers = {};
+
+        const container = document.getElementById('questions-container');
+        const scoreContainer = document.getElementById('score-container');
+        const scoreDisplay = document.getElementById('score-display');
+        const successMessage = document.getElementById('success-message');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        function initGame() {
+            container.innerHTML = '';
+            userAnswers = {};
+            scoreDisplay.textContent = '0';
+            scoreContainer.classList.remove('hidden');
+            successMessage.classList.add('hidden');
+            checkBtn.classList.remove('hidden');
+            resetBtn.classList.add('hidden');
+
+            questionsData.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-xl shadow-sm border border-gray-200 border-l-[4px] border-l-[#0B192C] p-5 flex flex-col justify-between hover:shadow-md transition-shadow";
+                
+                card.innerHTML = `
+                    <div class="mb-4">
+                        <p class="text-[15px] md:text-base text-[#121212] leading-loose">
+                            <strong class="text-[#D4AF37] mr-2 w-5 inline-block text-right">${index + 1}.</strong> 
+                            ${q.pre} 
+                            <span id="blank-${q.id}" class="blank-space"></span> 
+                            ${q.post}
+                        </p>
+                    </div>
+                    <div class="flex gap-3 pl-8 mt-auto">
+                        <button id="btn-${q.id}-opt1" onclick="selectOption(${q.id}, '${q.opt1}', 'opt1')" class="px-5 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50">
+                            ${q.opt1}
+                        </button>
+                        <button id="btn-${q.id}-opt2" onclick="selectOption(${q.id}, '${q.opt2}', 'opt2')" class="px-5 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50">
+                            ${q.opt2}
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectOption(qId, word, btnType) {
+            // Save answer
+            userAnswers[qId] = word;
+
+            // Get elements
+            const blank = document.getElementById(`blank-${qId}`);
+            const btn1 = document.getElementById(`btn-${qId}-opt1`);
+            const btn2 = document.getElementById(`btn-${qId}-opt2`);
+
+            // Reset both buttons to default
+            const defaultClasses = "px-5 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50";
+            btn1.className = defaultClasses;
+            btn2.className = defaultClasses;
+
+            // Highlight selected button (Premium styling)
+            const selectedBtn = btnType === 'opt1' ? btn1 : btn2;
+            selectedBtn.className = "px-5 py-1.5 rounded-full border-2 border-[#D4AF37] bg-[#0B192C] text-[#D4AF37] font-bold text-sm shadow-md transition-all scale-105";
+
+            // Update blank space text and remove error styles if any
+            blank.textContent = word;
+            blank.className = "blank-space animate-pop border-b-[#0B192C]";
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            let allAnswered = true;
+
+            questionsData.forEach(q => {
+                const blank = document.getElementById(`blank-${q.id}`);
+                const userAnswer = userAnswers[q.id];
+
+                // Remove previous validation styles
+                blank.classList.remove('border-b-red-500', 'text-red-500', 'border-b-green-500', 'text-green-600', 'border-b-yellow-400', 'animate-shake');
+
+                if (!userAnswer) {
+                    // Not answered
+                    allAnswered = false;
+                    blank.classList.add('border-b-yellow-400');
+                    return;
+                }
+
+                if (userAnswer === q.correct) {
+                    // Correct
+                    score++;
+                    blank.classList.add('border-b-green-500', 'text-green-600');
+                    blank.innerHTML = `${userAnswer} <span class="text-xs ml-1">&#10003;</span>`;
+                } else {
+                    // Incorrect
+                    blank.classList.add('border-b-red-500', 'text-red-500', 'animate-shake');
+                    blank.innerHTML = `${userAnswer} <span class="text-xs ml-1">&#10005;</span>`;
+                    
+                    // Remove shake class after animation
+                    setTimeout(() => {
+                        blank.classList.remove('animate-shake');
+                    }, 400);
+                }
+            });
+
+            // Update score
+            scoreDisplay.textContent = score;
+
+            // If all correct, show success
+            if (score === questionsData.length) {
+                checkBtn.classList.add('hidden');
+                resetBtn.classList.remove('hidden');
+                successMessage.classList.remove('hidden');
+                
+                // Scroll down to success message gracefully
+                setTimeout(() => {
+                    successMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }, 100);
+            }
+        }
+
+        function resetGame() {
+            initGame();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Start game on load
+        window.onload = initGame;
+    </script>
+</body>
+</html>
