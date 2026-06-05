@@ -32,7 +32,7 @@
         summary { list-style: none; cursor: pointer; position: relative; transition: 0.3s; }
         summary::-webkit-details-marker { display: none; } 
         
-        /* NIVEL 1: STEP (Categoría Principal) */
+        /* NIVEL 1: STEP */
         .folder-summary {
             background-color: #0B192C;
             color: #D4AF37;
@@ -48,22 +48,22 @@
         .folder-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.9rem; transition: transform 0.3s; }
         details[open] > .folder-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 2: MITADES (First Half / Second Half) - COLORES INVERTIDOS */
+        /* NIVEL 2: MITADES - COLORES INVERTIDOS */
         .half-details { margin: 0.5rem 0 0.5rem 1.5rem; } 
         .half-summary {
-            background-color: #D4AF37; /* Fondo Dorado */
-            color: #0B192C;            /* Letras Azules */
+            background-color: #D4AF37; 
+            color: #0B192C;            
             padding: 1.2rem 1.5rem;
             font-weight: bold;
             border-radius: 4px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .half-summary:hover { background-color: #C5A028; } /* Dorado más oscuro al pasar el ratón */
+        .half-summary:hover { background-color: #C5A028; }
         .half-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; color: #0B192C; }
         .half-details[open] > .half-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 3: SESSIONS (Subcarpetas de cada mitad) */
+        /* NIVEL 3: SESSIONS */
         .sub-details { margin: 0.5rem 0 0.5rem 1.5rem; } 
         .sub-summary {
             background-color: #0B192C; 
@@ -76,7 +76,7 @@
         .sub-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
         .sub-details[open] > .sub-summary::after { transform: rotate(180deg); }
 
-        /* NIVEL 4: MATERIAL DE CLASE (Enlaces) */
+        /* NIVEL 4: MATERIAL DE CLASE */
         .material-link {
             display: block;
             padding: 1rem 1.5rem;
@@ -94,11 +94,11 @@
 
         /* Etiquetas informativas */
         .tag { font-size: 0.65rem; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; margin-right: 8px; font-weight: bold; display: inline-flex; min-width: 80px; justify-content: center; }
-        .tag-info { background: #e0f2fe; color: #0369a1; }     /* Azul claro - Infographics */
-        .tag-act { background: #ffedd5; color: #c2410c; }      /* Naranja - Activity */
-        .tag-script { background: #dcfce7; color: #15803d; }   /* Verde claro - Scripts */
-        .tag-trans { background: #fef08a; color: #854d0e; }    /* Amarillo/Dorado - Transpositions */
-        .tag-tool { background: #f3e8ff; color: #7e22ce; }     /* Morado - Tools */
+        .tag-info { background: #e0f2fe; color: #0369a1; }     /* Azul */
+        .tag-act { background: #ffedd5; color: #c2410c; }      /* Naranja */
+        .tag-script { background: #dcfce7; color: #15803d; }   /* Verde */
+        .tag-trans { background: #fef08a; color: #854d0e; }    /* Amarillo */
+        .tag-tool { background: #f3e8ff; color: #7e22ce; }     /* Morado */
     </style>
 </head>
 <body>
@@ -106,7 +106,6 @@
         <h1>Premium English</h1>
     </header>
     
-    <!-- LOGIN ENVOLVILDO EN FORM NATIVO -->
     <form id="login-form" onsubmit="event.preventDefault(); checkPassword();">
         <h2>Exclusive Access</h2>
         <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
@@ -115,179 +114,123 @@
         <p id="error-message">Incorrect code. Please try again.</p>
     </form>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-content">
         <div class="container">
             <h2>Interactive Hub</h2>
             
-            <!-- NIVEL 1: STEP 1 (Empieza cerrado) -->
             <details>
                 <summary class="folder-summary">Step 1</summary>
                 
-                <!-- NIVEL 2: FIRST HALF (Sesiones 1 a 8 - Empieza cerrado) -->
+                <!-- FIRST HALF -->
                 <details class="half-details">
                     <summary class="half-summary">First Half</summary>
 
-                    <!-- NIVEL 3: SESSION 1 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 1</summary>
-                        <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Possessive Adjectives
-                        </a>
-                        <a href="STEP-1/SESSION-1/The_Wrong_Suitcase.html" class="material-link">
-                            <span class="tag tag-script">Script</span> The Wrong Suitcase
-                        </a>
-                        <a href="STEP-1/SESSION-1/transposition.html" class="material-link">
-                            <span class="tag tag-trans">Transposition</span> Drill: Session 1
-                        </a>
+                        <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link"><span class="tag tag-info">Infographic</span> Possessive Adjectives</a>
+                        <a href="STEP-1/SESSION-1/The_Wrong_Suitcase.html" class="material-link"><span class="tag tag-script">Script</span> The Wrong Suitcase</a>
+                        <a href="STEP-1/SESSION-1/transposition.html" class="material-link"><span class="tag tag-trans">Transposition</span> Drill: Session 1</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 2 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 2</summary>
-                        <a href="STEP-1/SESSION-2/Wh_Question_Words.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> WH-Question Words
-                        </a>
-                        <a href="STEP-1/SESSION-2/Numbers_in_English.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Numbers in English
-                        </a>
-                        <a href="STEP-1/SESSION-2/Teen_vs_Ty-Numbers.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Teen vs Ty Numbers
-                        </a>
-                        <a href="STEP-1/SESSION-2/How_to_Say_Phone_Numbers_in_English.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Phone Numbers
-                        </a>
-                        <a href="STEP-1/SESSION-2/An_Actor_and_a_Musician.html" class="material-link">
-                            <span class="tag tag-script">Script</span> An Actor and a Musician
-                        </a>
-                        <a href="STEP-1/SESSION-2/transposition.html" class="material-link">
-                            <span class="tag tag-trans">Transposition</span> Drill: Actor & Musician
-                        </a>
+                        <a href="STEP-1/SESSION-2/Wh_Question_Words.html" class="material-link"><span class="tag tag-info">Infographic</span> WH-Question Words</a>
+                        <a href="STEP-1/SESSION-2/Numbers_in_English.html" class="material-link"><span class="tag tag-info">Infographic</span> Numbers in English</a>
+                        <a href="STEP-1/SESSION-2/Teen_vs_Ty-Numbers.html" class="material-link"><span class="tag tag-info">Infographic</span> Teen vs Ty Numbers</a>
+                        <a href="STEP-1/SESSION-2/How_to_Say_Phone_Numbers_in_English.html" class="material-link"><span class="tag tag-info">Infographic</span> Phone Numbers</a>
+                        <a href="STEP-1/SESSION-2/An_Actor_and_a_Musician.html" class="material-link"><span class="tag tag-script">Script</span> An Actor and a Musician</a>
+                        <a href="STEP-1/SESSION-2/transposition.html" class="material-link"><span class="tag tag-trans">Transposition</span> Drill: Actor & Musician</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 3 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 3</summary>
-                        <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Learning Colors
-                        </a>
-                        <a href="STEP-1/SESSION-3/Demonstratives.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Demonstratives
-                        </a>
-                        <a href="STEP-1/SESSION-3/To_Have_Got.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> To Have Got
-                        </a>
-                        <a href="STEP-1/SESSION-3/Is_This_Jacket_For_You.html" class="material-link">
-                            <span class="tag tag-script">Script</span> Is This Jacket For You?
-                        </a>
+                        <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link"><span class="tag tag-info">Infographic</span> Learning Colors</a>
+                        <a href="STEP-1/SESSION-3/Demonstratives.html" class="material-link"><span class="tag tag-info">Infographic</span> Demonstratives</a>
+                        <a href="STEP-1/SESSION-3/To_Have_Got.html" class="material-link"><span class="tag tag-info">Infographic</span> To Have Got</a>
+                        <a href="STEP-1/SESSION-3/Is_This_Jacket_For_You.html" class="material-link"><span class="tag tag-script">Script</span> Is This Jacket For You?</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 4 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 4</summary>
-                        <a href="STEP-1/SESSION-4/Adjectives.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Adjectives
-                        </a>
-                        <a href="STEP-1/SESSION-4/Demonstratives_Challenge.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Demonstratives Challenge
-                        </a>
-                        <a href="STEP-1/SESSION-4/Find_The_Clothing_Item.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Find The Clothing Item
-                        </a>
-                        <a href="STEP-1/SESSION-4/Adjectives_Drag_and_Drop.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Adjectives Drag and Drop
-                        </a>
+                        <a href="STEP-1/SESSION-4/Adjectives.html" class="material-link"><span class="tag tag-info">Infographic</span> Adjectives</a>
+                        <a href="STEP-1/SESSION-4/Demonstratives_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Demonstratives Challenge</a>
+                        <a href="STEP-1/SESSION-4/Find_The_Clothing_Item.html" class="material-link"><span class="tag tag-act">Activity</span> Find The Clothing Item</a>
+                        <a href="STEP-1/SESSION-4/Adjectives_Drag_and_Drop.html" class="material-link"><span class="tag tag-act">Activity</span> Adjectives Drag and Drop</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 5 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 5</summary>
-                        <a href="STEP-1/SESSION-5/Simple_Present.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Simple Present
-                        </a>
-                        <a href="STEP-1/SESSION-5/Telling_The_Time_Challenge.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Telling The Time Challenge
-                        </a>
+                        <a href="STEP-1/SESSION-5/Simple_Present.html" class="material-link"><span class="tag tag-info">Infographic</span> Simple Present</a>
+                        <a href="STEP-1/SESSION-5/Telling_The_Time_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Telling The Time Challenge</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 6 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 6</summary>
-                        <a href="STEP-1/SESSION-6/Adverbs_of_Frequency.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Adverbs of Frequency
-                        </a>
-                        <a href="STEP-1/SESSION-6/Choose_The_Correct_Adverb.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Choose The Correct Adverb
-                        </a>
-                        <a href="STEP-1/SESSION-6/Daily_Routine_Drag_and_Drop.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Daily Routine Drag and Drop
-                        </a>
+                        <a href="STEP-1/SESSION-6/Adverbs_of_Frequency.html" class="material-link"><span class="tag tag-info">Infographic</span> Adverbs of Frequency</a>
+                        <a href="STEP-1/SESSION-6/Choose_The_Correct_Adverb.html" class="material-link"><span class="tag tag-act">Activity</span> Choose The Correct Adverb</a>
+                        <a href="STEP-1/SESSION-6/Daily_Routine_Drag_and_Drop.html" class="material-link"><span class="tag tag-act">Activity</span> Daily Routine Drag and Drop</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 7 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 7</summary>
-                        <a href="STEP-1/SESSION-7/There_is_There_are.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> There is / There are
-                        </a>
-                        <a href="STEP-1/SESSION-7/Prepositions_of_Place.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Prepositions of Place
-                        </a>
-                        <a href="STEP-1/SESSION-7/There_is_There_are_Challenge.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> There is / There are Challenge
-                        </a>
-                        <a href="STEP-1/SESSION-7/Describe_The_House_Challenge.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Describe The House Challenge
-                        </a>
-                        <a href="STEP-1/SESSION-7/Reading_Comprehension.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Reading Comprehension
-                        </a>
+                        <a href="STEP-1/SESSION-7/There_is_There_are.html" class="material-link"><span class="tag tag-info">Infographic</span> There is / There are</a>
+                        <a href="STEP-1/SESSION-7/Prepositions_of_Place.html" class="material-link"><span class="tag tag-info">Infographic</span> Prepositions of Place</a>
+                        <a href="STEP-1/SESSION-7/There_is_There_are_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> There is / There are Challenge</a>
+                        <a href="STEP-1/SESSION-7/Describe_The_House_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Describe The House Challenge</a>
+                        <a href="STEP-1/SESSION-7/Reading_Comprehension.html" class="material-link"><span class="tag tag-act">Activity</span> Reading Comprehension</a>
                     </details>
 
-                    <!-- NIVEL 3: SESSION 8 -->
                     <details class="sub-details">
                         <summary class="sub-summary">Session 8</summary>
-                        <a href="STEP-1/SESSION-8/Prepositions_of_Place_2.html" class="material-link">
-                            <span class="tag tag-info">Infographic</span> Prepositions of Place 2
-                        </a>
-                        <a href="STEP-1/SESSION-8/Speaking_Practice.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Speaking Practice
-                        </a>
-                        <a href="STEP-1/SESSION-8/Midterm_Test_Preparation.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Midterm Test Preparation
-                        </a>
-                        <a href="STEP-1/SESSION-8/Writing_Practice.html" class="material-link">
-                            <span class="tag tag-act">Activity</span> Writing Practice
-                        </a>
+                        <a href="STEP-1/SESSION-8/Prepositions_of_Place_2.html" class="material-link"><span class="tag tag-info">Infographic</span> Prepositions of Place 2</a>
+                        <a href="STEP-1/SESSION-8/Speaking_Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Speaking Practice</a>
+                        <a href="STEP-1/SESSION-8/Midterm_Test_Preparation.html" class="material-link"><span class="tag tag-act">Activity</span> Midterm Test Preparation</a>
+                        <a href="STEP-1/SESSION-8/Writing_Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Writing Practice</a>
                     </details>
-                </details> <!-- Fin de First Half -->
-
-                <!-- NIVEL 2: SECOND HALF (Preparado para el futuro) -->
-                <details class="half-details">
-                    <summary class="half-summary">Second Half</summary>
-                    <div style="padding: 1.5rem; text-align: center; color: #666; font-style: italic; font-size: 0.9rem;">
-                        Upcoming sessions will be unlocked here...
-                    </div>
                 </details>
 
+                <!-- SECOND HALF -->
+                <details class="half-details">
+                    <summary class="half-summary">Second Half</summary>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 9</summary>
+                        <a href="STEP-1/SESSION-9/Countable_vs_Uncountable_Nouns.html" class="material-link"><span class="tag tag-info">Infographic</span> Countable vs Uncountable</a>
+                        <a href="STEP-1/SESSION-9/Grocery_Time.html" class="material-link"><span class="tag tag-act">Activity</span> Grocery Time</a>
+                        <a href="STEP-1/SESSION-9/Some_vs_Any.html" class="material-link"><span class="tag tag-info">Infographic</span> Some vs Any</a>
+                        <a href="STEP-1/SESSION-9/Detective_Grammar.html" class="material-link"><span class="tag tag-act">Activity</span> Detective Grammar</a>
+                        <a href="STEP-1/SESSION-9/Quick-Fire_Speaking_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Speaking Challenge</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 10</summary>
+                        <a href="STEP-1/SESSION-10/Much-Many-A_Lot_Of.html" class="material-link"><span class="tag tag-info">Infographic</span> Much / Many / A Lot Of</a>
+                        <a href="STEP-1/SESSION-10/How_Much-How_Many_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> How Much/Many Challenge</a>
+                        <a href="STEP-1/SESSION-10/Containers_and_Quantities.html" class="material-link"><span class="tag tag-info">Infographic</span> Containers & Quantities</a>
+                        <a href="STEP-1/SESSION-10/Food_Words_Around_The_World.html" class="material-link"><span class="tag tag-act">Activity</span> Food Words Around The World</a>
+                        <a href="STEP-1/SESSION-10/Breakfast_Around_The_World.html" class="material-link"><span class="tag tag-act">Activity</span> Breakfast Around The World</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 11</summary>
+                        <a href="STEP-1/SESSION-11/The_Modal_Verb_CAN.html" class="material-link"><span class="tag tag-info">Infographic</span> The Modal Verb CAN</a>
+                        <a href="STEP-1/SESSION-11/Oral_Practice-What_Can_You_Do.html" class="material-link"><span class="tag tag-act">Activity</span> Oral Practice: What Can You Do?</a>
+                        <a href="STEP-1/SESSION-11/Writing_Practice-What_Can_You_Do.html" class="material-link"><span class="tag tag-act">Activity</span> Writing Practice: What Can You Do?</a>
+                        <a href="STEP-1/SESSION-11/Speak_Like_a_Native_On_The_Phone.html" class="material-link"><span class="tag tag-script">Script</span> Speak Like a Native On The Phone</a>
+                        <a href="STEP-1/SESSION-11/Identify_The_Tone_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Identify The Tone Challenge</a>
+                    </details>
+                </details>
             </details>
 
-            <!-- NIVEL 1: HERRAMIENTAS GENERALES (Empieza cerrado) -->
+            <!-- GENERAL TOOLS -->
             <details>
                 <summary class="folder-summary">General Tools</summary>
                 <div class="sub-details">
-                    <a href="collage.html" class="material-link">
-                        <span class="tag tag-tool">Tool</span> Collage Activity
-                    </a>
-                    <a href="collage6.html" class="material-link">
-                        <span class="tag tag-tool">Tool</span> Collage 6 Images
-                    </a>
-                    <a href="generador-ppt.html" class="material-link">
-                        <span class="tag tag-tool">Tool</span> PPT Generator
-                    </a>
+                    <a href="collage.html" class="material-link"><span class="tag tag-tool">Tool</span> Collage Activity</a>
+                    <a href="collage6.html" class="material-link"><span class="tag tag-tool">Tool</span> Collage 6 Images</a>
+                    <a href="generador-ppt.html" class="material-link"><span class="tag tag-tool">Tool</span> PPT Generator</a>
                 </div>
             </details>
-
         </div>
     </div>
 
@@ -297,9 +240,7 @@
             const errorMessage = document.getElementById("error-message");
             const loginForm = document.getElementById("login-form");
             const mainContent = document.getElementById("main-content");
-
             const correctPassword = "admin"; 
-
             if (password === correctPassword) {
                 loginForm.style.display = "none";
                 mainContent.style.display = "block";
