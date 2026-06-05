@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Past: Click & Match - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+
+        /* Estilo para palabra arrastrada */
+        .dragging { opacity: 0.5; }
+        
+        /* Zona de soltado activa */
+        .drag-over { border-color: #D4AF37 !important; background-color: #fefce8 !important; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- HEADER (Premium Blue Night) -->
+        <div class="bg-[#0B192C] text-center pt-12 pb-10 px-6 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • VOCABULARY & GRAMMAR
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-3 leading-tight relative z-10">
+                Simple Past: Click & Match
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto relative z-10">
+                Choose the correct <strong class="text-[#D4AF37] font-bold">-ed</strong> verb from the bank and match it with the correct sentence to complete the meaning.
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10 relative">
+            
+            <!-- Score Display -->
+            <div class="absolute top-6 right-6 md:top-10 md:right-10 z-10 hidden" id="score-container">
+                <div class="text-[#D4AF37] font-bold text-sm bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                    Score: <span id="score-display" class="text-white ml-2">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white" id="total-score">10</span>
+                </div>
+            </div>
+
+            <!-- BANCO DE PALABRAS -->
+            <div class="bg-white rounded-xl shadow-sm border-2 border-dashed border-[#D4AF37]/60 p-6 mb-10 relative mt-8 md:mt-0">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4 text-center">Word Bank (Tap or Drag)</p>
+                <div id="word-bank" class="flex flex-wrap justify-center gap-3 min-h-[60px]">
+                    <!-- Las palabras se inyectan mediante JS -->
+                </div>
+            </div>
+
+            <!-- ÁREA DE ORACIONES (2 Columnas) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-5 mb-10" id="sentences-container">
+                <!-- Se inyectan mediante JS -->
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-gray-200" id="action-buttons">
+                <button onclick="checkAnswers()" id="check-btn" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-10 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+                <button onclick="removeIncorrect()" id="remove-btn" class="hidden w-full sm:w-auto bg-white hover:bg-red-50 text-red-700 font-bold py-3 px-8 rounded-full shadow-sm transition-all duration-300 border border-red-200 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    Remove Incorrect
+                </button>
+                <button onclick="resetGame()" id="reset-btn" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-10 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Try Again
+                </button>
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div id="success-message" class="hidden mt-8 p-6 bg-[#0B192C] rounded-xl border-l-[8px] border-[#D4AF37] text-center animate-pop shadow-lg">
+                <h3 class="text-2xl font-serif-custom font-bold text-[#D4AF37] mb-2">Excellent Work!</h3>
+                <p class="text-white text-[15px]">You have successfully matched all the regular verbs in the simple past.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SCRIPT DE LA ACTIVIDAD -->
+    <script>
+        const verbList = ['survived', 'talked', 'accepted', 'waited', 'continued', 'studied', 'checked', 'noticed', 'lived', 'watched'];
+        
+        // Estructura de las oraciones. targetWord es la respuesta correcta.
+        const sentences = [
+            { id: 1, pre: "I", post: "in Brazil for two years.", targetWord: "lived" },
+            { id: 2, pre: "Lisa", post: "Japanese for five years.", targetWord: "studied" },
+            { id: 3, pre: "I", post: "for you at the beach all day.", targetWord: "waited" },
+            { id: 4, pre: "They", post: "the rules, so they must accept the results.", targetWord: "accepted" },
+            { id: 5, pre: "They", post: "walking because they were not tired.", targetWord: "continued" },
+            { id: 6, pre: "We", post: "on the phone for thirty minutes.", targetWord: "talked" },
+            { id: 7, pre: "The doctor", post: "my throat, but there was nothing to worry about.", targetWord: "checked" },
+            { id: 8, pre: "At that moment I", post: "that my mother was not here.", targetWord: "noticed" },
+            { id: 9, pre: "He's a hero. He", post: "Peter's attack!", targetWord: "survived" },
+            { id: 10, pre: "I", post: "that movie already.", targetWord: "watched" }
+        ];
+
+        const wordBank = document.getElementById('word-bank');
+        const sentencesContainer = document.getElementById('sentences-container');
+        let selectedWordEl = null; // Para la selección en dispositivos móviles
+
+        // Iniciar el juego
+        function initGame() {
+            wordBank.innerHTML = '';
+            sentencesContainer.innerHTML = '';
+            
+            document.getElementById('score-container').classList.add('hidden');
+            document.getElementById('success-message').classList.add('hidden');
+            document.getElementById('check-btn').classList.remove('hidden');
+            document.getElementById('reset-btn').classList.add('hidden');
+            document.getElementById('remove-btn').classList.add('hidden');
+
+            // Mezclar palabras para el banco
+            const shuffledWords = [...verbList].sort(() => Math.random() - 0.5);
+            
+            shuffledWords.forEach(word => {
+                createWordElement(word, wordBank);
+            });
+
+            // Generar Oraciones
+            sentences.forEach(s => {
+                const sentenceDiv = document.createElement('div');
+                sentenceDiv.className = "flex flex-wrap items-center gap-2 p-4 rounded-lg border-l-[4px] border-[#0B192C] bg-white shadow-sm hover:shadow-md transition-shadow text-[15px] md:text-base leading-relaxed";
+                
+                sentenceDiv.innerHTML = `
+                    <span class="font-bold text-[#D4AF37] w-5 text-right mr-1 shrink-0">${s.id}.</span>
+                    <span class="text-[#121212] font-medium">${s.pre}</span>
+                    <div class="drop-zone inline-flex items-center justify-center min-w-[120px] h-[36px] bg-gray-50 border border-gray-300 border-b-2 border-b-[#0B192C] mx-1 rounded transition-colors" data-answer="${s.targetWord}"></div>
+                    <span class="text-[#121212]">${s.post}</span>
+                `;
+                sentencesContainer.appendChild(sentenceDiv);
+            });
+
+            setupDragAndDrop();
+        }
+
+        function createWordElement(word, container) {
+            const wordEl = document.createElement('div');
+            wordEl.textContent = word;
+            wordEl.className = "draggable-word cursor-grab bg-white border border-[#0B192C] text-[#0B192C] font-semibold px-4 py-1.5 rounded-full shadow-sm hover:bg-[#0B192C] hover:text-[#D4AF37] transition-all select-none text-sm md:text-base";
+            wordEl.draggable = true;
+            wordEl.dataset.word = word;
+
+            // Eventos PC
+            wordEl.addEventListener('dragstart', (e) => {
+                wordEl.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', word);
+            });
+
+            wordEl.addEventListener('dragend', () => {
+                wordEl.classList.remove('dragging');
+            });
+
+            // Eventos Móvil (Tap)
+            wordEl.addEventListener('click', (e) => {
+                e.stopPropagation(); // Evitar burbujeo
+                
+                // Si la palabra ya está en una oración, devolverla al banco
+                if (wordEl.parentElement.classList.contains('drop-zone')) {
+                    wordBank.appendChild(wordEl);
+                    clearStyles(wordEl);
+                    return;
+                }
+
+                // Si está en el banco, seleccionarla
+                if (selectedWordEl) clearStyles(selectedWordEl);
+                
+                selectedWordEl = wordEl;
+                wordEl.classList.add('ring-4', 'ring-[#D4AF37]', 'bg-[#0B192C]', 'text-[#D4AF37]');
+                wordEl.classList.remove('text-[#0B192C]', 'bg-white');
+            });
+
+            container.appendChild(wordEl);
+        }
+
+        function clearStyles(el) {
+            el.classList.remove('ring-4', 'ring-[#D4AF37]', 'bg-[#0B192C]', 'text-[#D4AF37]', 'border-green-500', 'bg-green-50', 'text-green-800', 'border-red-500', 'bg-red-50', 'text-red-800');
+            el.classList.add('bg-white', 'text-[#0B192C]');
+            // Limpiar iconos extra si los hay
+            const icon = el.querySelector('.status-icon');
+            if(icon) icon.remove();
+        }
+
+        function setupDragAndDrop() {
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            dropZones.forEach(zone => {
+                // Eventos PC
+                zone.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    zone.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    
+                    const draggingEl = document.querySelector('.dragging');
+                    if (draggingEl) {
+                        handlePlacement(draggingEl, zone);
+                    }
+                });
+
+                // Eventos Móvil
+                zone.addEventListener('click', () => {
+                    if (selectedWordEl) {
+                        handlePlacement(selectedWordEl, zone);
+                        clearStyles(selectedWordEl);
+                        selectedWordEl = null;
+                    }
+                });
+            });
+        }
+
+        function handlePlacement(wordEl, zone) {
+            // Si la zona ya tiene una palabra, devolver la vieja al banco
+            if (zone.children.length > 0) {
+                const oldWord = zone.children[0];
+                clearStyles(oldWord);
+                wordBank.appendChild(oldWord);
+            }
+            
+            // Limpiar estilos de corrección previos
+            clearStyles(wordEl);
+            zone.classList.remove('border-b-green-500', 'border-b-red-500');
+            zone.classList.add('border-b-[#0B192C]');
+            
+            // Colocar la nueva
+            zone.appendChild(wordEl);
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            let allFilled = true;
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dropZones.forEach(zone => {
+                if (zone.children.length === 0) {
+                    allFilled = false;
+                    zone.classList.add('border-b-yellow-400', 'bg-yellow-50');
+                    setTimeout(() => zone.classList.remove('border-b-yellow-400', 'bg-yellow-50'), 1500);
+                    return; 
+                }
+
+                const wordEl = zone.children[0];
+                const correctAnswer = zone.dataset.answer;
+                const userAnswer = wordEl.dataset.word;
+
+                clearStyles(wordEl);
+
+                if (correctAnswer === userAnswer) {
+                    // Correcto
+                    score++;
+                    wordEl.classList.remove('border-[#0B192C]', 'text-[#0B192C]');
+                    wordEl.classList.add('border-green-500', 'bg-green-50', 'text-green-800');
+                    
+                    if(!wordEl.querySelector('.status-icon')) {
+                        wordEl.innerHTML += ` <span class="status-icon text-green-600 font-bold ml-1">&#10003;</span>`;
+                    }
+                    wordEl.draggable = false; // Bloquear arrastre
+                    wordEl.style.pointerEvents = 'none'; // Bloquear clic
+                } else {
+                    // Incorrecto
+                    wordEl.classList.remove('border-[#0B192C]', 'text-[#0B192C]');
+                    wordEl.classList.add('border-red-500', 'bg-red-50', 'text-red-800', 'animate-shake');
+                    
+                    if(!wordEl.querySelector('.status-icon')) {
+                        wordEl.innerHTML += ` <span class="status-icon text-red-600 font-bold ml-1">&#10005;</span>`;
+                    }
+
+                    setTimeout(() => {
+                        wordEl.classList.remove('animate-shake');
+                    }, 400);
+                }
+            });
+
+            if (!allFilled) return; // Si faltan palabras, no califica todavía
+
+            document.getElementById('score-display').textContent = score;
+            document.getElementById('score-container').classList.remove('hidden');
+
+            if (score === sentences.length) {
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('remove-btn').classList.add('hidden');
+                document.getElementById('reset-btn').classList.remove('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            } else {
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('remove-btn').classList.remove('hidden');
+            }
+        }
+
+        function removeIncorrect() {
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dropZones.forEach(zone => {
+                if (zone.children.length === 0) return;
+
+                const wordEl = zone.children[0];
+                const correctAnswer = zone.dataset.answer;
+                const userAnswer = wordEl.dataset.word;
+
+                if (correctAnswer !== userAnswer) {
+                    // Devolver al banco
+                    clearStyles(wordEl);
+                    wordEl.textContent = wordEl.dataset.word; // Restaurar texto sin iconos
+                    wordBank.appendChild(wordEl);
+                }
+            });
+            
+            // Limpiar la selección actual si la hay
+            if(selectedWordEl) {
+                clearStyles(selectedWordEl);
+                selectedWordEl = null;
+            }
+
+            // Cambiar botones
+            document.getElementById('remove-btn').classList.add('hidden');
+            document.getElementById('check-btn').classList.remove('hidden');
+            document.getElementById('score-container').classList.add('hidden');
+        }
+
+        // Arrancar el juego
+        window.onload = initGame;
+    </script>
+</body>
+</html>
