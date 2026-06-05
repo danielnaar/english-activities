@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stative vs Dynamic Error Spotting - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Animaciones */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            50% { transform: translateX(6px); }
+            75% { transform: translateX(-6px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+        
+        /* Estilos base para los verbos cliqueables */
+        .verb-btn {
+            display: inline-block;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            color: #0B192C;
+            font-weight: 600;
+            padding: 0.1rem 0.5rem;
+            margin: 0 0.1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .verb-btn:hover {
+            border-color: #D4AF37;
+            background-color: #fefce8;
+        }
+        .verb-btn.selected {
+            background-color: #0B192C;
+            border-color: #D4AF37;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transform: scale(1.05);
+        }
+        /* Estilos de validación */
+        .verb-btn.correct {
+            background-color: #10b981; /* Verde */
+            border-color: #059669;
+            color: white;
+        }
+        .verb-btn.incorrect {
+            background-color: #ef4444; /* Rojo */
+            border-color: #b91c1c;
+            color: white;
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl rounded-xl overflow-hidden border border-gray-200">
+        
+        <!-- ENCABEZADO (Premium Blue Night) -->
+        <div class="bg-[#0B192C] text-center pt-10 pb-8 px-6 border-b-[6px] border-[#D4AF37]">
+            <p class="text-[#D4AF37] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-3 font-serif-custom">
+                PREMIUM ENGLISH
+            </p>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif-custom font-bold text-white mb-3 leading-tight">
+                Stative vs. Dynamic Verbs
+            </h1>
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto">
+                Read the paragraphs below and <strong class="text-[#D4AF37]">click the verb</strong> that is incorrectly used in each sentence.
+            </p>
+        </div>
+
+        <div class="p-6 md:p-10 relative">
+            
+            <!-- Score Display -->
+            <div class="absolute top-6 right-6 md:top-10 md:right-10 z-10 hidden" id="score-container">
+                <div class="text-[#D4AF37] font-bold text-sm bg-[#0B192C] px-4 py-1.5 rounded-full shadow-sm border border-[#D4AF37] flex items-center">
+                    Score: <span id="score-display" class="text-white ml-2">0</span> <span class="text-white/60 mx-1">/</span> <span class="text-white">5</span>
+                </div>
+            </div>
+
+            <!-- SENTENCES CONTAINER -->
+            <div class="space-y-6 mb-10 mt-8 md:mt-0" id="paragraphs-container">
+                
+                <!-- Paragraph 1 -->
+                <div class="paragraph-card bg-white p-6 rounded-xl border border-gray-200 border-l-[6px] border-l-[#0B192C] shadow-sm transition-all" id="card-1">
+                    <div class="flex items-start">
+                        <span class="text-[#D4AF37] font-bold text-lg mr-4 mt-0.5">1.</span>
+                        <p class="text-[15px] md:text-lg leading-loose text-gray-700">
+                            When I <span class="verb-btn" data-group="1" data-correct="false">called</span> Sarah, she <span class="verb-btn" data-group="1" data-correct="false">said</span> she <span class="verb-btn" data-group="1" data-correct="true">watched</span> TV, so she didn't <span class="verb-btn" data-group="1" data-correct="false">want</span> to come out with me, so I <span class="verb-btn" data-group="1" data-correct="false">went</span> to the pub alone.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paragraph 2 -->
+                <div class="paragraph-card bg-white p-6 rounded-xl border border-gray-200 border-l-[6px] border-l-[#0B192C] shadow-sm transition-all" id="card-2">
+                    <div class="flex items-start">
+                        <span class="text-[#D4AF37] font-bold text-lg mr-4 mt-0.5">2.</span>
+                        <p class="text-[15px] md:text-lg leading-loose text-gray-700">
+                            Mohammed <span class="verb-btn" data-group="2" data-correct="false">owns</span> two different houses. He <span class="verb-btn" data-group="2" data-correct="false">likes</span> to live in his house by the sea when the weather is good, but in the winter he <span class="verb-btn" data-group="2" data-correct="true">is preferring</span> to live in the city.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paragraph 3 -->
+                <div class="paragraph-card bg-white p-6 rounded-xl border border-gray-200 border-l-[6px] border-l-[#0B192C] shadow-sm transition-all" id="card-3">
+                    <div class="flex items-start">
+                        <span class="text-[#D4AF37] font-bold text-lg mr-4 mt-0.5">3.</span>
+                        <p class="text-[15px] md:text-lg leading-loose text-gray-700">
+                            While Keiko <span class="verb-btn" data-group="3" data-correct="false">was fixing</span> the car, I <span class="verb-btn" data-group="3" data-correct="false">was making</span> the supper. By six o'clock I <span class="verb-btn" data-group="3" data-correct="false">had been working</span> for eight hours, so I <span class="verb-btn" data-group="3" data-correct="true">was needing</span> a good meal.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paragraph 4 -->
+                <div class="paragraph-card bg-white p-6 rounded-xl border border-gray-200 border-l-[6px] border-l-[#0B192C] shadow-sm transition-all" id="card-4">
+                    <div class="flex items-start">
+                        <span class="text-[#D4AF37] font-bold text-lg mr-4 mt-0.5">4.</span>
+                        <p class="text-[15px] md:text-lg leading-loose text-gray-700">
+                            I <span class="verb-btn" data-group="4" data-correct="false">play</span> tennis every Tuesday. Last week, I <span class="verb-btn" data-group="4" data-correct="false">was playing</span> with John, a man I <span class="verb-btn" data-group="4" data-correct="true">am knowing</span> from work, when a bird <span class="verb-btn" data-group="4" data-correct="false">flew</span> into the tennis net.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Paragraph 5 -->
+                <div class="paragraph-card bg-white p-6 rounded-xl border border-gray-200 border-l-[6px] border-l-[#0B192C] shadow-sm transition-all" id="card-5">
+                    <div class="flex items-start">
+                        <span class="text-[#D4AF37] font-bold text-lg mr-4 mt-0.5">5.</span>
+                        <p class="text-[15px] md:text-lg leading-loose text-gray-700">
+                            I don't <span class="verb-btn" data-group="5" data-correct="false">understand</span> stative and dynamic verbs. They <span class="verb-btn" data-group="5" data-correct="false">seem</span> very confusing. I <span class="verb-btn" data-group="5" data-correct="true">am hating</span> them, because they <span class="verb-btn" data-group="5" data-correct="false">are driving</span> me crazy!
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-6 border-t border-gray-200" id="action-buttons">
+                <button onclick="checkAnswers()" id="check-btn" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-12 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+                <button onclick="resetGame()" id="reset-btn" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-12 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Try Again
+                </button>
+            </div>
+
+            <!-- SUCCESS MESSAGE -->
+            <div id="success-message" class="hidden mt-8 p-6 md:p-8 bg-[#0B192C] rounded-xl border-l-[8px] border-[#D4AF37] shadow-lg animate-pop">
+                <h3 class="text-3xl font-serif-custom font-bold text-[#D4AF37] mb-2">Editor Skills Mastered!</h3>
+                <p class="text-white text-base font-light">You have successfully identified all the incorrectly used stative verbs.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const totalQuestions = 5;
+        let gameFinished = false;
+
+        // Añadir eventos a todos los verbos
+        document.querySelectorAll('.verb-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(gameFinished) return; // Si ya se evaluó, no dejar cambiar
+
+                const group = this.dataset.group;
+                
+                // Deseleccionar los demás en el mismo párrafo
+                document.querySelectorAll(`.verb-btn[data-group="${group}"]`).forEach(el => {
+                    el.classList.remove('selected');
+                });
+
+                // Seleccionar el actual
+                this.classList.add('selected');
+                
+                // Limpiar advertencia de tarjeta si la tenía
+                const card = document.getElementById(`card-${group}`);
+                card.classList.remove('border-yellow-400', 'ring-2', 'ring-yellow-400/50');
+            });
+        });
+
+        function checkAnswers() {
+            let score = 0;
+            let allAnswered = true;
+
+            // Verificar cada uno de los 5 párrafos
+            for(let i = 1; i <= totalQuestions; i++) {
+                const card = document.getElementById(`card-${i}`);
+                const selectedVerb = document.querySelector(`.verb-btn[data-group="${i}"].selected`);
+
+                // Limpiar estilos previos
+                card.classList.remove('border-yellow-400', 'ring-2', 'ring-yellow-400/50');
+
+                if (!selectedVerb) {
+                    // Si no seleccionó nada en este párrafo
+                    allAnswered = false;
+                    card.classList.add('border-yellow-400', 'ring-2', 'ring-yellow-400/50');
+                } else {
+                    // Evaluar si es correcto
+                    const isCorrect = selectedVerb.dataset.correct === "true";
+                    
+                    if (isCorrect) {
+                        score++;
+                        selectedVerb.classList.add('correct');
+                        // Añadir chulito solo si no lo tiene
+                        if(!selectedVerb.innerHTML.includes('&#10003;')) {
+                            selectedVerb.innerHTML += ' <span class="ml-1 font-bold text-white">&#10003;</span>';
+                        }
+                    } else {
+                        selectedVerb.classList.add('incorrect', 'animate-shake');
+                        // Añadir cruz
+                        if(!selectedVerb.innerHTML.includes('&#10005;')) {
+                            selectedVerb.innerHTML += ' <span class="ml-1 font-bold text-white">&#10005;</span>';
+                        }
+                        
+                        setTimeout(() => {
+                            selectedVerb.classList.remove('animate-shake');
+                        }, 400);
+                    }
+                }
+            }
+
+            if (!allAnswered) {
+                // Si faltan por responder, no terminamos el juego
+                return;
+            }
+
+            // Si respondió todo
+            gameFinished = true;
+            document.getElementById('score-display').textContent = score;
+            document.getElementById('score-container').classList.remove('hidden');
+
+            if (score === totalQuestions) {
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('reset-btn').classList.remove('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Scroll down
+                setTimeout(() => {
+                    document.getElementById('success-message').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            } else {
+                // Si se equivocó en alguna, permitir reiniciar
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('reset-btn').classList.remove('hidden');
+            }
+        }
+
+        function resetGame() {
+            gameFinished = false;
+            document.getElementById('score-container').classList.add('hidden');
+            document.getElementById('success-message').classList.add('hidden');
+            document.getElementById('check-btn').classList.remove('hidden');
+            document.getElementById('reset-btn').classList.add('hidden');
+
+            // Limpiar todos los verbos
+            document.querySelectorAll('.verb-btn').forEach(btn => {
+                btn.classList.remove('selected', 'correct', 'incorrect', 'animate-shake');
+                // Remover iconos de check o X
+                btn.innerHTML = btn.innerHTML.replace(/ <span.*<\/span>/, '');
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
