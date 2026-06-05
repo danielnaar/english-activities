@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regular and Irregular Verbs - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-6 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • VOCABULARY BUILDING
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Regular and Irregular Verbs
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/80 text-sm md:text-base font-light max-w-2xl mx-auto relative z-10">
+                Mastering the spelling patterns for the <strong class="text-white font-semibold">Simple Past</strong> tense.
+            </p>
+        </div>
+
+        <!-- SECCIÓN: REGULAR VERBS (TABLA) -->
+        <div class="p-6 md:p-10 bg-white">
+            <div class="flex items-center justify-center mb-8">
+                <span class="w-12 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                <h2 class="text-3xl font-serif-custom font-bold text-[#0B192C]">Regular Verbs</h2>
+                <span class="w-12 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </div>
+            
+            <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+                <table class="min-w-full text-left bg-white text-[15px]">
+                    <thead class="bg-[#F8F9FA] text-[#0B192C] border-b-2 border-[#0B192C]">
+                        <tr>
+                            <th class="py-4 px-6 font-bold uppercase tracking-wider text-xs w-1/3">Verb ending in...</th>
+                            <th class="py-4 px-6 font-bold uppercase tracking-wider text-xs border-l border-gray-200 w-1/3">How to make simple past</th>
+                            <th class="py-4 px-6 font-bold uppercase tracking-wider text-xs border-l border-gray-200 w-1/3">Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100 text-[#121212] font-medium">
+                        
+                        <!-- Row 1: e -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="py-5 px-6">
+                                <span class="font-bold text-[#D4AF37] text-xl font-serif-custom">e</span>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100">
+                                Add <strong class="text-[#0B192C]">-D</strong>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100 text-gray-600">
+                                <div class="flex flex-col space-y-1">
+                                    <span>live <strong class="text-[#D4AF37] mx-2">&rarr;</strong> lived</span>
+                                    <span>date <strong class="text-[#D4AF37] mx-2">&rarr;</strong> dated</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 2: consonant + y -->
+                        <tr class="bg-gray-50/50 hover:bg-slate-50 transition-colors">
+                            <td class="py-5 px-6">
+                                consonant + <span class="font-bold text-[#D4AF37] text-xl font-serif-custom ml-1">y</span>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100">
+                                Change Y to I, then add <strong class="text-[#0B192C]">-ED</strong>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100 text-gray-600">
+                                <div class="flex flex-col space-y-1">
+                                    <span>try <strong class="text-[#D4AF37] mx-2">&rarr;</strong> tried</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 3: Vowel + consonant -->
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="py-5 px-6">
+                                Vowel + consonant<br>
+                                <span class="text-xs text-gray-500 font-light block mt-1">(but not w or y)</span>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100">
+                                Double the consonant, then add <strong class="text-[#0B192C]">-ED</strong>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100 text-gray-600">
+                                <div class="flex flex-col space-y-1">
+                                    <span>tap <strong class="text-[#D4AF37] mx-2">&rarr;</strong> tapped</span>
+                                    <span>commit <strong class="text-[#D4AF37] mx-2">&rarr;</strong> committed</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Row 4: Anything else -->
+                        <tr class="bg-gray-50/50 hover:bg-slate-50 transition-colors">
+                            <td class="py-5 px-6">
+                                Anything else<br>
+                                <span class="text-xs text-gray-500 font-light block mt-1">(including w)</span>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100">
+                                Add <strong class="text-[#0B192C]">-ED</strong>
+                            </td>
+                            <td class="py-5 px-6 border-l border-gray-100 text-gray-600">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <span>boil <strong class="text-[#D4AF37] mx-1">&rarr;</strong> boiled</span>
+                                    <span>fill <strong class="text-[#D4AF37] mx-1">&rarr;</strong> filled</span>
+                                    <span>hand <strong class="text-[#D4AF37] mx-1">&rarr;</strong> handed</span>
+                                    <span>show <strong class="text-[#D4AF37] mx-1">&rarr;</strong> showed</span>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: IRREGULAR VERBS & DOWNLOAD -->
+        <div class="px-6 md:px-10 pb-12">
+            <div class="bg-[#0B192C] rounded-xl border-l-[8px] border-[#D4AF37] p-8 md:p-10 shadow-lg flex flex-col md:flex-row items-center justify-between">
+                
+                <div class="mb-8 md:mb-0 md:mr-8 text-center md:text-left flex-1">
+                    <h2 class="text-3xl font-serif-custom font-bold text-[#D4AF37] mb-3">Irregular Verbs</h2>
+                    <p class="text-white/90 text-sm md:text-base font-light leading-relaxed">
+                        Irregular verbs do not follow a specific spelling pattern in the simple past. You have to memorize them! Click the button to download the essential list.
+                    </p>
+                </div>
+                
+                <!-- BOTÓN DE DESCARGA -->
+                <div class="shrink-0 w-full md:w-auto">
+                    <!-- El href apunta al archivo PDF. Cambia el nombre en tu PC a verbos.pdf -->
+                    <a href="verbos.pdf" download="Premium_English_Verbs_List.pdf" class="w-full sm:w-auto bg-white hover:bg-gray-100 text-[#0B192C] font-bold py-4 px-8 rounded-full shadow-md transition-all duration-300 border-2 border-transparent hover:border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center group cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-[#D4AF37] group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Download List
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excelencia, exclusividad y resultados garantizados.
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
