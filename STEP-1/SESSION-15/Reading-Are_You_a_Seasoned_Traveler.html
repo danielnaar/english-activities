@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasoned Traveler - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Estilos personalizados para las opciones del quiz */
+        .quiz-option {
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            border-color: #D4AF37;
+            background-color: #fdfbf7;
+        }
+        .quiz-option.selected {
+            border-color: #0B192C;
+            background-color: #0B192C;
+            color: #ffffff;
+        }
+        .quiz-option.selected .radio-circle {
+            border-color: #D4AF37;
+        }
+        .quiz-option.selected .radio-dot {
+            background-color: #D4AF37;
+            transform: scale(1);
+        }
+        .quiz-option.correct {
+            border-color: #10B981; /* Green */
+            background-color: #ECFDF5;
+            color: #065F46;
+        }
+        .quiz-option.incorrect {
+            border-color: #EF4444; /* Red */
+            background-color: #FEF2F2;
+            color: #991B1B;
+        }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200 mx-auto">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • READING & SPEAKING
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Are You a Seasoned Traveler?
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Read the text, explore the glossary, then complete the interactive tasks.
+            </p>
+        </div>
+
+        <!-- SECCIÓN DE LECTURA (Reading Text) -->
+        <div class="p-8 md:p-10 bg-white border-b border-gray-200">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-10 pb-4 border-b border-gray-100 gap-4">
+                <h2 class="text-2xl md:text-3xl font-serif-custom font-bold text-[#0B192C]">
+                    Eight signs you've graduated from "tourist" to "traveler"
+                </h2>
+                <div class="bg-gray-100 text-[#0B192C] text-xs font-bold uppercase tracking-widest px-4 py-2 rounded border border-gray-200 flex items-center whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    60s Reading
+                </div>
+            </div>
+
+            <!-- Texto de Lectura (Un solo bloque organizado) -->
+            <div class="bg-[#F8F9FA] rounded-xl border-t-[4px] border-[#0B192C] p-8 md:p-10 shadow-sm space-y-6">
+                
+                <!-- Punto 1 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#D4AF37] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">1)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        Your packing starts with the question "What can I leave behind?" and ends with a <strong class="text-[#0B192C]">backpack</strong> that still has space. If you forget something, you buy it there, or realize you never needed it.
+                    </p>
+                </div>
+
+                <!-- Punto 2 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#0B192C] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">2)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        <strong class="text-[#0B192C]">Jet lag</strong> doesn't scare you. You've learned to walk in daylight, hydrate, and nap smart so your first day isn't wasted.
+                    </p>
+                </div>
+
+                <!-- Punto 3 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#D4AF37] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">3)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        You've been <strong class="text-[#0B192C]">overcharged</strong> at least once, and you survived. Now you check fares in the app, confirm prices before the ride, and smile when you say "No, thanks."
+                    </p>
+                </div>
+
+                <!-- Punto 4 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#0B192C] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">4)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        You speak "international body language": pointing, drawing a map on a <strong class="text-[#0B192C]">napkin</strong>, counting on your fingers, and using three local words, "hello," "please," "thanks", like a pro.
+                    </p>
+                </div>
+
+                <!-- Punto 5 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#D4AF37] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">5)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        Plans change and you don't panic. A closed museum becomes a <strong class="text-[#0B192C]">street-food</strong> tour; a delayed train becomes a conversation with the person next to you. Flexibility is part of the ticket.
+                    </p>
+                </div>
+
+                <!-- Punto 6 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#0B192C] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">6)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        You treat reviews as hints, not commandments. You try the famous place, but you also follow the line of locals to the tiny spot around the corner.
+                    </p>
+                </div>
+
+                <!-- Punto 7 -->
+                <div class="flex items-start border-b border-gray-200 pb-6">
+                    <div class="text-[#D4AF37] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">7)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        Insurance isn't a debate; it's a checklist item. You compare <strong class="text-[#0B192C]">coverage</strong> once, buy the right plan, and stop worrying about "what ifs".
+                    </p>
+                </div>
+
+                <!-- Punto 8 -->
+                <div class="flex items-start">
+                    <div class="text-[#0B192C] font-serif-custom font-bold text-3xl mr-5 leading-none shrink-0">8)</div>
+                    <p class="text-[16px] text-gray-700 leading-relaxed">
+                        You accept a beautiful truth: you'll never "see it all". That's why you keep a short, <strong class="text-[#0B192C]">living list</strong>, three places you'd return to, and three you'll discover next.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECCIÓN: INTERACTIVE TASKS (Quick Check) -->
+        <div class="p-8 md:p-10 bg-[#F8F9FA]">
+            
+            <div class="bg-white border-[3px] border-[#0B192C] rounded-xl p-8 md:p-10 shadow-lg relative max-w-4xl mx-auto">
+                <!-- Título Flotante -->
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-[#0B192C] border-2 border-[#D4AF37] rounded-full px-8 py-2 flex items-center shadow-md whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#D4AF37] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                    <h2 class="text-lg font-serif-custom font-bold text-white uppercase tracking-wider">
+                        Quick Check
+                    </h2>
+                </div>
+
+                <div class="space-y-10 mt-6" id="quiz-container">
+                    
+                    <!-- Pregunta 1 -->
+                    <div class="quiz-question" data-question="1">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">1) What is the author's attitude toward plans changing?</h3>
+                        <div class="space-y-3">
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                                <input type="radio" name="q1" value="0" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>It ruins the trip and must be avoided.</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q1" value="1" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>It can lead to new, positive experiences.</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                                <input type="radio" name="q1" value="2" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>It is acceptable only for short trips.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="quiz-question" data-question="2">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">2) According to the text, what best describes a seasoned traveler's approach to reviews?</h3>
+                        <div class="space-y-3">
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                                <input type="radio" name="q2" value="0" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>They never read reviews.</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                                <input type="radio" name="q2" value="1" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>They follow top-rated places only.</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q2" value="2" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>They use reviews as hints and explore beyond them.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="quiz-question" data-question="3">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">3) Which sentence summarizes the packing philosophy?</h3>
+                        <div class="space-y-3">
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q3" value="0" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>Take less, buy or skip the rest.</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                                <input type="radio" name="q3" value="1" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>Pack everything just in case.</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                                <input type="radio" name="q3" value="2" class="hidden">
+                                <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center">
+                                    <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                                </div>
+                                <span>Pack for every possible weather scenario.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controles del Quiz -->
+                <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="bg-[#F8F9FA] px-6 py-3 rounded-lg border border-gray-200 text-[#0B192C] font-bold text-lg">
+                        Score: <span id="score-text" class="text-[#D4AF37]">0/3</span>
+                    </div>
+                    
+                    <div class="flex gap-4 w-full sm:w-auto">
+                        <button id="btn-clear" class="flex-1 sm:flex-none bg-white hover:bg-gray-50 border border-gray-300 text-gray-600 font-bold py-3 px-6 rounded-lg transition-colors text-sm uppercase tracking-widest shadow-sm">
+                            Clear
+                        </button>
+                        <button id="btn-check" class="flex-1 sm:flex-none bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-6 rounded-lg transition-colors text-sm uppercase tracking-widest shadow-md">
+                            Check answers
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC PARA EL QUIZ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = document.querySelectorAll('.quiz-option');
+            const checkBtn = document.getElementById('btn-check');
+            const clearBtn = document.getElementById('btn-clear');
+            const scoreText = document.getElementById('score-text');
+            let hasChecked = false;
+
+            // Manejar selección de opciones
+            options.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    if (hasChecked) return; // No permitir cambios después de verificar
+                    
+                    const questionDiv = this.closest('.quiz-question');
+                    const allOptionsInQuestion = questionDiv.querySelectorAll('.quiz-option');
+                    
+                    // Remover clase 'selected' de las otras opciones de la misma pregunta
+                    allOptionsInQuestion.forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.querySelector('input').checked = false;
+                    });
+                    
+                    // Agregar clase 'selected' a la opción clicada
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                });
+            });
+
+            // Lógica para verificar respuestas
+            checkBtn.addEventListener('click', () => {
+                if (hasChecked) return;
+                
+                const questions = document.querySelectorAll('.quiz-question');
+                let score = 0;
+                let allAnswered = true;
+
+                // Primero verificar que todas estén respondidas
+                questions.forEach(q => {
+                    const selected = q.querySelector('.quiz-option.selected');
+                    if (!selected) {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert("Please select an answer for all questions before checking.");
+                    return;
+                }
+
+                hasChecked = true;
+
+                questions.forEach(q => {
+                    const options = q.querySelectorAll('.quiz-option');
+                    
+                    options.forEach(opt => {
+                        // Remover clase selected para aplicar los colores de validación
+                        opt.classList.remove('selected');
+                        
+                        const isCorrect = opt.getAttribute('data-correct') === 'true';
+                        const isSelected = opt.querySelector('input').checked;
+
+                        if (isCorrect) {
+                            opt.classList.add('correct');
+                        }
+                        
+                        if (isSelected && !isCorrect) {
+                            opt.classList.add('incorrect');
+                        }
+
+                        if (isSelected && isCorrect) {
+                            score++;
+                        }
+                        
+                        // Deshabilitar cursor
+                        opt.classList.remove('cursor-pointer');
+                        opt.classList.add('cursor-default');
+                    });
+                });
+
+                // Actualizar UI del score
+                scoreText.textContent = `${score}/3`;
+                
+                // Cambiar el botón check a estado deshabilitado visualmente
+                checkBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                checkBtn.classList.remove('hover:bg-[#1a2e4c]');
+            });
+
+            // Lógica para el botón Reset (Clear)
+            clearBtn.addEventListener('click', () => {
+                hasChecked = false;
+                scoreText.textContent = '0/3';
+                
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect', 'cursor-default');
+                    opt.classList.add('cursor-pointer');
+                    opt.querySelector('input').checked = false;
+                });
+
+                checkBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                checkBtn.classList.add('hover:bg-[#1a2e4c]');
+            });
+        });
+    </script>
+</body>
+</html>
