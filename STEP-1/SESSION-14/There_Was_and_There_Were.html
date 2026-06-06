@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>There was / There were - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Animaciones para las palabras interactivas */
+        .interactive-word {
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: 2px dashed #D4AF37;
+            padding: 2px 8px;
+            margin: 0 4px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            color: #D4AF37;
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+        .interactive-word:hover {
+            background-color: rgba(212, 175, 55, 0.25);
+        }
+        .interactive-word.past-mode {
+            color: #0B192C;
+            background-color: #D4AF37;
+            border-bottom-style: solid;
+        }
+        
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        .animate-pop { animation: pop 0.3s ease-in-out; }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            50% { transform: translateX(4px); }
+            75% { transform: translateX(-4px); }
+        }
+        .animate-shake { animation: shake 0.4s ease-in-out; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • PAST TENSE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                There was / There were
+            </h1>
+            
+            <div class="w-24 h-px bg-gray-500 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                To talk about existence in the past, we simply change the verb <strong class="text-[#D4AF37] font-semibold italic">to be</strong> from present to past.
+            </p>
+        </div>
+
+        <!-- SECCIÓN: REGLAS CENTRALES (2 Columnas) -->
+        <div class="p-6 md:p-10 bg-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
+                
+                <!-- CARD: CORE RULE -->
+                <div class="bg-[#F8F9FA] rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-[#D4AF37]"></div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6 border-b border-gray-200 pb-4">
+                            <h2 class="text-2xl font-serif-custom font-bold text-[#0B192C]">Core Rule</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        
+                        <div class="space-y-6 text-[#121212]">
+                            <div class="flex items-start">
+                                <div class="bg-[#0B192C] text-[#D4AF37] font-bold text-lg rounded px-3 py-1 mr-4 shadow-sm w-20 text-center">was</div>
+                                <div>
+                                    <p class="font-bold uppercase tracking-wider text-xs text-gray-500 mb-1">Use for</p>
+                                    <p class="font-medium text-[15px]">Singular or Uncountable Nouns.</p>
+                                    <p class="text-gray-500 italic text-sm mt-1">(one, much, water, furniture)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="w-full h-px bg-gray-200"></div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-[#D4AF37] text-[#0B192C] font-bold text-lg rounded px-3 py-1 mr-4 shadow-sm w-20 text-center">were</div>
+                                <div>
+                                    <p class="font-bold uppercase tracking-wider text-xs text-gray-500 mb-1">Use for</p>
+                                    <p class="font-medium text-[15px]">Plural Nouns.</p>
+                                    <p class="text-gray-500 italic text-sm mt-1">(two+, many, chairs, people)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD: QUICK TABLE & EXAMPLES -->
+                <div class="bg-[#F8F9FA] rounded-xl border border-gray-200 shadow-sm overflow-hidden flex flex-col relative">
+                     <div class="absolute top-0 left-0 w-full h-1 bg-[#0B192C]"></div>
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-6 border-b border-gray-200 pb-4">
+                            <h2 class="text-2xl font-serif-custom font-bold text-[#0B192C]">Tense Change</h2>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#0B192C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+                        </div>
+                        
+                        <div class="space-y-4 text-[15px]">
+                            <!-- Example 1 -->
+                            <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+                                <span class="text-gray-500 w-2/5">There <strong class="text-[#0B192C]">is</strong> one chair.</span>
+                                <span class="text-[#D4AF37] mx-2 font-bold">&rarr;</span>
+                                <span class="text-[#121212] font-medium w-2/5">There <strong class="text-[#D4AF37]">was</strong> one chair.</span>
+                            </div>
+                            <!-- Example 2 -->
+                            <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+                                <span class="text-gray-500 w-2/5">There <strong class="text-[#0B192C]">are</strong> many chairs.</span>
+                                <span class="text-[#D4AF37] mx-2 font-bold">&rarr;</span>
+                                <span class="text-[#121212] font-medium w-2/5">There <strong class="text-[#D4AF37]">were</strong> many chairs.</span>
+                            </div>
+                            <!-- Example 3 -->
+                            <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+                                <span class="text-gray-500 w-2/5">There <strong class="text-[#0B192C]">is</strong> water.</span>
+                                <span class="text-[#D4AF37] mx-2 font-bold">&rarr;</span>
+                                <span class="text-[#121212] font-medium w-2/5">There <strong class="text-[#D4AF37]">was</strong> water.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- TEACHER TIP FLOTANTE -->
+            <div class="mt-8 flex justify-center">
+                 <div class="bg-amber-50 text-[#0B192C] px-6 py-3 rounded-full text-sm font-semibold border border-[#D4AF37]/40 flex items-center shadow-sm">
+                    <span class="text-[#D4AF37] text-xl mr-2">!</span> 
+                    Tip: After "there", look at the noun! One/Water = was. Two/Many = were.
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: INTERACTIVA (CLICK TO CHANGE) -->
+        <div class="bg-[#0B192C] px-6 py-12 md:px-12 border-y-[4px] border-[#D4AF37]">
+            <div class="text-center mb-10">
+                <h3 class="text-3xl font-serif-custom font-bold text-white mb-3">
+                    Click to Change to Past
+                </h3>
+                <p class="text-gray-300 text-sm md:text-base font-light">
+                    Click the underlined word(s) to transform the sentence to the past. Click again to go back.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <!-- Interactive Sentence 1 -->
+                <div class="bg-white/10 border border-white/20 p-5 rounded-xl text-white text-lg text-center shadow-inner">
+                    There <span class="interactive-word" onclick="toggleTense(this, 'are', 'were')">are</span> many people in your party.
+                    <div class="mt-2 text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold opacity-0 transition-opacity" id="hint-1">plural = were</div>
+                </div>
+                
+                <!-- Interactive Sentence 2 -->
+                <div class="bg-white/10 border border-white/20 p-5 rounded-xl text-white text-lg text-center shadow-inner">
+                    There <span class="interactive-word" onclick="toggleTense(this, 'is', 'was')">is</span> only 1 student in the class.
+                    <div class="mt-2 text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold opacity-0 transition-opacity" id="hint-2">singular = was</div>
+                </div>
+                
+                <!-- Interactive Sentence 3 -->
+                <div class="bg-white/10 border border-white/20 p-5 rounded-xl text-white text-lg text-center shadow-inner">
+                    There <span class="interactive-word" onclick="toggleTense(this, 'are', 'were')">are</span> three new emails.
+                    <div class="mt-2 text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold opacity-0 transition-opacity" id="hint-3">3 = plural</div>
+                </div>
+                
+                <!-- Interactive Sentence 4 -->
+                <div class="bg-white/10 border border-white/20 p-5 rounded-xl text-white text-lg text-center shadow-inner">
+                    There <span class="interactive-word" onclick="toggleTense(this, 'is', 'was')">is</span> a problem with the bus.
+                    <div class="mt-2 text-[10px] uppercase tracking-widest text-[#D4AF37] font-bold opacity-0 transition-opacity" id="hint-4">one problem = was</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: MICRO-QUIZ -->
+        <div class="bg-slate-50 p-8 md:p-12 text-center relative">
+            <h3 class="text-3xl font-serif-custom font-bold text-[#0B192C] mb-3 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-[#D4AF37] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                Micro-Quiz
+            </h3>
+            <p class="text-gray-600 text-sm md:text-base mb-10 max-w-2xl mx-auto">
+                Choose the correct option for the past tense.
+            </p>
+            
+            <div id="quiz-container" class="max-w-3xl mx-auto space-y-6 text-left mb-10">
+                <!-- Question 1 -->
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between quiz-row" data-correct="were">
+                    <p class="text-[15px] md:text-base text-[#121212] mb-4 md:mb-0">
+                        <strong class="text-[#D4AF37] mr-2">1)</strong> Yesterday, there <span class="inline-block w-16 text-center border-b-2 border-gray-300 mx-1 quiz-blank text-[#D4AF37] font-bold">_____</span> many people at the mall.
+                    </p>
+                    <div class="flex gap-3 shrink-0">
+                        <button onclick="selectOption(this, 'was')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">was</button>
+                        <button onclick="selectOption(this, 'were')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">were</button>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between quiz-row" data-correct="was">
+                    <p class="text-[15px] md:text-base text-[#121212] mb-4 md:mb-0">
+                        <strong class="text-[#D4AF37] mr-2">2)</strong> Last night, there <span class="inline-block w-16 text-center border-b-2 border-gray-300 mx-1 quiz-blank text-[#D4AF37] font-bold">_____</span> a big storm.
+                    </p>
+                    <div class="flex gap-3 shrink-0">
+                        <button onclick="selectOption(this, 'was')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">was</button>
+                        <button onclick="selectOption(this, 'were')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">were</button>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between quiz-row" data-correct="were">
+                    <p class="text-[15px] md:text-base text-[#121212] mb-4 md:mb-0">
+                        <strong class="text-[#D4AF37] mr-2">3)</strong> In 2010, there <span class="inline-block w-16 text-center border-b-2 border-gray-300 mx-1 quiz-blank text-[#D4AF37] font-bold">_____</span> two new buildings here.
+                    </p>
+                    <div class="flex gap-3 shrink-0">
+                        <button onclick="selectOption(this, 'was')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">was</button>
+                        <button onclick="selectOption(this, 'were')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">were</button>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between quiz-row" data-correct="was">
+                    <p class="text-[15px] md:text-base text-[#121212] mb-4 md:mb-0">
+                        <strong class="text-[#D4AF37] mr-2">4)</strong> This morning, there <span class="inline-block w-16 text-center border-b-2 border-gray-300 mx-1 quiz-blank text-[#D4AF37] font-bold">_____</span> a message for you.
+                    </p>
+                    <div class="flex gap-3 shrink-0">
+                        <button onclick="selectOption(this, 'was')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">was</button>
+                        <button onclick="selectOption(this, 'were')" class="quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none">were</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4" id="action-buttons">
+                <button onclick="checkQuiz()" id="check-btn" class="w-full sm:w-auto bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-12 rounded-full shadow-md transition-all duration-300 border border-[#D4AF37] tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Check Answers
+                </button>
+                <button onclick="resetQuiz()" id="reset-btn" class="hidden w-full sm:w-auto bg-white hover:bg-gray-50 text-[#0B192C] font-bold py-3 px-12 rounded-full shadow-sm transition-all duration-300 border border-gray-300 tracking-wider uppercase text-sm flex justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Reset
+                </button>
+            </div>
+            
+            <!-- Mensaje de éxito -->
+            <div id="success-message" class="hidden mt-8 p-6 bg-[#0B192C] rounded-xl border-l-[8px] border-[#D4AF37] text-center animate-pop shadow-lg max-w-2xl mx-auto">
+                <h3 class="text-2xl font-serif-custom font-bold text-[#D4AF37] mb-2">Perfect Score!</h3>
+                <p class="text-white text-sm">You have mastered the difference between <em>was</em> and <em>were</em>.</p>
+            </div>
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excelencia, exclusividad y resultados garantizados.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ----------------------------------------------------
+        // LÓGICA PARA: "Click to Change to Past"
+        // ----------------------------------------------------
+        function toggleTense(element, presentWord, pastWord) {
+            // Remover animación pop si ya la tiene para poder reiniciarla
+            element.classList.remove('animate-pop');
+            void element.offsetWidth; // Trigger reflow
+
+            if (element.textContent === presentWord) {
+                element.textContent = pastWord;
+                element.classList.add('past-mode');
+                
+                // Mostrar la pista (hint) correspondiente a esta oración
+                const hintElement = element.nextElementSibling;
+                if(hintElement && hintElement.id.startsWith('hint')) {
+                    hintElement.style.opacity = '1';
+                }
+            } else {
+                element.textContent = presentWord;
+                element.classList.remove('past-mode');
+                
+                // Ocultar la pista
+                const hintElement = element.nextElementSibling;
+                if(hintElement && hintElement.id.startsWith('hint')) {
+                    hintElement.style.opacity = '0';
+                }
+            }
+            
+            element.classList.add('animate-pop');
+        }
+
+        // ----------------------------------------------------
+        // LÓGICA PARA: Micro-Quiz
+        // ----------------------------------------------------
+        function selectOption(btn, word) {
+            const row = btn.closest('.quiz-row');
+            const blank = row.querySelector('.quiz-blank');
+            const allBtns = row.querySelectorAll('.quiz-btn');
+
+            // Resetear botones en esta fila
+            allBtns.forEach(b => {
+                b.className = "quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none";
+                b.removeAttribute('data-selected');
+            });
+
+            // Activar botón seleccionado
+            btn.className = "quiz-btn px-6 py-1.5 rounded-full border-2 border-[#D4AF37] bg-[#0B192C] text-[#D4AF37] font-bold text-sm shadow-md transition-all scale-105 focus:outline-none";
+            btn.setAttribute('data-selected', 'true');
+
+            // Llenar el espacio en blanco
+            blank.textContent = word;
+            blank.dataset.userAnswer = word;
+            
+            // Limpiar estilos de error/éxito si los hay
+            blank.classList.remove('border-green-500', 'text-green-600', 'border-red-500', 'text-red-500', 'animate-shake');
+            blank.classList.add('border-gray-300', 'text-[#D4AF37]');
+            
+            // Quitar icono de feedback si existe
+            const existingIcon = row.querySelector('.feedback-icon');
+            if(existingIcon) existingIcon.remove();
+        }
+
+        function checkQuiz() {
+            const rows = document.querySelectorAll('.quiz-row');
+            let score = 0;
+            let allAnswered = true;
+
+            rows.forEach(row => {
+                const blank = row.querySelector('.quiz-blank');
+                const correctAnswer = row.dataset.correct;
+                const userAnswer = blank.dataset.userAnswer;
+                
+                // Quitar iconos viejos
+                const existingIcon = row.querySelector('.feedback-icon');
+                if(existingIcon) existingIcon.remove();
+
+                if (!userAnswer) {
+                    allAnswered = false;
+                    blank.classList.add('border-yellow-400');
+                    return;
+                }
+
+                blank.classList.remove('border-yellow-400', 'border-gray-300', 'text-[#D4AF37]');
+
+                if (userAnswer === correctAnswer) {
+                    // CORRECTO
+                    score++;
+                    blank.classList.add('border-green-500', 'text-green-600');
+                    
+                    // Añadir check verde
+                    const icon = document.createElement('span');
+                    icon.className = "feedback-icon text-green-600 font-bold ml-2 animate-pop";
+                    icon.innerHTML = "&#10003;";
+                    blank.parentNode.appendChild(icon);
+                    
+                } else {
+                    // INCORRECTO
+                    blank.classList.add('border-red-500', 'text-red-500', 'animate-shake');
+                    
+                    // Añadir cruz roja
+                    const icon = document.createElement('span');
+                    icon.className = "feedback-icon text-red-500 font-bold ml-2";
+                    icon.innerHTML = "&#10005;";
+                    blank.parentNode.appendChild(icon);
+                    
+                    setTimeout(() => {
+                        blank.classList.remove('animate-shake');
+                    }, 400);
+                }
+            });
+
+            if (score === rows.length) {
+                document.getElementById('check-btn').classList.add('hidden');
+                document.getElementById('reset-btn').classList.remove('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+            }
+        }
+
+        function resetQuiz() {
+            const rows = document.querySelectorAll('.quiz-row');
+            
+            rows.forEach(row => {
+                const blank = row.querySelector('.quiz-blank');
+                const allBtns = row.querySelectorAll('.quiz-btn');
+                
+                // Reset blank space
+                blank.textContent = "_____";
+                delete blank.dataset.userAnswer;
+                blank.className = "inline-block w-16 text-center border-b-2 border-gray-300 mx-1 quiz-blank text-[#D4AF37] font-bold";
+                
+                // Reset buttons
+                allBtns.forEach(b => {
+                    b.className = "quiz-btn px-6 py-1.5 rounded-full border border-gray-300 text-[#0B192C] font-semibold text-sm hover:border-[#D4AF37] transition-all bg-gray-50 focus:outline-none";
+                    b.removeAttribute('data-selected');
+                });
+                
+                // Remove feedback icons
+                const existingIcon = row.querySelector('.feedback-icon');
+                if(existingIcon) existingIcon.remove();
+            });
+            
+            document.getElementById('check-btn').classList.remove('hidden');
+            document.getElementById('reset-btn').classList.add('hidden');
+            document.getElementById('success-message').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
