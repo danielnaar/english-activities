@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Like - Would like - Want - Premium English</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e5e7eb;
+            margin: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom { font-family: 'Playfair Display', serif; }
+        
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Custom Select Styling */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230B192C%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat, repeat;
+            background-position: right .7em top 50%, 0 0;
+            background-size: .65em auto, 100%;
+        }
+
+        .premium-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.5);
+            border-color: #D4AF37;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-[#121212] py-10 px-2 sm:px-6 lg:px-8 items-center">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-4xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200">
+        
+        <!-- ENCABEZADO -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-6 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • INTERACTIVE PRACTICE
+            </p>
+            <h1 class="text-4xl md:text-5xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Like - Would like - Want
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Choose the best option in each sentence. Pay attention to the context!
+            </p>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <div class="p-6 md:p-12 bg-white">
+            
+            <!-- Quick Guide -->
+            <div class="bg-gray-50 border-l-[4px] border-[#D4AF37] p-5 rounded-r-lg shadow-sm mb-10">
+                <p class="text-[12px] font-bold text-[#0B192C] uppercase tracking-widest mb-2 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    Quick Guide
+                </p>
+                <div class="text-[14px] text-gray-700 flex flex-col sm:flex-row sm:gap-6 font-medium">
+                    <p><strong class="text-[#0B192C]">like</strong> = general preference.</p>
+                    <p><strong class="text-[#0B192C]">would like</strong> = polite or desired now/plan.</p>
+                    <p><strong class="text-[#0B192C]">want</strong> = direct/strong desire.</p>
+                </div>
+            </div>
+
+            <!-- Quiz Container -->
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions will be injected here via JavaScript -->
+            </div>
+
+            <!-- Controles y Puntaje -->
+            <div class="mt-12 pt-8 border-t border-gray-200 flex flex-col gap-6">
+                
+                <!-- Mensaje de Felicitaciones (Oculto por defecto) -->
+                <div id="completion-message" class="hidden w-full bg-[#0B192C] border border-[#D4AF37] rounded-xl p-8 text-center shadow-lg animate-fade-in">
+                    <div class="w-16 h-16 bg-[#F8F9FA] rounded-full flex items-center justify-center mx-auto mb-4 shadow-md">
+                        <svg class="text-[#D4AF37]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <h3 id="completion-title" class="text-2xl md:text-3xl font-serif-custom font-bold text-[#D4AF37] mb-2">Congratulations!</h3>
+                    <p id="completion-desc" class="text-white/80 text-[15px] font-light">You have successfully completed the activity.</p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-6 w-full">
+                    <!-- Score Display -->
+                    <div id="score-display" class="hidden bg-[#F8F9FA] border border-gray-200 px-6 py-3 rounded-lg shadow-sm">
+                        <span class="text-gray-600 font-bold uppercase tracking-wider text-sm mr-2">Final Score:</span>
+                        <span id="score-text" class="text-[#0B192C] font-serif-custom font-bold text-2xl">0/10</span>
+                    </div>
+                    
+                    <!-- Buttons -->
+                    <div class="flex gap-4 w-full sm:w-auto ml-auto">
+                        <button id="btn-reset" class="flex-1 sm:flex-none bg-white hover:bg-gray-50 border border-gray-300 text-gray-600 font-bold py-3 px-8 rounded-xl transition-colors text-sm uppercase tracking-widest shadow-sm">
+                            Reset
+                        </button>
+                        <button id="btn-check" class="flex-1 sm:flex-none bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-8 rounded-xl transition-colors text-sm uppercase tracking-widest shadow-md">
+                            Check
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById('quiz-container');
+            const btnCheck = document.getElementById('btn-check');
+            const btnReset = document.getElementById('btn-reset');
+            const scoreDisplay = document.getElementById('score-display');
+            const scoreText = document.getElementById('score-text');
+            const completionMessage = document.getElementById('completion-message');
+            const completionTitle = document.getElementById('completion-title');
+            const completionDesc = document.getElementById('completion-desc');
+
+            // Data adjusted logically: Contexts where "want" implies demanding/disrespectful behavior.
+            const questions = [
+                { id: 1, pre: "When", post: "to visit us?", options: ["do you like", "would you like", "do you want"], answer: "would you like" },
+                { id: 2, pre: "My husband", post: "bananas. He eats one every day.", options: ["like", "likes", "would like"], answer: "likes" },
+                { id: 3, pre: "I", post: "playing tennis with my friends.", options: ["like", "would like", "want"], answer: "like" },
+                { id: 4, pre: "I", post: "to speak to the manager right now!", options: ["like", "would like", "want"], answer: "want" },
+                { id: 5, pre: "I", post: "pizza. It is my favourite food.", options: ["like", "would like", "want"], answer: "like" },
+                { id: 6, pre: "", post: "to come to dinner too?", options: ["Do you like", "Would you like", "Do you want"], answer: "Would you like" },
+                { id: 7, pre: "", post: "to come to my house for dinner?", options: ["Do you like", "Would you like", "Do you want"], answer: "Would you like" },
+                { id: 8, pre: "I", post: "a hamburger and a coke, please.", options: ["like", "would like", "want"], answer: "would like" },
+                { id: 9, pre: "I", post: "that toy right now! Give it to me!", options: ["like", "would like", "want"], answer: "want" },
+                { id: 10, pre: "", post: "listening to classical music?", options: ["Do you like", "Would you like", "Do you want"], answer: "Do you like" }
+            ];
+
+            let hasChecked = false;
+
+            // Render the questions
+            function renderQuiz() {
+                quizContainer.innerHTML = '';
+                questions.forEach((q, index) => {
+                    const row = document.createElement('div');
+                    row.className = "flex flex-col sm:flex-row sm:items-center py-3 border-b border-gray-100 animate-fade-in";
+                    row.style.animationDelay = `${index * 0.05}s`;
+
+                    // Options HTML
+                    let optionsHtml = `<option value="" disabled selected>- choose -</option>`;
+                    q.options.forEach(opt => {
+                        optionsHtml += `<option value="${opt}">${opt}</option>`;
+                    });
+
+                    // Build the layout
+                    row.innerHTML = `
+                        <div class="flex items-center w-full mb-3 sm:mb-0">
+                            <div class="w-8 h-8 rounded-full bg-[#0B192C] flex items-center justify-center text-[#D4AF37] font-bold text-sm mr-4 shrink-0 shadow-sm">
+                                ${q.id}
+                            </div>
+                            <div class="flex-grow flex flex-wrap items-center gap-2 text-[15px] font-medium text-[#121212]">
+                                ${q.pre ? `<span>${q.pre}</span>` : ''}
+                                <div class="relative inline-block w-40 sm:w-48">
+                                    <select id="q${q.id}" class="premium-select w-full bg-white border border-gray-300 text-gray-700 rounded-md py-1.5 px-3 text-[14px] cursor-pointer shadow-sm focus:border-[#D4AF37] transition-colors">
+                                        ${optionsHtml}
+                                    </select>
+                                    <!-- Validation Icons -->
+                                    <svg class="icon-success absolute right-[-28px] top-1/2 transform -translate-y-1/2 text-green-500 hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                    <svg class="icon-error absolute right-[-28px] top-1/2 transform -translate-y-1/2 text-red-500 hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                                </div>
+                                ${q.post ? `<span>${q.post}</span>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    quizContainer.appendChild(row);
+
+                    // Add listener to remove error state when changed
+                    const selectEl = document.getElementById(`q${q.id}`);
+                    selectEl.addEventListener('change', function() {
+                        if (!hasChecked) return;
+                        this.classList.remove('border-red-500', 'bg-red-50', 'text-red-900', 'border-green-500', 'bg-green-50', 'text-green-900');
+                        this.classList.add('border-gray-300', 'text-gray-700');
+                        const parent = this.parentElement;
+                        parent.querySelector('.icon-success').classList.add('hidden');
+                        parent.querySelector('.icon-error').classList.add('hidden');
+                    });
+                });
+            }
+
+            // Check Answers
+            btnCheck.addEventListener('click', () => {
+                let score = 0;
+                let allAnswered = true;
+
+                // Validate if all are answered
+                questions.forEach(q => {
+                    const selectEl = document.getElementById(`q${q.id}`);
+                    if (!selectEl.value) {
+                        allAnswered = false;
+                        selectEl.classList.add('border-red-300', 'bg-red-50');
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert("Please answer all questions before checking.");
+                    return;
+                }
+
+                hasChecked = true;
+
+                // Grade the quiz
+                questions.forEach(q => {
+                    const selectEl = document.getElementById(`q${q.id}`);
+                    const parent = selectEl.parentElement;
+                    const iconSuccess = parent.querySelector('.icon-success');
+                    const iconError = parent.querySelector('.icon-error');
+
+                    // Reset previous classes
+                    selectEl.classList.remove('border-red-300', 'bg-red-50', 'border-gray-300');
+
+                    if (selectEl.value === q.answer) {
+                        score++;
+                        selectEl.classList.add('border-green-500', 'bg-green-50', 'text-green-900');
+                        iconSuccess.classList.remove('hidden');
+                        iconError.classList.add('hidden');
+                    } else {
+                        selectEl.classList.add('border-red-500', 'bg-red-50', 'text-red-900');
+                        iconError.classList.remove('hidden');
+                        iconSuccess.classList.add('hidden');
+                    }
+                });
+
+                // Display Score and Completion Message
+                scoreText.textContent = `${score}/10`;
+                scoreDisplay.classList.remove('hidden');
+                scoreDisplay.classList.add('animate-fade-in');
+
+                // Dynamic message based on score
+                if (score === 10) {
+                    completionTitle.textContent = "Executive Mastery Achieved!";
+                    completionDesc.textContent = "Flawless performance. You perfectly understand the difference between these structures.";
+                } else if (score >= 7) {
+                    completionTitle.textContent = "Great Job!";
+                    completionDesc.textContent = "You have a solid understanding. Review your mistakes to achieve perfection.";
+                } else {
+                    completionTitle.textContent = "Training Completed";
+                    completionDesc.textContent = "Please review the Quick Guide and try again to improve your accuracy.";
+                }
+                completionMessage.classList.remove('hidden');
+                
+                // Scroll down smoothly to show results
+                completionMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+
+            // Reset Quiz
+            btnReset.addEventListener('click', () => {
+                hasChecked = false;
+                scoreDisplay.classList.add('hidden');
+                completionMessage.classList.add('hidden');
+                renderQuiz(); // Re-render to clear everything
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Initialize
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
