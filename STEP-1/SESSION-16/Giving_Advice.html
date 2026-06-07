@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giving Advice - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Estilos personalizados para las opciones del quiz */
+        .quiz-option {
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            border-color: #D4AF37;
+            background-color: #fdfbf7;
+        }
+        .quiz-option.selected {
+            border-color: #0B192C;
+            background-color: #0B192C;
+            color: #ffffff;
+        }
+        .quiz-option.selected .radio-circle {
+            border-color: #D4AF37;
+        }
+        .quiz-option.selected .radio-dot {
+            background-color: #D4AF37;
+            transform: scale(1);
+        }
+        .quiz-option.correct {
+            border-color: #10B981; /* Green */
+            background-color: #ECFDF5;
+            color: #065F46;
+        }
+        .quiz-option.correct .radio-circle {
+            border-color: #10B981;
+        }
+        .quiz-option.correct .radio-dot {
+            background-color: #10B981;
+        }
+        .quiz-option.incorrect {
+            border-color: #EF4444; /* Red */
+            background-color: #FEF2F2;
+            color: #991B1B;
+        }
+        .quiz-option.incorrect .radio-circle {
+            border-color: #EF4444;
+        }
+        .quiz-option.incorrect .radio-dot {
+            background-color: #EF4444;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-4xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200 mx-auto flex flex-col">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • INTERACTIVE PRACTICE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Giving Advice
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Choose the best piece of advice. Use <strong class="text-[#D4AF37]">should / shouldn't</strong> for helpful, polite suggestions.
+            </p>
+        </div>
+
+        <!-- SECCIÓN: INTERACTIVE TASKS -->
+        <div class="p-6 md:p-10 bg-white flex-grow">
+            
+            <div class="space-y-10" id="quiz-container">
+                
+                <!-- Question 1 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="1">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">1)</span> I want to stop smoking.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q1" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should try nicotine patches.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q1" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should smoke only on weekends.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q1" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should try a different brand.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="2">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">2)</span> Paul still hasn't repaid me the money I lent him.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q2" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should ask him for it.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q2" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should lend him more.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q2" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should give it back to him.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="3">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">3)</span> I need to lose some weight.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q3" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should worry about it later.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q3" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should eat less bread and sugar.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q3" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should stop eating completely.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="4">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">4)</span> I bought this but it's broken.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q4" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should keep it and hope it works.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q4" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should sell it online without saying it is broken.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q4" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should take it back to the shop.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="5">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">5)</span> I wish I had more money.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q5" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should throw away your wallet.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q5" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should buy things you don't need.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q5" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You shouldn't spend so much on clothes.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="6">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">6)</span> My purse has been stolen.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q6" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should do nothing and wait.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q6" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should post about it only on social media.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q6" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should go to the police.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="7">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">7)</span> My eyes hurt.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q7" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You shouldn't spend so much time on the computer.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q7" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should read in the dark.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q7" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should watch more TV.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="8">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">8)</span> I didn't pass last week's quizzes.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q8" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should talk to the teacher.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q8" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should ignore the results.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q8" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should cheat next time.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="quiz-question border-b border-gray-100 pb-8" data-question="9">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">9)</span> I'm still feeling very sick.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q9" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should call the doctor.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q9" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should buy a new phone.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q9" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should stay home and be sad.</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="quiz-question pb-4" data-question="10">
+                    <h3 class="text-xl font-serif-custom font-bold text-[#0B192C] mb-5 flex items-start">
+                        <span class="text-[#D4AF37] mr-3">10)</span> I don't know where to go on holiday.
+                    </h3>
+                    <div class="space-y-3 pl-8">
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q10" value="0" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should cancel holidays forever.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700" data-correct="true">
+                            <input type="radio" name="q10" value="1" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should go to Paris. It's beautiful.</span>
+                        </label>
+                        <label class="quiz-option cursor-pointer flex items-center p-4 border border-gray-200 rounded-lg text-[15px] font-medium text-gray-700">
+                            <input type="radio" name="q10" value="2" class="hidden">
+                            <div class="radio-circle w-5 h-5 rounded-full border-2 border-gray-300 mr-4 flex items-center justify-center shrink-0">
+                                <div class="radio-dot w-2.5 h-2.5 rounded-full bg-transparent transform scale-0 transition-transform"></div>
+                            </div>
+                            <span>You should run a marathon.</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controles del Quiz y Score -->
+            <div class="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-6">
+                
+                <!-- Score Display -->
+                <div id="score-display" class="hidden bg-[#F8F9FA] px-6 py-4 rounded-lg border border-gray-200 text-[#0B192C] font-bold text-lg shadow-sm">
+                    Score: <span id="score-text" class="text-[#D4AF37] font-serif-custom text-2xl ml-2">0/10</span>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="flex gap-4 w-full sm:w-auto ml-auto">
+                    <button id="btn-clear" class="flex-1 sm:flex-none bg-white hover:bg-gray-50 border border-gray-300 text-gray-600 font-bold py-3 px-8 rounded-lg transition-colors text-sm uppercase tracking-widest shadow-sm">
+                        Clear
+                    </button>
+                    <button id="btn-check" class="flex-1 sm:flex-none bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-8 rounded-lg transition-colors text-sm uppercase tracking-widest shadow-md">
+                        Check answers
+                    </button>
+                </div>
+            </div>
+
+            <!-- COMPLETION MESSAGE -->
+            <div id="completion-message" class="hidden mt-10 bg-[#0B192C] border-t-[6px] border-[#D4AF37] rounded-xl p-8 shadow-2xl flex-col items-center text-center animate-fade-in">
+                <div class="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mb-4 shadow-md">
+                    <svg class="text-[#0B192C]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-serif-custom font-bold text-white mb-3">Training Completed</h2>
+                <p class="text-white/80 text-[15px] mb-2 leading-relaxed max-w-lg">
+                    You have demonstrated mental agility and structural precision that meets the <span class="font-bold text-[#D4AF37]">Premium English</span> standard.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC PARA EL QUIZ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = document.querySelectorAll('.quiz-option');
+            const checkBtn = document.getElementById('btn-check');
+            const clearBtn = document.getElementById('btn-clear');
+            const scoreDisplay = document.getElementById('score-display');
+            const scoreText = document.getElementById('score-text');
+            const completionMsg = document.getElementById('completion-message');
+            let hasChecked = false;
+
+            // Manejar selección de opciones
+            options.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    if (hasChecked) return; // No permitir cambios después de verificar
+                    
+                    const questionDiv = this.closest('.quiz-question');
+                    const allOptionsInQuestion = questionDiv.querySelectorAll('.quiz-option');
+                    
+                    // Remover clase 'selected' de las otras opciones
+                    allOptionsInQuestion.forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.querySelector('input').checked = false;
+                    });
+                    
+                    // Agregar clase 'selected'
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                });
+            });
+
+            // Lógica para verificar respuestas
+            checkBtn.addEventListener('click', () => {
+                if (hasChecked) return;
+                
+                const questions = document.querySelectorAll('.quiz-question');
+                let score = 0;
+                let allAnswered = true;
+
+                // Verificar que todas estén respondidas
+                questions.forEach(q => {
+                    const selected = q.querySelector('.quiz-option.selected');
+                    if (!selected) {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert("Please select an answer for all questions before checking.");
+                    return;
+                }
+
+                hasChecked = true;
+
+                questions.forEach(q => {
+                    const options = q.querySelectorAll('.quiz-option');
+                    
+                    options.forEach(opt => {
+                        opt.classList.remove('selected');
+                        
+                        const isCorrect = opt.getAttribute('data-correct') === 'true';
+                        const isSelected = opt.querySelector('input').checked;
+
+                        if (isCorrect) {
+                            opt.classList.add('correct');
+                        }
+                        
+                        if (isSelected && !isCorrect) {
+                            opt.classList.add('incorrect');
+                        }
+
+                        if (isSelected && isCorrect) {
+                            score++;
+                        }
+                        
+                        // Deshabilitar interacciones
+                        opt.classList.remove('cursor-pointer');
+                        opt.classList.add('cursor-default');
+                    });
+                });
+
+                // Mostrar Score
+                scoreText.textContent = `${score}/10`;
+                scoreDisplay.classList.remove('hidden');
+                
+                // Mostrar Mensaje de Éxito al final
+                completionMsg.classList.remove('hidden');
+                completionMsg.classList.add('flex');
+                
+                // Deshabilitar botón
+                checkBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                checkBtn.classList.remove('hover:bg-[#1a2e4c]');
+
+                // Hacer scroll suave hacia el mensaje de éxito
+                completionMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+
+            // Lógica para el botón Reset (Clear)
+            clearBtn.addEventListener('click', () => {
+                hasChecked = false;
+                scoreText.textContent = '0/10';
+                scoreDisplay.classList.add('hidden');
+                
+                // Ocultar mensaje de éxito
+                completionMsg.classList.add('hidden');
+                completionMsg.classList.remove('flex');
+                
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect', 'cursor-default');
+                    opt.classList.add('cursor-pointer');
+                    opt.querySelector('input').checked = false;
+                });
+
+                checkBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                checkBtn.classList.add('hover:bg-[#1a2e4c]');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
