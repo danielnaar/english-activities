@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree & Relationships - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        /* Estilos personalizados para las opciones del quiz */
+        .quiz-option {
+            transition: all 0.2s ease;
+        }
+        .quiz-option:hover {
+            border-color: #D4AF37;
+            background-color: #fdfbf7;
+        }
+        .quiz-option.selected {
+            border-color: #0B192C;
+            background-color: #0B192C;
+            color: #ffffff;
+        }
+        .quiz-option.selected .radio-circle {
+            border-color: #D4AF37;
+        }
+        .quiz-option.selected .radio-dot {
+            background-color: #D4AF37;
+            transform: scale(1);
+        }
+        .quiz-option.correct {
+            border-color: #10B981; 
+            background-color: #ECFDF5;
+            color: #065F46;
+        }
+        .quiz-option.correct .radio-circle {
+            border-color: #10B981;
+        }
+        .quiz-option.correct .radio-dot {
+            background-color: #10B981;
+        }
+        .quiz-option.incorrect {
+            border-color: #EF4444; 
+            background-color: #FEF2F2;
+            color: #991B1B;
+        }
+        .quiz-option.incorrect .radio-circle {
+            border-color: #EF4444;
+        }
+        .quiz-option.incorrect .radio-dot {
+            background-color: #EF4444;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-5xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200 mx-auto flex flex-col">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • READING & VOCABULARY
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                My Family Tree
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Master family relationships through categorical groupings, contextual reading, and an interactive quiz.
+            </p>
+        </div>
+
+        <!-- SECCIÓN 1: VOCABULARY ARCHITECTURE (Agrupaciones Pedagógicas) -->
+        <div class="p-8 md:p-10 bg-white border-b border-gray-200">
+            <h2 class="text-2xl font-serif-custom font-bold text-[#0B192C] mb-8 text-center flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D4AF37] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                Vocabulary Architecture
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Group 1 -->
+                <div class="bg-[#F8F9FA] rounded-xl border border-gray-200 p-5 shadow-sm">
+                    <p class="text-[#0B192C] font-bold text-xs tracking-widest uppercase mb-3">1. Core Family</p>
+                    <div class="flex flex-wrap gap-2 text-[14px]">
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">parents</span>
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">husband / wife</span>
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">son / daughter</span>
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">brother / sister</span>
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="bg-[#F8F9FA] rounded-xl border border-gray-200 p-5 shadow-sm">
+                    <p class="text-[#0B192C] font-bold text-xs tracking-widest uppercase mb-3">2. Extended Family</p>
+                    <div class="flex flex-wrap gap-2 text-[14px]">
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">grandparents</span>
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">aunt / uncle</span>
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">cousins</span>
+                        <span class="bg-white border border-gray-200 px-3 py-1 rounded text-gray-700">niece / nephew</span>
+                    </div>
+                </div>
+
+                <!-- Group 3 (In-laws) -->
+                <div class="bg-white border-l-[4px] border-[#0B192C] rounded-r-xl p-5 shadow-sm">
+                    <p class="text-[#0B192C] font-bold text-xs tracking-widest uppercase mb-2">3. By Marriage (-in-law)</p>
+                    <p class="text-[13px] text-gray-500 mb-4 italic">Family acquired legally through marriage.</p>
+                    
+                    <ul class="space-y-2 text-[14px]">
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-[#0B192C]">father-in-law</span>
+                            <span class="text-gray-500 italic text-xs">suegro</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-[#0B192C]">mother-in-law</span>
+                            <span class="text-gray-500 italic text-xs">suegra</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-[#0B192C]">brother-in-law</span>
+                            <span class="text-gray-500 italic text-xs">cuñado</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-[#0B192C]">sister-in-law</span>
+                            <span class="text-gray-500 italic text-xs">cuñada</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-[#0B192C]">son-in-law</span>
+                            <span class="text-gray-500 italic text-xs">yerno</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-[#0B192C]">daughter-in-law</span>
+                            <span class="text-gray-500 italic text-xs">nuera</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Group 4 (Step & Half) -->
+                <div class="bg-white border-l-[4px] border-[#D4AF37] rounded-r-xl p-5 shadow-sm">
+                    <p class="text-[#D4AF37] font-bold text-xs tracking-widest uppercase mb-2">4. Blended Family (Step- / Half-)</p>
+                    <p class="text-[13px] text-gray-500 mb-4 italic">No blood tie (Step) vs Sharing one biological parent (Half).</p>
+                    
+                    <ul class="space-y-2 text-[14px]">
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-gray-800">stepfather</span>
+                            <span class="text-gray-500 italic text-xs">padrastro</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-gray-800">stepmother</span>
+                            <span class="text-gray-500 italic text-xs">madrastra</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-gray-800">stepson / stepdaughter</span>
+                            <span class="text-gray-500 italic text-xs">hijastro / hijastra</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
+                            <span class="font-semibold text-gray-800">stepbrother / stepsister</span>
+                            <span class="text-gray-500 italic text-xs">hermanastro / hermanastra</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-yellow-50 p-2 rounded border border-yellow-100 mt-2">
+                            <span class="font-bold text-[#D4AF37]">half-brother</span>
+                            <span class="text-[#D4AF37] italic text-xs">medio hermano (de sangre)</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-yellow-50 p-2 rounded border border-yellow-100">
+                            <span class="font-bold text-[#D4AF37]">half-sister</span>
+                            <span class="text-[#D4AF37] italic text-xs">media hermana (de sangre)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Executive Edge: Complex Cases -->
+            <div class="bg-[#0B192C] rounded-xl p-6 md:p-8 shadow-md relative mt-4">
+                <div class="absolute -top-3 left-6 bg-[#D4AF37] text-[#0B192C] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded shadow-sm">
+                    Executive Edge: Complex Cases
+                </div>
+                <h3 class="text-white font-serif-custom text-xl font-bold mb-4 mt-2">The "No-Translation" Relatives</h3>
+                <p class="text-white/80 text-[14px] leading-relaxed mb-4">
+                    In Spanish, we have specific words for complex marital ties, but in English, <strong class="text-[#D4AF37]">they do not exist</strong>. You must explain the relationship literally:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white/10 border border-white/20 p-4 rounded text-[14px]">
+                        <p class="text-[#D4AF37] font-bold mb-1">Consuegro / Consuegra</p>
+                        <p class="text-white font-light">"My son's father-in-law" <br> <span class="text-xs text-gray-400">or simply "My son's wife's parents"</span></p>
+                    </div>
+                    <div class="bg-white/10 border border-white/20 p-4 rounded text-[14px]">
+                        <p class="text-[#D4AF37] font-bold mb-1">Concuñado / Concuñada</p>
+                        <p class="text-white font-light">"My sister-in-law's husband" <br> <span class="text-xs text-gray-400">or "My husband's brother's wife"</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: READING (Family Story) -->
+        <div class="p-8 md:p-10 bg-[#F8F9FA] border-b border-gray-200">
+            <h2 class="text-2xl font-serif-custom font-bold text-[#0B192C] mb-6">
+                Family Story
+            </h2>
+            
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 space-y-6 text-[16px] text-gray-700 leading-relaxed">
+                
+                <p>
+                    Jack is married to Alice. She is his <strong class="text-[#0B192C]">wife</strong> and he is her <strong class="text-[#0B192C]">husband</strong>. They have two <strong class="text-[#0B192C]">children</strong>: a <strong class="text-[#0B192C]">son</strong>, Henry, and a <strong class="text-[#0B192C]">daughter</strong>, Lisa. They live next to Alice's <strong class="text-[#0B192C]">parents</strong>, Harry and Marjorie. Harry is Alice's father and Marjorie is her mother.
+                </p>
+                <p>
+                    For Jack, Harry is his <strong class="text-[#D4AF37] underline decoration-[#D4AF37] underline-offset-4">father-in-law</strong> and Marjorie is his <strong class="text-[#D4AF37] underline decoration-[#D4AF37] underline-offset-4">mother-in-law</strong>. Henry is Harry's <strong class="text-[#0B192C]">grandson</strong> and Lisa is Marjorie's <strong class="text-[#0B192C]">granddaughter</strong>.
+                </p>
+                <p>
+                    Alice has two <strong class="text-[#0B192C]">siblings</strong>: her sister, Mary, and her brother, Frank. Frank has two children, David and Sherrie. Sherrie is Alice's <strong class="text-[#0B192C]">niece</strong> and David is Alice's <strong class="text-[#0B192C]">nephew</strong>. Alice is their <strong class="text-[#0B192C]">aunt</strong> and Jack is their <strong class="text-[#0B192C]">uncle</strong>.
+                </p>
+                <div class="bg-[#F8F9FA] p-4 rounded-lg border border-gray-100 italic text-sm text-gray-600">
+                    <strong class="text-[#D4AF37] not-italic uppercase tracking-widest text-[11px] mr-2">Extra:</strong> 
+                    David and Sherrie are <strong class="text-[#0B192C]">cousins</strong> of Henry and Lisa.
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: INTERACTIVE QUIZ -->
+        <div class="p-8 md:p-10 bg-white flex-grow">
+            
+            <div class="bg-white border-[3px] border-[#0B192C] rounded-xl p-8 md:p-10 shadow-lg relative max-w-4xl mx-auto">
+                <!-- Título Flotante -->
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-[#0B192C] border-2 border-[#D4AF37] rounded-full px-8 py-2 flex items-center shadow-md whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#D4AF37] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h2 class="text-lg font-serif-custom font-bold text-white uppercase tracking-wider">
+                        Quick Quiz
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8 mt-8" id="quiz-container">
+                    
+                    <!-- Question 1 -->
+                    <div class="quiz-question" data-question="1">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">1. Who is Lisa's uncle?</h3>
+                        <div class="space-y-2">
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q1" value="0" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Jack</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q1" value="1" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Frank</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q1" value="2" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Harry</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q1" value="3" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>David</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="quiz-question" data-question="2">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">2. Who is Henry's grandmother?</h3>
+                        <div class="space-y-2">
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q2" value="0" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Marjorie</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q2" value="1" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Mary</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q2" value="2" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Alice</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q2" value="3" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Sherrie</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="quiz-question" data-question="3">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">3. Who are Alice's children?</h3>
+                        <div class="space-y-2">
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q3" value="0" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Henry and Lisa</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q3" value="1" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>David and Sherrie</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q3" value="2" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Mary and Frank</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q3" value="3" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Harry and Marjorie</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="quiz-question" data-question="4">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">4. Jack is Harry's...</h3>
+                        <div class="space-y-2">
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q4" value="0" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>son</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q4" value="1" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>father-in-law</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q4" value="2" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>son-in-law</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q4" value="3" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>nephew</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="quiz-question" data-question="5">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">5. David is Lisa's...</h3>
+                        <div class="space-y-2">
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q5" value="0" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>cousin</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q5" value="1" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>nephew</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q5" value="2" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>brother</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q5" value="3" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>uncle</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="quiz-question" data-question="6">
+                        <h3 class="text-[16px] font-bold text-[#0B192C] mb-4">6. Who is Marjorie's husband?</h3>
+                        <div class="space-y-2">
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700" data-correct="true">
+                                <input type="radio" name="q6" value="0" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Harry</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q6" value="1" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Jack</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q6" value="2" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Frank</span>
+                            </label>
+                            <label class="quiz-option cursor-pointer flex items-center p-3 border border-gray-200 rounded-lg text-[14px] font-medium text-gray-700">
+                                <input type="radio" name="q6" value="3" class="hidden">
+                                <div class="radio-circle w-4 h-4 rounded-full border-2 border-gray-300 mr-3 flex items-center justify-center shrink-0"><div class="radio-dot w-2 h-2 rounded-full bg-transparent transform scale-0 transition-transform"></div></div>
+                                <span>Henry</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controles del Quiz -->
+                <div class="mt-10 pt-6 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="bg-[#F8F9FA] px-6 py-3 rounded-lg border border-gray-200 text-[#0B192C] font-bold text-lg">
+                        Score: <span id="score-text" class="text-[#D4AF37]">0/6</span>
+                    </div>
+                    
+                    <div class="flex gap-4 w-full sm:w-auto">
+                        <button id="btn-clear" class="flex-1 sm:flex-none bg-white hover:bg-gray-50 border border-gray-300 text-gray-600 font-bold py-3 px-6 rounded-lg transition-colors text-sm uppercase tracking-widest shadow-sm">
+                            Reset
+                        </button>
+                        <button id="btn-check" class="flex-1 sm:flex-none bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-3 px-6 rounded-lg transition-colors text-sm uppercase tracking-widest shadow-md">
+                            Check Answers
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mensaje de Éxito -->
+                <div id="completion-message" class="hidden mt-10 bg-[#0B192C] border-t-[6px] border-[#D4AF37] rounded-xl p-8 shadow-2xl flex-col items-center text-center animate-fade-in">
+                    <div class="w-16 h-16 bg-[#D4AF37] rounded-full flex items-center justify-center mb-4 shadow-md">
+                        <svg class="text-[#0B192C]" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-serif-custom font-bold text-white mb-3">Family Tree Mastered</h2>
+                    <p class="text-white/80 text-[15px] leading-relaxed max-w-lg">
+                        You have successfully demonstrated your understanding of vocabulary and contextual relationships.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC PARA EL QUIZ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = document.querySelectorAll('.quiz-option');
+            const checkBtn = document.getElementById('btn-check');
+            const clearBtn = document.getElementById('btn-clear');
+            const scoreText = document.getElementById('score-text');
+            const completionMsg = document.getElementById('completion-message');
+            let hasChecked = false;
+
+            // Manejar selección de opciones
+            options.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    if (hasChecked) return; 
+                    
+                    const questionDiv = this.closest('.quiz-question');
+                    const allOptionsInQuestion = questionDiv.querySelectorAll('.quiz-option');
+                    
+                    allOptionsInQuestion.forEach(opt => {
+                        opt.classList.remove('selected');
+                        opt.querySelector('input').checked = false;
+                    });
+                    
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
+                });
+            });
+
+            // Lógica para verificar respuestas
+            checkBtn.addEventListener('click', () => {
+                if (hasChecked) return;
+                
+                const questions = document.querySelectorAll('.quiz-question');
+                let score = 0;
+                let allAnswered = true;
+
+                questions.forEach(q => {
+                    const selected = q.querySelector('.quiz-option.selected');
+                    if (!selected) {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    alert("Please select an answer for all 6 questions before checking.");
+                    return;
+                }
+
+                hasChecked = true;
+
+                questions.forEach(q => {
+                    const options = q.querySelectorAll('.quiz-option');
+                    
+                    options.forEach(opt => {
+                        opt.classList.remove('selected');
+                        
+                        const isCorrect = opt.getAttribute('data-correct') === 'true';
+                        const isSelected = opt.querySelector('input').checked;
+
+                        if (isCorrect) {
+                            opt.classList.add('correct');
+                        }
+                        
+                        if (isSelected && !isCorrect) {
+                            opt.classList.add('incorrect');
+                        }
+
+                        if (isSelected && isCorrect) {
+                            score++;
+                        }
+                        
+                        opt.classList.remove('cursor-pointer');
+                        opt.classList.add('cursor-default');
+                    });
+                });
+
+                // Actualizar UI del score
+                scoreText.textContent = `${score}/6`;
+                
+                // Cambiar el botón check a estado deshabilitado
+                checkBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                checkBtn.classList.remove('hover:bg-[#1a2e4c]');
+
+                // Mostrar mensaje de éxito
+                completionMsg.classList.remove('hidden');
+                completionMsg.classList.add('flex');
+                completionMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+
+            // Lógica para el botón Reset
+            clearBtn.addEventListener('click', () => {
+                hasChecked = false;
+                scoreText.textContent = '0/6';
+                
+                completionMsg.classList.add('hidden');
+                completionMsg.classList.remove('flex');
+
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect', 'cursor-default');
+                    opt.classList.add('cursor-pointer');
+                    opt.querySelector('input').checked = false;
+                });
+
+                checkBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                checkBtn.classList.add('hover:bg-[#1a2e4c]');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
