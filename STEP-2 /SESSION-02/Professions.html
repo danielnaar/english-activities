@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professions: Guess Who - Premium English</title>
+    <!-- Google Fonts: Playfair Display y Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,900&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #e5e7eb; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-serif-custom {
+            font-family: 'Playfair Display', serif; 
+        }
+        /* Patrón sutil para el encabezado */
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Opciones del Quiz */
+        .quiz-btn {
+            transition: all 0.3s ease;
+        }
+        .quiz-btn:hover:not(:disabled) {
+            border-color: #D4AF37;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(212, 175, 55, 0.15);
+        }
+        .quiz-btn.correct {
+            background-color: #10B981; /* Verde */
+            border-color: #10B981;
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+        }
+        .quiz-btn.incorrect {
+            background-color: #EF4444; /* Rojo */
+            border-color: #EF4444;
+            color: white;
+            opacity: 0.8;
+        }
+        .quiz-btn:disabled:not(.correct):not(.incorrect) {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #f3f4f6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+    </style>
+</head>
+<body class="py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center text-[#121212] min-h-screen">
+
+    <!-- Contenedor Principal -->
+    <div class="w-full max-w-4xl bg-[#F8F9FA] shadow-2xl overflow-hidden rounded-xl border border-gray-200 flex flex-col flex-grow">
+        
+        <!-- ENCABEZADO (Azul Noche Premium) -->
+        <div class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden shrink-0">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-serif-custom relative z-10">
+                PREMIUM ENGLISH • VOCABULARY CHALLENGE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif-custom font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Professions
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Read the professional description and deduce the correct job title. Build vocabulary through context, not translation.
+            </p>
+        </div>
+
+        <!-- ÁREA DEL JUEGO (Workspace) -->
+        <div id="workspace-view" class="flex-grow p-6 md:p-12 bg-white flex flex-col relative">
+            
+            <!-- Barra de Progreso -->
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gray-200">
+                <div id="progress-bar" class="h-full bg-[#D4AF37] transition-all duration-500 ease-out" style="width: 0%;"></div>
+            </div>
+
+            <!-- Cabecera de la Pregunta -->
+            <div class="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+                <div class="flex items-center">
+                    <div id="question-number" class="w-10 h-10 rounded-full bg-[#0B192C] flex items-center justify-center text-[#D4AF37] font-bold text-lg mr-4 shadow-md">
+                        1
+                    </div>
+                    <div>
+                        <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">
+                            Who am I?
+                        </h2>
+                        <h3 class="text-lg font-serif-custom font-bold text-[#0B192C]">
+                            Read and guess
+                        </h3>
+                    </div>
+                </div>
+                <div class="text-right hidden sm:block">
+                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Score</span>
+                    <p id="score-display" class="text-xl font-serif-custom font-bold text-[#D4AF37]">0</p>
+                </div>
+            </div>
+
+            <!-- Tarjeta con la Definición -->
+            <div class="bg-[#F8F9FA] border-l-[4px] border-[#D4AF37] p-8 rounded-r-xl shadow-sm mb-10 min-h-[140px] flex items-center">
+                <p id="riddle-text" class="text-xl md:text-2xl font-serif-custom font-bold text-[#121212] leading-relaxed">
+                    "I provide legal advice and represent clients in court proceedings."
+                </p>
+            </div>
+
+            <!-- Opciones (Grid 2x2) -->
+            <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-auto">
+                <!-- Los botones se inyectarán vía JS -->
+            </div>
+
+            <!-- Botón de Siguiente (Oculto por defecto) -->
+            <div id="next-container" class="mt-10 flex justify-end hidden animate-fade-in">
+                <button id="btn-next" class="bg-[#0B192C] hover:bg-[#1a2e4c] text-[#D4AF37] font-bold py-4 px-8 rounded-xl transition-all duration-300 text-sm uppercase tracking-widest shadow-md flex items-center group">
+                    Next Profession
+                    <svg class="ml-2 group-hover:translate-x-1 transition-transform" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- PANTALLA DE FINALIZACIÓN -->
+        <div id="completion-view" class="hidden flex-grow bg-[#0B192C] p-10 md:p-16 flex flex-col items-center justify-center text-center relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <div class="w-20 h-20 bg-[#D4AF37] rounded-full flex items-center justify-center mb-6 shadow-xl relative z-10">
+                <svg class="text-[#0B192C]" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            
+            <h2 class="text-3xl md:text-5xl font-serif-custom font-bold text-white mb-4 relative z-10">Vocabulary Mastered</h2>
+            
+            <p class="text-white/80 text-lg mb-8 leading-relaxed max-w-lg relative z-10">
+                You have successfully completed the professions challenge. <br>
+                Final Score: <strong id="final-score" class="text-[#D4AF37] text-2xl ml-2">0/15</strong>
+            </p>
+            
+            <button id="btn-restart" class="bg-white hover:bg-gray-100 text-[#0B192C] font-bold py-4 px-10 rounded-xl transition-colors text-sm uppercase tracking-widest shadow-md relative z-10">
+                Restart Challenge
+            </button>
+        </div>
+
+        <!-- PIE DE PÁGINA -->
+        <div class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 border-t border-gray-800 shrink-0">
+            <div class="mb-2 md:mb-0">
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> | Executive Mastery
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Base de datos de profesiones y sus definiciones ejecutivas
+            const allProfessions = [
+                { word: "lawyer", riddle: "I provide legal advice and represent clients in court proceedings or negotiations." },
+                { word: "programmer", riddle: "I write, test, and maintain the code that powers software and computer applications." },
+                { word: "doctor", riddle: "I diagnose illnesses, prescribe treatments, and care for patients' general health." },
+                { word: "chef", riddle: "I oversee the kitchen, design menus, and prepare high-quality culinary dishes." },
+                { word: "scientist", riddle: "I conduct rigorous research and experiments to advance knowledge in fields like biology or physics." },
+                { word: "pilot", riddle: "I operate and navigate aircraft to transport passengers and cargo safely across the world." },
+                { word: "firefighter", riddle: "I respond to emergencies, extinguish dangerous blazes, and rescue people in danger." },
+                { word: "teacher", riddle: "I plan educational lessons and help students acquire new knowledge and essential skills." },
+                { word: "artist", riddle: "I create original pieces of visual work, such as paintings or sculptures, to express ideas." },
+                { word: "athlete", riddle: "I train rigorously every day and compete in professional sports or physical tournaments." },
+                { word: "singer", riddle: "I use my voice professionally to perform musical compositions for a live audience." },
+                { word: "vet", riddle: "I provide medical care, diagnoses, and surgical treatments specifically for animals." },
+                { word: "dentist", riddle: "I specialize in oral health, treating teeth and gums to prevent decay and diseases." },
+                { word: "police officer", riddle: "I patrol communities, enforce local laws, and maintain public safety and order." },
+                { word: "astronaut", riddle: "I am highly trained to command, navigate, or serve as a crew member on a spacecraft." },
+                { word: "principal", riddle: "I manage the daily operations, staff, and overall educational environment of a school." },
+                { word: "musician", riddle: "I play instruments or compose music professionally for live shows or studio recordings." },
+                { word: "actor", riddle: "I perform different roles in plays, movies, or television shows to entertain audiences." },
+                { word: "driver", riddle: "I operate vehicles to transport passengers or goods from one location to another." }
+            ];
+
+            // Variables de Estado
+            let sessionQuestions = [];
+            let currentIdx = 0;
+            let currentScore = 0;
+            let hasAnswered = false;
+
+            // Elementos del DOM
+            const viewWorkspace = document.getElementById('workspace-view');
+            const viewCompletion = document.getElementById('completion-view');
+            const elProgressBar = document.getElementById('progress-bar');
+            const elQuestionNum = document.getElementById('question-number');
+            const elRiddleText = document.getElementById('riddle-text');
+            const elOptionsContainer = document.getElementById('options-container');
+            const elNextContainer = document.getElementById('next-container');
+            const btnNext = document.getElementById('btn-next');
+            const btnRestart = document.getElementById('btn-restart');
+            const elScoreDisplay = document.getElementById('score-display');
+            const elFinalScore = document.getElementById('final-score');
+
+            // Función para mezclar arreglos (Fisher-Yates)
+            function shuffle(array) {
+                let currentIndex = array.length, randomIndex;
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+                }
+                return array;
+            }
+
+            // Inicializar el juego
+            function initGame() {
+                // Seleccionamos 15 profesiones al azar para la sesión
+                const shuffledProfessions = shuffle([...allProfessions]);
+                sessionQuestions = shuffledProfessions.slice(0, 15);
+                
+                currentIdx = 0;
+                currentScore = 0;
+                elScoreDisplay.textContent = currentScore;
+                
+                viewCompletion.classList.add('hidden');
+                viewWorkspace.classList.remove('hidden');
+                viewWorkspace.classList.add('flex');
+                
+                loadQuestion();
+            }
+
+            // Cargar una pregunta
+            function loadQuestion() {
+                hasAnswered = false;
+                elNextContainer.classList.add('hidden');
+                
+                const currentData = sessionQuestions[currentIdx];
+                
+                // Actualizar UI
+                elProgressBar.style.width = `${((currentIdx) / sessionQuestions.length) * 100}%`;
+                elQuestionNum.textContent = currentIdx + 1;
+                elRiddleText.textContent = `"${currentData.riddle}"`;
+
+                // Generar Opciones (1 correcta + 3 incorrectas al azar)
+                const correctWord = currentData.word;
+                let distractors = allProfessions.filter(p => p.word !== correctWord).map(p => p.word);
+                distractors = shuffle(distractors).slice(0, 3);
+                
+                let options = [correctWord, ...distractors];
+                options = shuffle(options);
+
+                // Renderizar Botones
+                elOptionsContainer.innerHTML = '';
+                options.forEach((opt, index) => {
+                    const btn = document.createElement('button');
+                    // Capitalizar primera letra
+                    const capitalizedOpt = opt.charAt(0).toUpperCase() + opt.slice(1);
+                    
+                    btn.className = "quiz-btn w-full bg-white border-2 border-gray-200 text-[#0B192C] font-bold py-4 px-6 rounded-xl text-[16px] text-center shadow-sm animate-fade-in";
+                    btn.style.animationDelay = `${index * 0.1}s`;
+                    btn.textContent = capitalizedOpt;
+                    btn.dataset.word = opt;
+                    
+                    btn.addEventListener('click', () => handleAnswer(btn, correctWord));
+                    elOptionsContainer.appendChild(btn);
+                });
+            }
+
+            // Manejar la respuesta del usuario
+            function handleAnswer(selectedBtn, correctWord) {
+                if (hasAnswered) return;
+                hasAnswered = true;
+
+                const isCorrect = selectedBtn.dataset.word === correctWord;
+                const allBtns = elOptionsContainer.querySelectorAll('button');
+
+                allBtns.forEach(btn => {
+                    btn.disabled = true; // Deshabilitar todos
+                    
+                    if (btn.dataset.word === correctWord) {
+                        btn.classList.add('correct');
+                        // Añadir icono de check
+                        btn.innerHTML += ` <svg class="inline-block ml-2 mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                    } else if (btn === selectedBtn && !isCorrect) {
+                        btn.classList.add('incorrect');
+                        // Añadir icono de error
+                        btn.innerHTML += ` <svg class="inline-block ml-2 mb-1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+                    }
+                });
+
+                if (isCorrect) {
+                    currentScore++;
+                    elScoreDisplay.textContent = currentScore;
+                }
+
+                // Mostrar botón de siguiente
+                elNextContainer.classList.remove('hidden');
+                
+                // Actualizar barra de progreso al responder
+                elProgressBar.style.width = `${((currentIdx + 1) / sessionQuestions.length) * 100}%`;
+            }
+
+            // Siguiente pregunta o finalización
+            btnNext.addEventListener('click', () => {
+                if (currentIdx < sessionQuestions.length - 1) {
+                    currentIdx++;
+                    loadQuestion();
+                } else {
+                    // Mostrar pantalla final
+                    viewWorkspace.classList.add('hidden');
+                    viewWorkspace.classList.remove('flex');
+                    viewCompletion.classList.remove('hidden');
+                    viewCompletion.classList.add('flex');
+                    elFinalScore.textContent = `${currentScore} / ${sessionQuestions.length}`;
+                }
+            });
+
+            // Reiniciar
+            btnRestart.addEventListener('click', initGame);
+
+            // Iniciar al cargar
+            initGame();
+        });
+    </script>
+</body>
+</html>
