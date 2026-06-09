@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countable vs Uncountable Nouns - Executive Reference</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Formula Box Styling */
+        .formula-box {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #D4AF37;
+            text-align: center;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 5.5rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Countable <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2">vs.</span> Uncountable
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Master the rules, quantifiers, and contextual exceptions to communicate amounts and concepts with absolute structural accuracy.
+            </p>
+        </header>
+
+        <!-- SECTION 1: The Core Distinction -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-[#F8F9FA]">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                The Core Distinction
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                
+                <!-- Countable -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern h-full">
+                    <div class="p-8 flex-grow relative z-10 flex flex-col justify-start">
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-white mb-4 flex items-center gap-3 min-h-[3.5rem]">
+                                <div class="w-8 h-8 rounded-full bg-white/10 text-[#D4AF37] flex items-center justify-center text-sm shrink-0 font-montserrat">C</div>
+                                Countable Nouns
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-4 font-medium italic">Things we can count as separate items (one, two, three...).</p>
+                            <div class="formula-box text-sm">
+                                <span>Singular: <span class="text-white">a / an</span> (a chair, an apple)</span>
+                                <span class="block mt-2 text-white/30 border-b border-white/20 w-3/4 mx-auto"></span>
+                                <span class="mt-2">Plural: <span class="text-white">verb + s</span> (two chairs)</span>
+                            </div>
+                        </div>
+                        <p class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-2 mt-2">Examples:</p>
+                        <p class="text-white font-medium mb-4">dog, student, ticket, idea, car, photo.</p>
+                        
+                        <div class="bg-white/5 rounded p-4 text-sm border border-white/10 shadow-inner mt-auto">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-[#10B981] font-bold">✓</span>
+                                <span class="text-white">I have <strong class="text-[#D4AF37]">two</strong> tickets.</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>I have much tickets.</s> <span class="italic text-xs">(use 'many')</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uncountable -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern h-full">
+                    <div class="p-8 flex-grow relative z-10 flex flex-col justify-start">
+                        <div>
+                            <h3 class="text-xl font-playfair font-bold text-white mb-4 flex items-center gap-3 min-h-[3.5rem]">
+                                <div class="w-8 h-8 rounded-full bg-white/10 text-[#D4AF37] flex items-center justify-center text-sm shrink-0 font-montserrat">U</div>
+                                Uncountable Nouns
+                            </h3>
+                            <p class="text-gray-400 text-sm mb-4 font-medium italic">Substances, concepts, or things we do not count as separate pieces.</p>
+                            <div class="formula-box text-sm">
+                                <span>Never use: <span class="text-white">a / an / numbers</span></span>
+                                <span class="block mt-2 text-white/30 border-b border-white/20 w-3/4 mx-auto"></span>
+                                <span class="mt-2">Always use: <span class="text-white">Singular verbs</span></span>
+                            </div>
+                        </div>
+                        <p class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-2 mt-2">Examples:</p>
+                        <p class="text-white font-medium mb-4">milk, water, rice, music, information, luggage, furniture.</p>
+                        
+                        <div class="bg-white/5 rounded p-4 text-sm border border-white/10 shadow-inner mt-auto">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-[#10B981] font-bold">✓</span>
+                                <span class="text-white">The news <strong class="text-[#D4AF37]">is</strong> good.</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-400">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>I need a water.</s> <span class="italic text-xs">(say 'a bottle of water')</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 2: Contextual Nuances (Zebra Table) -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-white">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Nouns that can be C or U
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+            
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto font-medium">The meaning changes entirely depending on the context of the sentence.</p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden max-w-5xl mx-auto">
+                <table class="min-w-full text-left border-collapse">
+                    <thead class="bg-[#0B192C] text-white">
+                        <tr>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest border-r border-white/10 w-1/5 text-[#D4AF37]">Noun</th>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest border-r border-white/10 w-2/5">Countable Meaning (Specific)</th>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest w-2/5">Uncountable Meaning (General)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-[15px] divide-y divide-gray-100 text-[#121212]">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base bg-gray-50">Light</td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100">A lamp: <br><span class="italic text-gray-500 text-sm">"Turn on <strong class="text-[#0B192C] not-italic">a light</strong>."</span></td>
+                            <td class="py-4 px-6 text-gray-700">General illumination: <br><span class="italic text-gray-500 text-sm">"There is too much <strong class="text-[#0B192C] not-italic">light</strong>."</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors bg-gray-50/50">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base bg-gray-100/50">Noise</td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100">A specific sound: <br><span class="italic text-gray-500 text-sm">"I heard <strong class="text-[#0B192C] not-italic">a noise</strong>."</span></td>
+                            <td class="py-4 px-6 text-gray-700">General sound: <br><span class="italic text-gray-500 text-sm">"There is a lot of <strong class="text-[#0B192C] not-italic">noise</strong>."</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base bg-gray-50">Time</td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100">A specific event: <br><span class="italic text-gray-500 text-sm">"We had <strong class="text-[#0B192C] not-italic">a good time</strong>."</span></td>
+                            <td class="py-4 px-6 text-gray-700">General time: <br><span class="italic text-gray-500 text-sm">"Do you have <strong class="text-[#0B192C] not-italic">time</strong>?"</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors bg-gray-50/50">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base bg-gray-100/50">Paper</td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100">A newspaper/document: <br><span class="italic text-gray-500 text-sm">"I bought <strong class="text-[#0B192C] not-italic">a paper</strong>."</span></td>
+                            <td class="py-4 px-6 text-gray-700">The material: <br><span class="italic text-gray-500 text-sm">"I need some <strong class="text-[#0B192C] not-italic">paper</strong>."</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base bg-gray-50">Chicken</td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100">The animal: <br><span class="italic text-gray-500 text-sm">"I saw <strong class="text-[#0B192C] not-italic">a chicken</strong>."</span></td>
+                            <td class="py-4 px-6 text-gray-700">The food: <br><span class="italic text-gray-500 text-sm">"I eat <strong class="text-[#0B192C] not-italic">chicken</strong>."</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECTION 3: Quantifiers & Articles -->
+        <div class="p-8 md:p-12 bg-[#F8F9FA] border-b border-gray-200">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Key Quantifiers
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                
+                <!-- For Countable -->
+                <div class="bg-white border-t-[4px] border-[#0B192C] p-6 rounded-b-xl rounded-t-sm shadow-sm flex flex-col justify-start">
+                    <h3 class="font-bold text-[#0B192C] text-[16px] mb-4 uppercase tracking-wide text-center">
+                        Countable Only
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 text-center flex-grow flex flex-col justify-center gap-3">
+                        <span class="font-bold text-lg text-[#D4AF37]">many</span>
+                        <span class="font-bold text-lg text-[#D4AF37]">a few</span>
+                        <span class="font-bold text-lg text-[#D4AF37]">few</span>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 italic mt-4">"We have <strong class="text-[#0B192C] not-italic">many</strong> books."</p>
+                </div>
+
+                <!-- For Both -->
+                <div class="bg-[#0B192C] border-t-[4px] border-[#D4AF37] p-6 rounded-b-xl rounded-t-sm shadow-md flex flex-col justify-start bg-pattern relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="font-bold text-[#D4AF37] text-[16px] mb-4 uppercase tracking-wide text-center">
+                            For Both (C & U)
+                        </h3>
+                        <div class="bg-white/10 rounded-lg p-4 border border-white/20 text-center flex-grow flex flex-col justify-center gap-3">
+                            <span class="font-bold text-lg text-white">a lot of / lots of</span>
+                            <span class="font-bold text-lg text-white">some <span class="text-xs font-normal text-gray-300 block">(positive statements)</span></span>
+                            <span class="font-bold text-lg text-white">any <span class="text-xs font-normal text-gray-300 block">(questions / negatives)</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- For Uncountable -->
+                <div class="bg-white border-t-[4px] border-[#0B192C] p-6 rounded-b-xl rounded-t-sm shadow-sm flex flex-col justify-start">
+                    <h3 class="font-bold text-[#0B192C] text-[16px] mb-4 uppercase tracking-wide text-center">
+                        Uncountable Only
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 text-center flex-grow flex flex-col justify-center gap-3">
+                        <span class="font-bold text-lg text-[#D4AF37]">much</span>
+                        <span class="font-bold text-lg text-[#D4AF37]">a little</span>
+                        <span class="font-bold text-lg text-[#D4AF37]">little</span>
+                    </div>
+                    <p class="text-center text-sm text-gray-500 italic mt-4">"There is <strong class="text-[#0B192C] not-italic">a little</strong> sugar."</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 4: Executive Precision & Mistakes -->
+        <div class="p-8 md:p-12 bg-white">
+            <h2 class="text-2xl font-playfair font-bold text-[#0B192C] mb-8 flex items-center justify-center text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D4AF37] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                Executive Precision
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto items-stretch">
+                
+                <!-- Containers and Units -->
+                <div>
+                    <h3 class="font-bold text-[#0B192C] text-[16px] mb-4 uppercase tracking-wide border-b border-gray-100 pb-2">
+                        Containers & Units
+                    </h3>
+                    <p class="text-[14px] text-gray-600 mb-4 font-medium">Use these structures to talk about amounts of uncountables professionally.</p>
+                    
+                    <div class="grid grid-cols-2 gap-3 text-sm font-semibold text-[#121212]">
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm flex items-center gap-2">
+                            <span class="text-[#D4AF37]">●</span> a piece of advice
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm flex items-center gap-2">
+                            <span class="text-[#D4AF37]">●</span> a bowl of rice
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm flex items-center gap-2">
+                            <span class="text-[#D4AF37]">●</span> a bottle of water
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm flex items-center gap-2">
+                            <span class="text-[#D4AF37]">●</span> a cup of coffee
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm flex items-center gap-2">
+                            <span class="text-[#D4AF37]">●</span> a slice of bread
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm flex items-center gap-2">
+                            <span class="text-[#D4AF37]">●</span> a bar of chocolate
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Mistakes -->
+                <div class="bg-gray-50 border-l-[4px] border-[#EF4444] p-6 rounded-r-xl shadow-sm flex flex-col justify-start">
+                    <h3 class="font-bold text-[#EF4444] text-[16px] mb-4 uppercase tracking-wide">
+                        Common Mistakes
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white rounded p-4 text-[14px] border border-gray-200 shadow-inner">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>I have many informations.</s></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#10B981] font-bold">✓</span>
+                                <span class="font-bold text-[#0B192C]">I have much information.</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded p-4 text-[14px] border border-gray-200 shadow-inner">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>She gave me an advice.</s></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#10B981] font-bold">✓</span>
+                                <span class="font-bold text-[#0B192C]">She gave me a piece of advice.</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded p-4 text-[14px] border border-gray-200 shadow-inner">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>There are a bread on the table.</s></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#10B981] font-bold">✓</span>
+                                <span class="font-bold text-[#0B192C]">There is a slice of bread on the table.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>
