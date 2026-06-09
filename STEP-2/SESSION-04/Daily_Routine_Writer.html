@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Routine Composition - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE WRITING ASSIGNMENT
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Daily Routine Writer
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Draft a comprehensive overview of your executive daily schedule. Focus on structural accuracy, frequency indicators, and professional tone.
+            </p>
+        </header>
+
+        <div class="p-8 md:p-12">
+            
+            <!-- Assignment Briefing -->
+            <section class="mb-12">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8 bg-gray-50 border border-gray-200 rounded-xl p-8 shadow-sm">
+                    
+                    <div class="text-center px-6 border-b md:border-b-0 md:border-r border-gray-300 pb-6 md:pb-0">
+                        <span class="block text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Target Length</span>
+                        <span class="text-4xl font-playfair font-bold text-[#0B192C]">120 - 180</span>
+                        <span class="block text-[#D4AF37] font-semibold tracking-widest uppercase text-xs mt-1">Words</span>
+                    </div>
+
+                    <div class="text-center px-6">
+                        <span class="block text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Delivery Format</span>
+                        <span class="text-2xl font-playfair font-bold text-[#0B192C]">Word Document</span>
+                        <span class="block text-gray-500 font-medium text-sm mt-1">Download, complete, and submit via chat</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Technical Requirements (Checklist) -->
+            <section class="mb-14">
+                <div class="mb-10 mt-2">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center">
+                        <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                        Grammatical Requirements
+                        <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    
+                    <!-- Requirement 1 -->
+                    <div class="bg-white rounded-xl shadow-sm border-t-[4px] border-[#0B192C] p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-lg shadow-sm border border-[#D4AF37]/30 mb-4">
+                            1
+                        </div>
+                        <h3 class="font-bold text-[#121212] text-lg mb-2">Time Prepositions</h3>
+                        <p class="text-gray-600 text-sm font-medium mb-3">Include proper markers for exact times, periods, and days.</p>
+                        <div class="mt-auto bg-gray-50 py-1.5 px-4 rounded-full border border-gray-200">
+                            <span class="text-xs font-bold text-[#0B192C] tracking-widest">AT - IN - ON</span>
+                        </div>
+                    </div>
+
+                    <!-- Requirement 2 -->
+                    <div class="bg-white rounded-xl shadow-sm border-t-[4px] border-[#D4AF37] p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-lg shadow-sm border border-[#D4AF37]/30 mb-4">
+                            2
+                        </div>
+                        <h3 class="font-bold text-[#121212] text-lg mb-2">Frequency Adverbs</h3>
+                        <p class="text-gray-600 text-sm font-medium mb-3">Demonstrate control over how often tasks are performed.</p>
+                        <div class="mt-auto bg-gray-50 py-1.5 px-4 rounded-full border border-gray-200">
+                            <span class="text-xs font-bold text-[#D4AF37] tracking-widest">ALWAYS - OFTEN - NEVER</span>
+                        </div>
+                    </div>
+
+                    <!-- Requirement 3 -->
+                    <div class="bg-white rounded-xl shadow-sm border-t-[4px] border-[#0B192C] p-6 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-lg shadow-sm border border-[#D4AF37]/30 mb-4">
+                            3
+                        </div>
+                        <h3 class="font-bold text-[#121212] text-lg mb-2">Professional Tone</h3>
+                        <p class="text-gray-600 text-sm font-medium mb-3">Express future intentions or professional desires elegantly.</p>
+                        <div class="mt-auto bg-gray-50 py-1.5 px-4 rounded-full border border-gray-200">
+                            <span class="text-xs font-bold text-[#0B192C] tracking-widest">WOULD LIKE TO</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="text-center bg-[#0B192C] rounded-xl p-10 relative overflow-hidden bg-pattern border border-[#D4AF37]/50 shadow-xl max-w-3xl mx-auto">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-playfair font-bold text-white mb-3">Ready to begin?</h3>
+                    <p class="text-gray-300 font-medium mb-8 max-w-md mx-auto">
+                        Download the official template. Once completed, share the document back with your instructor for detailed feedback.
+                    </p>
+                    
+                    <button id="download-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-white transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-lg flex items-center justify-center gap-3 mx-auto transform hover:-translate-y-1">
+                        Download Word Template
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    </button>
+                    
+                    <p id="success-msg" class="text-[#10B981] font-bold text-sm mt-4 opacity-0 transition-opacity duration-300 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Template Downloaded Successfully
+                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic for Document Generation -->
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+            
+            // 1. MS Word compatible HTML Structure
+            const header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Executive Routine Document</title></head><body>";
+            const footer = "</body></html>";
+            
+            // 2. The Content of the Word File (Styled for a premium feel inside Word)
+            const content = `
+                <div style="font-family: 'Century Gothic', Helvetica, Arial, sans-serif; color: #121212; max-width: 800px; margin: 0 auto;">
+                    
+                    <!-- Branding Header -->
+                    <table width="100%" style="border-bottom: 3px solid #D4AF37; margin-bottom: 20px;">
+                        <tr>
+                            <td style="padding-bottom: 10px;">
+                                <h1 style="color: #0B192C; margin: 0; font-size: 24pt;">PREMIUM ENGLISH</h1>
+                                <p style="color: #666666; margin: 0; font-size: 11pt; font-style: italic;">Executive Mastery</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Assignment Meta -->
+                    <h2 style="color: #0B192C; font-size: 18pt;">Writing Assignment: Daily Routine</h2>
+                    <br>
+                    <p><strong>Executive Name:</strong> _________________________________</p>
+                    <p><strong>Date:</strong> _________________________________</p>
+                    <br>
+
+                    <!-- Instructions Block -->
+                    <div style="background-color: #F8F9FA; padding: 15px; border-left: 4px solid #0B192C; margin-bottom: 30px;">
+                        <h3 style="margin-top: 0; color: #0B192C; font-size: 12pt;">Assignment Parameters:</h3>
+                        <ul>
+                            <li style="margin-bottom: 5px;"><strong>Length Target:</strong> 120 - 180 words.</li>
+                            <li style="margin-bottom: 5px;"><strong>Requirement 1:</strong> Include prepositions of time (at, in, on).</li>
+                            <li style="margin-bottom: 5px;"><strong>Requirement 2:</strong> Include adverbs of frequency (always, usually, etc.).</li>
+                            <li style="margin-bottom: 5px;"><strong>Requirement 3:</strong> Include the structure "would like to" at least once.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Writing Area -->
+                    <h3 style="color: #D4AF37; font-size: 14pt; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Your Composition:</h3>
+                    <p style="color: #9CA3AF; font-style: italic;">[ Click here and begin typing your executive routine... ]</p>
+                    
+                    <br><br><br><br><br><br><br><br><br><br>
+                </div>
+            `;
+            
+            const sourceHTML = header + content + footer;
+            
+            // 3. Create Blob and Trigger Download
+            const blob = new Blob(['\ufeff', sourceHTML], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            
+            link.href = url;
+            link.download = 'Executive_Routine_Template.doc';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // 4. UX Feedback (Success Message)
+            const successMsg = document.getElementById('success-msg');
+            successMsg.classList.remove('opacity-0');
+            successMsg.classList.add('animate-pop');
+            
+            setTimeout(() => {
+                successMsg.classList.add('opacity-0');
+                successMsg.classList.remove('animate-pop');
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
