@@ -72,3 +72,278 @@
             font-weight: bold;
             border-radius: 4px;
         }
+        .sub-summary:hover { background-color: #121212; }
+        .sub-summary::after { content: '▼'; position: absolute; right: 1.5rem; font-size: 0.8rem; transition: transform 0.3s; }
+        .sub-details[open] > .sub-summary::after { transform: rotate(180deg); }
+
+        /* NIVEL 4: MATERIAL DE CLASE */
+        .material-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            margin: 0.5rem 0 0.5rem 1.5rem;
+            background-color: #F8F9FA;
+            color: #0B192C;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            border-left: 4px solid #D4AF37; 
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+        .material-link:hover { background-color: #eef0f3; transform: translateX(5px); }
+
+        /* Etiquetas informativas */
+        .tag { font-size: 0.65rem; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; margin-right: 8px; font-weight: bold; display: inline-flex; min-width: 80px; justify-content: center; }
+        .tag-info { background: #e0f2fe; color: #0369a1; }     /* Azul */
+        .tag-act { background: #ffedd5; color: #c2410c; }      /* Naranja */
+        .tag-script { background: #dcfce7; color: #15803d; }   /* Verde */
+        .tag-trans { background: #fef08a; color: #854d0e; }    /* Amarillo */
+        .tag-tool { background: #f3e8ff; color: #7e22ce; }     /* Morado */
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Premium English</h1>
+    </header>
+    
+    <form id="login-form" onsubmit="event.preventDefault(); checkPassword();">
+        <h2>Exclusive Access</h2>
+        <p class="login-desc">Please enter your private access code to enter the interactive hub.</p>
+        <input type="password" id="password-input" placeholder="Enter Code" required>
+        <button type="submit" class="btn-login">Access</button>
+        <p id="error-message">Incorrect code. Please try again.</p>
+    </form>
+
+    <div id="main-content">
+        <div class="container">
+            <h2>Interactive Hub</h2>
+            
+            <details>
+                <summary class="folder-summary">Step 1</summary>
+                
+                <details class="half-details">
+                    <summary class="half-summary">First Half</summary>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 1</summary>
+                        <a href="STEP-1/SESSION-1/Possessive_Adjectives.html" class="material-link"><span class="tag tag-info">Infographic</span> Possessive Adjectives</a>
+                        <a href="STEP-1/SESSION-1/The_Wrong_Suitcase.html" class="material-link"><span class="tag tag-script">Script</span> The Wrong Suitcase</a>
+                        <a href="STEP-1/SESSION-1/transposition.html" class="material-link"><span class="tag tag-trans">Transposition</span> Drill: Session 1</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 2</summary>
+                        <a href="STEP-1/SESSION-2/Wh_Question_Words.html" class="material-link"><span class="tag tag-info">Infographic</span> WH-Question Words</a>
+                        <a href="STEP-1/SESSION-2/Numbers_in_English.html" class="material-link"><span class="tag tag-info">Infographic</span> Numbers in English</a>
+                        <a href="STEP-1/SESSION-2/Teen_vs_Ty-Numbers.html" class="material-link"><span class="tag tag-info">Infographic</span> Teen vs Ty Numbers</a>
+                        <a href="STEP-1/SESSION-2/How_to_Say_Phone_Numbers_in_English.html" class="material-link"><span class="tag tag-info">Infographic</span> Phone Numbers</a>
+                        <a href="STEP-1/SESSION-2/An_Actor_and_a_Musician.html" class="material-link"><span class="tag tag-script">Script</span> An Actor and a Musician</a>
+                        <a href="STEP-1/SESSION-2/transposition.html" class="material-link"><span class="tag tag-trans">Transposition</span> Drill: Actor & Musician</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 3</summary>
+                        <a href="STEP-1/SESSION-3/Learning_Colors.html" class="material-link"><span class="tag tag-info">Infographic</span> Learning Colors</a>
+                        <a href="STEP-1/SESSION-3/Demonstratives.html" class="material-link"><span class="tag tag-info">Infographic</span> Demonstratives</a>
+                        <a href="STEP-1/SESSION-3/To_Have_Got.html" class="material-link"><span class="tag tag-info">Infographic</span> To Have Got</a>
+                        <a href="STEP-1/SESSION-3/Is_This_Jacket_For_You.html" class="material-link"><span class="tag tag-script">Script</span> Is This Jacket For You?</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 4</summary>
+                        <a href="STEP-1/SESSION-4/Adjectives.html" class="material-link"><span class="tag tag-info">Infographic</span> Adjectives</a>
+                        <a href="STEP-1/SESSION-4/Demonstratives_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Demonstratives Challenge</a>
+                        <a href="STEP-1/SESSION-4/Find_The_Clothing_Item.html" class="material-link"><span class="tag tag-act">Activity</span> Find The Clothing Item</a>
+                        <a href="STEP-1/SESSION-4/Adjectives_Drag_and_Drop.html" class="material-link"><span class="tag tag-act">Activity</span> Adjectives Drag and Drop</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 5</summary>
+                        <a href="STEP-1/SESSION-5/Simple_Present.html" class="material-link"><span class="tag tag-info">Infographic</span> Simple Present</a>
+                        <a href="STEP-1/SESSION-5/Telling_The_Time_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Telling The Time Challenge</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 6</summary>
+                        <a href="STEP-1/SESSION-6/Adverbs_of_Frequency.html" class="material-link"><span class="tag tag-info">Infographic</span> Adverbs of Frequency</a>
+                        <a href="STEP-1/SESSION-6/Choose_The_Correct_Adverb.html" class="material-link"><span class="tag tag-act">Activity</span> Choose The Correct Adverb</a>
+                        <a href="STEP-1/SESSION-6/Daily_Routine_Drag_and_Drop.html" class="material-link"><span class="tag tag-act">Activity</span> Daily Routine Drag and Drop</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 7</summary>
+                        <a href="STEP-1/SESSION-7/There_is_There_are.html" class="material-link"><span class="tag tag-info">Infographic</span> There is / There are</a>
+                        <a href="STEP-1/SESSION-7/Prepositions_of_Place.html" class="material-link"><span class="tag tag-info">Infographic</span> Prepositions of Place</a>
+                        <a href="STEP-1/SESSION-7/There_is_There_are_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> There is / There are Challenge</a>
+                        <a href="STEP-1/SESSION-7/Describe_The_House_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Describe The House Challenge</a>
+                        <a href="STEP-1/SESSION-7/Reading_Comprehension.html" class="material-link"><span class="tag tag-act">Activity</span> Reading Comprehension</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 8</summary>
+                        <a href="STEP-1/SESSION-8/Prepositions_of_Place_2.html" class="material-link"><span class="tag tag-info">Infographic</span> Prepositions of Place 2</a>
+                        <a href="STEP-1/SESSION-8/Speaking_Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Speaking Practice</a>
+                        <a href="STEP-1/SESSION-8/Midterm_Test_Preparation.html" class="material-link"><span class="tag tag-act">Activity</span> Midterm Test Preparation</a>
+                        <a href="STEP-1/SESSION-8/Writing_Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Writing Practice</a>
+                    </details>
+                </details>
+
+                <details class="half-details">
+                    <summary class="half-summary">Second Half</summary>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 9</summary>
+                        <a href="STEP-1/SESSION-9/Countable_vs_Uncountable_Nouns.html" class="material-link"><span class="tag tag-info">Infographic</span> Countable vs Uncountable</a>
+                        <a href="STEP-1/SESSION-9/Some_vs_Any.html" class="material-link"><span class="tag tag-info">Infographic</span> Some vs Any</a>
+                        <a href="STEP-1/SESSION-9/Grocery_Time.html" class="material-link"><span class="tag tag-act">Activity</span> Grocery Time</a>
+                        <a href="STEP-1/SESSION-9/Detective_Grammar.html" class="material-link"><span class="tag tag-act">Activity</span> Detective Grammar</a>
+                        <a href="STEP-1/SESSION-9/Quick-Fire_Speaking_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Speaking Challenge</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 10</summary>
+                        <a href="STEP-1/SESSION-10/Much-Many-A_Lot_Of.html" class="material-link"><span class="tag tag-info">Infographic</span> Much / Many / A Lot Of</a>
+                        <a href="STEP-1/SESSION-10/Containers_and_Quantities.html" class="material-link"><span class="tag tag-info">Infographic</span> Containers & Quantities</a>
+                        <a href="STEP-1/SESSION-10/How_Much-How_Many_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> How Much/Many Challenge</a>
+                        <a href="STEP-1/SESSION-10/Food_Words_Around_The_World.html" class="material-link"><span class="tag tag-act">Activity</span> Food Words Around The World</a>
+                        <a href="STEP-1/SESSION-10/Breakfast_Around_The_World.html" class="material-link"><span class="tag tag-act">Activity</span> Breakfast Around The World</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 11</summary>
+                        <a href="STEP-1/SESSION-11/The_Modal_Verb_CAN.html" class="material-link"><span class="tag tag-info">Infographic</span> The Modal Verb CAN</a>
+                        <a href="STEP-1/SESSION-11/Speak_Like_a_Native_On_The_Phone.html" class="material-link"><span class="tag tag-info">Infographic</span> Speak Like a Native On The Phone</a>
+                        <a href="STEP-1/SESSION-11/Oral_Practice-What_Can_You_Do.html" class="material-link"><span class="tag tag-act">Activity</span> Oral Practice: What Can You Do?</a>
+                        <a href="STEP-1/SESSION-11/Writing_Practice-What_Can_You_Do.html" class="material-link"><span class="tag tag-act">Activity</span> Writing Practice: What Can You Do?</a>
+                        <a href="STEP-1/SESSION-11/Identify_The_Tone_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> Identify The Tone Challenge</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 12</summary>
+                        <a href="STEP-1/SESSION-12/Stative_vs_Dynamic_Verbs.html" class="material-link"><span class="tag tag-info">Infographic</span> Stative vs Dynamic Verbs</a>
+                        <a href="STEP-1/SESSION-12/Progressive_Tenses-Special_Meanings.html" class="material-link"><span class="tag tag-info">Infographic</span> Progressive Tenses: Special Meanings</a>
+                        <a href="STEP-1/SESSION-12/Stative_or_Dynamic_Quiz.html" class="material-link"><span class="tag tag-act">Activity</span> Stative or Dynamic Quiz</a>
+                        <a href="STEP-1/SESSION-12/Error_Spotting-Stative_Verbs.html" class="material-link"><span class="tag tag-act">Activity</span> Error Spotting: Stative Verbs</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 13</summary>
+                        <a href="STEP-1/SESSION-13/Simple_Past.html" class="material-link"><span class="tag tag-info">Infographic</span> Simple Past</a>
+                        <a href="STEP-1/SESSION-13/Regular_and_Irregular_Verbs.html" class="material-link"><span class="tag tag-info">Infographic</span> Regular and Irregular Verbs</a>
+                        <a href="STEP-1/SESSION-13/Simple_Past_Drag_and_Drop.html" class="material-link"><span class="tag tag-act">Activity</span> Simple Past Drag and Drop</a>
+                        <a href="STEP-1/SESSION-13/Simple_Past_Pick_From_Combo.html" class="material-link"><span class="tag tag-act">Activity</span> Simple Past Pick From Combo</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 14</summary>
+                        <a href="STEP-1/SESSION-14/Simple_Past_Negative_and_Questions.html" class="material-link"><span class="tag tag-info">Infographic</span> Simple Past Negative & Questions</a>
+                        <a href="STEP-1/SESSION-14/There_Was_and_There_Were.html" class="material-link"><span class="tag tag-info">Infographic</span> There Was and There Were</a>
+                        <a href="STEP-1/SESSION-14/ED_Sound_Sort_Challenge.html" class="material-link"><span class="tag tag-act">Activity</span> ED Sound Sort Challenge</a>
+                        <a href="STEP-1/SESSION-14/The_Ultimate_Activity_About_The_Past.html" class="material-link"><span class="tag tag-act">Activity</span> Ultimate Past Activity</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 15</summary>
+                        <a href="STEP-1/SESSION-15/Future_With_Going_To.html" class="material-link"><span class="tag tag-info">Infographic</span> Future With Going To</a>
+                        <a href="STEP-1/SESSION-15/Reading-Are_You_a_Seasoned_Traveler.html" class="material-link"><span class="tag tag-act">Activity</span> Reading: Are You a Seasoned Traveler</a>
+                        <a href="STEP-1/SESSION-15/Transforming_Sentences_With_Going_To.html" class="material-link"><span class="tag tag-act">Activity</span> Transforming Sentences With Going To</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 16</summary>
+                        <a href="STEP-1/SESSION-16/Like_vs_Would_Like.html" class="material-link"><span class="tag tag-info">Infographic</span> Like vs Would Like</a>
+                        <a href="STEP-1/SESSION-16/Would_Like_To_vs_Want_To.html" class="material-link"><span class="tag tag-info">Infographic</span> Would Like To vs Want To</a>
+                        <a href="STEP-1/SESSION-16/Using_Should.html" class="material-link"><span class="tag tag-info">Infographic</span> Using Should</a>
+                        <a href="STEP-1/SESSION-16/Like-Would like-Want_Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Like / Would Like / Want Practice</a>
+                        <a href="STEP-1/SESSION-16/Giving_Advice.html" class="material-link"><span class="tag tag-act">Activity</span> Giving Advice</a>
+                        <a href="STEP-1/SESSION-16/Immigration_Interview_Strategy.html" class="material-link"><span class="tag tag-act">Activity</span> Immigration Interview Strategy</a>
+                    </details>
+                </details>
+            </details>
+
+            <details>
+                <summary class="folder-summary">Step 2</summary>
+                
+                <details class="half-details">
+                    <summary class="half-summary">First Half</summary>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 1</summary>
+                        <a href="STEP-2/SESSION-01/Family_Tree.html" class="material-link"><span class="tag tag-info">Infographic</span> Family Tree</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 2</summary>
+                        <a href="STEP-2/SESSION-02/Use_of_Can.html" class="material-link"><span class="tag tag-info">Infographic</span> Use of Can</a>
+                        <a href="STEP-2/SESSION-02/Telling_The_Time.html" class="material-link"><span class="tag tag-info">Infographic</span> Telling The Time</a>
+                        <a href="STEP-2/SESSION-02/Professions.html" class="material-link"><span class="tag tag-act">Activity</span> Professions</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 3</summary>
+                        <a href="STEP-2/SESSION-03/Prepositions_of_Time.html" class="material-link"><span class="tag tag-info">Infographic</span> Prepositions of Time</a>
+                        <a href="STEP-2/SESSION-03/Would_Like_vs_Want_To.html" class="material-link"><span class="tag tag-info">Infographic</span> Would Like vs Want To</a>
+                        <a href="STEP-2/SESSION-03/Prepositions_of_Time-Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Prepositions of Time Practice</a>
+                        <a href="STEP-2/SESSION-03/Prepositions_of_Time-Practice_2.html" class="material-link"><span class="tag tag-act">Activity</span> Prepositions of Time Practice 2</a>
+                        <a href="STEP-2/SESSION-03/Would_Like_vs_Want_To-Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Would Like vs Want To Practice</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 4</summary>
+                        <a href="STEP-2/SESSION-04/Adverbs_of_Frequency.html" class="material-link"><span class="tag tag-info">Infographic</span> Adverbs of Frequency</a>
+                        <a href="STEP-2/SESSION-04/Adverbs_of_Frequency-Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Adverbs of Frequency Practice</a>
+                        <a href="STEP-2/SESSION-04/Daily_Routine_Writer.html" class="material-link"><span class="tag tag-act">Activity</span> Daily Routine Writer</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 05</summary>
+                        <a href="STEP-2/SESSION-05/Present_Progressive.html" class="material-link"><span class="tag tag-info">Infographic</span> Present Progressive</a>
+                        <a href="STEP-2/SESSION-05/Possessive_Pronouns.html" class="material-link"><span class="tag tag-info">Infographic</span> Possessive Pronouns</a>
+                        <a href="STEP-2/SESSION-05/Possessive_Pronouns-Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Possessive Pronouns Practice</a>
+                        <a href="STEP-2/SESSION-05/Simple_Present-Practice.html" class="material-link"><span class="tag tag-act">Activity</span> Simple Present Practice</a>
+                    </details>
+
+                    <details class="sub-details">
+                        <summary class="sub-summary">Session 06</summary>
+                        <a href="STEP-2/SESSION-06/There is_There are.html" class="material-link"><span class="tag tag-info">Infographic</span> There Is / There Are</a>
+                        <a href="STEP-2/SESSION-06/Room_Furniture-Match.html" class="material-link"><span class="tag tag-act">Activity</span> Room Furniture Match</a>
+                    </details>
+                </details>
+
+                <details class="half-details">
+                    <summary class="half-summary">Second Half</summary>
+                    <div style="padding: 1.5rem; text-align: center; color: #666; font-style: italic; font-size: 0.9rem;">
+                        Upcoming sessions will be unlocked here...
+                    </div>
+                </details>
+            </details>
+
+            <details>
+                <summary class="folder-summary">General Tools</summary>
+                <div class="sub-details">
+                    <a href="collage.html" class="material-link"><span class="tag tag-tool">Tool</span> Collage Activity</a>
+                    <a href="collage6.html" class="material-link"><span class="tag tag-tool">Tool</span> Collage 6 Images</a>
+                    <a href="generador-ppt.html" class="material-link"><span class="tag tag-tool">Tool</span> PPT Generator</a>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password-input").value;
+            const errorMessage = document.getElementById("error-message");
+            const loginForm = document.getElementById("login-form");
+            const mainContent = document.getElementById("main-content");
+            const correctPassword = "admin"; 
+            if (password === correctPassword) {
+                loginForm.style.display = "none";
+                mainContent.style.display = "block";
+                errorMessage.style.display = "none";
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
