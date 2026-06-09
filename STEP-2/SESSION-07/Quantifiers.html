@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantifiers - Executive Reference</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Formula Box Styling */
+        .formula-box {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #D4AF37;
+            text-align: center;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 4.5rem;
+        }
+
+        /* Custom Tag Styling */
+        .tag-u {
+            background-color: #0B192C;
+            color: #D4AF37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .tag-c {
+            background-color: #F8F9FA;
+            color: #0B192C;
+            border: 1px solid #cbd5e1;
+        }
+        .tag-both {
+            background-color: #E2E8F0;
+            color: #121212;
+            border: 1px solid #94A3B8;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Advanced Quantifiers
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                A quick guide for quantity words. Master the executive formula: <br>
+                <strong class="text-[#D4AF37] font-semibold tracking-wider">Noun Type + Sentence Type = Your Best Choice.</strong>
+            </p>
+        </header>
+
+        <!-- SECTION 1: Core Uses (The Executive Table) -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-white">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-10">
+                <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] m-0">
+                    The Core Uses
+                </h2>
+                <div class="flex gap-3 mt-2 md:mt-0">
+                    <span class="tag-u text-[11px] font-bold px-3 py-1 rounded uppercase tracking-widest shadow-sm">[U] Uncountable</span>
+                    <span class="tag-c text-[11px] font-bold px-3 py-1 rounded uppercase tracking-widest shadow-sm">[C] Countable Plural</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden max-w-5xl mx-auto">
+                <table class="min-w-full text-left border-collapse">
+                    <thead class="bg-[#0B192C] text-white">
+                        <tr>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest border-r border-white/10 w-1/6 text-[#D4AF37]">Word</th>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest border-r border-white/10 w-1/6 text-center">Use With</th>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest border-r border-white/10 w-1/3">Typical Use</th>
+                            <th class="py-4 px-6 font-bold text-xs uppercase tracking-widest w-1/3">Contextual Example</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-[14px] divide-y divide-gray-100 text-[#121212]">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base">much</td>
+                            <td class="py-4 px-6 border-r border-gray-100 text-center"><span class="tag-u text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">[U]</span></td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100 font-medium">Questions / Negatives.</td>
+                            <td class="py-4 px-6 text-gray-700 italic">"Do you have <strong class="text-[#0B192C] not-italic">much</strong> time?"</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors bg-gray-50/50">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base">many</td>
+                            <td class="py-4 px-6 border-r border-gray-100 text-center"><span class="tag-c text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">[C]</span></td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100 font-medium">Questions / Negatives.</td>
+                            <td class="py-4 px-6 text-gray-700 italic">"There are not <strong class="text-[#0B192C] not-italic">many</strong> buses."</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base">a lot of</td>
+                            <td class="py-4 px-6 border-r border-gray-100 text-center"><span class="tag-both text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">[U] or [C]</span></td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100 font-medium">Neutral / Affirmative.</td>
+                            <td class="py-4 px-6 text-gray-700 italic">"We have <strong class="text-[#0B192C] not-italic">a lot of</strong> homework."</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors bg-gray-50/50">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base">lots of</td>
+                            <td class="py-4 px-6 border-r border-gray-100 text-center"><span class="tag-both text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">[U] or [C]</span></td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100 font-medium">Informal, equivalent to 'a lot of'.</td>
+                            <td class="py-4 px-6 text-gray-700 italic">"There are <strong class="text-[#0B192C] not-italic">lots of</strong> apples."</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base">a little</td>
+                            <td class="py-4 px-6 border-r border-gray-100 text-center"><span class="tag-u text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">[U]</span></td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100 font-medium">Small amount, positive meaning.</td>
+                            <td class="py-4 px-6 text-gray-700 italic">"There is <strong class="text-[#0B192C] not-italic">a little</strong> milk."</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors bg-gray-50/50">
+                            <td class="py-4 px-6 font-bold text-[#0B192C] border-r border-gray-100 text-base">a few</td>
+                            <td class="py-4 px-6 border-r border-gray-100 text-center"><span class="tag-c text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">[C]</span></td>
+                            <td class="py-4 px-6 text-gray-700 border-r border-gray-100 font-medium">Small number, positive meaning.</td>
+                            <td class="py-4 px-6 text-gray-700 italic">"I have <strong class="text-[#0B192C] not-italic">a few</strong> friends."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- SECTION 2: The Quick Chooser Matrix -->
+        <div class="p-8 md:p-12 bg-[#F8F9FA] border-b border-gray-200">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                The Quick Chooser
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                
+                <!-- Questions & Negatives -->
+                <div class="bg-white rounded-xl shadow-sm border-t-[4px] border-[#0B192C] p-6 md:p-8 flex flex-col justify-start">
+                    <h3 class="font-bold text-[#0B192C] text-[16px] mb-6 uppercase tracking-wide text-center border-b border-gray-100 pb-3">
+                        Questions & Negatives
+                    </h3>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <div class="flex items-center justify-between bg-gray-50 p-4 rounded border border-gray-100">
+                            <div>
+                                <span class="tag-u text-[10px] font-bold px-2 py-0.5 rounded mr-2">[U]</span>
+                                <span class="text-sm font-medium text-gray-600">water, money</span>
+                            </div>
+                            <span class="font-bold text-lg text-[#0B192C]">much</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-gray-50 p-4 rounded border border-gray-100">
+                            <div>
+                                <span class="tag-c text-[10px] font-bold px-2 py-0.5 rounded mr-2">[C]</span>
+                                <span class="text-sm font-medium text-gray-600">books, cars</span>
+                            </div>
+                            <span class="font-bold text-lg text-[#0B192C]">many</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Affirmatives -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] p-6 md:p-8 flex flex-col justify-start bg-pattern relative overflow-hidden">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="font-bold text-[#D4AF37] text-[16px] mb-6 uppercase tracking-wide text-center border-b border-white/10 pb-3">
+                            Affirmatives
+                        </h3>
+                        
+                        <div class="space-y-4 flex-grow">
+                            <div class="flex flex-col bg-white/5 p-4 rounded border border-white/10">
+                                <div class="mb-2">
+                                    <span class="tag-u text-[10px] font-bold px-2 py-0.5 rounded mr-2">[U]</span>
+                                    <span class="text-sm font-medium text-gray-300">water, money</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-bold text-base text-white">a lot of / lots of / <span class="text-[#D4AF37]">a little</span></span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col bg-white/5 p-4 rounded border border-white/10">
+                                <div class="mb-2">
+                                    <span class="tag-c text-[10px] font-bold px-2 py-0.5 rounded mr-2">[C]</span>
+                                    <span class="text-sm font-medium text-gray-300">books, cars</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-bold text-base text-white">a lot of / lots of / <span class="text-[#D4AF37]">a few</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: Watch Out & Key Considerations -->
+        <div class="p-8 md:p-12 bg-white">
+            <h2 class="text-2xl font-playfair font-bold text-[#0B192C] mb-8 flex items-center justify-center text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#D4AF37] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                Key Considerations
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto items-stretch">
+                
+                <!-- Watch Out (Mistakes) -->
+                <div class="bg-gray-50 border-l-[4px] border-[#EF4444] p-6 rounded-r-xl shadow-sm flex flex-col justify-start">
+                    <h3 class="font-bold text-[#EF4444] text-[16px] mb-4 uppercase tracking-wide">
+                        Watch Out
+                    </h3>
+                    <p class="text-[14px] text-gray-600 mb-4 font-medium">Never mix a countable quantifier with an uncountable noun, or vice versa.</p>
+                    
+                    <div class="space-y-3">
+                        <div class="bg-white rounded p-3 text-[14px] border border-gray-200 shadow-inner flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>much apples</s></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#D4AF37] font-bold">➔</span>
+                                <span class="font-bold text-[#0B192C]">many apples</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded p-3 text-[14px] border border-gray-200 shadow-inner flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>many money</s></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#D4AF37] font-bold">➔</span>
+                                <span class="font-bold text-[#0B192C]">much money</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded p-3 text-[14px] border border-gray-200 shadow-inner flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#EF4444] font-bold">✕</span>
+                                <span><s>lots coffee</s></span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[#D4AF37] font-bold">➔</span>
+                                <span class="font-bold text-[#0B192C]">lots of coffee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra Note (Subtle Differences) -->
+                <div class="bg-[#0B192C] border-l-[4px] border-[#D4AF37] p-6 rounded-r-xl shadow-md flex flex-col justify-start relative overflow-hidden bg-pattern">
+                    <div class="relative z-10">
+                        <h3 class="font-bold text-[#D4AF37] text-[16px] mb-4 uppercase tracking-wide flex items-center gap-2">
+                            <svg class="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            The "A" makes a difference
+                        </h3>
+                        <p class="text-[14px] text-gray-300 mb-5 font-medium leading-relaxed">
+                            Using <strong class="text-white font-bold">little</strong> and <strong class="text-white font-bold">few</strong> without the "a" conveys a <em class="text-[#D4AF37]">negative</em> or insufficient meaning.
+                        </p>
+                        
+                        <ul class="space-y-4 text-[14px] text-gray-200">
+                            <li class="flex items-start bg-white/5 p-3 rounded border border-white/10">
+                                <span class="text-[#D4AF37] mr-3 font-bold">●</span>
+                                <span>
+                                    <strong class="text-white block mb-1">We have little time.</strong>
+                                    <span class="italic text-gray-400">Meaning: We have almost none. (Negative tone)</span>
+                                </span>
+                            </li>
+                            <li class="flex items-start bg-white/5 p-3 rounded border border-white/10">
+                                <span class="text-[#D4AF37] mr-3 font-bold">●</span>
+                                <span>
+                                    <strong class="text-white block mb-1">I have few friends here.</strong>
+                                    <span class="italic text-gray-400">Meaning: I do not have many. (Negative tone)</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>
