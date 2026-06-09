@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prepositions of Time Practice - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Premium Select Dropdown */
+        .premium-select {
+            appearance: none;
+            background-color: transparent;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.25rem center;
+            background-size: 1rem;
+            min-width: 90px;
+        }
+
+        .premium-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .premium-select:disabled {
+            cursor: default;
+            opacity: 1;
+            border-bottom-color: transparent;
+            background-image: none;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Prepositions of Time <br>
+                <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2">at - in - on</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Make the right choice. Select the most accurate preposition to complete each statement in a professional or daily context.
+            </p>
+        </header>
+
+        <div class="p-8 md:p-12">
+            
+            <!-- Interactive Assessment (Pure Activity) -->
+            <section>
+                
+                <div class="mb-10 mt-2">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center">
+                        <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                        Knowledge Application
+                        <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+                    </h2>
+                </div>
+
+                <!-- Quiz Grid Container -->
+                <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6 mb-8">
+                    <!-- Dynamic content will be injected here via JS -->
+                </div>
+
+                <!-- Controls -->
+                <div class="mt-16 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                    <!-- Score Display -->
+                    <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                        Score: 0 / 12
+                    </div>
+                    
+                    <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                        Validate Responses
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>
+                    <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                        Reset
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-lg mb-0 leading-relaxed font-medium">
+                        You have successfully demonstrated absolute mastery over time prepositions. Structural accuracy is the foundation of clear, authoritative, and professional communication.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        const quizData = [
+            { id: 1, pre: "The museum opens", post: "Monday.", answer: "on", options: ["at", "in", "on"] },
+            { id: 2, pre: "The party is", post: "Saturday night.", answer: "on", options: ["at", "in", "on"] },
+            { id: 3, pre: "We graduated", post: "2019.", answer: "in", options: ["at", "in", "on"] },
+            { id: 4, pre: "They moved here", post: "May.", answer: "in", options: ["at", "in", "on"] },
+            { id: 5, pre: "She called me", post: "the afternoon.", answer: "in", options: ["at", "in", "on"] },
+            { id: 6, pre: "He arrived", post: "time to catch the train.", answer: "in", options: ["at", "in", "on"] }, // "in time to do something" rule
+            { id: 7, pre: "Sarah has a workshop", post: "3 p.m.", answer: "at", options: ["at", "in", "on"] }, // Name filtered for brand safety
+            { id: 8, pre: "He will be free", post: "the moment.", answer: "at", options: ["at", "in", "on"] },
+            { id: 9, pre: "I want to finish this", post: "the future.", answer: "in", options: ["at", "in", "on"] },
+            { id: 10, pre: "Our exam is", post: "12 June.", answer: "on", options: ["at", "in", "on"] },
+            { id: 11, pre: "The flight landed", post: "midnight.", answer: "at", options: ["at", "in", "on"] },
+            { id: 12, pre: "The concert is", post: "my birthday.", answer: "on", options: ["at", "in", "on"] }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderOptions(optionsArray) {
+            return optionsArray.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col justify-center p-5 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-center flex-wrap gap-3 text-base md:text-lg">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-sm shadow-sm shrink-0 border border-[#D4AF37]/30">
+                                ${index + 1}
+                            </div>
+                            <span class="text-[#121212] font-semibold">${item.pre}</span>
+                            
+                            <select id="select-${item.id}" class="premium-select bg-gray-50 rounded border-none focus:bg-white focus:ring-0">
+                                <option value="" disabled selected>Select</option>
+                                ${renderOptions(item.options)}
+                            </select>
+                            
+                            <span class="text-[#121212] font-semibold">${item.post}</span>
+                        </div>
+                        <div id="feedback-${item.id}" class="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 transition-opacity duration-300"></div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+            const totalQuestions = quizData.length;
+
+            quizData.forEach(item => {
+                const selectElement = document.getElementById(`select-${item.id}`);
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackElement = document.getElementById(`feedback-${item.id}`);
+                const selectedValue = selectElement.value;
+
+                // Reset states
+                cardElement.classList.remove('animate-shake', 'bg-red-50', 'border-red-200', 'bg-green-50', 'border-green-200', 'border-[#D4AF37]');
+                feedbackElement.classList.remove('opacity-100');
+                feedbackElement.classList.add('opacity-0');
+
+                if (selectedValue === item.answer) {
+                    // Success State
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    selectElement.disabled = true;
+                    selectElement.classList.remove('text-[#0B192C]', 'bg-gray-50');
+                    selectElement.classList.add('text-[#047857]', 'font-bold', 'bg-transparent');
+                    feedbackElement.innerHTML = iconSuccess;
+                    feedbackElement.classList.remove('opacity-0');
+                    feedbackElement.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    // Error / Incomplete State
+                    if (selectedValue !== "") {
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackElement.innerHTML = iconError;
+                        feedbackElement.classList.remove('opacity-0');
+                        feedbackElement.classList.add('opacity-100');
+                        
+                        setTimeout(() => {
+                            cardElement.classList.remove('animate-shake');
+                        }, 400);
+                    } else {
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            renderQuiz(); 
+            
+            scoreDisplay.textContent = `Score: 0 / ${quizData.length}`;
+            scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
