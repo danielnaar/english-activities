@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Should vs Shouldn't - Executive Reference</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Formula Box Styling */
+        .formula-box {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #D4AF37;
+            text-align: center;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 4.5rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Should <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2">&amp;</span> Shouldn't
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Master the art of giving advice, making polite suggestions, and expressing professional expectations with perfect structural accuracy.
+            </p>
+        </header>
+
+        <!-- SECTION 1: The Core Framework -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-[#F8F9FA]">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                The Structural Framework
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+                
+                <!-- Affirmative -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern">
+                    <div class="p-6 relative z-10 flex flex-col justify-start">
+                        <h3 class="text-lg font-playfair font-bold text-white mb-3 text-center">Affirmative</h3>
+                        <div class="formula-box text-sm">
+                            <span>Subject + <span class="text-white">should</span> + base verb</span>
+                        </div>
+                        <div class="bg-white/5 rounded p-3 text-[14px] text-gray-300 border border-white/10 text-center italic">
+                            "You <strong class="text-white not-italic">should drink</strong> more water."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Negative -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern">
+                    <div class="p-6 relative z-10 flex flex-col justify-start">
+                        <h3 class="text-lg font-playfair font-bold text-white mb-3 text-center">Negative</h3>
+                        <div class="formula-box text-sm">
+                            <span>Subject + <span class="text-white">shouldn't</span> + base verb</span>
+                        </div>
+                        <div class="bg-white/5 rounded p-3 text-[14px] text-gray-300 border border-white/10 text-center italic">
+                            "He <strong class="text-white not-italic">shouldn't drive</strong> so fast."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern">
+                    <div class="p-6 relative z-10 flex flex-col justify-start">
+                        <h3 class="text-lg font-playfair font-bold text-white mb-3 text-center">Questions</h3>
+                        <div class="formula-box text-sm">
+                            <span><span class="text-white">Should</span> + subject + base verb?</span>
+                        </div>
+                        <div class="bg-white/5 rounded p-3 text-[14px] text-gray-300 border border-white/10 text-center italic">
+                            "<strong class="text-white not-italic">Should we book</strong> a table?"
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- The Golden Rule -->
+            <div class="max-w-3xl mx-auto bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6 justify-center">
+                <div class="w-14 h-14 rounded-full bg-[#D4AF37]/10 flex items-center justify-center shrink-0 border border-[#D4AF37]/30">
+                    <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#0B192C] uppercase tracking-widest text-sm mb-1">The Golden Rule</h4>
+                    <p class="text-gray-700 text-[15px] leading-relaxed">
+                        After <em>should</em> or <em>shouldn't</em>, <strong>always</strong> use the base verb. 
+                        <br><span class="text-[#EF4444] font-bold">No "to"</span>, <span class="text-[#EF4444] font-bold">no "-s"</span>, <span class="text-[#EF4444] font-bold">no "-ed"</span>. 
+                        <span class="text-[#10B981] font-bold ml-2">✓ should go</span>, <span class="text-[#10B981] font-bold">✓ should study</span>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Professional Contexts -->
+        <div class="p-8 md:p-12 bg-white border-b border-gray-100">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Professional Contexts
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                
+                <!-- Advice -->
+                <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all border-t-[4px] border-t-[#3B82F6] flex flex-col">
+                    <h3 class="font-bold text-[#0B192C] text-lg mb-2 flex items-center gap-2">
+                        <span class="text-[#3B82F6]">●</span> Advice
+                    </h3>
+                    <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Soft suggestion / Friendly tone</p>
+                    <div class="bg-white p-4 rounded border border-gray-200 flex-grow shadow-inner">
+                        <p class="italic text-gray-700 mb-3">"You <strong class="text-[#0B192C] not-italic">should see</strong> a doctor."</p>
+                        <p class="italic text-gray-700">"You <strong class="text-[#0B192C] not-italic">shouldn't skip</strong> breakfast."</p>
+                    </div>
+                </div>
+
+                <!-- Opinion -->
+                <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all border-t-[4px] border-t-[#10B981] flex flex-col">
+                    <h3 class="font-bold text-[#0B192C] text-lg mb-2 flex items-center gap-2">
+                        <span class="text-[#10B981]">●</span> Opinion & Recommendation
+                    </h3>
+                    <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Often paired with 'I think'</p>
+                    <div class="bg-white p-4 rounded border border-gray-200 flex-grow shadow-inner">
+                        <p class="italic text-gray-700 mb-3">"<strong class="text-[#0B192C] not-italic">I think we should start</strong> earlier."</p>
+                        <p class="italic text-gray-700">"<strong class="text-[#EF4444] not-italic">I don't think</strong> you <strong class="text-[#0B192C] not-italic">should buy</strong> it now."</p>
+                    </div>
+                </div>
+
+                <!-- Expectation -->
+                <div class="bg-gray-50 rounded-xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-all border-t-[4px] border-t-[#8B5CF6] flex flex-col">
+                    <h3 class="font-bold text-[#0B192C] text-lg mb-2 flex items-center gap-2">
+                        <span class="text-[#8B5CF6]">●</span> Expectation & Probability
+                    </h3>
+                    <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest mb-4">Not 100% certain, but probable</p>
+                    <div class="bg-white p-4 rounded border border-gray-200 flex-grow shadow-inner">
+                        <p class="italic text-gray-700 mb-3">"The bus <strong class="text-[#0B192C] not-italic">should arrive</strong> at 7."</p>
+                        <p class="italic text-gray-700">"It <strong class="text-[#0B192C] not-italic">shouldn't take</strong> long."</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: Executive Precision & Comparisons -->
+        <div class="p-8 md:p-12 bg-[#F8F9FA]">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto items-start">
+                
+                <!-- Left Column: Mistakes & Pronunciation -->
+                <div class="space-y-8">
+                    
+                    <!-- Common Mistakes -->
+                    <div class="bg-white border-l-[4px] border-[#EF4444] p-6 rounded-r-xl shadow-sm">
+                        <h3 class="font-bold text-[#0B192C] text-lg mb-5 flex items-center gap-2">
+                            <svg class="w-5 h-5 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            Common Errors to Avoid
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-gray-50 rounded p-3 text-[14px] border border-gray-200 shadow-inner">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-[#EF4444] font-bold">✕</span>
+                                    <span><s>He shoulds study more.</s></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[#10B981] font-bold">✓</span>
+                                    <span class="font-bold text-[#0B192C]">He should study more.</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 rounded p-3 text-[14px] border border-gray-200 shadow-inner">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-[#EF4444] font-bold">✕</span>
+                                    <span><s>You should to practice every day.</s></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[#10B981] font-bold">✓</span>
+                                    <span class="font-bold text-[#0B192C]">You should practice every day.</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 rounded p-3 text-[14px] border border-gray-200 shadow-inner">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-[#EF4444] font-bold">✕</span>
+                                    <span><s>Do you should call your mom?</s></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[#10B981] font-bold">✓</span>
+                                    <span class="font-bold text-[#0B192C]">Should you call your mom?</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded p-3 text-[14px] border border-gray-200 shadow-inner">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-[#EF4444] font-bold">✕</span>
+                                    <span><s>I don't should eat late.</s></span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[#10B981] font-bold">✓</span>
+                                    <span class="font-bold text-[#0B192C]">I shouldn't eat late.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Tips (Pronunciation & Adverbs) -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-[#0B192C] text-white p-5 rounded-xl shadow-md relative overflow-hidden bg-pattern">
+                            <div class="relative z-10">
+                                <span class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest block mb-2">Pronunciation</span>
+                                <p class="text-sm font-medium mb-1">The 'L' is <strong class="text-[#EF4444]">silent</strong>.</p>
+                                <p class="text-gray-300 text-xs italic mb-2">should = /ʃʊd/ <br> shouldn't = /ʃʊdənt/</p>
+                                <div class="bg-white/10 text-center py-1 rounded text-xs font-bold border border-white/20">
+                                    Tip: say "shood"
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-gray-200 p-5 rounded-xl shadow-sm">
+                            <span class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest block mb-2">With Adverbs</span>
+                            <p class="text-xs text-gray-600 mb-2">Place adverbs like <em>probably, really, definitely</em> after the subject or after should.</p>
+                            <ul class="text-xs font-semibold text-[#0B192C] space-y-1">
+                                <li>✓ You <span class="text-[#D4AF37]">should probably</span> call.</li>
+                                <li>✓ You <span class="text-[#D4AF37]">probably should</span> call.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Modal Comparisons -->
+                <div>
+                    <h3 class="font-playfair font-bold text-2xl text-[#0B192C] mb-5">
+                        Modal Power Scale
+                    </h3>
+                    <p class="text-[14px] text-gray-600 mb-6 font-medium">Understand the exact severity of the modal verb you choose to use in the workplace.</p>
+                    
+                    <div class="space-y-4">
+                        
+                        <!-- Should -->
+                        <div class="bg-white p-4 rounded-lg border-l-[4px] border-l-[#3B82F6] shadow-sm flex items-start gap-4">
+                            <div class="w-20 shrink-0">
+                                <span class="font-bold text-[#0B192C]">Should</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">Soft advice / expectation</p>
+                                <p class="text-sm italic text-gray-700">"You should wear a helmet."</p>
+                            </div>
+                        </div>
+
+                        <!-- Ought to -->
+                        <div class="bg-white p-4 rounded-lg border-l-[4px] border-l-[#8B5CF6] shadow-sm flex items-start gap-4">
+                            <div class="w-20 shrink-0">
+                                <span class="font-bold text-[#0B192C]">Ought to</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">Similar to should, more formal</p>
+                                <p class="text-sm italic text-gray-700">"You ought to wear a helmet."</p>
+                            </div>
+                        </div>
+
+                        <!-- Had better -->
+                        <div class="bg-white p-4 rounded-lg border-l-[4px] border-l-[#F59E0B] shadow-sm flex items-start gap-4">
+                            <div class="w-20 shrink-0">
+                                <span class="font-bold text-[#0B192C]">Had better</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">Strong advice + warning</p>
+                                <p class="text-sm italic text-gray-700">"You had better wear a helmet."</p>
+                            </div>
+                        </div>
+
+                        <!-- Must / Have to -->
+                        <div class="bg-white p-4 rounded-lg border-l-[4px] border-l-[#EF4444] shadow-sm flex items-start gap-4">
+                            <div class="w-20 shrink-0">
+                                <span class="font-bold text-[#0B192C]">Must / Have to</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">Strong obligation / strict rule</p>
+                                <p class="text-sm italic text-gray-700">"You must wear a helmet."</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Advanced Note -->
+                    <div class="mt-6 bg-[#0B192C] text-white p-5 rounded-lg border border-[#D4AF37]/50 shadow-md">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-[#D4AF37] font-bold">✦</span>
+                            <span class="text-sm font-bold uppercase tracking-widest text-[#D4AF37]">Advanced Note</span>
+                        </div>
+                        <p class="text-sm font-bold mb-1">Past Regrets / Criticism:</p>
+                        <p class="text-xs text-gray-300 mb-2">Form: <strong class="text-white">should have + past participle</strong></p>
+                        <ul class="text-xs text-gray-300 italic space-y-1">
+                            <li>"You <strong class="text-white not-italic">should have called</strong> me."</li>
+                            <li>"You <strong class="text-white not-italic">shouldn't have shouted</strong>."</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+</body>
+</html>
