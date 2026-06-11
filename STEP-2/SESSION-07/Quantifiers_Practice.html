@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantifiers Practice - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Premium Select Dropdown */
+        .premium-select {
+            appearance: none;
+            background-color: transparent;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.25rem center;
+            background-size: 1rem;
+            min-width: 130px;
+            margin: 0 0.5rem;
+        }
+
+        .premium-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .premium-select:disabled {
+            cursor: default;
+            opacity: 1;
+            border-bottom-color: transparent;
+            background-image: none;
+        }
+        
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Executive Power Bowl
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Fill the recipe instructions with the most precise quantifiers: <strong class="text-[#D4AF37] font-semibold tracking-wider">much, many, some, a lot of, a few, a little, any</strong>. Consider the context and noun type.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-12">
+            
+            <!-- Interactive Assessment (Split Sections) -->
+            <section class="mb-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    
+                    <!-- Ingredients Section -->
+                    <div>
+                        <div class="mb-6 border-b border-gray-100 pb-3">
+                            <h2 class="text-2xl font-playfair font-bold text-[#0B192C] flex items-center gap-3">
+                                <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                                Ingredients
+                            </h2>
+                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest mt-1">Serves two professionals</p>
+                        </div>
+                        
+                        <div id="ingredients-container" class="space-y-4">
+                            <!-- Dynamic content injected here -->
+                        </div>
+                    </div>
+
+                    <!-- Steps Section -->
+                    <div>
+                        <div class="mb-6 border-b border-gray-100 pb-3">
+                            <h2 class="text-2xl font-playfair font-bold text-[#0B192C] flex items-center gap-3">
+                                <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Preparation Steps
+                            </h2>
+                            <p class="text-xs text-gray-500 font-semibold uppercase tracking-widest mt-1">Keep it simple and precise</p>
+                        </div>
+                        
+                        <div id="steps-container" class="space-y-4">
+                            <!-- Dynamic content injected here -->
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controls -->
+                <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                    <!-- Score Display -->
+                    <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                        Score: 0 / 12
+                    </div>
+                    
+                    <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                        Validate Responses
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>
+                    <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                        Reset
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium">
+                        You have successfully completed the recipe with flawless quantification. Accurate use of quantifiers demonstrates an advanced level of English proficiency.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        const optionsBank = ["much", "many", "some", "a lot of", "a few", "a little", "any"];
+
+        // Data separated logically. 
+        // Agregada la propiedad 'explanation' en español para el feedback.
+        const ingredientsData = [
+            { 
+                id: 'q1', pre: "1) We need", post: "cherry tomatoes.", hint: "(12 pieces)", 
+                valid: ["a few", "some"],
+                explanation: "Los tomates son <strong>contables plurales</strong>. Usamos 'a few' o 'some' para indicar una cantidad pequeña positiva."
+            },
+            { 
+                id: 'q2', pre: "2) We do not use", post: "sugar.", hint: "", 
+                valid: ["much", "any"],
+                explanation: "El azúcar (sugar) es <strong>incontable</strong> y la oración es negativa. 'Any' significa 'nada de' y 'much' significa 'mucho'."
+            },
+            { 
+                id: 'q3', pre: "3) Add", post: "olive oil.", hint: "(just a touch)", 
+                valid: ["a little"],
+                explanation: "El aceite (oil) es <strong>incontable</strong>. Para expresar 'un poco' de algo incontable usamos 'a little'."
+            },
+            { 
+                id: 'q4', pre: "4) Do we have", post: "avocados?", hint: "", 
+                valid: ["any", "many"],
+                explanation: "Los aguacates (avocados) son <strong>contables plurales</strong>. En preguntas es común usar 'any' (algunos) o 'many' (muchos)."
+            },
+            { 
+                id: 'q5', pre: "5) We buy", post: "lemons because we love sour flavors.", hint: "", 
+                valid: ["a lot of", "many"],
+                explanation: "Los limones son <strong>contables</strong>. Como amamos los sabores ácidos, compramos una gran cantidad ('a lot of' o 'many')."
+            },
+            { 
+                id: 'q6', pre: "6) Slice", post: "red onions.", hint: "(two or three)", 
+                valid: ["a few"],
+                explanation: "Las cebollas son <strong>contables</strong>. Para referirte a un número pequeño (dos o tres), la opción correcta es 'a few'."
+            }
+        ];
+
+        const stepsData = [
+            { 
+                id: 'q7', pre: "7) Wash the veggies. There are", post: "seeds in the tomatoes; remove them.", hint: "", 
+                valid: ["many", "a lot of", "a few", "some"], // Añadida validación de lógica del usuario
+                explanation: "Las semillas (seeds) son <strong>contables plurales</strong>. Puedes usar 'many', 'a lot of', 'some' o 'a few'. ¡Todas son gramaticalmente correctas aquí!"
+            },
+            { 
+                id: 'q8', pre: "8) Chop", post: "fresh basil and add it to the bowl.", hint: "", 
+                valid: ["some", "a little"],
+                explanation: "La albahaca (basil) es <strong>incontable</strong>. Para agregar una cantidad moderada usa 'some' o 'a little'."
+            },
+            { 
+                id: 'q9', pre: "9) Do not add", post: "salt if the cheese is salty.", hint: "", 
+                valid: ["any", "much"],
+                explanation: "La sal (salt) es <strong>incontable</strong> en una oración negativa. Usamos 'any' o 'much'."
+            },
+            { 
+                id: 'q10', pre: "10) Mix everything with", post: "care.", hint: "", 
+                valid: ["a lot of", "some", "a little", "much"], // Añadida validación de lógica del usuario
+                explanation: "El cuidado (care) es un concepto abstracto <strong>incontable</strong>. 'A lot of', 'much', 'some', o 'a little' encajan perfectamente en este contexto."
+            },
+            { 
+                id: 'q11', pre: "11) Serve with", post: "rice on the side.", hint: "", 
+                valid: ["some", "a little"],
+                explanation: "El arroz (rice) es <strong>incontable</strong>. Las mejores opciones afirmativas son 'some' o 'a little'."
+            },
+            { 
+                id: 'q12', pre: "12) Got guests? There are", post: "extra bowls in the cabinet.", hint: "", 
+                valid: ["some", "a few", "a lot of", "many"],
+                explanation: "Los tazones (bowls) son <strong>contables plurales</strong>. Al ser afirmativo, puedes usar 'some', 'a few', 'many' o 'a lot of'."
+            }
+        ];
+
+        const allQuizData = [...ingredientsData, ...stepsData];
+        const totalQuestions = allQuizData.length;
+
+        // UI Elements
+        const containerIngredients = document.getElementById('ingredients-container');
+        const containerSteps = document.getElementById('steps-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-5 h-5 text-[#10B981] ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-5 h-5 text-[#EF4444] ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderOptions() {
+            return optionsBank.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        function renderSection(dataArray, container) {
+            let html = '';
+            dataArray.forEach(item => {
+                let hintHtml = item.hint ? `<span class="text-xs text-gray-400 italic block mt-1">${item.hint}</span>` : '';
+                
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-4 rounded-lg bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-center flex-wrap text-base md:text-lg w-full pr-6 relative z-10">
+                            <span class="text-[#121212] font-semibold leading-relaxed">${item.pre}</span>
+                            <select id="select-${item.id}" class="premium-select bg-gray-50 rounded border-none focus:bg-white focus:ring-0 text-sm md:text-base py-1">
+                                <option value="" disabled selected>choose</option>
+                                ${renderOptions()}
+                            </select>
+                            <span class="text-[#121212] font-semibold leading-relaxed">${item.post}</span>
+                        </div>
+                        ${hintHtml}
+                        <div id="feedback-icon-${item.id}" class="absolute right-3 top-4 opacity-0 transition-opacity duration-300 pointer-events-none z-20"></div>
+                        
+                        <!-- Contenedor de Retroalimentación -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Feedback:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+
+            allQuizData.forEach(item => {
+                const selectElement = document.getElementById(`select-${item.id}`);
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const selectedValue = selectElement.value;
+
+                // Reset states
+                cardElement.classList.remove('animate-shake', 'bg-red-50', 'border-red-200', 'bg-green-50', 'border-green-200', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                // Check against the array of valid answers
+                if (item.valid.includes(selectedValue)) {
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    selectElement.disabled = true;
+                    selectElement.classList.remove('text-[#0B192C]', 'bg-gray-50');
+                    selectElement.classList.add('text-[#047857]', 'font-bold', 'bg-transparent');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    if (selectedValue !== "") {
+                        // Error - Muestra el feedback
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show'); // Mostrar explicación
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Vacío
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score & Banner
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            renderSection(ingredientsData, containerIngredients);
+            renderSection(stepsData, containerSteps);
+            
+            scoreDisplay.textContent = `Score: 0 / ${totalQuestions}`;
+            scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderSection(ingredientsData, containerIngredients);
+        renderSection(stepsData, containerSteps);
+        
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
