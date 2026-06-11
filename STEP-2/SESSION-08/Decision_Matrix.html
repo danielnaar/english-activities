@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Should vs Shouldn't Practice - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Segmented Buttons for Categorization */
+        .segment-btn {
+            padding: 0.6rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748B;
+            background-color: transparent;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .segment-btn:hover {
+            color: var(--color-primary);
+        }
+        .segment-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .segment-btn.disabled {
+            pointer-events: none;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Decision Matrix: <br>
+                <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2 block mt-2">Should vs. Shouldn't</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Analyze each scenario carefully. Determine whether the action represents something you <strong class="text-[#D4AF37] font-bold">should</strong> or <strong class="text-[#D4AF37] font-bold">shouldn't</strong> do based on logic, safety, and professional etiquette.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-12">
+            
+            <!-- Interactive Assessment -->
+            <section class="mb-8">
+                <div class="mb-10 border-b border-gray-100 pb-4">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C] flex items-center justify-center">
+                        Action Sorting Board
+                    </h2>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2 text-center">
+                        Select the correct modal for each statement
+                    </p>
+                </div>
+
+                <!-- Matrix Grid Container -->
+                <div id="matrix-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dynamic content injected here -->
+                </div>
+            </section>
+
+            <!-- Controls -->
+            <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                <!-- Score Display -->
+                <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 12
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Validate Responses
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium">
+                        You have successfully categorized every action. Delivering proper advice and defining professional standards are key competencies of high-level management.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        
+        // State object to hold user selections
+        const userState = {};
+
+        // Master Data for the Board
+        const matrixData = [
+            { 
+                id: 'q1', 
+                text: "Drink water after running", 
+                answer: "should",
+                explanation: "Rehydration is essential for physical recovery."
+            },
+            { 
+                id: 'q2', 
+                text: "Yell at customer support", 
+                answer: "shouldnt",
+                explanation: "Professional etiquette requires maintaining composure. You shouldn't yell at staff."
+            },
+            { 
+                id: 'q3', 
+                text: "Leave the stove on while you nap", 
+                answer: "shouldnt",
+                explanation: "This is a severe fire hazard. You definitely shouldn't do this."
+            },
+            { 
+                id: 'q4', 
+                text: "Wear a helmet on a bike", 
+                answer: "should",
+                explanation: "Safety first. You should always wear protective gear."
+            },
+            { 
+                id: 'q5', 
+                text: "Text while crossing the street", 
+                answer: "shouldnt",
+                explanation: "Situational awareness is critical. You shouldn't be distracted in traffic."
+            },
+            { 
+                id: 'q6', 
+                text: "Brush your teeth before bed", 
+                answer: "should",
+                explanation: "A fundamental part of a healthy daily routine."
+            },
+            { 
+                id: 'q7', 
+                text: "Ignore the fire alarm", 
+                answer: "shouldnt",
+                explanation: "Never ignore emergency protocols in a corporate or residential building."
+            },
+            { 
+                id: 'q8', 
+                text: "Say sorry when you are late", 
+                answer: "should",
+                explanation: "Accountability and politeness are hallmarks of an executive."
+            },
+            { 
+                id: 'q9', 
+                text: "Use 1234 as your password", 
+                answer: "shouldnt",
+                explanation: "Data security is paramount. '1234' is highly vulnerable."
+            },
+            { 
+                id: 'q10', 
+                text: "Bring a jacket, it looks rainy", 
+                answer: "should",
+                explanation: "You should always be prepared for changing weather."
+            },
+            { 
+                id: 'q11', 
+                text: "Feed a gremlin after midnight", 
+                answer: "shouldnt",
+                explanation: "According to strict pop-culture regulations, you definitely shouldn't do this."
+            },
+            { 
+                id: 'q12', 
+                text: "Back up your files", 
+                answer: "should",
+                explanation: "Data loss is an executive nightmare. You should maintain regular backups."
+            }
+        ];
+
+        const totalQuestions = matrixData.length;
+
+        // UI Elements
+        const containerMatrix = document.getElementById('matrix-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] absolute right-3 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] absolute right-3 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderMatrix() {
+            let html = '';
+            matrixData.forEach(item => {
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-5 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex justify-between items-start mb-4 pr-6">
+                            <span class="font-bold text-[#121212] text-[15px] leading-relaxed">
+                                You <span class="tracking-widest text-gray-400 mx-1">________</span> <br>
+                                <span class="font-medium text-gray-600">${item.text.toLowerCase()}</span>
+                            </span>
+                        </div>
+                        
+                        <div class="flex bg-gray-100 rounded-md p-1 gap-1 mt-auto relative z-10">
+                            <button class="segment-btn" data-id="${item.id}" data-val="should">Should</button>
+                            <button class="segment-btn" data-id="${item.id}" data-val="shouldnt">Shouldn't</button>
+                        </div>
+
+                        <!-- Feedback Icon Anchor -->
+                        <div id="feedback-icon-${item.id}" class="opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+                        
+                        <!-- Feedback Explanation Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Logic:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            containerMatrix.innerHTML = html;
+
+            // Attach Event Listeners for Segmented Buttons
+            document.querySelectorAll('.segment-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const val = this.getAttribute('data-val');
+                    
+                    // Remove active class from siblings
+                    this.parentElement.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Save to user state
+                    userState[itemId] = val;
+                });
+            });
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+
+            matrixData.forEach(item => {
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const userAnswer = userState[item.id];
+
+                // Reset visual states
+                cardElement.classList.remove('animate-shake', 'bg-red-50', 'border-red-200', 'bg-green-50', 'border-green-200', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (userAnswer === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    
+                    // Disable buttons to lock answer
+                    cardElement.querySelectorAll('.segment-btn').forEach(b => b.classList.add('disabled'));
+                    
+                    correctCount++;
+                } else {
+                    if (userAnswer) {
+                        // Attempted but incorrect - Show Error & Explanation
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show');
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Unanswered
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            // Clear memory state
+            for (let key in userState) delete userState[key];
+            
+            // Re-render UI
+            renderMatrix(); 
+            
+            // Reset Score & Banners
+            scoreDisplay.textContent = `Score: 0 / ${totalQuestions}`;
+            scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderMatrix();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
