@@ -347,13 +347,24 @@
     </div>
 
     <script>
+        // VERIFICAR ESTADO DE SESIÓN AL CARGAR LA PÁGINA
+        document.addEventListener("DOMContentLoaded", function() {
+            if (sessionStorage.getItem("hub_authenticated") === "true") {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("main-content").style.display = "block";
+            }
+        });
+
         function checkPassword() {
             const password = document.getElementById("password-input").value;
             const errorMessage = document.getElementById("error-message");
             const loginForm = document.getElementById("login-form");
             const mainContent = document.getElementById("main-content");
             const correctPassword = "admin"; 
+            
             if (password === correctPassword) {
+                // GUARDAR ESTADO DE SESIÓN
+                sessionStorage.setItem("hub_authenticated", "true");
                 loginForm.style.display = "none";
                 mainContent.style.display = "block";
                 errorMessage.style.display = "none";
