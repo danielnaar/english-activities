@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Case Studies - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Premium Select Dropdown */
+        .premium-select {
+            appearance: none;
+            background-color: #F8F9FA;
+            border: 1px solid #E5E7EB;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.5rem 2rem 0.5rem 0.75rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1rem;
+            width: 100%;
+            border-radius: 0.375rem;
+        }
+
+        .premium-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .premium-select:disabled {
+            cursor: default;
+            opacity: 1;
+            border-bottom-color: transparent;
+            background-image: none;
+        }
+
+        /* Custom Interactive Chips */
+        .chip-btn {
+            transition: all 0.2s ease;
+            user-select: none;
+            text-align: left;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .chip-btn.selected {
+            background-color: #0B192C;
+            color: white;
+            border-color: #0B192C;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .chip-btn.selected:hover {
+            background-color: #152744;
+            color: white;
+            border-color: #152744;
+        }
+        .chip-btn.selected .chip-icon {
+            color: #D4AF37;
+            opacity: 1;
+        }
+        .chip-btn.selected.success {
+            background-color: #10B981;
+            border-color: #10B981;
+            color: white;
+        }
+        .chip-btn.selected.success .chip-icon {
+            color: white;
+        }
+        .chip-btn.disabled {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Case Studies: <br>
+                <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2 block mt-2">Could & Couldn't</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Analyze the historical profiles below. Identify the correct figure and select the <strong class="text-[#D4AF37] font-bold">TWO true facts</strong> regarding their past abilities and limitations.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-12">
+            
+            <!-- Interactive Assessment Container -->
+            <section class="mb-8">
+                
+                <div id="cases-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Dynamic content will be injected here via JS -->
+                </div>
+
+                <!-- Controls -->
+                <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                    <!-- Score Display -->
+                    <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                        Score: 0 / 4
+                    </div>
+                    
+                    <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                        Validate Analysis
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>
+                    <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                        Reset
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium">
+                        You have successfully analyzed all historical profiles. Understanding context and extracting true facts regarding past abilities is a key analytical skill.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Arquitectura de Datos (Data Architecture)
+        const nameOptions = ["Albert Einstein", "Agatha Christie", "Bruce Willis", "Ray Charles"];
+
+        const profilesData = [
+            {
+                id: 'p1',
+                tag: "Mystery Mastermind",
+                text: "This British author became the best-selling fiction writer of all time. As a child, she was educated at home. She could read by the age of four, but interestingly, she couldn't spell very well.",
+                correctName: "Agatha Christie",
+                facts: [
+                    { id: 'f1a', text: "She could read when she was four.", isCorrect: true },
+                    { id: 'f1b', text: "She couldn't spell perfectly.", isCorrect: true },
+                    { id: 'f1c', text: "She could speak five languages.", isCorrect: false }
+                ],
+                explanation: "Agatha Christie was the mystery mastermind. She <strong>could</strong> read early but <strong>couldn't</strong> spell well."
+            },
+            {
+                id: 'p2',
+                tag: "Action Hero Energy",
+                text: "Before becoming a global action superstar, he worked as a private investigator. As a child, he suffered from a stutter and couldn't speak fluently. Acting helped him overcome it, and he could eventually deliver iconic movie lines.",
+                correctName: "Bruce Willis",
+                facts: [
+                    { id: 'f2a', text: "He couldn't speak fluently as a child.", isCorrect: true },
+                    { id: 'f2b', text: "He could fly real helicopters.", isCorrect: false },
+                    { id: 'f2c', text: "He could deliver iconic lines.", isCorrect: true }
+                ],
+                explanation: "Bruce Willis had a stutter (<strong>couldn't</strong> speak fluently) but became an actor who <strong>could</strong> deliver great lines."
+            },
+            {
+                id: 'p3',
+                tag: "Legend on the Keys",
+                text: "This musical genius lost his sight at the age of seven due to an illness, so he couldn't see. Despite this, he possessed immense talent. He could play the piano masterfully and became a pioneer of soul music.",
+                correctName: "Ray Charles",
+                facts: [
+                    { id: 'f3a', text: "He couldn't see from age seven.", isCorrect: true },
+                    { id: 'f3b', text: "He could play the piano masterfully.", isCorrect: true },
+                    { id: 'f3c', text: "He couldn't hear very well.", isCorrect: false }
+                ],
+                explanation: "Ray Charles lost his sight (<strong>couldn't</strong> see) but <strong>could</strong> play the piano exceptionally well."
+            },
+            {
+                id: 'p4',
+                tag: "Science Hair Vibes",
+                text: "This famous physicist changed our understanding of the universe. He was a slow learner early on and couldn't speak in full sentences until he was older. Later, he could explain the most complex theories of space and time.",
+                correctName: "Albert Einstein",
+                facts: [
+                    { id: 'f4a', text: "He could remember everyone's phone numbers.", isCorrect: false },
+                    { id: 'f4b', text: "He couldn't speak well in early childhood.", isCorrect: true },
+                    { id: 'f4c', text: "He could explain complex physics theories.", isCorrect: true }
+                ],
+                explanation: "Albert Einstein <strong>couldn't</strong> speak well early on, but later <strong>could</strong> explain the universe's greatest mysteries."
+            }
+        ];
+
+        const container = document.getElementById('cases-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] absolute right-4 top-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] absolute right-4 top-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Renderizado Dinámico (Dynamic Rendering)
+        function renderOptions() {
+            // Ordenar alfabéticamente para facilitar la UX
+            const sortedOptions = [...nameOptions].sort();
+            return sortedOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        function renderProfiles() {
+            let html = '';
+            profilesData.forEach((profile) => {
+                
+                let factsHTML = '';
+                profile.facts.forEach(fact => {
+                    factsHTML += `
+                        <button type="button" class="chip-btn px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100" data-profile="${profile.id}" data-fact="${fact.id}">
+                            <svg class="w-5 h-5 mr-3 chip-icon text-gray-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="text-sm font-medium leading-tight">${fact.text}</span>
+                        </button>
+                    `;
+                });
+
+                html += `
+                    <div id="card-${profile.id}" class="relative flex flex-col bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 overflow-hidden">
+                        
+                        <!-- Header del Perfil -->
+                        <div class="bg-gray-50 p-6 border-b border-gray-100">
+                            <span class="inline-block bg-[#0B192C] text-[#D4AF37] text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 shadow-sm">
+                                ${profile.tag}
+                            </span>
+                            <p class="text-[#121212] font-medium text-[15px] leading-relaxed mb-5">
+                                "${profile.text}"
+                            </p>
+                            
+                            <div class="relative pr-8">
+                                <span class="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Identify Figure:</span>
+                                <select id="select-${profile.id}" class="premium-select">
+                                    <option value="" disabled selected>Select historical figure...</option>
+                                    ${renderOptions()}
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Selección de Hechos -->
+                        <div class="p-6 flex-grow flex flex-col">
+                            <span class="block text-xs font-bold text-[#0B192C] uppercase tracking-widest mb-3">Select the TWO true facts:</span>
+                            <div class="flex flex-col gap-3">
+                                ${factsHTML}
+                            </div>
+                        </div>
+                        
+                        <!-- Icono de Feedback Superior -->
+                        <div id="feedback-icon-${profile.id}" class="opacity-0 transition-opacity duration-300 pointer-events-none z-20"></div>
+                        
+                        <!-- Caja de Explicación -->
+                        <div id="explanation-${profile.id}" class="feedback-box mx-6 mb-6 mt-0">
+                            <strong>Feedback:</strong> ${profile.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+
+            // Listeners para los botones (Chips)
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const profileId = this.getAttribute('data-profile');
+                    const isSelected = this.classList.contains('selected');
+                    
+                    // Contar cuántos están seleccionados en este perfil
+                    const selectedCount = document.querySelectorAll(`.chip-btn[data-profile="${profileId}"].selected`).length;
+
+                    if (isSelected) {
+                        // Permitir deseleccionar
+                        this.classList.remove('selected');
+                    } else {
+                        // Permitir seleccionar solo si hay menos de 2
+                        if (selectedCount < 2) {
+                            this.classList.add('selected');
+                        } else {
+                            // Animación visual suave para indicar que se alcanzó el límite
+                            this.classList.add('animate-shake');
+                            setTimeout(() => { this.classList.remove('animate-shake'); }, 400);
+                        }
+                    }
+                });
+            });
+        }
+
+        // 3. Lógica de Validación (Validation Logic)
+        function validateAnswers() {
+            let correctCount = 0;
+            const totalProfiles = profilesData.length;
+
+            profilesData.forEach(profile => {
+                const selectElement = document.getElementById(`select-${profile.id}`);
+                const cardElement = document.getElementById(`card-${profile.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${profile.id}`);
+                const explanationBox = document.getElementById(`explanation-${profile.id}`);
+                const selectedName = selectElement.value;
+
+                // Obtener los IDs de los facts seleccionados por el usuario
+                const selectedFactBtns = Array.from(document.querySelectorAll(`.chip-btn[data-profile="${profile.id}"].selected`));
+                const selectedFactIds = selectedFactBtns.map(btn => btn.getAttribute('data-fact'));
+
+                // Obtener los IDs de los facts correctos desde la data
+                const correctFactIds = profile.facts.filter(f => f.isCorrect).map(f => f.id);
+
+                // Validar si el nombre es correcto y si los hechos seleccionados son exactamente los correctos
+                const isNameCorrect = selectedName === profile.correctName;
+                
+                // Función auxiliar para comparar arrays
+                const areFactsCorrect = selectedFactIds.length === correctFactIds.length && 
+                                        selectedFactIds.every(id => correctFactIds.includes(id));
+
+                // Reiniciar estados visuales
+                cardElement.classList.remove('animate-shake', 'border-red-200', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (isNameCorrect && areFactsCorrect) {
+                    // Estado de Éxito (Success State)
+                    cardElement.classList.add('border-[#A7F3D0]', 'animate-pop');
+                    selectElement.disabled = true;
+                    selectElement.classList.remove('text-[#0B192C]');
+                    selectElement.classList.add('text-[#047857]', 'bg-transparent', 'border-transparent');
+                    
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    
+                    // Deshabilitar botones
+                    document.querySelectorAll(`.chip-btn[data-profile="${profile.id}"]`).forEach(btn => {
+                        btn.classList.add('disabled');
+                        if(btn.classList.contains('selected')) {
+                            btn.classList.add('success');
+                        }
+                    });
+                    
+                    correctCount++;
+                } else {
+                    // Estado de Error / Incompleto
+                    if (selectedName !== "" || selectedFactIds.length > 0) {
+                        cardElement.classList.add('animate-shake', 'border-[#FECACA]');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show'); // Mostrar explicación del error
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Estado vacío
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Actualizar Marcador
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalProfiles}`;
+            
+            if(correctCount === totalProfiles) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Lógica de Reinicio (Reset Logic)
+        function resetQuiz() {
+            renderProfiles(); 
+            
+            scoreDisplay.textContent = `Score: 0 / 4`;
+            scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Inicializar
+        renderProfiles();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
