@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tense Conversion Drill - Presentation Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                INSTRUCTOR FACILITATION TOOL
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Structural Conversion <br>
+                <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2">Present ↔ Past</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Project this module. Ask a participant to verbally convert the source statement to the target tense, logically adjusting the time marker. Click to reveal the suggested answer.
+            </p>
+        </header>
+
+        <div class="p-8 md:p-14 bg-[#F8F9FA] flex-grow flex flex-col items-center justify-center min-h-[400px]">
+            
+            <!-- Drill Container -->
+            <div id="drill-container" class="w-full max-w-4xl">
+                <!-- Content injected via JS -->
+            </div>
+
+            <!-- Completion State (Hidden initially) -->
+            <div id="completion-state" class="hidden text-center w-full max-w-3xl mx-auto py-10">
+                <div class="w-24 h-24 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-3xl shadow-lg border border-[#D4AF37]/30 mx-auto mb-6">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-playfair font-bold text-[#0B192C] mb-4">Drill Session Complete</h2>
+                <p class="text-gray-600 text-lg mb-8">Excellent facilitation. The class has successfully completed all structural conversion exercises.</p>
+                <button id="restart-btn" class="bg-white border-2 border-[#0B192C] text-[#0B192C] hover:bg-[#0B192C] hover:text-[#D4AF37] transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md inline-flex items-center justify-center gap-3">
+                    Restart Session
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Instructor Controls Footer -->
+        <div id="controls-container" class="bg-white border-t border-gray-200 py-6 px-8 flex flex-col sm:flex-row justify-center items-center gap-5 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+            
+            <button id="reveal-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3 w-full sm:w-auto">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                Reveal Suggested Conversion
+            </button>
+
+            <button id="next-btn" class="bg-white border-2 border-gray-200 text-gray-500 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3 w-full sm:w-auto hidden">
+                Next Scenario
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+
+        </div>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Executive Scenarios Data
+        const scenarios = [
+            {
+                sourceTense: "Simple Present",
+                targetTense: "Simple Past",
+                sourceSentence: "We usually schedule the project briefing on Mondays.",
+                targetSentence: "We scheduled the project briefing last Monday.",
+                note: "Verb changes to regular '-ed'. Time marker changes from 'on Mondays' to 'last Monday'."
+            },
+            {
+                sourceTense: "Simple Past",
+                targetTense: "Simple Present",
+                sourceSentence: "The directors didn't approve the budget yesterday.",
+                targetSentence: "The directors don't approve the budget easily.",
+                note: "Negative auxiliary changes from 'didn't' to 'don't'. Time marker adjusted to general context."
+            },
+            {
+                sourceTense: "Simple Present",
+                targetTense: "Simple Past",
+                sourceSentence: "Does the IT department update the servers every night?",
+                targetSentence: "Did the IT department update the servers last night?",
+                note: "Question auxiliary 'Does' becomes 'Did'. Base verb remains. 'Every night' becomes 'last night'."
+            },
+            {
+                sourceTense: "Simple Past",
+                targetTense: "Simple Present",
+                sourceSentence: "She managed the European market in 2023.",
+                targetSentence: "She manages the European market now.",
+                note: "Irregular/Regular past verb changes to Present (+s). Past year becomes 'now' or 'currently'."
+            },
+            {
+                sourceTense: "Simple Present",
+                targetTense: "Simple Past",
+                sourceSentence: "I don't receive the analytics report on time.",
+                targetSentence: "I didn't receive the analytics report on time.",
+                note: "Negative auxiliary 'don't' becomes 'didn't'. Base verb remains."
+            },
+            {
+                sourceTense: "Simple Past",
+                targetTense: "Simple Present",
+                sourceSentence: "Did they sign the merger agreement last week?",
+                targetSentence: "Do they sign merger agreements often?",
+                note: "Auxiliary 'Did' becomes 'Do'. Object generalized for present habit."
+            },
+            {
+                sourceTense: "Simple Present",
+                targetTense: "Simple Past",
+                sourceSentence: "The new headquarters are fully operational.",
+                targetSentence: "The new headquarters were fully operational.",
+                note: "Verb 'To Be' changes from 'are' to 'were'."
+            },
+            {
+                sourceTense: "Simple Past",
+                targetTense: "Simple Present",
+                sourceSentence: "I flew to Singapore for the annual summit.",
+                targetSentence: "I fly to Singapore for the annual summit.",
+                note: "Irregular verb 'flew' reverts to base 'fly' for a present routine."
+            }
+        ];
+
+        let currentIndex = 0;
+        let isRevealed = false;
+
+        // UI Elements
+        const drillContainer = document.getElementById('drill-container');
+        const controlsContainer = document.getElementById('controls-container');
+        const completionState = document.getElementById('completion-state');
+        const revealBtn = document.getElementById('reveal-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // 2. Render Logic
+        function renderCard() {
+            const data = scenarios[currentIndex];
+            
+            // Set styles based on tense
+            const sourceColor = data.sourceTense === "Simple Present" ? "bg-[#3B82F6] text-white" : "bg-[#10B981] text-white";
+            const targetColor = data.targetTense === "Simple Present" ? "bg-[#3B82F6] text-white border-none" : "bg-[#10B981] text-white border-none";
+
+            const html = `
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden animate-fade-in w-full">
+                    
+                    <!-- Progress Bar -->
+                    <div class="bg-gray-100 h-1.5 w-full">
+                        <div class="bg-[#D4AF37] h-1.5 transition-all duration-500" style="width: ${((currentIndex + 1) / scenarios.length) * 100}%"></div>
+                    </div>
+
+                    <div class="p-8 md:p-12">
+                        <!-- Tense Indicators -->
+                        <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                            <div class="flex items-center gap-4">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Convert from</span>
+                                <span class="${sourceColor} px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">${data.sourceTense}</span>
+                            </div>
+                            <svg class="w-6 h-6 text-gray-300 mx-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            <div class="flex items-center gap-4">
+                                <span class="${targetColor} px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">${data.targetTense}</span>
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest text-right">Target</span>
+                            </div>
+                        </div>
+
+                        <!-- Source Sentence -->
+                        <div class="text-center mb-10">
+                            <span class="block text-sm font-bold text-[#D4AF37] uppercase tracking-widest mb-3">Source Statement</span>
+                            <h2 class="text-2xl md:text-4xl font-playfair font-bold text-[#0B192C] leading-tight">"${data.sourceSentence}"</h2>
+                        </div>
+
+                        <!-- Target Sentence (Hidden initially) -->
+                        <div id="target-area" class="opacity-0 translate-y-4 transition-all duration-500 pointer-events-none h-0 overflow-hidden">
+                            <div class="bg-gray-50 border-l-[6px] border-[#D4AF37] rounded-r-xl p-8 text-center shadow-inner mt-8">
+                                <span class="block text-sm font-bold text-[#10B981] uppercase tracking-widest mb-3 flex justify-center items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Suggested Conversion
+                                </span>
+                                <h3 class="text-xl md:text-3xl font-playfair font-bold text-[#0B192C] leading-tight mb-4">"${data.targetSentence}"</h3>
+                                <p class="text-sm text-gray-500 font-medium max-w-2xl mx-auto"><strong class="text-[#0B192C]">Instructor Note:</strong> ${data.note}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-6">
+                    <span class="text-sm font-bold text-gray-400 tracking-widest uppercase">Scenario ${currentIndex + 1} of ${scenarios.length}</span>
+                </div>
+            `;
+            
+            drillContainer.innerHTML = html;
+        }
+
+        // 3. Interactions
+        revealBtn.addEventListener('click', () => {
+            if (isRevealed) return;
+            
+            const targetArea = document.getElementById('target-area');
+            
+            // Animate reveal
+            targetArea.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none', 'h-0', 'overflow-hidden');
+            targetArea.classList.add('opacity-100', 'translate-y-0');
+            
+            // Toggle Buttons
+            revealBtn.classList.add('hidden');
+            nextBtn.classList.remove('hidden');
+            
+            isRevealed = true;
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex++;
+            
+            if (currentIndex < scenarios.length) {
+                // Next Card
+                isRevealed = false;
+                revealBtn.classList.remove('hidden');
+                nextBtn.classList.add('hidden');
+                renderCard();
+            } else {
+                // Show Completion State
+                drillContainer.innerHTML = '';
+                controlsContainer.classList.add('hidden');
+                completionState.classList.remove('hidden');
+                completionState.classList.add('animate-pop');
+            }
+        });
+
+        restartBtn.addEventListener('click', () => {
+            currentIndex = 0;
+            isRevealed = false;
+            
+            completionState.classList.add('hidden');
+            controlsContainer.classList.remove('hidden');
+            revealBtn.classList.remove('hidden');
+            nextBtn.classList.add('hidden');
+            
+            renderCard();
+        });
+
+        // Initialize
+        renderCard();
+
+    </script>
+</body>
+</html>
