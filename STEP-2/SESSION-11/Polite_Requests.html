@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polite Requests - Executive Reference & Practice</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Premium Select Dropdown */
+        .premium-select {
+            appearance: none;
+            background-color: transparent;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.25rem center;
+            background-size: 1rem;
+            min-width: 110px;
+            margin: 0 0.5rem;
+        }
+
+        .premium-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .premium-select:disabled {
+            cursor: default;
+            opacity: 1;
+            border-bottom-color: transparent;
+            background-image: none;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE & PRACTICE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Polite Requests
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Master the art of asking. Use these modal verbs to gracefully ask people to do things or to seek professional permission.
+            </p>
+        </header>
+
+        <!-- SECTION 1: The Formality Scale -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-[#F8F9FA]">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                The Executive Formality Scale
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-gray-200 p-8 relative overflow-hidden">
+                <p class="text-center text-gray-600 font-medium mb-8">The more formal or polite you want to sound, the more you should escalate through these modales:</p>
+                
+                <!-- The Visual Scale -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 relative">
+                    <!-- Connecting Line (Desktop) -->
+                    <div class="hidden md:block absolute top-1/2 left-[10%] right-[10%] h-1 bg-gradient-to-r from-gray-200 via-[#D4AF37] to-[#0B192C] -z-0 transform -translate-y-1/2"></div>
+                    
+                    <!-- CAN -->
+                    <div class="bg-white border-2 border-gray-200 rounded-full w-24 h-24 flex flex-col items-center justify-center z-10 shadow-sm">
+                        <span class="font-bold text-[#0B192C] text-xl">Can</span>
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Informal</span>
+                    </div>
+                    
+                    <!-- Arrow (Mobile) -->
+                    <svg class="w-6 h-6 text-gray-300 md:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+
+                    <!-- COULD -->
+                    <div class="bg-white border-2 border-[#D4AF37] rounded-full w-28 h-28 flex flex-col items-center justify-center z-10 shadow-md">
+                        <span class="font-bold text-[#0B192C] text-2xl">Could</span>
+                        <span class="text-[11px] uppercase font-bold text-[#D4AF37] tracking-wider">Polite</span>
+                    </div>
+
+                    <!-- Arrow (Mobile) -->
+                    <svg class="w-6 h-6 text-[#D4AF37] md:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+
+                    <!-- WOULD -->
+                    <div class="bg-[#0B192C] border-2 border-[#0B192C] rounded-full w-32 h-32 flex flex-col items-center justify-center z-10 shadow-lg ring-4 ring-[#D4AF37]/20">
+                        <span class="font-bold text-[#D4AF37] text-3xl">Would</span>
+                        <span class="text-[12px] uppercase font-bold text-white tracking-widest mt-1">Formal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Modal Breakdown -->
+        <div class="p-8 md:p-12 bg-white border-b border-gray-100">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Modal Matrix
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+                
+                <!-- Can -->
+                <div class="bg-gray-50 border-t-[4px] border-gray-300 p-6 rounded-b-xl rounded-t-sm shadow-sm flex flex-col h-full hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-[#0B192C] text-xl mb-1 uppercase tracking-wide">Can</h3>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Friendly • Informal</p>
+                    <p class="text-[14px] text-gray-700 mb-4 flex-grow">Best used with close colleagues, friends, or direct reports.</p>
+                    <div class="bg-white rounded p-3 text-sm border border-gray-200 shadow-inner">
+                        <span class="italic text-gray-800">"<strong class="text-[#0B192C] not-italic">Can</strong> you help me lift this box?"</span>
+                    </div>
+                </div>
+
+                <!-- Could -->
+                <div class="bg-gray-50 border-t-[4px] border-[#D4AF37] p-6 rounded-b-xl rounded-t-sm shadow-sm flex flex-col h-full hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-[#0B192C] text-xl mb-1 uppercase tracking-wide">Could</h3>
+                    <p class="text-xs font-bold text-[#D4AF37] uppercase tracking-widest mb-4">Softer • More Polite</p>
+                    <p class="text-[14px] text-gray-700 mb-4 flex-grow">The standard choice for professional requests in the workplace.</p>
+                    <div class="bg-white rounded p-3 text-sm border border-gray-200 shadow-inner">
+                        <span class="italic text-gray-800">"<strong class="text-[#0B192C] not-italic">Could</strong> you explain this exercise?"</span>
+                    </div>
+                </div>
+
+                <!-- Would -->
+                <div class="bg-[#0B192C] border-t-[4px] border-[#D4AF37] p-6 rounded-b-xl rounded-t-sm shadow-md flex flex-col h-full bg-pattern relative">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="font-bold text-[#D4AF37] text-xl mb-1 uppercase tracking-wide">Would</h3>
+                        <p class="text-xs font-bold text-white uppercase tracking-widest mb-4">Very Polite • Formal</p>
+                        <p class="text-[14px] text-gray-300 mb-4 flex-grow">Reserved for clients, high-level management, or delicate requests.</p>
+                        <div class="bg-white/10 rounded p-3 text-sm border border-white/20 shadow-inner">
+                            <span class="italic text-white">"<strong class="text-[#D4AF37] not-italic">Would</strong> you give me her number, please?"</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Will -->
+                <div class="bg-gray-50 border-t-[4px] border-blue-500 p-6 rounded-b-xl rounded-t-sm shadow-sm flex flex-col h-full lg:col-start-1 lg:col-span-1 hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-[#0B192C] text-xl mb-1 uppercase tracking-wide">Will</h3>
+                    <p class="text-xs font-bold text-blue-500 uppercase tracking-widest mb-4">Neutral • Direct</p>
+                    <p class="text-[14px] text-gray-700 mb-4 flex-grow">Used to ask for commitments or give direct instructions smoothly.</p>
+                    <div class="bg-white rounded p-3 text-sm border border-gray-200 shadow-inner">
+                        <span class="italic text-gray-800">"<strong class="text-[#0B192C] not-italic">Will</strong> you pay by card?"</span>
+                    </div>
+                </div>
+
+                <!-- May -->
+                <div class="bg-gray-50 border-t-[4px] border-purple-500 p-6 md:p-8 rounded-b-xl rounded-t-sm shadow-sm flex flex-col h-full md:col-span-2 lg:col-span-2 hover:shadow-md transition-shadow">
+                    <div class="flex flex-col lg:flex-row gap-6 h-full items-center">
+                        <div class="flex-grow flex flex-col lg:w-5/12">
+                            <h3 class="font-bold text-[#0B192C] text-xl mb-1 uppercase tracking-wide">May</h3>
+                            <p class="text-xs font-bold text-purple-500 uppercase tracking-widest mb-4">Permission • Highly Formal</p>
+                            <p class="text-[14px] text-gray-700 mb-2">Strictly used for asking permission from superiors or in formal settings.</p>
+                            <p class="text-xs text-gray-500 italic">(Note: Usually only used with 'I' or 'We').</p>
+                        </div>
+                        <div class="lg:w-7/12 flex flex-col sm:flex-row gap-4 w-full">
+                            <div class="bg-white rounded p-5 text-sm border border-gray-200 shadow-inner flex-1 flex items-center justify-center">
+                                <span class="italic text-gray-800 text-center">"<strong class="text-[#0B192C] not-italic text-lg">May</strong> I use your pen?"</span>
+                            </div>
+                            <div class="bg-white rounded p-5 text-sm border border-gray-200 shadow-inner flex-1 flex items-center justify-center">
+                                <span class="italic text-gray-800 text-center">"<strong class="text-[#0B192C] not-italic text-lg">May</strong> I leave early today?"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: Knowledge Validation -->
+        <div class="p-8 md:p-12 bg-[#F8F9FA]">
+            <div class="mb-8 border-b border-gray-200 pb-4">
+                <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center">
+                    Contextual Application
+                </h2>
+                <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2 text-center">
+                    Select the most precise modal based on the social context
+                </p>
+            </div>
+
+            <div id="quiz-container" class="grid grid-cols-1 gap-6 max-w-4xl mx-auto mb-8">
+                <!-- Dynamic content injected here -->
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4">
+                <!-- Score Display -->
+                <div id="score-display" class="bg-gray-200 text-gray-500 border border-gray-300 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 5
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Validate Responses
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Tact</h2>
+                    <p class="text-gray-300 max-w-lg mb-0 leading-relaxed font-medium">
+                        You have successfully demonstrated the ability to modulate your tone according to the professional context. Masterful communication achieved.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        const quizData = [
+            { 
+                id: 'q1', 
+                pre: "Hey John,", 
+                post: "you help me carry these boxes to the lobby?", 
+                context: "(Close coworker / Informal)",
+                options: ["Can", "May", "Would"], 
+                answer: "Can",
+                explanation: "For friendly, informal requests with close colleagues, 'Can' is the most natural choice."
+            },
+            { 
+                id: 'q2', 
+                pre: "Good morning, Mr. Davis.", 
+                post: "I use your office for a private client call?", 
+                context: "(Asking permission / Formal)",
+                options: ["Will", "May", "Would"], 
+                answer: "May",
+                explanation: "When asking for permission in a formal setting or from a superior, 'May' is the correct and polite standard."
+            },
+            { 
+                id: 'q3', 
+                pre: "As we discussed,", 
+                post: "you send me the signed invoice by Friday?", 
+                context: "(Direct expectation / Neutral)",
+                options: ["Will", "May", "Can"], 
+                answer: "Will",
+                explanation: "'Will' is perfect for neutral, direct requests or when asking for a commitment."
+            },
+            { 
+                id: 'q4', 
+                pre: "Excuse me,", 
+                post: "you please wait a moment while I check the system?", 
+                context: "(Standard professional / Softer)",
+                options: ["Can", "Could", "May"], 
+                answer: "Could",
+                explanation: "'Could' is the standard for polite, soft requests in general professional situations."
+            },
+            { 
+                id: 'q5', 
+                pre: "To our esteemed guests,", 
+                post: "you be so kind as to take your seats?", 
+                context: "(Highly formal / Very polite)",
+                options: ["Can", "Will", "Would"], 
+                answer: "Would",
+                explanation: "'Would' is the pinnacle of formal requests, used for high-level events, clients, or extreme politeness."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderOptions(optionsArray) {
+            return optionsArray.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                
+                let preHtml = item.pre ? `<span class="text-[#121212] font-semibold leading-relaxed">${item.pre}</span>` : '';
+                let contextHtml = item.context ? `<span class="block w-full text-xs font-medium text-gray-500 uppercase tracking-widest mt-3 pt-3 border-t border-gray-100">${item.context}</span>` : '';
+                
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col justify-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-center flex-wrap gap-y-3 gap-x-2 text-base md:text-lg w-full pr-8 relative z-10">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-sm shadow-sm shrink-0 border border-[#D4AF37]/30 mr-2">
+                                ${index + 1}
+                            </div>
+                            ${preHtml}
+                            
+                            <select id="select-${item.id}" class="premium-select bg-gray-50 rounded border border-gray-200 focus:bg-white focus:ring-0">
+                                <option value="" disabled selected>choose</option>
+                                ${renderOptions(item.options)}
+                            </select>
+                            
+                            <span class="text-[#121212] font-semibold leading-relaxed">${item.post}</span>
+                            
+                            ${contextHtml}
+                        </div>
+                        
+                        <div id="feedback-icon-${item.id}" class="absolute right-4 top-6 opacity-0 transition-opacity duration-300 pointer-events-none z-20"></div>
+                        
+                        <!-- Feedback Explanation Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Logic:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+            const totalQuestions = quizData.length;
+
+            quizData.forEach(item => {
+                const selectElement = document.getElementById(`select-${item.id}`);
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const selectedValue = selectElement.value;
+
+                // Reset states
+                cardElement.classList.remove('animate-shake', 'bg-red-50', 'border-red-200', 'bg-green-50', 'border-green-200', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (selectedValue === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    selectElement.disabled = true;
+                    selectElement.classList.remove('text-[#0B192C]', 'bg-gray-50', 'border-gray-200');
+                    selectElement.classList.add('text-[#047857]', 'font-bold', 'bg-transparent', 'border-transparent');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    if (selectedValue !== "") {
+                        // Error - Muestra el feedback
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show'); // Mostrar explicación
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Vacío
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-200', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-200', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            renderQuiz(); 
+            
+            scoreDisplay.textContent = `Score: 0 / ${quizData.length}`;
+            scoreDisplay.classList.add('bg-gray-200', 'text-gray-500', 'border-gray-300');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
