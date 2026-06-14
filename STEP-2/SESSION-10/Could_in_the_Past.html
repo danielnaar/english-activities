@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Could in the Past - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Formula Box Styling */
+        .formula-box {
+            background-color: rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #D4AF37;
+            text-align: center;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 4.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Premium Select Dropdown */
+        .premium-select {
+            appearance: none;
+            background-color: transparent;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.25rem center;
+            background-size: 1rem;
+            min-width: 150px;
+            margin: 0 0.5rem;
+        }
+
+        .premium-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .premium-select:disabled {
+            cursor: default;
+            opacity: 1;
+            border-bottom-color: transparent;
+            background-image: none;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE & PRACTICE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Could <span class="italic font-light text-[#D4AF37] text-2xl md:text-4xl mx-2">in the past</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Master the past tense of CAN. Learn how to accurately express past abilities and possibilities, and understand the critical exception for specific occasions.
+            </p>
+        </header>
+
+        <!-- SECTION 1: The Core Framework -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-[#F8F9FA]">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Structural Framework
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-8">
+                
+                <!-- Affirmative -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern h-full">
+                    <div class="p-6 relative z-10 flex flex-col justify-start h-full">
+                        <h3 class="text-lg font-playfair font-bold text-white mb-3 text-center">Affirmative</h3>
+                        <div class="formula-box text-sm">
+                            <span>Subject + <span class="text-white">could</span> + base verb</span>
+                        </div>
+                        <div class="bg-white/5 rounded p-3 text-[14px] text-gray-300 border border-white/10 text-center italic mt-auto">
+                            "When I was 10, I <strong class="text-white not-italic">could swim</strong> very well."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Negative -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern h-full">
+                    <div class="p-6 relative z-10 flex flex-col justify-start h-full">
+                        <h3 class="text-lg font-playfair font-bold text-white mb-3 text-center">Negative</h3>
+                        <div class="formula-box text-sm">
+                            <span>Subject + <span class="text-white">couldn't</span> + base verb</span>
+                        </div>
+                        <div class="bg-white/5 rounded p-3 text-[14px] text-gray-300 border border-white/10 text-center italic mt-auto">
+                            "She <strong class="text-white not-italic">couldn't drive</strong> in 2015."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Questions -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] flex flex-col overflow-hidden bg-pattern h-full">
+                    <div class="p-6 relative z-10 flex flex-col justify-start h-full">
+                        <h3 class="text-lg font-playfair font-bold text-white mb-3 text-center">Questions</h3>
+                        <div class="formula-box text-sm">
+                            <span><span class="text-white">Could</span> + subject + base verb?</span>
+                        </div>
+                        <div class="bg-white/5 rounded p-3 text-[14px] text-gray-300 border border-white/10 text-center italic mt-auto">
+                            "<strong class="text-white not-italic">Could they play</strong> the piano?"
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- The Golden Rule -->
+            <div class="max-w-3xl mx-auto bg-white border border-gray-200 rounded-xl p-6 shadow-sm flex flex-col sm:flex-row items-center gap-6 justify-center">
+                <div class="w-14 h-14 rounded-full bg-[#10B981]/10 flex items-center justify-center shrink-0 border border-[#10B981]/30">
+                    <svg class="w-8 h-8 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-[#0B192C] uppercase tracking-widest text-sm mb-1">The Base Verb Rule</h4>
+                    <p class="text-gray-700 text-[15px] leading-relaxed">
+                        The "base verb" means the pure dictionary form (play, swim, speak). 
+                        <br><strong class="text-[#EF4444]">Avoid:</strong> <span class="text-gray-500 line-through mr-2">played</span> <span class="text-gray-500 line-through mr-2">speaks</span> <span class="text-gray-500 line-through">to play</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: Applications & The Crucial Exception -->
+        <div class="p-8 md:p-12 bg-white border-b border-gray-100">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-6xl mx-auto items-stretch">
+                
+                <!-- General Uses -->
+                <div>
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C] mb-6 flex items-center">
+                        <svg class="w-6 h-6 text-[#D4AF37] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Applications
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm h-full">
+                            <span class="block text-sm font-bold text-[#0B192C] uppercase tracking-wider mb-2">1. Past Ability</span>
+                            <p class="text-[14px] text-gray-600 mb-3">Refers to a general ability or habit during a period in the past.</p>
+                            <ul class="text-[14px] text-gray-700 italic space-y-2">
+                                <li>&bull; "When I lived in Japan, I <strong class="text-[#0B192C] not-italic">couldn't speak</strong> Japanese..."</li>
+                                <li>&bull; "My grandma <strong class="text-[#0B192C] not-italic">could bake</strong> amazing cakes."</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm h-full">
+                            <span class="block text-sm font-bold text-[#0B192C] uppercase tracking-wider mb-2">2. Past Possibility</span>
+                            <p class="text-[14px] text-gray-600 mb-3">It was possible (or impossible) at that time due to rules, money, transport, etc.</p>
+                            <ul class="text-[14px] text-gray-700 italic space-y-2">
+                                <li>&bull; "We <strong class="text-[#0B192C] not-italic">couldn't go</strong> to China, but we <strong class="text-[#0B192C] not-italic">could go</strong> to Korea."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warning: Specific Occasion -->
+                <div class="bg-gray-50 border-l-[6px] border-l-[#EF4444] rounded-r-xl shadow-md flex flex-col justify-start overflow-hidden">
+                    <div class="bg-[#EF4444]/10 p-4 border-b border-[#EF4444]/20 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <h3 class="font-bold text-[#EF4444] text-[16px] uppercase tracking-wide m-0">
+                            Warning: Specific Occasions
+                        </h3>
+                    </div>
+                    
+                    <div class="p-6 flex flex-col h-full">
+                        <p class="text-[15px] text-gray-800 font-medium mb-4 leading-relaxed">
+                            For <strong class="text-[#0B192C]">one successful moment</strong> in the past, do not use <em>could</em>. Prefer <strong>was/were able to</strong> or <strong>managed to</strong>.
+                        </p>
+                        
+                        <div class="bg-white rounded p-4 text-sm border border-gray-200 shadow-inner mb-4">
+                            <div class="flex items-start gap-2 mb-3">
+                                <span class="text-[#EF4444] font-bold shrink-0 mt-0.5">✕</span>
+                                <span class="text-gray-500">Yesterday I <s>could open</s> the door. <span class="italic text-xs block">(Sounds odd to native speakers)</span></span>
+                            </div>
+                            <div class="flex items-start gap-2 mb-2">
+                                <span class="text-[#10B981] font-bold shrink-0 mt-0.5">✓</span>
+                                <span class="font-bold text-[#0B192C]">Yesterday I was able to open the door.</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <span class="text-[#10B981] font-bold shrink-0 mt-0.5">✓</span>
+                                <span class="font-bold text-[#0B192C]">Yesterday I managed to open the door.</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-auto bg-[#0B192C] p-4 rounded text-sm text-gray-300 border border-[#D4AF37]/30">
+                            <strong class="text-[#D4AF37]">Exception:</strong> For <em>negative</em> situations on specific occasions, <strong>couldn't</strong> is perfectly correct: <br>
+                            <span class="text-white italic mt-1 block">"There was a bus strike, so I couldn't arrive on time."</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: Knowledge Validation -->
+        <div class="p-8 md:p-12 bg-[#F8F9FA]">
+            <div class="mb-8 border-b border-gray-200 pb-4">
+                <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center">
+                    Knowledge Validation
+                </h2>
+                <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2 text-center">
+                    Select the most precise option based on context
+                </p>
+            </div>
+
+            <div id="quiz-container" class="grid grid-cols-1 gap-6 max-w-4xl mx-auto mb-8">
+                <!-- Dynamic content injected here -->
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-4">
+                <!-- Score Display -->
+                <div id="score-display" class="bg-gray-200 text-gray-500 border border-gray-300 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 3
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Validate Responses
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-lg mb-0 leading-relaxed font-medium">
+                        You have successfully mastered the nuances of past ability and possibility. Knowing when not to use 'could' sets advanced speakers apart.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        const quizData = [
+            { 
+                id: 'q1', 
+                pre: "When he was 12, he", 
+                post: "play chess very well.", 
+                options: ["was able to", "could", "managed to"], 
+                answer: "could",
+                explanation: "Because 'When he was 12' refers to a general period/ability in the past, 'could' is the most natural choice."
+            },
+            { 
+                id: 'q2', 
+                pre: "The door was stuck, but after 5 minutes I", 
+                post: "open it.", 
+                options: ["was able to", "could", "couldn't"], 
+                answer: "was able to",
+                explanation: "This is one specific successful occasion (opening a stuck door). You must use 'was able to' or 'managed to'."
+            },
+            { 
+                id: 'q3', 
+                pre: "There was a storm, so we", 
+                post: "travel that night.", 
+                options: ["were able to", "managed to", "couldn't"], 
+                answer: "couldn't",
+                explanation: "For specific occasions that are NEGATIVE, 'couldn't' is perfectly correct and natural."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] ml-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderOptions(optionsArray) {
+            return optionsArray.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col justify-center p-6 rounded-xl bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-center flex-wrap gap-y-3 text-base md:text-lg w-full pr-8 relative z-10">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-sm shadow-sm shrink-0 border border-[#D4AF37]/30 mr-3">
+                                ${index + 1}
+                            </div>
+                            <span class="text-[#121212] font-semibold leading-relaxed">${item.pre}</span>
+                            
+                            <select id="select-${item.id}" class="premium-select bg-gray-50 rounded border-none focus:bg-white focus:ring-0">
+                                <option value="" disabled selected>choose</option>
+                                ${renderOptions(item.options)}
+                            </select>
+                            
+                            <span class="text-[#121212] font-semibold leading-relaxed">${item.post}</span>
+                        </div>
+                        
+                        <div id="feedback-icon-${item.id}" class="absolute right-4 top-6 opacity-0 transition-opacity duration-300 pointer-events-none z-20"></div>
+                        
+                        <!-- Feedback Explanation Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Logic:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+            const totalQuestions = quizData.length;
+
+            quizData.forEach(item => {
+                const selectElement = document.getElementById(`select-${item.id}`);
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const selectedValue = selectElement.value;
+
+                // Reset states
+                cardElement.classList.remove('animate-shake', 'bg-red-50', 'border-red-200', 'bg-green-50', 'border-green-200', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (selectedValue === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    selectElement.disabled = true;
+                    selectElement.classList.remove('text-[#0B192C]', 'bg-gray-50');
+                    selectElement.classList.add('text-[#047857]', 'font-bold', 'bg-transparent');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    if (selectedValue !== "") {
+                        // Error - Muestra el feedback
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show'); // Mostrar explicación
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Vacío
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-200', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-200', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            renderQuiz(); 
+            
+            scoreDisplay.textContent = `Score: 0 / ${quizData.length}`;
+            scoreDisplay.classList.add('bg-gray-200', 'text-gray-500', 'border-gray-300');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
