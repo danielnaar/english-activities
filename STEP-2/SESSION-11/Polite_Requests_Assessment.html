@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polite Requests Assessment - Professional Etiquette</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Premium Select Dropdown */
+        .premium-select {
+            appearance: none;
+            background-color: #F8F9FA;
+            border: 1px solid #E5E7EB;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.25rem 2rem 0.25rem 0.75rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1rem;
+            min-width: 130px;
+            border-radius: 0.375rem;
+            margin: 0 0.5rem;
+            display: inline-block;
+        }
+
+        .premium-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .premium-select:disabled {
+            cursor: default;
+            opacity: 1;
+            border-bottom-color: transparent;
+            background-image: none;
+            background-color: transparent;
+            border: none;
+            padding: 0 0.5rem;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • COMMUNICATION SKILLS
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Polite Requests Assessment
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Evaluate your command of professional etiquette. Choose the most polite and grammatically accurate option for each contextual scenario.
+            </p>
+        </header>
+
+        <!-- Reference Guide -->
+        <div class="bg-white border-b border-gray-100 p-8 md:p-12">
+            <h2 class="text-2xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-8">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Quick Reference
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm text-center">
+                    <span class="block font-bold text-[#0B192C] text-lg mb-1">Can</span>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest">Friendly</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm text-center">
+                    <span class="block font-bold text-[#0B192C] text-lg mb-1">Could</span>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest">Softer</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm text-center">
+                    <span class="block font-bold text-[#0B192C] text-lg mb-1">May</span>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest">Permission</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-sm text-center">
+                    <span class="block font-bold text-[#0B192C] text-lg mb-1">Will</span>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest">Neutral</span>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4 max-w-4xl mx-auto">
+                <div class="bg-[#0B192C] text-white p-4 rounded-lg shadow-md flex-1 text-center border border-[#D4AF37]/30">
+                    <span class="block font-bold text-[#D4AF37] text-sm uppercase tracking-widest mb-1">Ultra Polite</span>
+                    <span class="font-medium text-sm">Would you mind + <strong class="text-white">Gerund (ing)</strong></span>
+                </div>
+                <div class="bg-[#0B192C] text-white p-4 rounded-lg shadow-md flex-1 text-center border border-[#D4AF37]/30">
+                    <span class="block font-bold text-[#D4AF37] text-sm uppercase tracking-widest mb-1">Polite Permission</span>
+                    <span class="font-medium text-sm">Would you mind if I + <strong class="text-white">Past Tense</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8 md:p-12 bg-[#F8F9FA]">
+            
+            <!-- Assessment Grid -->
+            <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto mb-10">
+                <!-- Dynamic content injected here -->
+            </div>
+
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-200 max-w-4xl mx-auto">
+                <!-- Score Display -->
+                <div id="score-display" class="bg-white text-gray-500 border border-gray-300 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 10
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Validate Responses
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Etiquette Mastered</h2>
+                    <p class="text-gray-300 max-w-xl mb-0 leading-relaxed font-medium mx-auto">
+                        You have successfully demonstrated absolute command over polite structures. Grammatical tact is essential for maintaining strong professional relationships.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        const quizData = [
+            { 
+                id: 'q1', 
+                context: "Money request with soft tone.",
+                pre: "Mrs. Joung,", 
+                post: "lend me two hundred dollars till next week, please?", 
+                options: ["can't you", "Could you", "could you"], 
+                answer: "could you",
+                explanation: "'could you' is soft and polite. It is in lowercase because it is in the middle of the sentence after the comma."
+            },
+            { 
+                id: 'q2', 
+                context: "You need a small favor on the way home.",
+                pre: "", 
+                post: "buying two loaves of bread on your way home?", 
+                options: ["Will you", "do you mind", "Would you", "Would you mind"], 
+                answer: "Would you mind",
+                explanation: "The verb 'buying' is a gerund (-ing). The structure 'Would you mind' requires a gerund."
+            },
+            { 
+                id: 'q3', 
+                context: "On a plane, window shade is down.",
+                pre: "", 
+                post: "you mind opening the window shade during landing?", 
+                options: ["will", "Would", "Would you", "would"], 
+                answer: "Would",
+                explanation: "The sentence already has 'you mind'. So you only need 'Would' to complete 'Would you mind'."
+            },
+            { 
+                id: 'q4', 
+                context: "Permission accepted.",
+                pre: "Could I stay here for a while? - Yes, you", 
+                post: ".", 
+                options: ["can", "Would you mind", "must", "Will"], 
+                answer: "can",
+                explanation: "When granting permission, 'Yes, you can' is the natural and grammatically correct response."
+            },
+            { 
+                id: 'q5', 
+                context: "You cannot attend the party. You ask politely.",
+                pre: "Would you mind if I", 
+                post: "come to your party?", 
+                options: ["Can", "won't", "Could", "didn't", "May", "will not", "Would", "wouldn't"], 
+                answer: "didn't",
+                explanation: "The structure 'Would you mind if I...' must be followed by a verb in the past tense. Here, 'didn't'."
+            },
+            { 
+                id: 'q6', 
+                context: "You are in a library. Whisper mode on.",
+                pre: "", 
+                post: "I borrow this book for the weekend?", 
+                options: ["Could", "May", "Can"], 
+                answer: "May",
+                explanation: "'May I...' is the most formal and polite way to ask for permission in quiet or official settings."
+            },
+            { 
+                id: 'q7', 
+                context: "Borrowing a dictionary for a short time.",
+                pre: "Would you mind if I", 
+                post: "your dictionary for an hour?", 
+                options: ["borrowed", "Would", "borrowing", "Could", "will borrow", "May", "would borrow", "Can"], 
+                answer: "borrowed",
+                explanation: "Again, 'Would you mind if I...' is always followed by the Simple Past tense ('borrowed')."
+            },
+            { 
+                id: 'q8', 
+                context: "Asking a stranger for a photo.",
+                pre: "", 
+                post: "you take our picture, please? Our selfie stick retired.", 
+                options: ["Would", "Could", "May", "Can"], 
+                answer: "Could",
+                explanation: "'Could' is softer and more polite than 'Can', making it perfect for asking strangers for a favor."
+            },
+            { 
+                id: 'q9', 
+                context: "Neighbor is playing drums at midnight.",
+                pre: "Would you mind", 
+                post: "the drums after 10 p.m.?", 
+                options: ["not playing", "to not play", "not to play", "do not play"], 
+                answer: "not playing",
+                explanation: "'Would you mind' requires a gerund (-ing). The negative form is simply 'not' + gerund ('not playing')."
+            },
+            { 
+                id: 'q10', 
+                context: "Noise complaint with a headache.",
+                pre: "", 
+                post: "not making noise? I have a headache.", 
+                options: ["will you", "Can you", "Would you mind", "Wouldn't you"], 
+                answer: "Would you mind",
+                explanation: "The phrase continues with 'not making' (gerund). 'Would you mind' is the only option that fits this structure."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderOptions(optionsArray) {
+            // Keep the exact order as defined in the data
+            return optionsArray.map(opt => `<option value="${opt.replace(/"/g, '&quot;')}">${opt}</option>`).join('');
+        }
+
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                
+                let preHtml = item.pre ? `<span class="text-[#121212] font-semibold leading-relaxed">${item.pre}</span>` : '';
+                let postHtml = item.post ? `<span class="text-[#121212] font-semibold leading-relaxed">${item.post}</span>` : '';
+
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-6 rounded-xl bg-white border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-md">
+                        
+                        <!-- Header / Context -->
+                        <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                            <span class="text-[11px] font-bold text-gray-500 uppercase tracking-widest">${item.context}</span>
+                            <div class="flex items-center justify-center w-6 h-6 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-xs shadow-sm border border-[#D4AF37]/30">
+                                ${index + 1}
+                            </div>
+                        </div>
+                        
+                        <!-- Sentence Area -->
+                        <div class="flex-grow flex items-center flex-wrap gap-y-2 gap-x-1 relative z-10 mb-2">
+                            ${preHtml}
+                            <select id="select-${item.id}" class="premium-select bg-gray-50 border border-gray-200 focus:border-[#D4AF37] text-sm">
+                                <option value="" disabled selected>select...</option>
+                                ${renderOptions(item.options)}
+                            </select>
+                            ${postHtml}
+                        </div>
+                        
+                        <!-- Feedback Icon Anchor -->
+                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                             <div id="feedback-icon-${item.id}" class="opacity-0 transition-opacity duration-300 h-6 w-6 pointer-events-none"></div>
+                        </div>
+
+                        <!-- Feedback Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Logic:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+            const totalQuestions = quizData.length;
+
+            quizData.forEach(item => {
+                const selectElement = document.getElementById(`select-${item.id}`);
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const selectedValue = selectElement.value;
+
+                // Reset states
+                cardElement.classList.remove('animate-shake', 'border-red-200', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (selectedValue === item.answer) {
+                    // Success
+                    cardElement.classList.add('border-[#A7F3D0]', 'animate-pop', 'bg-[#F0FDF4]');
+                    cardElement.classList.remove('bg-white');
+                    
+                    selectElement.disabled = true;
+                    selectElement.classList.remove('text-[#0B192C]', 'border-gray-200');
+                    selectElement.classList.add('text-[#047857]', 'font-bold');
+                    
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    if (selectedValue !== "") {
+                        // Error 
+                        cardElement.classList.add('animate-shake', 'border-[#FECACA]');
+                        selectElement.classList.add('border-[#FECACA]', 'bg-[#FEF2F2]');
+                        
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show');
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Empty highlight
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-white', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-white', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            renderQuiz(); 
+            
+            scoreDisplay.textContent = `Score: 0 / ${quizData.length}`;
+            scoreDisplay.classList.add('bg-white', 'text-gray-500', 'border-gray-300');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
