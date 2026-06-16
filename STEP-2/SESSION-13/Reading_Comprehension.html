@@ -83,79 +83,18 @@
             border-color: #FECACA;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-
-        /* Custom Audio Player Style (Visual Only) */
-        .custom-audio-player {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .play-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #D4AF37;
-            color: #0B192C;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .play-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .progress-bar {
-            flex-grow: 1;
-            height: 4px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 2px;
-            position: relative;
-        }
-        
-        .progress-fill {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 30%; /* Fake progress */
-            background-color: #D4AF37;
-            border-radius: 2px;
-        }
-        
-        .progress-knob {
-            position: absolute;
-            right: -5px;
-            top: -3px;
-            width: 10px;
-            height: 10px;
-            background-color: white;
-            border-radius: 50%;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
-        }
     </style>
 </head>
 <body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
 
     <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
         
-        <!-- Header & Audio Player -->
+        <!-- Cabeçalho Principal -->
         <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
             <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
             
             <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
-                READING & LISTENING COMPREHENSION
+                COMPREENSÃO DE LEITURA
             </p>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
                 The Other Me!
@@ -164,26 +103,11 @@
             <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
             
             <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10 mb-8">
-                Do dogs really look like their owners? Let's find out! Listen to the story and read about these funny matches.
+                Do dogs really look like their owners? Let's find out! Read about these funny matches.
             </p>
-
-            <!-- Custom Audio Player (Visual Element for Executive Look) -->
-            <div class="relative z-10">
-                <div class="custom-audio-player">
-                    <div class="play-btn shadow-lg">
-                        <svg class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill">
-                            <div class="progress-knob"></div>
-                        </div>
-                    </div>
-                    <span class="text-white text-xs font-bold tracking-wider w-10 text-right">0:27</span>
-                </div>
-            </div>
         </header>
 
-        <!-- Profiles Gallery -->
+        <!-- Galeria de Perfis -->
         <div class="p-6 md:p-10 bg-[#F8F9FA]">
             
             <div class="flex flex-col gap-8 max-w-4xl mx-auto">
