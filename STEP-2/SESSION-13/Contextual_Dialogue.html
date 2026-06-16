@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contextual Dialogue - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .inline-select {
+            appearance: none;
+            background-color: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 0.1rem 1.5rem 0.1rem 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--color-primary);
+            border-radius: 0.375rem;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%230B192C'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.25rem center;
+            background-size: 0.9rem;
+            display: inline-block;
+            min-width: 100px;
+            text-align: left;
+            margin: 0 0.25rem;
+        }
+
+        .inline-select:focus {
+            border-bottom-color: var(--color-accent);
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23D4AF37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        .inline-select:disabled {
+            cursor: default;
+            background-color: transparent;
+            border-color: transparent;
+            background-image: none;
+            padding-right: 0.5rem;
+            min-width: auto;
+        }
+
+        /* Feedback styling inside bubbles */
+        .feedback-text {
+            display: none;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: #B91C1C;
+            background-color: #FEF2F2;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            border-left: 3px solid #EF4444;
+        }
+        
+        .feedback-text.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+
+        /* Dialogue Bubbles */
+        .dialogue-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            align-items: flex-start;
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #0B192C;
+            color: #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            font-family: 'Playfair Display', serif;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .avatar.alt {
+            background-color: #F8F9FA;
+            color: #0B192C;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .bubble {
+            background-color: #ffffff;
+            border: 1px solid #E5E7EB;
+            padding: 0.875rem 1.25rem;
+            border-radius: 0.75rem;
+            border-top-left-radius: 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            max-width: 90%;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .dialogue-row.alt-row {
+            flex-direction: row-reverse;
+        }
+
+        .dialogue-row.alt-row .bubble {
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0;
+            background-color: #F8F9FA;
+            border-color: #E5E7EB;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Contextual Dialogue
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Complete the conversation by selecting the correct grammatical connector. Integrate your knowledge of <strong class="text-[#D4AF37] font-semibold tracking-wider">one, ones, too, and enough</strong>.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-12">
+            
+            <section class="mb-14">
+                <div class="mb-8 border-b border-gray-100 pb-3">
+                    <h2 class="text-xl md:text-2xl font-playfair font-bold text-[#0B192C] flex items-center gap-3">
+                        <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        Scene 1: Shopping Talk
+                    </h2>
+                </div>
+
+                <div id="dialogue-1" class="max-w-3xl mx-auto">
+                    <!-- Dialogue dynamically injected here -->
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <div class="mb-8 border-b border-gray-100 pb-3">
+                    <h2 class="text-xl md:text-2xl font-playfair font-bold text-[#0B192C] flex items-center gap-3">
+                        <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                        Scene 2: The Fitting Room
+                    </h2>
+                </div>
+
+                <div id="dialogue-2" class="max-w-3xl mx-auto">
+                    <!-- Dialogue dynamically injected here -->
+                </div>
+            </section>
+
+            <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 9
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Validate Script
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Flawless Integration</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium">
+                        You have successfully completed both dialogues. Integrating these structural elements fluidly is a key indicator of high-level conversational English.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Data Architecture
+        const optionsBank = ["one", "ones", "too", "enough"];
+
+        const dialogue1Data = [
+            { type: 'text', character: 'T', name: 'Tammy', text: "Look at those beautiful boots!" },
+            { 
+                type: 'interactive', character: 'L', name: 'Lucy', alt: true,
+                pre: "Which", id: "q1", post: "?", answer: "ones",
+                explanation: "'Boots' is plural, so we replace it with 'ones'."
+            },
+            { 
+                type: 'interactive', character: 'T', name: 'Tammy',
+                pre: "The brown", id: "q2", post: "over there.", answer: "ones",
+                explanation: "Still referring to the plural 'boots'."
+            },
+            { type: 'text', character: 'L', name: 'Lucy', alt: true, text: "Oh, they'd look great on you!" },
+            { 
+                type: 'text', character: 'T', name: 'Tammy',
+                text: "Yeah, with my brown skirt."
+            },
+            { 
+                type: 'interactive', character: 'L', name: 'Lucy', alt: true,
+                pre: "The short", id: "q4", post: ", right?", answer: "one",
+                explanation: "Singular agreement. 'The short one'."
+            },
+            { 
+                type: 'interactive', character: 'T', name: 'Tammy',
+                pre: "Oh! That's", id: "q5", post: "expensive for me.", answer: "too",
+                explanation: "Indicates a negative excess before the adjective 'expensive'."
+            }
+        ];
+
+        const dialogue2Data = [
+            { 
+                type: 'interactive', character: 'A', name: 'Angela', 
+                pre: "Did any of those dresses fit you, or were they all", id: "q6", post: "long?", answer: "too",
+                explanation: "Indicates a negative excess before the adjective 'long'."
+            },
+            { 
+                type: 'interactive', character: 'S', name: 'Sara', alt: true,
+                pre: "I don't think I'm tall", id: "q7", post: "for this kind of dress.", answer: "enough",
+                explanation: "'Enough' goes AFTER the adjective ('tall') to mean sufficient."
+            },
+            { 
+                type: 'interactive', character: 'A', name: 'Angela',
+                pre: "This yellow", id: "q8", post: "was OK.", answer: "one",
+                explanation: "Replaces the singular noun 'dress'."
+            },
+            { 
+                type: 'interactive', character: 'S', name: 'Sara', alt: true,
+                pre: "No, I didn't like that", id: "q9", post: ". Yellow isn't my colour.", answer: "one",
+                explanation: "Replaces the singular noun 'dress'."
+            },
+            { type: 'text', character: 'A', name: 'Angela', text: "OK, let me check if there are other colours." },
+            { 
+                type: 'interactive', character: 'S', name: 'Sara', alt: true,
+                pre: "Could you find a green", id: "q10", post: "?", answer: "one",
+                explanation: "Replaces the singular noun 'dress'."
+            }
+        ];
+
+        const allQuestions = [...dialogue1Data, ...dialogue2Data].filter(item => item.type === 'interactive');
+        const totalQuestions = allQuestions.length;
+
+        // UI Elements
+        const contDialogue1 = document.getElementById('dialogue-1');
+        const contDialogue2 = document.getElementById('dialogue-2');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-5 h-5 text-[#10B981] inline ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-5 h-5 text-[#EF4444] inline ml-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        function renderOptions() {
+            return optionsBank.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        }
+
+        function renderDialogue(dataArray, container) {
+            let html = '';
+            dataArray.forEach(item => {
+                const avatarClass = item.alt ? 'avatar alt' : 'avatar';
+                const rowClass = item.alt ? 'dialogue-row alt-row' : 'dialogue-row';
+                
+                if (item.type === 'text') {
+                    html += `
+                        <div class="${rowClass}">
+                            <div class="${avatarClass}">${item.character}</div>
+                            <div class="flex flex-col ${item.alt ? 'items-end' : 'items-start'}">
+                                <span class="text-xs font-bold text-gray-400 mb-1 mx-1 tracking-wider uppercase">${item.name}</span>
+                                <div class="bubble">${item.text}</div>
+                            </div>
+                        </div>
+                    `;
+                } else if (item.type === 'interactive') {
+                    html += `
+                        <div class="${rowClass}" id="row-${item.id}">
+                            <div class="${avatarClass}">${item.character}</div>
+                            <div class="flex flex-col ${item.alt ? 'items-end' : 'items-start'} max-w-full">
+                                <span class="text-xs font-bold text-gray-400 mb-1 mx-1 tracking-wider uppercase">${item.name}</span>
+                                <div class="bubble" id="bubble-${item.id}">
+                                    ${item.pre}
+                                    <select id="select-${item.id}" class="inline-select">
+                                        <option value="" disabled selected>...</option>
+                                        ${renderOptions()}
+                                    </select>
+                                    ${item.post}
+                                    <span id="icon-${item.id}"></span>
+                                    <div id="feedback-${item.id}" class="feedback-text">
+                                        <strong>Correction:</strong> ${item.explanation}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            container.innerHTML = html;
+        }
+
+        function validateAnswers() {
+            let correctCount = 0;
+
+            allQuestions.forEach(item => {
+                const selectEl = document.getElementById(`select-${item.id}`);
+                const bubbleEl = document.getElementById(`bubble-${item.id}`);
+                const iconEl = document.getElementById(`icon-${item.id}`);
+                const feedbackEl = document.getElementById(`feedback-${item.id}`);
+                const val = selectEl.value;
+
+                // Reset states
+                bubbleEl.classList.remove('animate-shake', 'border-red-300', 'border-green-300');
+                feedbackEl.classList.remove('show');
+                iconEl.innerHTML = '';
+                selectEl.classList.remove('text-red-600');
+
+                if (val === item.answer) {
+                    correctCount++;
+                    bubbleEl.classList.add('border-green-300');
+                    selectEl.disabled = true;
+                    selectEl.classList.add('text-[#047857]');
+                    iconEl.innerHTML = iconSuccess;
+                } else {
+                    if (val !== "") {
+                        bubbleEl.classList.add('animate-shake', 'border-red-300');
+                        selectEl.classList.add('text-red-600');
+                        iconEl.innerHTML = iconError;
+                        feedbackEl.classList.add('show');
+                        setTimeout(() => { bubbleEl.classList.remove('animate-shake'); }, 400);
+                    }
+                }
+            });
+
+            // Score Logic
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        function resetQuiz() {
+            renderDialogue(dialogue1Data, contDialogue1);
+            renderDialogue(dialogue2Data, contDialogue2);
+            
+            scoreDisplay.textContent = `Score: 0 / ${totalQuestions}`;
+            scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialization
+        renderDialogue(dialogue1Data, contDialogue1);
+        renderDialogue(dialogue2Data, contDialogue2);
+        
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
