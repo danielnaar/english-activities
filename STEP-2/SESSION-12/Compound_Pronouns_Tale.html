@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Pronouns Tale - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .inline-input {
+            display: inline-block;
+            width: 130px;
+            background-color: #F3F4F6;
+            border: none;
+            border-bottom: 2px solid #CBD5E1;
+            padding: 0.1rem 0.5rem;
+            margin: 0 0.25rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+            border-radius: 0.25rem 0.25rem 0 0;
+            font-size: 0.95rem;
+        }
+
+        .inline-input:focus {
+            border-bottom-color: var(--color-accent);
+            background-color: #ffffff;
+            width: 140px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .inline-input.correct {
+            border-bottom-color: transparent;
+            background-color: transparent;
+            color: #047857;
+            pointer-events: none;
+        }
+
+        .inline-input.error {
+            border-bottom-color: #EF4444;
+            background-color: #FEF2F2;
+            color: #B91C1C;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • COMPREHENSIVE PRACTICE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 leading-tight relative z-10 tracking-wide">
+                Is Someone Robbing Our Home?!
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Read the scenario and complete the missing compound pronouns contextually. Pay attention to the logical flow of the narrative.
+            </p>
+        </header>
+
+        <div class="p-8 md:p-12 lg:p-16 bg-white flex justify-center border-b border-gray-100">
+            
+            <!-- Writing Practice Container -->
+            <div class="w-full max-w-4xl">
+                <div class="mb-10 flex items-center justify-center border-b border-gray-100 pb-4">
+                    <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center gap-3">
+                        <svg class="w-7 h-7 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        Contextual Challenge
+                    </h2>
+                </div>
+
+                <!-- Story Container -->
+                <div id="story-container" class="text-[17px] md:text-[19px] leading-loose text-gray-800 font-medium mb-12 text-justify md:text-left">
+                    Yesterday I got home and felt that <input type="text" id="q1" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> was wrong. 
+                    The door was open and the living room was dark. I did not know if I should call <input type="text" id="q2" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> or just go inside. 
+                    I reached for my phone and found <input type="text" id="q3" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> in my bag, so I ran to the car. 
+                    As I opened the car door, <input type="text" id="q4" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> turned a light on in the living room. 
+                    My heart jumped. I whispered, 'I think <input type="text" id="q5" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> is robbing our home.' 
+                    Right then my phone rang. It was my husband. He said, 'That is impossible. There is <input type="text" id="q6" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> robbing our home.' 
+                    I asked, 'How do you know?' He said, 'Because I am in the living room calling you. <input type="text" id="q7" class="inline-input" autocomplete="off" spellcheck="false" placeholder="..."> is fine. 
+                    Also I cannot find my keys <input type="text" id="q8" class="inline-input" autocomplete="off" spellcheck="false" placeholder="...">.'
+                </div>
+
+                <!-- Writing Controls -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6 mt-6">
+                    <div id="text-score" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-3.5 rounded-full font-bold shadow-sm transition-colors duration-300 text-base min-w-[150px] text-center">
+                        Score: 0 / 8
+                    </div>
+                    <button id="check-text-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] transition-all duration-300 rounded-full px-10 py-3.5 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3 w-full sm:w-auto">
+                        Validate Text
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Spelling Tip -->
+                <div class="mt-12 bg-gray-50 p-5 rounded-xl border border-gray-200 text-sm text-gray-600 shadow-inner flex gap-3 items-start max-w-2xl mx-auto">
+                    <svg class="w-5 h-5 text-[#D4AF37] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p><strong>Executive Tip:</strong> <em>someone, anything, nowhere, everywhere</em> are one word. <strong>"No one"</strong> is two words.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Banner -->
+        <div id="module-success-banner" class="hidden bg-[#0B192C] p-8 md:p-12 text-center border-t-[1px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-4 border border-[#D4AF37]/30">
+                    <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-3">Exceptional Precision</h2>
+                <p class="text-gray-300 max-w-xl mb-0 leading-relaxed font-medium">
+                    Excellent work. You have mastered the grammatical structure and contextual logic of compound pronouns in a narrative setting.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px] border-t border-[#121212]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- PART 1: WRITING LOGIC ---
+        const answers = {
+            'q1': ['something'],
+            'q2': ['anyone', 'someone', 'somebody', 'anybody'],
+            'q3': ['nothing'],
+            'q4': ['someone', 'somebody'],
+            'q5': ['someone', 'somebody'],
+            'q6': ['no one', 'nobody'],
+            'q7': ['everything'],
+            'q8': ['anywhere']
+        };
+
+        const totalTextQuestions = Object.keys(answers).length;
+        const checkTextBtn = document.getElementById('check-text-btn');
+        const textScoreDisplay = document.getElementById('text-score');
+
+        // Smart normalization
+        const normalize = (text) => text.toLowerCase().replace(/[^a-z\s]/g, '').replace(/\s+/g, ' ').trim();
+
+        function validateText() {
+            let correctCount = 0;
+
+            for (const [id, validArr] of Object.entries(answers)) {
+                const inputEl = document.getElementById(id);
+                const userVal = normalize(inputEl.value);
+
+                // Reset classes
+                inputEl.classList.remove('correct', 'error', 'animate-shake');
+
+                if (validArr.includes(userVal)) {
+                    inputEl.classList.add('correct');
+                    // Capitalize first letter visually if it's correct
+                    inputEl.value = userVal.charAt(0).toUpperCase() + userVal.slice(1);
+                    correctCount++;
+                } else {
+                    if (userVal !== "") {
+                        inputEl.classList.add('error', 'animate-shake');
+                        setTimeout(() => inputEl.classList.remove('animate-shake'), 400);
+                    }
+                }
+            }
+
+            textScoreDisplay.textContent = `Score: ${correctCount} / ${totalTextQuestions}`;
+            
+            if (correctCount === totalTextQuestions) {
+                textScoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                textScoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                checkSuccess();
+            } else {
+                textScoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                textScoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        checkTextBtn.addEventListener('click', validateText);
+        // Press Enter to validate
+        document.getElementById('story-container').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') validateText();
+        });
+
+        // --- GLOBAL SUCCESS CHECK ---
+        function checkSuccess() {
+            const allTextCorrect = Array.from(document.querySelectorAll('.inline-input')).every(el => el.classList.contains('correct'));
+            
+            if (allTextCorrect) {
+                const banner = document.getElementById('module-success-banner');
+                banner.classList.remove('hidden');
+                banner.classList.add('animate-pop');
+                setTimeout(() => { banner.scrollIntoView({ behavior: 'smooth', block: 'end' }); }, 300);
+            }
+        }
+
+    </script>
+</body>
+</html>
