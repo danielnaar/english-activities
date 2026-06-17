@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Perfect Reading Comprehension - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-down {
+            animation: fadeInDown 0.6s ease forwards;
+        }
+
+        /* Segmented Buttons for True/False */
+        .segment-btn {
+            padding: 0.6rem 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748B;
+            background-color: transparent;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .segment-btn:hover {
+            color: var(--color-primary);
+        }
+        .segment-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .segment-btn.disabled {
+            pointer-events: none;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Reading Comprehension <br>
+                <span class="italic font-light text-[#D4AF37] text-2xl md:text-4xl mx-2 block mt-2">The Present Perfect</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Read the personal statement below analyzing the structure of life experiences. Once completed, unlock the assessment to test your comprehension.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-12">
+            
+            <!-- SECTION 1: The Reading Material -->
+            <section id="reading-section" class="mb-8">
+                <div class="max-w-4xl mx-auto bg-gray-50 border border-gray-200 rounded-xl shadow-sm overflow-hidden border-l-[6px] border-l-[#0B192C]">
+                    <div class="p-8 md:p-10">
+                        <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] mb-8 flex items-center gap-3">
+                            "My Bucket List So Far"
+                        </h2>
+                        
+                        <div class="space-y-5 text-[16px] text-gray-700 leading-relaxed font-medium">
+                            <p>
+                                Hi! My name is Clara, and I'm only 19, but I have already done many amazing things in my life.
+                            </p>
+                            <p>
+                                I have travelled to Spain twice and I have visited Italy once. I have also eaten sushi in Japan — it was delicious!
+                            </p>
+                            <p>
+                                But I haven't climbed a mountain yet, and I haven't driven a car.
+                            </p>
+                            <p>
+                                My dream is to go to New York because I have never seen a Broadway show. I have read about it many times, but reading is not the same as being there!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Button to unlock the quiz -->
+                <div id="ready-action-container" class="mt-10 flex justify-center">
+                    <button id="ready-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#c29e2f] transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3 transform hover:-translate-y-1">
+                        I'm Ready for the Assessment
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+            </section>
+
+            <!-- SECTION 2: The Assessment (Hidden initially) -->
+            <section id="assessment-section" class="hidden pt-10 border-t border-gray-100">
+                <div class="mb-10">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C] flex items-center justify-center">
+                        Comprehension Check
+                    </h2>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2 text-center">
+                        Determine if the statements are True or False
+                    </p>
+                </div>
+
+                <!-- Quiz Grid Container -->
+                <div id="quiz-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <!-- Dynamic content injected here via JS -->
+                </div>
+
+                <!-- Controls -->
+                <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                    <!-- Score Display -->
+                    <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                        Score: 0 / 4
+                    </div>
+                    
+                    <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                        Validate Analysis
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Success Banner -->
+                <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                    
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                            <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Comprehension</h2>
+                        <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium mx-auto">
+                            You have successfully demonstrated accurate reading comprehension. Recognizing key details in written communication is a crucial professional skill.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        const userState = {};
+
+        const quizData = [
+            { 
+                id: 'q1', 
+                statement: "Clara has travelled to Spain more than once.", 
+                answer: "True",
+                explanation: "Verdadero. El texto menciona claramente que ha viajado a España 'twice' (dos veces)."
+            },
+            { 
+                id: 'q2', 
+                statement: "She has already climbed a mountain.", 
+                answer: "False",
+                explanation: "Falso. En el texto ella afirma: 'I haven't climbed a mountain yet' (Todavía no he escalado una montaña)."
+            },
+            { 
+                id: 'q3', 
+                statement: "She has eaten sushi in Italy.", 
+                answer: "False",
+                explanation: "Falso. Ella visitó Italia, pero el sushi lo comió en Japón ('eaten sushi in Japan')."
+            },
+            { 
+                id: 'q4', 
+                statement: "She has never seen a Broadway show in New York.", 
+                answer: "True",
+                explanation: "Verdadero. Ella menciona que su sueño es ir a Nueva York precisamente porque 'I have never seen a Broadway show'."
+            }
+        ];
+
+        const totalQuestions = quizData.length;
+
+        // UI Elements
+        const readyBtn = document.getElementById('ready-btn');
+        const readyContainer = document.getElementById('ready-action-container');
+        const assessmentSection = document.getElementById('assessment-section');
+        const containerQuiz = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] absolute right-3 top-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] absolute right-3 top-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Ready Button Interaction
+        readyBtn.addEventListener('click', () => {
+            // Hide the ready button
+            readyContainer.classList.add('hidden');
+            
+            // Show and animate the assessment section
+            assessmentSection.classList.remove('hidden');
+            assessmentSection.classList.add('animate-fade-in-down');
+            
+            // Scroll to the assessment smoothly
+            setTimeout(() => {
+                assessmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        });
+
+        // 3. Dynamic Rendering for Assessment
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-6 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-start gap-3 mb-6 pr-6">
+                            <span class="text-xs font-bold text-[#D4AF37] uppercase tracking-widest mt-1 shrink-0">Fact ${index + 1}</span>
+                            <span class="font-medium text-[#121212] text-[16px] leading-relaxed">
+                                "${item.statement}"
+                            </span>
+                        </div>
+                        
+                        <div class="flex bg-gray-100 rounded-md p-1 gap-1 mt-auto relative z-10">
+                            <button class="segment-btn" data-id="${item.id}" data-val="True">True</button>
+                            <button class="segment-btn" data-id="${item.id}" data-val="False">False</button>
+                        </div>
+
+                        <!-- Feedback Icon Anchor -->
+                        <div id="feedback-icon-${item.id}" class="opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+                        
+                        <!-- Feedback Explanation Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Lógica:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            containerQuiz.innerHTML = html;
+
+            // Attach Event Listeners for Segmented Buttons
+            document.querySelectorAll('.segment-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const val = this.getAttribute('data-val');
+                    
+                    // Remove active class from siblings
+                    this.parentElement.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Save to user state
+                    userState[itemId] = val;
+                });
+            });
+        }
+
+        // 4. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+
+            quizData.forEach(item => {
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const userAnswer = userState[item.id];
+
+                // Reset visual states
+                cardElement.classList.remove('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]', 'bg-[#F0FDF4]', 'border-[#A7F3D0]', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (userAnswer === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    
+                    // Disable buttons to lock answer
+                    cardElement.querySelectorAll('.segment-btn').forEach(b => b.classList.add('disabled'));
+                    
+                    correctCount++;
+                } else {
+                    if (userAnswer) {
+                        // Attempted but incorrect - Show Error & Explanation
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show');
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Unanswered
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+
+    </script>
+</body>
+</html>
