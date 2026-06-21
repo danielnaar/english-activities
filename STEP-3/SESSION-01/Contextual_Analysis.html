@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contextual Analysis - Executive Practice Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Executive Option Button Styling */
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            background-color: #F8F9FA;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: #4B5563;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .option-btn:hover:not(.disabled) {
+            border-color: #cbd5e1;
+            background-color: #ffffff;
+        }
+
+        .option-btn.selected {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom Radio Circle */
+        .radio-circle {
+            width: 1.125rem;
+            height: 1.125rem;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .option-btn.selected .radio-circle {
+            border-color: var(--color-accent);
+        }
+        
+        .option-btn.selected .radio-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .option-btn.disabled {
+            pointer-events: none;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Contextual Analysis <br>
+                <span class="italic font-light text-[#D4AF37] text-2xl md:text-4xl mx-2 block mt-2">Simple vs. Progressive</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Analyze the scene and evaluate the grammar. Consider the time markers and context to decide if each statement uses the correct tense.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-12">
+            
+            <!-- Visual Map Section -->
+            <section class="mb-12">
+                <div class="mb-6 border-b border-gray-100 pb-4 text-center">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C]">
+                        The Scene
+                    </h2>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-1">
+                        Observe the ongoing actions and routines
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-xl shadow-inner border border-gray-200 max-w-4xl mx-auto">
+                    <div class="relative rounded-lg overflow-hidden border-2 border-[#0B192C]/10 flex items-center justify-center bg-white min-h-[300px] md:min-h-[450px]">
+                        
+                        <!-- Fallback background message -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center bg-gray-100 z-0">
+                            <svg class="w-12 h-12 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-gray-400 font-bold tracking-widest uppercase text-sm">Image Reference: park.jpeg</span>
+                        </div>
+                        
+                        <!-- Main Image -->
+                        <img src="park.jpeg" alt="Park Scene Activity" class="w-full object-contain max-h-[550px] relative z-10" onerror="this.style.opacity='0'">
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-8">
+                <!-- Quiz Grid Container -->
+                <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Dynamic content injected here via JS -->
+                </div>
+            </section>
+
+            <!-- Controls -->
+            <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-100">
+                <!-- Score Display -->
+                <div id="score-display" class="bg-gray-100 text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 10
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Validate Analysis
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Analytical Mastery</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium mx-auto">
+                        You have successfully audited all statements against the visual context. Distinguishing between routines and current actions is a critical pillar of professional fluency.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // 1. Data Architecture
+        
+        // State object to hold user selections
+        const userState = {};
+
+        // Master Data for the Assessment
+        const quizData = [
+            { 
+                id: 'q1', 
+                sentence: "The boy is eating an ice cream.", 
+                answer: "correct",
+                explanation: "Correct. It describes an action happening right now in the scene (Present Progressive)."
+            },
+            { 
+                id: 'q2', 
+                sentence: "The café is selling coffee every morning.", 
+                answer: "incorrect",
+                explanation: "'Every morning' indicates a routine. It should be Present Simple: 'The café <strong>sells</strong> coffee every morning.'"
+            },
+            { 
+                id: 'q3', 
+                sentence: "The runners jog in the park every afternoon.", 
+                answer: "correct",
+                explanation: "Correct. 'Every afternoon' is a routine, so the Present Simple ('jog') is the appropriate tense."
+            },
+            { 
+                id: 'q4', 
+                sentence: "The dog runs after the ball right now.", 
+                answer: "incorrect",
+                explanation: "'Right now' indicates an ongoing action. It should be Present Progressive: 'The dog <strong>is running</strong> after the ball...'"
+            },
+            { 
+                id: 'q5', 
+                sentence: "The woman is riding a bicycle.", 
+                answer: "correct",
+                explanation: "Correct. It accurately describes an ongoing action visible in the current moment."
+            },
+            { 
+                id: 'q6', 
+                sentence: "The park is opening every day at 8 AM.", 
+                answer: "incorrect",
+                explanation: "'Every day' is a fixed schedule or routine. It should be Present Simple: 'The park <strong>opens</strong> every day...'"
+            },
+            { 
+                id: 'q7', 
+                sentence: "The couple is talking while walking.", 
+                answer: "correct",
+                explanation: "Correct. Both 'is talking' and 'walking' describe continuous actions happening in the present scene."
+            },
+            { 
+                id: 'q8', 
+                sentence: "The girl reads a book on the bench now.", 
+                answer: "incorrect",
+                explanation: "The marker 'now' requires the Present Progressive tense: 'The girl <strong>is reading</strong> a book...'"
+            },
+            { 
+                id: 'q9', 
+                sentence: "People walk in the park regularly.", 
+                answer: "correct",
+                explanation: "Correct. 'Regularly' indicates a habit, making the Present Simple ('walk') the correct choice."
+            },
+            { 
+                id: 'q10', 
+                sentence: "The boys are playing soccer.", 
+                answer: "correct",
+                explanation: "Correct. It describes an ongoing action that we can observe right now in the picture."
+            }
+        ];
+
+        const totalQuestions = quizData.length;
+
+        // UI Elements
+        const containerQuiz = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] absolute right-4 top-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] absolute right-4 top-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                
+                // Formatted text layout
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-6 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-start gap-3 mb-6 pr-6">
+                            <div class="flex items-center justify-center w-7 h-7 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-xs shadow-sm shrink-0 border border-[#D4AF37]/30 mt-0.5">
+                                ${index + 1}
+                            </div>
+                            <span class="font-medium text-[#121212] text-[16px] leading-relaxed">
+                                ${item.sentence}
+                            </span>
+                        </div>
+                        
+                        <div class="flex gap-3 mt-auto relative z-10 w-full">
+                            <button class="option-btn" data-id="${item.id}" data-val="correct">
+                                <div class="radio-circle"></div>
+                                <span>Correct</span>
+                            </button>
+                            <button class="option-btn" data-id="${item.id}" data-val="incorrect">
+                                <div class="radio-circle"></div>
+                                <span>Incorrect</span>
+                            </button>
+                        </div>
+
+                        <!-- Feedback Icon Anchor -->
+                        <div id="feedback-icon-${item.id}" class="opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+                        
+                        <!-- Feedback Explanation Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Logic:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            containerQuiz.innerHTML = html;
+
+            // Attach Event Listeners for Option Buttons
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const val = this.getAttribute('data-val');
+                    
+                    // Remove selected class from siblings
+                    this.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+                    
+                    // Add selected class to clicked button
+                    this.classList.add('selected');
+                    
+                    // Save to user state
+                    userState[itemId] = val;
+                });
+            });
+        }
+
+        // 3. Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+
+            quizData.forEach(item => {
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const userAnswer = userState[item.id];
+
+                // Reset visual states
+                cardElement.classList.remove('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]', 'bg-[#F0FDF4]', 'border-[#A7F3D0]', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (userAnswer === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    
+                    // Disable buttons to lock answer
+                    cardElement.querySelectorAll('.option-btn').forEach(b => b.classList.add('disabled'));
+                    
+                    // Optional: Highlight correct button permanently
+                    const correctBtn = cardElement.querySelector(`[data-val="${item.answer}"]`);
+                    if(correctBtn) {
+                        correctBtn.style.backgroundColor = '#047857';
+                        correctBtn.style.borderColor = '#047857';
+                        correctBtn.style.color = 'white';
+                        correctBtn.querySelector('.radio-circle').style.borderColor = '#D4AF37';
+                        correctBtn.querySelector('.radio-circle').style.backgroundColor = '#D4AF37';
+                    }
+
+                    correctCount++;
+                } else {
+                    if (userAnswer) {
+                        // Attempted but incorrect - Show Error & Explanation
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show');
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Unanswered (highlight empty border)
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        // 4. Reset Logic
+        function resetQuiz() {
+            // Clear memory state
+            for (let key in userState) delete userState[key];
+            
+            // Re-render UI
+            renderQuiz(); 
+            
+            // Reset Score & Banners
+            scoreDisplay.textContent = `Score: 0 / ${totalQuestions}`;
+            scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
