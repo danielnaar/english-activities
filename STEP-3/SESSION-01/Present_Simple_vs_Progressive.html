@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Simple vs Present Progressive - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F0F4F8;      /* Soft sophisticated gray background */
+            --color-text: #1E293B;    /* Deep Slate for better readability */
+            --color-surface: #FFFFFF;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Subtle Luxury Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Smooth Interactions */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(11, 25, 44, 0.15);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Premium Text Input */
+        .premium-input {
+            width: 100%;
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-bottom: 2px solid #94A3B8;
+            padding: 0.875rem 1.25rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: var(--color-primary);
+            border-radius: 0.5rem;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .premium-input:focus {
+            border-bottom-color: var(--color-accent);
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .premium-input:disabled {
+            cursor: default;
+            opacity: 1;
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        /* Segmented Buttons */
+        .segment-btn {
+            padding: 0.875rem 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+            background-color: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .segment-btn:hover:not(.disabled) {
+            background-color: #F1F5F9;
+            border-color: #CBD5E1;
+        }
+        .segment-btn.active {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.15);
+        }
+        .segment-btn.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .radio-indicator {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            border: 2px solid #94A3B8;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .segment-btn.active .radio-indicator {
+            border-color: var(--color-accent);
+        }
+        .segment-btn.active .radio-indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.875rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            display: none;
+            box-shadow: 0 2px 4px rgba(239, 68, 68, 0.1);
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-12 px-4 sm:px-6 lg:px-8 flex justify-center min-h-screen items-start">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-2xl overflow-hidden border border-gray-200 border-t-[8px] border-t-[#D4AF37] mx-auto flex flex-col relative">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-20 pb-16 px-8 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.4em] text-[10px] sm:text-xs font-bold mb-6 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-playfair font-bold text-white mb-8 leading-tight relative z-10 tracking-wide drop-shadow-lg">
+                Present Simple <br class="md:hidden">
+                <span class="italic font-light text-[#D4AF37] text-3xl md:text-6xl mx-4">vs.</span> 
+                Progressive
+            </h1>
+            
+            <div class="w-32 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mx-auto mb-8 relative z-10 opacity-50"></div>
+            
+            <p class="text-gray-300 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10 tracking-wide">
+                Daily routines vs. Actions happening right now. Master the distinction to accurately convey timing and habits in professional environments.
+            </p>
+        </header>
+
+        <!-- SECTION 1: Forms -->
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-[#F8F9FA]">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Structural Forms
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                
+                <!-- Present Simple Form (White/Blue) -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 border-t-[4px] border-t-[#0B192C] overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+                    <div class="bg-gray-50 border-b border-gray-100 py-4 px-6 text-center">
+                        <h3 class="font-bold text-[#0B192C] text-lg uppercase tracking-widest">Present Simple</h3>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-6">
+                        <div class="group">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-6 h-6 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center"><span class="text-[#10B981] font-bold text-sm">+</span></div>
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Affirmative</span>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center text-[14px] font-medium text-[#0B192C] mb-2">
+                                Subject + base / 3rd person <strong class="text-[#D4AF37]">-s</strong>
+                            </div>
+                            <p class="text-[14px] text-gray-600 text-center"><span class="italic">She</span> <strong class="text-[#0B192C]">sings</strong> <span class="italic">every day.</span></p>
+                        </div>
+                        <div class="group">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-6 h-6 rounded-full bg-[#EF4444]/10 border border-[#EF4444]/20 flex items-center justify-center"><span class="text-[#EF4444] font-bold text-sm">-</span></div>
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Negative</span>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center text-[14px] font-medium text-[#0B192C] mb-2">
+                                Subject + <strong class="text-[#D4AF37]">do/does not</strong> + base
+                            </div>
+                            <p class="text-[14px] text-gray-600 text-center"><span class="italic">She</span> <strong class="text-[#0B192C]">does not sing</strong> <span class="italic">often.</span></p>
+                        </div>
+                        <div class="group">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-6 h-6 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20 flex items-center justify-center"><span class="text-[#3B82F6] font-bold text-sm">?</span></div>
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Question</span>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center text-[14px] font-medium text-[#0B192C] mb-2">
+                                <strong class="text-[#D4AF37]">Do/Does</strong> + subject + base?
+                            </div>
+                            <p class="text-[14px] text-gray-600 text-center"><strong class="text-[#0B192C]">Does</strong> <span class="italic">she</span> <strong class="text-[#0B192C]">sing</strong> <span class="italic">well?</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Present Progressive Form (Navy/Gold) -->
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-t-[#D4AF37] overflow-hidden flex flex-col hover:shadow-lg transition-shadow bg-pattern relative">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="border-b border-white/10 py-4 px-6 text-center">
+                            <h3 class="font-bold text-[#D4AF37] text-lg uppercase tracking-widest">Present Progressive</h3>
+                        </div>
+                        <div class="p-6 md:p-8 space-y-6">
+                            <div class="group">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-6 h-6 rounded-full bg-[#10B981]/20 border border-[#10B981]/30 flex items-center justify-center"><span class="text-[#10B981] font-bold text-sm">+</span></div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Affirmative</span>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-lg p-3 text-center text-[14px] font-medium text-white mb-2 shadow-inner">
+                                    Subject + <strong class="text-[#D4AF37]">be</strong> + verb<strong class="text-[#D4AF37]">-ing</strong>
+                                </div>
+                                <p class="text-[14px] text-gray-300 text-center"><span class="italic">She</span> <strong class="text-white">is singing</strong> <span class="italic">now.</span></p>
+                            </div>
+                            <div class="group">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-6 h-6 rounded-full bg-[#EF4444]/20 border border-[#EF4444]/30 flex items-center justify-center"><span class="text-[#EF4444] font-bold text-sm">-</span></div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Negative</span>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-lg p-3 text-center text-[14px] font-medium text-white mb-2 shadow-inner">
+                                    Subject + <strong class="text-[#D4AF37]">be not</strong> + verb<strong class="text-[#D4AF37]">-ing</strong>
+                                </div>
+                                <p class="text-[14px] text-gray-300 text-center"><span class="italic">She</span> <strong class="text-white">is not singing</strong> <span class="italic">now.</span></p>
+                            </div>
+                            <div class="group">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-6 h-6 rounded-full bg-[#3B82F6]/20 border border-[#3B82F6]/30 flex items-center justify-center"><span class="text-[#3B82F6] font-bold text-sm">?</span></div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Question</span>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 rounded-lg p-3 text-center text-[14px] font-medium text-white mb-2 shadow-inner">
+                                    <strong class="text-[#D4AF37]">Be</strong> + subject + verb<strong class="text-[#D4AF37]">-ing</strong>?
+                                </div>
+                                <p class="text-[14px] text-gray-300 text-center"><strong class="text-white">Is</strong> <span class="italic">she</span> <strong class="text-white">singing</strong> <span class="italic">now?</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 2: Uses & Markers -->
+        <div class="p-8 md:p-12 bg-white border-b border-gray-100">
+            
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                What are they for?
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+                
+                <!-- Simple Uses & Markers (White/Blue) -->
+                <div class="flex flex-col h-full bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow border-t-[4px] border-t-[#0B192C]">
+                    <div class="p-6 md:p-8 flex flex-col h-full">
+                        <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center border border-gray-200 shrink-0">
+                                <svg class="w-5 h-5 text-[#0B192C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <h3 class="font-bold text-[#0B192C] text-lg uppercase tracking-wide">Present Simple</h3>
+                        </div>
+                        
+                        <ul class="space-y-5 text-[15px] text-gray-700 font-medium mb-8 flex-grow">
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#D4AF37] font-bold mt-0.5">•</span>
+                                <div>
+                                    <strong class="text-[#0B192C] block mb-1">Habits and routines</strong>
+                                    <span class="italic text-gray-500 text-sm">"I drink coffee every morning."</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#D4AF37] font-bold mt-0.5">•</span>
+                                <div>
+                                    <strong class="text-[#0B192C] block mb-1">General facts</strong>
+                                    <span class="italic text-gray-500 text-sm">"The sun rises in the east."</span>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="bg-gray-50 rounded-lg p-5 border border-gray-100 mt-auto">
+                            <span class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Time Markers</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white border border-gray-200 text-[#0B192C] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">always</span>
+                                <span class="bg-white border border-gray-200 text-[#0B192C] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">usually</span>
+                                <span class="bg-white border border-gray-200 text-[#0B192C] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">often</span>
+                                <span class="bg-white border border-gray-200 text-[#0B192C] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">sometimes</span>
+                                <span class="bg-white border border-gray-200 text-[#0B192C] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">never</span>
+                                <span class="bg-white border border-gray-200 text-[#0B192C] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">every day</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progressive Uses & Markers (Navy/Gold) -->
+                <div class="flex flex-col h-full bg-[#0B192C] rounded-xl border border-[#D4AF37]/30 shadow-md overflow-hidden hover:shadow-lg transition-shadow border-t-[4px] border-t-[#D4AF37] bg-pattern relative">
+                    <div class="p-6 md:p-8 flex flex-col h-full relative z-10">
+                        <div class="flex items-center gap-4 mb-6 pb-4 border-b border-white/10">
+                            <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shrink-0 shadow-inner">
+                                <svg class="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <h3 class="font-bold text-white text-lg uppercase tracking-wide">Present Progressive</h3>
+                        </div>
+                        
+                        <ul class="space-y-5 text-[15px] text-gray-300 font-medium mb-8 flex-grow">
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#D4AF37] font-bold mt-0.5">•</span>
+                                <div>
+                                    <strong class="text-white block mb-1">Actions happening now</strong>
+                                    <span class="italic text-gray-400 text-sm">"She is studying for an exam."</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-[#D4AF37] font-bold mt-0.5">•</span>
+                                <div>
+                                    <strong class="text-white block mb-1">Temporary actions</strong>
+                                    <span class="italic text-gray-400 text-sm">"They are living in Paris this year."</span>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="bg-white/5 rounded-lg p-5 border border-white/10 shadow-inner mt-auto">
+                            <span class="block text-xs font-bold text-[#D4AF37] uppercase tracking-widest mb-3">Time Markers</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-[#152744] border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">now</span>
+                                <span class="bg-[#152744] border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">right now</span>
+                                <span class="bg-[#152744] border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">at the moment</span>
+                                <span class="bg-[#152744] border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">this week</span>
+                                <span class="bg-[#152744] border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">currently</span>
+                                <span class="bg-[#152744] border border-[#D4AF37]/30 text-[#D4AF37] px-3 py-1.5 rounded-full text-xs font-bold tracking-wide shadow-sm">today</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: Contrast & Mistakes -->
+        <div class="p-8 md:p-12 bg-[#F8F9FA] border-b border-gray-200">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                Executive Precision
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+                
+                <!-- Contrast Examples -->
+                <div class="flex flex-col h-full bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8">
+                    <h3 class="font-bold text-[#0B192C] text-lg mb-6 uppercase tracking-wide flex items-center gap-2 border-b border-gray-100 pb-3">
+                        <svg class="w-5 h-5 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                        Contrast in Context
+                    </h3>
+                    
+                    <div class="space-y-6 flex-grow flex flex-col justify-center">
+                        <!-- Pair 1 -->
+                        <div class="flex flex-col gap-0 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+                            <div class="bg-white p-4 flex items-center gap-3">
+                                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-gray-50 border border-gray-200 px-2 py-1 rounded w-20 text-center shrink-0">Simple</span> 
+                                <span class="text-[14px] font-medium text-gray-800">He <strong class="text-[#0B192C] border-b border-gray-300">plays</strong> the guitar every weekend.</span>
+                            </div>
+                            <div class="bg-[#D4AF37] p-4 flex items-center gap-3 border-t border-[#0B192C]/20 relative">
+                                <div class="relative z-10 flex items-center gap-3 w-full">
+                                    <span class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest bg-[#0B192C] border border-[#0B192C] px-2 py-1 rounded w-20 text-center shrink-0 shadow-sm">Prog.</span> 
+                                    <span class="text-[14px] font-medium text-[#0B192C]">He <strong class="text-[#0B192C] border-b border-[#0B192C]">is playing</strong> the guitar right now.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pair 2 -->
+                        <div class="flex flex-col gap-0 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+                            <div class="bg-white p-4 flex items-center gap-3">
+                                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-gray-50 border border-gray-200 px-2 py-1 rounded w-20 text-center shrink-0">Simple</span> 
+                                <span class="text-[14px] font-medium text-gray-800">I <strong class="text-[#0B192C] border-b border-gray-300">work</strong> in a bank.</span>
+                            </div>
+                            <div class="bg-[#D4AF37] p-4 flex items-center gap-3 border-t border-[#0B192C]/20 relative">
+                                <div class="relative z-10 flex items-center gap-3 w-full">
+                                    <span class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest bg-[#0B192C] border border-[#0B192C] px-2 py-1 rounded w-20 text-center shrink-0 shadow-sm">Prog.</span> 
+                                    <span class="text-[14px] font-medium text-[#0B192C]">I <strong class="text-[#0B192C] border-b border-[#0B192C]">am working</strong> from home today.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Mistakes -->
+                <div class="flex flex-col h-full bg-white rounded-xl shadow-sm border border-gray-200 border-l-[4px] border-l-[#EF4444] p-6 md:p-8 hover:shadow-md transition-shadow">
+                    <h3 class="font-bold text-[#EF4444] text-lg mb-2 uppercase tracking-wide flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        Common Mistakes
+                    </h3>
+                    <p class="text-[11px] text-gray-500 font-bold uppercase tracking-widest mb-6 border-b border-gray-100 pb-3">Don't mix up routine vs current action.</p>
+                    
+                    <div class="space-y-4 flex-grow flex flex-col justify-center">
+                        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 shadow-inner">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="text-[#EF4444] font-bold text-sm shrink-0">✕</span>
+                                <span class="text-gray-500 text-sm italic"><s>She is sing every day.</s></span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#10B981] font-bold text-sm shrink-0">✓</span>
+                                <span class="font-semibold text-[#0B192C] text-[14px]">She sings every day.</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-5 border border-gray-200 shadow-inner">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="text-[#EF4444] font-bold text-sm shrink-0">✕</span>
+                                <span class="text-gray-500 text-sm italic"><s>They go to school right now.</s></span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="text-[#10B981] font-bold text-sm shrink-0">✓</span>
+                                <span class="font-semibold text-[#0B192C] text-[14px]">They are going to school right now.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 4: Assessment (Quick Checks) -->
+        <div class="p-8 md:p-14 lg:p-16 bg-white relative">
+            
+            <div class="flex items-center justify-center mb-12 flex-col">
+                <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0F172A] mb-2">Interactive Assessment</h2>
+                <div class="w-16 h-1 bg-[#D4AF37] rounded-full mb-3"></div>
+                <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest text-center">
+                    Validate your structural knowledge
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-8 max-w-4xl mx-auto">
+                
+                <!-- Q1: Multiple Choice -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover-lift" id="card-q1">
+                    <div class="flex items-center gap-4 mb-6 border-b border-gray-100 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-lg shrink-0 shadow-inner border border-[#D4AF37]/30">1</div>
+                        <h3 class="font-bold text-[#1E293B] text-lg">Choose the correct sentence context:</h3>
+                        <div id="feedback-icon-q1" class="ml-auto opacity-0 transition-opacity duration-300"></div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="segment-btn" data-id="q1" data-val="wrong">
+                            <div class="radio-indicator"></div>
+                            <span>She is sing every day.</span>
+                        </button>
+                        <button class="segment-btn" data-id="q1" data-val="correct">
+                            <div class="radio-indicator"></div>
+                            <span>She sings every day.</span>
+                        </button>
+                    </div>
+                    <div id="explanation-q1" class="feedback-box">
+                        <strong>Logic:</strong> "Every day" is a routine marker, requiring Present Simple.
+                    </div>
+                </div>
+
+                <!-- Q2: Fix it -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover-lift" id="card-q2">
+                    <div class="flex items-center gap-4 mb-6 border-b border-gray-100 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-lg shrink-0 shadow-inner border border-[#D4AF37]/30">2</div>
+                        <h3 class="font-bold text-[#1E293B] text-lg">Correct the structural error:</h3>
+                        <div id="feedback-icon-q2" class="ml-auto opacity-0 transition-opacity duration-300"></div>
+                    </div>
+                    
+                    <div class="bg-red-50 p-4 rounded-xl border border-red-100 mb-5">
+                        <p class="text-gray-500 font-medium italic line-through decoration-red-300 decoration-2 text-center text-[15px]">They go to school now.</p>
+                    </div>
+                    
+                    <div class="relative w-full">
+                        <input type="text" id="input-q2" class="premium-input text-[15px]" placeholder="Type the correct sentence..." autocomplete="off" spellcheck="false">
+                    </div>
+                    <div id="explanation-q2" class="feedback-box">
+                        <strong>Logic:</strong> "Now" requires the Present Progressive (are going).
+                    </div>
+                </div>
+
+                <!-- Q3: Make a question -->
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover-lift" id="card-q3">
+                    <div class="flex items-center gap-4 mb-6 border-b border-gray-100 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-lg shrink-0 shadow-inner border border-[#D4AF37]/30">3</div>
+                        <h3 class="font-bold text-[#1E293B] text-lg">Formulate the question:</h3>
+                        <div id="feedback-icon-q3" class="ml-auto opacity-0 transition-opacity duration-300"></div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 mb-5 flex items-center gap-3">
+                        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Prompt:</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[#0B192C] font-semibold text-[15px]">she / sing / now</span>
+                        </div>
+                    </div>
+                    
+                    <div class="relative w-full">
+                        <input type="text" id="input-q3" class="premium-input text-[15px]" placeholder="Type your question here..." autocomplete="off" spellcheck="false">
+                    </div>
+                    <div id="explanation-q3" class="feedback-box">
+                        <strong>Logic:</strong> "Now" needs Present Progressive question format: Is + she + singing + now?
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-10 border-t border-gray-200">
+                <div id="score-display" class="bg-gray-50 text-gray-500 border border-gray-200 px-8 py-4 rounded-xl font-bold shadow-sm transition-all duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 3
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-xl px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Check Answers
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-xl px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-2xl p-10 md:p-14 text-center border border-[#D4AF37]/50 shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-[#D4AF37] opacity-10 rounded-full blur-[60px]"></div>
+                <div class="absolute -bottom-20 -left-20 w-64 h-64 bg-[#10B981] opacity-5 rounded-full blur-[60px]"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10 shadow-inner backdrop-blur-sm">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <!-- TITLE CHANGED TO GOLD -->
+                    <h2 class="text-3xl md:text-4xl font-playfair text-[#D4AF37] font-bold mb-4 drop-shadow-md">Excellent Work</h2>
+                    <p class="text-gray-300 max-w-2xl mx-auto mb-0 leading-relaxed font-medium text-[15px]">
+                        You have successfully mastered the distinction between routine facts and current ongoing actions. Structural precision is key to executive fluency.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#0F172A] py-8 px-10 flex flex-col md:flex-row justify-between items-center text-[13px] border-t border-gray-800">
+            <div class="mb-4 md:mb-0 flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-[#D4AF37]"></div>
+                <span class="font-bold text-white tracking-widest uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-500 font-medium ml-2">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37] font-medium tracking-wide">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Data and State
+        let q1Answer = null;
+        
+        const q2ValidAnswers = [
+            "they are going to school right now",
+            "they are going to school now",
+            "they're going to school now"
+        ];
+        
+        const q3ValidAnswers = [
+            "is she singing now",
+            "is she singing right now"
+        ];
+
+        // Elements
+        const btnCheck = document.getElementById('check-btn');
+        const btnReset = document.getElementById('reset-btn');
+        const scoreDisplay = document.getElementById('score-display');
+        const successBanner = document.getElementById('success-banner');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // Q1 Selection Logic
+        document.querySelectorAll('#card-q1 .segment-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Reset all buttons
+                document.querySelectorAll('#card-q1 .segment-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Set active styling for selected button
+                this.classList.add('active');
+                q1Answer = this.getAttribute('data-val');
+            });
+        });
+
+        // Normalization Helper
+        const normalizeText = (text) => {
+            return text.toLowerCase()
+                       .replace(/[^a-z\s']/g, '') // remove punctuation except apostrophes
+                       .replace(/\s+/g, ' ') // remove double spaces
+                       .trim();
+        };
+
+        // Validation Logic
+        function validateAnswers() {
+            let correctCount = 0;
+            const totalQuestions = 3;
+
+            // --- Validate Q1 ---
+            const cardQ1 = document.getElementById('card-q1');
+            const iconQ1 = document.getElementById('feedback-icon-q1');
+            const expQ1 = document.getElementById('explanation-q1');
+            
+            cardQ1.classList.remove('animate-shake', 'border-red-200', 'border-[#A7F3D0]', 'border-[#D4AF37]', 'bg-[#FEF2F2]', 'bg-[#F0FDF4]');
+            iconQ1.classList.remove('opacity-100'); iconQ1.classList.add('opacity-0');
+            expQ1.classList.remove('show');
+
+            if (q1Answer === 'correct') {
+                cardQ1.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                iconQ1.innerHTML = iconSuccess;
+                iconQ1.classList.remove('opacity-0'); iconQ1.classList.add('opacity-100');
+                cardQ1.querySelectorAll('.segment-btn').forEach(b => b.classList.add('disabled'));
+                correctCount++;
+            } else {
+                if (q1Answer !== null) {
+                    cardQ1.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-red-200');
+                    iconQ1.innerHTML = iconError;
+                    iconQ1.classList.remove('opacity-0'); iconQ1.classList.add('opacity-100');
+                    expQ1.classList.add('show');
+                    setTimeout(() => { cardQ1.classList.remove('animate-shake'); }, 400);
+                } else {
+                    cardQ1.classList.add('border-[#D4AF37]');
+                }
+            }
+
+            // --- Validate Q2 & Q3 Helper ---
+            function validateInputQuestion(id, validArr) {
+                const card = document.getElementById(`card-${id}`);
+                const input = document.getElementById(`input-${id}`);
+                const icon = document.getElementById(`feedback-icon-${id}`);
+                const exp = document.getElementById(`explanation-${id}`);
+                
+                const rawVal = input.value;
+                const normalizedVal = normalizeText(rawVal);
+
+                card.classList.remove('animate-shake', 'border-red-200', 'border-[#A7F3D0]', 'border-[#D4AF37]', 'bg-[#FEF2F2]', 'bg-[#F0FDF4]');
+                input.classList.remove('text-[#047857]', 'font-bold', 'border-transparent', 'bg-transparent', 'text-red-600', 'border-red-400');
+                icon.classList.remove('opacity-100'); icon.classList.add('opacity-0');
+                exp.classList.remove('show');
+
+                if (validArr.includes(normalizedVal)) {
+                    card.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    input.disabled = true;
+                    input.classList.add('text-[#047857]', 'font-bold', 'border-transparent', 'bg-transparent');
+                    
+                    // Format beautifully
+                    let cleanStr = validArr[0];
+                    input.value = cleanStr.charAt(0).toUpperCase() + cleanStr.slice(1) + (id === 'q3' ? '?' : '.');
+
+                    icon.innerHTML = iconSuccess;
+                    icon.classList.remove('opacity-0'); icon.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    if (rawVal.trim() !== "") {
+                        card.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-red-200');
+                        input.classList.add('text-red-600', 'border-red-400');
+                        icon.innerHTML = iconError;
+                        icon.classList.remove('opacity-0'); icon.classList.add('opacity-100');
+                        exp.classList.add('show');
+                        setTimeout(() => { card.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        card.classList.add('border-[#D4AF37]');
+                    }
+                }
+            }
+
+            validateInputQuestion('q2', q2ValidAnswers);
+            validateInputQuestion('q3', q3ValidAnswers);
+
+            // --- Update Score ---
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-gray-50', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]', 'shadow-lg');
+                
+                btnCheck.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-gray-50', 'text-gray-500', 'border-gray-200');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]', 'shadow-lg');
+            }
+        }
+
+        // Reset Logic
+        function resetQuiz() {
+            // Reset State
+            q1Answer = null;
+            document.querySelectorAll('#card-q1 .segment-btn').forEach(b => {
+                b.classList.remove('active', 'disabled');
+            });
+            document.getElementById('input-q2').value = "";
+            document.getElementById('input-q2').disabled = false;
+            document.getElementById('input-q3').value = "";
+            document.getElementById('input-q3').disabled = false;
+
+            // Reset Styles
+            ['q1', 'q2', 'q3'].forEach(id => {
+                const card = document.getElementById(`card-${id}`);
+                card.className = "bg-white p-8 rounded-2xl border border-gray-200 shadow-sm hover-lift";
+                
+                document.getElementById(`feedback-icon-${id}`).className = "ml-auto opacity-0 transition-opacity duration-300";
+                document.getElementById(`explanation-${id}`).className = "feedback-box";
+                
+                if(id !== 'q1') {
+                    document.getElementById(`input-${id}`).className = "premium-input text-[15px]";
+                }
+            });
+
+            // Reset UI
+            scoreDisplay.textContent = `Score: 0 / 3`;
+            scoreDisplay.classList.add('bg-gray-50', 'text-gray-500', 'border-gray-200');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]', 'shadow-lg');
+            
+            btnCheck.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('.p-8.md\\:p-14.lg\\:p-16.bg-white.relative').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Listeners
+        btnCheck.addEventListener('click', validateAnswers);
+        btnReset.addEventListener('click', resetQuiz);
+
+        // Enter key support for inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') validateAnswers();
+            });
+        });
+
+    </script>
+</body>
+</html>
