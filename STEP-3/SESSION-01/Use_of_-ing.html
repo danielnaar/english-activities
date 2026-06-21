@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use of -ing - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Segmented Buttons for Categorization */
+        .segment-btn {
+            padding: 0.6rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748B;
+            background-color: transparent;
+            border-radius: 0.375rem;
+            transition: all 0.2s ease;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .segment-btn:hover {
+            color: var(--color-primary);
+        }
+        .segment-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-accent); /* Cambiado de blanco a Dorado Éxito */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+        .segment-btn.disabled {
+            pointer-events: none;
+        }
+
+        /* Feedback Box Styling */
+        .feedback-box {
+            background-color: #FEF2F2;
+            border-left: 4px solid #EF4444;
+            color: #991B1B;
+            padding: 0.75rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            display: none;
+        }
+        .feedback-box.show {
+            display: block;
+            animation: pop 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • GRAMMAR REFERENCE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Use of <span class="italic font-light text-[#D4AF37] text-3xl md:text-5xl mx-2">-ing</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                One ending, different roles in English. Master how the <strong class="font-bold text-[#D4AF37]">-ing</strong> suffix transforms verbs into nouns, adjectives, or complements to build sophisticated sentences.
+            </p>
+        </header>
+
+        <div class="p-8 md:p-12 border-b border-gray-100 bg-[#F8F9FA]">
+            <h2 class="text-2xl md:text-3xl font-playfair font-bold text-[#0B192C] flex items-center justify-center text-center mb-10">
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] mr-4 hidden sm:block"></span>
+                The Three Roles
+                <span class="w-12 md:w-16 h-0.5 bg-[#D4AF37] ml-4 hidden sm:block"></span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                
+                <!-- Role 1: Noun -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow">
+                    <div class="bg-gray-50 border-b border-gray-200 py-4 px-6 text-center">
+                        <h3 class="font-bold text-[#0B192C] text-lg uppercase tracking-widest flex items-center justify-center gap-2">
+                            <span class="text-[#D4AF37] text-xl">●</span> As a Noun
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8 flex-grow flex flex-col">
+                        <p class="text-[14px] text-gray-500 font-medium mb-6">Acts as the subject or object of a sentence. It names an activity rather than doing it.</p>
+                        
+                        <div class="space-y-4 mt-auto">
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 shadow-inner">
+                                <span class="italic text-gray-800 text-[15px]">"<strong class="text-[#0B192C] not-italic border-b-2 border-[#D4AF37]">Singing</strong> is good for your health."</span>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 shadow-inner">
+                                <span class="italic text-gray-800 text-[15px]">"<strong class="text-[#0B192C] not-italic border-b-2 border-[#D4AF37]">Swimming</strong> is my favorite sport."</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-[#0B192C] rounded-xl shadow-md border-t-[4px] border-[#D4AF37] overflow-hidden flex flex-col h-full bg-pattern relative hover:shadow-lg transition-shadow">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="border-b border-white/10 py-4 px-6 text-center">
+                            <h3 class="font-bold text-white text-lg uppercase tracking-widest flex items-center justify-center gap-2">
+                                <span class="text-[#D4AF37] text-xl">●</span> As an Adjective
+                            </h3>
+                        </div>
+                        <div class="p-6 md:p-8 flex-grow flex flex-col">
+                            <p class="text-[14px] text-gray-300 font-medium mb-6">Describes a noun. It tells us about the characteristic or effect of a person, place, or thing.</p>
+                            
+                            <div class="space-y-4 mt-auto">
+                                <div class="bg-white/5 rounded-lg p-4 border border-white/10 shadow-inner backdrop-blur-sm">
+                                    <span class="italic text-white text-[15px]">"It was a <strong class="text-[#D4AF37] not-italic border-b-2 border-[#D4AF37]">boring</strong> movie."</span>
+                                </div>
+                                <div class="bg-white/5 rounded-lg p-4 border border-white/10 shadow-inner backdrop-blur-sm">
+                                    <span class="italic text-white text-[15px]">"I had a <strong class="text-[#D4AF37] not-italic border-b-2 border-[#D4AF37]">hard working</strong> day."</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col h-full hover:shadow-md transition-shadow">
+                    <div class="bg-gray-50 border-b border-gray-200 py-4 px-6 text-center">
+                        <h3 class="font-bold text-[#0B192C] text-lg uppercase tracking-widest flex items-center justify-center gap-2">
+                            <span class="text-[#D4AF37] text-xl">●</span> As part of a Verb
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8 flex-grow flex flex-col">
+                        <p class="text-[14px] text-gray-500 font-medium mb-6">Follows certain main verbs (like <em>enjoy, hate, finish, stop</em>) to complete the action.</p>
+                        
+                        <div class="space-y-4 mt-auto">
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 shadow-inner">
+                                <span class="italic text-gray-800 text-[15px]">"I hate <strong class="text-[#0B192C] not-italic border-b-2 border-[#D4AF37]">smoking</strong>."</span>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 border border-gray-100 shadow-inner">
+                                <span class="italic text-gray-800 text-[15px]">"She enjoys <strong class="text-[#0B192C] not-italic border-b-2 border-[#D4AF37]">reading</strong>."</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="p-8 md:p-12 bg-white border-b border-gray-100">
+            <div class="max-w-4xl mx-auto bg-gray-50 border-l-[6px] border-[#D4AF37] rounded-r-xl shadow-sm flex flex-col sm:flex-row items-center gap-6 justify-between p-6 md:p-8">
+                
+                <!-- CORRECCIÓN DE ALINEACIÓN: flex-col items-start y text-left -->
+                <div class="w-full sm:w-1/3 flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <div class="flex items-center gap-3 mb-2">
+                        <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <h4 class="font-bold text-[#0B192C] uppercase tracking-widest text-lg m-0 leading-none">Executive Context</h4>
+                    </div>
+                    <!-- Margin left añadido para alinear visualmente con el texto de arriba, ignorando el icono -->
+                    <p class="text-sm font-bold text-gray-500 uppercase tracking-widest mt-1 ml-9">Corporate English</p>
+                </div>
+
+                <div class="w-full sm:w-2/3 border-t sm:border-t-0 sm:border-l border-gray-200 pt-4 sm:pt-0 sm:pl-8">
+                    <p class="text-gray-700 text-[14px] font-medium leading-relaxed mb-4 text-center sm:text-left">
+                        Using <strong class="text-[#0B192C]">-ing</strong> as a noun is extremely common in business settings to sound more objective and formal.
+                    </p>
+                    
+                    <div class="flex flex-col gap-3">
+                        <div class="bg-white p-4 rounded border border-gray-200 shadow-sm">
+                            <span class="text-[11px] font-bold text-[#10B981] uppercase tracking-widest mb-1 block">Subject Noun</span>
+                            <span class="italic text-[#0B192C] font-semibold">"<strong class="text-[#D4AF37] not-italic">Networking</strong> is essential for career growth."</span>
+                        </div>
+                        <div class="bg-white p-4 rounded border border-gray-200 shadow-sm">
+                            <span class="text-[11px] font-bold text-[#10B981] uppercase tracking-widest mb-1 block">After a verb</span>
+                            <span class="italic text-[#0B192C] font-semibold">"Management suggested <strong class="text-[#D4AF37] not-italic">delaying</strong> the launch."</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="p-8 md:p-12 bg-[#F8F9FA]">
+            
+            <section class="mb-8">
+                <div class="mb-10 border-b border-gray-200 pb-4">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C] flex items-center justify-center">
+                        Structural Analyzer
+                    </h2>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2 text-center">
+                        Identify the role of the highlighted word
+                    </p>
+                </div>
+
+                <!-- Quiz Grid Container -->
+                <div id="quiz-container" class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <!-- Dynamic content injected here via JS -->
+                </div>
+            </section>
+
+            <div class="mt-14 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-200">
+                <!-- Score Display -->
+                <div id="score-display" class="bg-white text-gray-500 border border-gray-300 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 6
+                </div>
+                
+                <button id="check-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Analyze Roles
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </button>
+                <button id="reset-btn" class="bg-white border-2 border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Structural Mastery</h2>
+                    <p class="text-gray-300 max-w-xl mb-0 leading-relaxed font-medium mx-auto">
+                        Excellent work. Understanding the function of the "-ing" form allows you to construct more precise, diverse, and professional sentences.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Data Architecture
+        
+        // State object to hold user selections
+        const userState = {};
+
+        // Master Data for the Quiz
+        const quizData = [
+            { 
+                id: 'q1', 
+                sentence: "Developing new strategies is crucial.", 
+                highlight: "Developing",
+                answer: "noun",
+                explanation: "'Developing' actúa como el sujeto de la oración. Está nombrando la actividad, por lo que es un sustantivo."
+            },
+            { 
+                id: 'q2', 
+                sentence: "We watched an interesting presentation.", 
+                highlight: "interesting",
+                answer: "adjective",
+                explanation: "'Interesting' está describiendo al sustantivo 'presentation'. Por lo tanto, actúa como un adjetivo."
+            },
+            { 
+                id: 'q3', 
+                sentence: "She suggested delaying the meeting.", 
+                highlight: "delaying",
+                answer: "verb",
+                explanation: "'Delaying' es un gerundio que complementa al verbo principal 'suggested'. Es parte del patrón verbal."
+            },
+            { 
+                id: 'q4', 
+                sentence: "I appreciate an understanding manager.", 
+                highlight: "understanding",
+                answer: "adjective",
+                explanation: "'Understanding' describe qué tipo de gerente es (comprensivo). Actúa como un adjetivo."
+            },
+            { 
+                id: 'q5', 
+                sentence: "We finished writing the final report.", 
+                highlight: "writing",
+                answer: "verb",
+                explanation: "Sigue al verbo principal 'finished' para completar la idea de la acción. Es parte del patrón verbal."
+            },
+            { 
+                id: 'q6', 
+                sentence: "Multitasking can reduce your productivity.", 
+                highlight: "Multitasking",
+                answer: "noun",
+                explanation: "Actúa como el sujeto de la oración. Está nombrando el concepto de 'hacer múltiples tareas'."
+            }
+        ];
+
+        const totalQuestions = quizData.length;
+
+        // UI Elements
+        const containerQuiz = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-6 h-6 text-[#10B981] absolute right-3 top-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-6 h-6 text-[#EF4444] absolute right-3 top-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                
+                // Bold the highlight word within the sentence
+                const formattedSentence = item.sentence.replace(
+                    item.highlight, 
+                    `<strong class="text-[#0B192C] underline decoration-[#D4AF37] decoration-2 underline-offset-2">${item.highlight}</strong>`
+                );
+
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-6 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 hover:shadow-md">
+                        <div class="flex items-center gap-3 mb-6 pr-6">
+                            <span class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest mt-1 shrink-0 bg-[#0B192C] px-2 py-1 rounded">Item ${index + 1}</span>
+                            <span class="font-medium text-gray-700 text-[15px] leading-relaxed italic">
+                                "${formattedSentence}"
+                            </span>
+                        </div>
+                        
+                        <div class="flex flex-wrap bg-gray-100 rounded-md p-1 gap-1 mt-auto relative z-10">
+                            <button class="segment-btn" data-id="${item.id}" data-val="noun">Noun</button>
+                            <button class="segment-btn" data-id="${item.id}" data-val="adjective">Adjective</button>
+                            <button class="segment-btn" data-id="${item.id}" data-val="verb">Verb Part</button>
+                        </div>
+
+                        <!-- Feedback Icon Anchor -->
+                        <div id="feedback-icon-${item.id}" class="opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+                        
+                        <!-- Feedback Explanation Box -->
+                        <div id="explanation-${item.id}" class="feedback-box">
+                            <strong>Logic:</strong> ${item.explanation}
+                        </div>
+                    </div>
+                `;
+            });
+            containerQuiz.innerHTML = html;
+
+            // Attach Event Listeners for Segmented Buttons
+            document.querySelectorAll('.segment-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const val = this.getAttribute('data-val');
+                    
+                    // Remove active class from siblings
+                    this.parentElement.querySelectorAll('.segment-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Save to user state
+                    userState[itemId] = val;
+                });
+            });
+        }
+
+        function validateAnswers() {
+            let correctCount = 0;
+
+            quizData.forEach(item => {
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const explanationBox = document.getElementById(`explanation-${item.id}`);
+                const userAnswer = userState[item.id];
+
+                // Reset visual states
+                cardElement.classList.remove('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]', 'bg-[#F0FDF4]', 'border-[#A7F3D0]', 'border-[#D4AF37]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+                explanationBox.classList.remove('show');
+
+                if (userAnswer === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    
+                    // Disable buttons to lock answer
+                    cardElement.querySelectorAll('.segment-btn').forEach(b => b.classList.add('disabled'));
+                    
+                    correctCount++;
+                } else {
+                    if (userAnswer) {
+                        // Attempted but incorrect - Show Error & Explanation
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        explanationBox.classList.add('show');
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Unanswered highlight
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-white', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-white', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        function resetQuiz() {
+            // Clear memory state
+            for (let key in userState) delete userState[key];
+            
+            // Re-render UI
+            renderQuiz(); 
+            
+            // Reset Score & Banners
+            scoreDisplay.textContent = `Score: 0 / ${totalQuestions}`;
+            scoreDisplay.classList.add('bg-white', 'text-gray-500', 'border-gray-300');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
