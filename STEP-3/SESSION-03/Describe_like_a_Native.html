@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Describe like a Native - Match</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            50% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Matching Buttons Styling */
+        .match-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.25rem;
+            background-color: #FFFFFF;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            color: #374151;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            min-height: 5rem;
+        }
+
+        @media (max-width: 768px) {
+            .match-btn {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+                min-height: 4rem;
+            }
+        }
+
+        .match-btn:hover:not(.disabled) {
+            border-color: #cbd5e1;
+            background-color: #F8F9FA;
+            color: var(--color-primary);
+        }
+
+        .match-btn.selected {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: var(--color-accent);
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(11, 25, 44, 0.15);
+            z-index: 10;
+        }
+
+        .match-btn.matched {
+            background-color: #F0FDF4;
+            border-color: #10B981;
+            color: #047857;
+            pointer-events: none;
+            box-shadow: none;
+        }
+
+        .match-btn.error {
+            background-color: #FEF2F2;
+            border-color: #EF4444;
+            color: #B91C1C;
+        }
+
+        .match-btn.disabled {
+            pointer-events: none;
+        }
+
+        /* Column labels */
+        .col-header {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #6B7280;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E5E7EB;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-4 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-6 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE VOCABULARY MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Describe like a Native
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Upgrade your vocabulary. Click a simple sentence on the left, then find its fluent, native-style equivalent on the right.
+            </p>
+        </header>
+
+        <div class="p-4 md:p-10 lg:p-12 bg-[#F8F9FA]">
+            
+            <!-- SECTION 1: Features & Build -->
+            <section class="mb-16">
+                <div class="mb-8 text-center">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C]">
+                        Part 1: Features & Build
+                    </h2>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2">
+                        Match the 8 pairs below
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 md:gap-8 relative">
+                    <!-- Left Column (Simple) -->
+                    <div>
+                        <div class="col-header">Simple English</div>
+                        <div id="left-col-1" class="flex flex-col gap-3">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column (Native) -->
+                    <div>
+                        <div class="col-header">Native Style</div>
+                        <div id="right-col-1" class="flex flex-col gap-3">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: General Appearance & Age -->
+            <section class="mb-8 pt-8 border-t border-gray-200">
+                <div class="mb-8 text-center">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C]">
+                        Part 2: Appearance & Age
+                    </h2>
+                    <p class="text-sm text-gray-500 font-semibold uppercase tracking-widest mt-2">
+                        Match the 7 pairs below
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 md:gap-8 relative">
+                    <!-- Left Column (Simple) -->
+                    <div>
+                        <div class="col-header">Simple English</div>
+                        <div id="left-col-2" class="flex flex-col gap-3">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column (Native) -->
+                    <div>
+                        <div class="col-header">Native Style</div>
+                        <div id="right-col-2" class="flex flex-col gap-3">
+                            <!-- Dynamic Content -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Controls -->
+            <div class="mt-14 flex flex-col items-center justify-center gap-5 pt-8 border-t border-gray-200">
+                <div id="score-display" class="bg-gray-100 text-[#0B192C] border border-gray-200 px-8 py-3 rounded-full font-bold shadow-sm text-lg">
+                    Matches Found: <span id="match-count" class="text-[#D4AF37]">0</span> / 15
+                </div>
+                
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-3 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Restart Activity
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Vocabulary Upgraded</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium mx-auto">
+                        You have successfully matched all phrases. Using structures like "She's got..." and descriptive verbs elevates your English from a textbook level to true native fluency.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Vanilla JS Logic -->
+    <script>
+        // Data adapted to B1 level (Simplified native phrases)
+        const part1Data = [
+            { id: '1', simple: "She has blue eyes.", native: "She's got striking blue eyes you can't miss." },
+            { id: '2', simple: "She has long hair.", native: "She's got long, silky hair that flows down her back." },
+            { id: '3', simple: "He has a beard.", native: "He's rocking a full beard that makes him look older." },
+            { id: '4', simple: "He has green eyes.", native: "He's got piercing green eyes that look right at you." },
+            { id: '5', simple: "She has freckles.", native: "She's got little freckles that make her look super cute." },
+            { id: '6', simple: "He has no hair.", native: "He's bald and proud of it." },
+            { id: '7', simple: "She has red hair.", native: "She's got curly red hair that shines in the sun." },
+            { id: '8', simple: "He has brown eyes.", native: "He's got warm brown eyes that make him look friendly." }
+        ];
+
+        const part2Data = [
+            { id: '9', simple: "He is tall.", native: "He's so tall he needs to duck through doors." },
+            { id: '10', simple: "He is strong.", native: "He's built like an athlete, really strong." },
+            { id: '11', simple: "She is beautiful.", native: "She's gorgeous—people turn their heads when she walks by." },
+            { id: '12', simple: "He is slim.", native: "He's slim and looks like a model." },
+            { id: '13', simple: "She is short.", native: "She's short, but she walks like she owns the place." },
+            { id: '14', simple: "She is young.", native: "She's young, full of energy, and it shows in her smile." },
+            { id: '15', simple: "He is old.", native: "He's older, with lines that tell a lifetime of stories." }
+        ];
+
+        const totalPairs = part1Data.length + part2Data.length;
+
+        let selectedLeft = null;
+        let selectedRight = null;
+        let matchesFound = 0;
+
+        // UI Elements
+        const leftCol1 = document.getElementById('left-col-1');
+        const rightCol1 = document.getElementById('right-col-1');
+        const leftCol2 = document.getElementById('left-col-2');
+        const rightCol2 = document.getElementById('right-col-2');
+        
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const matchCountDisplay = document.getElementById('match-count');
+
+        function shuffleArray(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        function createButtonHTML(id, text, side) {
+            return `
+                <button type="button" class="match-btn" data-id="${id}" data-side="${side}">
+                    ${text}
+                </button>
+            `;
+        }
+
+        function renderSection(data, leftContainer, rightContainer) {
+            // Left column (Simple) - Keep original order for logic
+            let leftHTML = '';
+            data.forEach(item => {
+                leftHTML += createButtonHTML(item.id, item.simple, 'left');
+            });
+            leftContainer.innerHTML = leftHTML;
+
+            // Right column (Native) - Shuffle
+            let shuffledData = shuffleArray([...data]);
+            let rightHTML = '';
+            shuffledData.forEach(item => {
+                rightHTML += createButtonHTML(item.id, item.native, 'right');
+            });
+            rightContainer.innerHTML = rightHTML;
+        }
+
+        function initGame() {
+            // Reset state
+            selectedLeft = null;
+            selectedRight = null;
+            matchesFound = 0;
+            matchCountDisplay.textContent = matchesFound;
+            
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+
+            // Render both sections
+            renderSection(part1Data, leftCol1, rightCol1);
+            renderSection(part2Data, leftCol2, rightCol2);
+
+            // Attach Event Listeners
+            document.querySelectorAll('.match-btn').forEach(btn => {
+                btn.addEventListener('click', handleMatchClick);
+            });
+        }
+
+        function handleMatchClick(e) {
+            const btn = e.currentTarget;
+            
+            // Ignore if already matched
+            if (btn.classList.contains('matched')) return;
+
+            const side = btn.getAttribute('data-side');
+
+            // Visual selection logic
+            if (side === 'left') {
+                if (selectedLeft) selectedLeft.classList.remove('selected');
+                selectedLeft = btn;
+                selectedLeft.classList.add('selected');
+            } else {
+                if (selectedRight) selectedRight.classList.remove('selected');
+                selectedRight = btn;
+                selectedRight.classList.add('selected');
+            }
+
+            // Check match if both sides have a selection
+            if (selectedLeft && selectedRight) {
+                // Ensure they are in the same part/container logically. 
+                // Using dataset.id is unique across both parts, so it works globally.
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const leftId = selectedLeft.getAttribute('data-id');
+            const rightId = selectedRight.getAttribute('data-id');
+
+            // Lock UI temporarily
+            document.querySelectorAll('.match-btn').forEach(b => b.classList.add('disabled'));
+
+            if (leftId === rightId) {
+                // SUCCESS
+                selectedLeft.classList.remove('selected');
+                selectedRight.classList.remove('selected');
+                
+                selectedLeft.classList.add('matched', 'animate-pop');
+                selectedRight.classList.add('matched', 'animate-pop');
+                
+                matchesFound++;
+                matchCountDisplay.textContent = matchesFound;
+                
+                resetSelectionState();
+                
+                if (matchesFound === totalPairs) {
+                    showSuccess();
+                } else {
+                    // Unlock UI
+                    document.querySelectorAll('.match-btn:not(.matched)').forEach(b => b.classList.remove('disabled'));
+                }
+
+            } else {
+                // ERROR
+                selectedLeft.classList.remove('selected');
+                selectedRight.classList.remove('selected');
+                
+                selectedLeft.classList.add('error', 'animate-shake');
+                selectedRight.classList.add('error', 'animate-shake');
+                
+                let l = selectedLeft;
+                let r = selectedRight;
+                
+                resetSelectionState();
+
+                setTimeout(() => {
+                    l.classList.remove('error', 'animate-shake');
+                    r.classList.remove('error', 'animate-shake');
+                    // Unlock UI
+                    document.querySelectorAll('.match-btn:not(.matched)').forEach(b => b.classList.remove('disabled'));
+                }, 500);
+            }
+        }
+
+        function resetSelectionState() {
+            selectedLeft = null;
+            selectedRight = null;
+        }
+
+        function showSuccess() {
+            successBanner.classList.remove('hidden');
+            successBanner.classList.add('animate-pop');
+            setTimeout(() => {
+                successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 150);
+        }
+
+        // Run
+        resetBtn.addEventListener('click', initGame);
+        initGame();
+
+    </script>
+</body>
+</html>
