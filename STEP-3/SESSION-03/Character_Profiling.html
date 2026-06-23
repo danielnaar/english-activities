@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Profiling - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+
+        /* Premium Textarea */
+        .premium-textarea {
+            width: 100%;
+            background-color: #F8F9FA;
+            border: 1px solid #E5E7EB;
+            border-bottom: 2px solid #cbd5e1;
+            padding: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            color: var(--color-primary);
+            border-radius: 0.5rem;
+            outline: none;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 150px;
+            line-height: 1.6;
+        }
+
+        .premium-textarea:focus {
+            border-bottom-color: var(--color-accent);
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Status Indicators */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .status-pending {
+            background-color: #F3F4F6;
+            color: #6B7280;
+            border: 1px solid #E5E7EB;
+        }
+
+        .status-success {
+            background-color: #F0FDF4;
+            color: #047857;
+            border: 1px solid #A7F3D0;
+        }
+
+        .status-error {
+            background-color: #FEF2F2;
+            color: #B91C1C;
+            border: 1px solid #FECACA;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE PRACTICE MODULE
+            </p>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Visual Identification
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-base md:text-lg max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Draft a precise descriptive report of the subject. <br>
+                Use <strong class="text-[#D4AF37]">BE</strong> for Height, Build, and Age. Use <strong class="text-[#D4AF37]">HAVE</strong> for Hair and Eyes.
+            </p>
+        </header>
+
+        <div class="p-6 md:p-10 lg:p-12">
+            
+            <!-- Main Workspace: Image + Editor -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
+                
+                <!-- Left Column: The Subject Image -->
+                <div class="lg:col-span-5 flex flex-col">
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-inner h-full flex flex-col items-center">
+                        
+                        <div class="w-full flex justify-between items-center mb-4 px-2">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Subject Photo</span>
+                            <span id="subject-id" class="bg-[#0B192C] text-[#D4AF37] text-[10px] font-bold px-3 py-1 rounded-full tracking-widest shadow-sm">ID: 001</span>
+                        </div>
+
+                        <!-- Image Display -->
+                        <div class="w-full bg-white rounded-lg border-2 border-[#0B192C]/10 overflow-hidden shadow-sm relative flex items-center justify-center p-3">
+                            <img id="subject-image" src="sherlock.jpeg" alt="Subject Profile" class="max-w-full max-h-[450px] object-contain rounded shadow-sm">
+                        </div>
+
+                        <div class="mt-6 w-full text-center">
+                            <h3 id="subject-name" class="font-playfair font-bold text-2xl text-[#0B192C] mb-1">Subject Name</h3>
+                            
+                            <!-- Profile Navigation -->
+                            <div class="flex items-center justify-center gap-4 mt-4">
+                                <button id="prev-btn" class="p-2 rounded-full hover:bg-gray-200 text-gray-600 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                                </button>
+                                <span id="profile-counter" class="text-sm font-bold text-gray-400 uppercase tracking-widest">1 / 6</span>
+                                <button id="next-btn" class="p-2 rounded-full hover:bg-gray-200 text-gray-600 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: The Editor and Analysis -->
+                <div class="lg:col-span-7 flex flex-col">
+                    
+                    <div class="mb-4 flex items-center gap-3 border-b border-gray-100 pb-3">
+                        <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        <h2 class="text-xl font-playfair font-bold text-[#0B192C]">Official Description Report</h2>
+                    </div>
+
+                    <!-- Text Area -->
+                    <textarea id="description-input" class="premium-textarea mb-6" placeholder="Type your description here... Example: He is tall and slim. He has short curly brown hair and green eyes. He wears glasses."></textarea>
+                    
+                    <!-- Analysis Feedback Panel -->
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-inner flex-grow">
+                        <div class="flex justify-between items-center mb-5">
+                            <h3 class="text-sm font-bold text-[#0B192C] uppercase tracking-widest">Analysis Engine</h3>
+                            <button id="analyze-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] transition-colors text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-md shadow-sm flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Run Check
+                            </button>
+                        </div>
+
+                        <!-- Checklists -->
+                        <div id="checklist-container" class="grid grid-cols-2 gap-4">
+                            <!-- Items generated via JS -->
+                        </div>
+
+                        <!-- Grammar Tip Box (Hidden by default) -->
+                        <div id="grammar-tip" class="hidden mt-6 bg-[#FEF2F2] border-l-[4px] border-[#EF4444] p-4 rounded-r-lg">
+                            <p class="text-sm text-[#991B1B] font-medium flex items-start gap-2">
+                                <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                <span id="grammar-tip-text">Remember to use 'is' for height/build and 'has' for hair/eyes.</span>
+                            </p>
+                        </div>
+                        
+                        <!-- Success Box (Hidden by default) -->
+                        <div id="success-tip" class="hidden mt-6 bg-[#F0FDF4] border-l-[4px] border-[#10B981] p-4 rounded-r-lg">
+                            <p class="text-sm text-[#047857] font-bold flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Perfect profile! All key features identified.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Data Architecture
+        // PROFESOR: Aquí puedes editar los rasgos y cambiar las imágenes ('image' property)
+        const profiles = [
+            {
+                id: 1,
+                code: "SH-001",
+                name: "Sherlock Holmes",
+                image: "sherlock.jpeg",
+                requirements: [
+                    { key: "height", label: "Height", expected: ["tall", "high", "big"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["thin", "slim", "skinny", "normal"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["short", "straight", "dark", "black", "brown"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["clear", "greyish", "grey", "gray", "blue", "light"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["jawline", "coat", "collar", "tie", "jacket", "suit", "clothes"], verb: "wear" }
+                ]
+            },
+            {
+                id: 2,
+                code: "RG-002",
+                name: "Ragnar",
+                image: "ragnar.jpeg",
+                requirements: [
+                    { key: "height", label: "Height", expected: ["tall", "big", "huge"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["bulky", "broad", "muscular", "strong", "big", "heavy"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["long", "blonde", "blond", "fair", "braided", "braid", "yellow"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["intense", "light", "blue"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["beard", "rugged", "armor", "leather", "fur", "axe", "weapon", "dirty", "clothes"], verb: "have" }
+                ]
+            },
+            {
+                id: 3,
+                code: "AL-003",
+                name: "Alice",
+                image: "alice.jpeg",
+                requirements: [
+                    { key: "height", label: "Height", expected: ["short", "small", "little"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["slender", "petite", "slim", "thin", "normal", "small"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["long", "straight", "blonde", "blond", "yellow"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["big", "round", "blue", "light"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["dress", "apron", "shoes", "clothes", "blue"], verb: "wear" }
+                ]
+            },
+            {
+                id: 4,
+                code: "RH-004",
+                name: "Robin Hood",
+                image: "robin.jpeg",
+                requirements: [
+                    { key: "height", label: "Height", expected: ["medium", "average", "normal"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["athletic", "fit", "strong", "slim", "normal"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["short", "wavy", "brown", "dark"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["sharp", "green", "light"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["beard", "tunic", "bracers", "bow", "arrow", "quiver", "facial hair", "shirt", "clothes", "weapon", "hat"], verb: "wear" }
+                ]
+            },
+            {
+                id: 5,
+                code: "CL-005",
+                name: "Cleopatra",
+                image: "cleopatra.jpeg",
+                requirements: [
+                    { key: "height", label: "Height", expected: ["medium", "average", "normal"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["elegant", "slender", "slim", "thin", "beautiful", "normal"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["short", "straight", "black", "bangs", "dark"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["dark", "almond", "brown", "black"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["gown", "dress", "headdress", "necklace", "scepter", "crown", "gold", "clothes"], verb: "wear" }
+                ]
+            },
+            {
+                id: 6,
+                code: "ZS-006",
+                name: "Zeus",
+                image: "zeus.jpeg",
+                requirements: [
+                    { key: "height", label: "Height", expected: ["tall", "giant", "big", "huge"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["robust", "muscular", "bulky", "strong", "fat", "big", "heavy"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["long", "wavy", "white", "grey", "gray"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["intense", "piercing", "blue", "glowing", "light"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["beard", "thunderbolt", "scepter", "eagle", "lightning", "bird", "staff", "stick"], verb: "have" }
+                ]
+            }
+        ];
+
+        let currentIndex = 0;
+
+        // UI Elements
+        const elImage = document.getElementById('subject-image');
+        const elName = document.getElementById('subject-name');
+        const elId = document.getElementById('subject-id');
+        const elCounter = document.getElementById('profile-counter');
+        const btnPrev = document.getElementById('prev-btn');
+        const btnNext = document.getElementById('next-btn');
+        
+        const elInput = document.getElementById('description-input');
+        const btnAnalyze = document.getElementById('analyze-btn');
+        const elChecklist = document.getElementById('checklist-container');
+        
+        const elGrammarTip = document.getElementById('grammar-tip');
+        const elSuccessTip = document.getElementById('success-tip');
+
+        function loadProfile(index) {
+            const profile = profiles[index];
+            
+            // Visuals
+            elImage.src = profile.image;
+            elName.textContent = profile.name;
+            elId.textContent = `ID: ${profile.code}`;
+            elCounter.textContent = `${index + 1} / ${profiles.length}`;
+            
+            // Clear input and feedback
+            elInput.value = '';
+            elGrammarTip.classList.add('hidden');
+            elSuccessTip.classList.add('hidden');
+            
+            // Generate Checklist UI
+            let listHtml = '';
+            profile.requirements.forEach(req => {
+                listHtml += `
+                    <div id="check-${req.key}" class="status-pill status-pending animate-slide-in">
+                        <span class="icon-holder">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </span>
+                        ${req.label}
+                    </div>
+                `;
+            });
+            elChecklist.innerHTML = listHtml;
+        }
+
+        // Setup Navigation
+        btnPrev.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadProfile(currentIndex);
+            }
+        });
+
+        btnNext.addEventListener('click', () => {
+            if (currentIndex < profiles.length - 1) {
+                currentIndex++;
+                loadProfile(currentIndex);
+            }
+        });
+
+        function analyzeDescription() {
+            const profile = profiles[currentIndex];
+            const text = elInput.value.toLowerCase().replace(/[^\w\s]/gi, ''); // remove punctuation
+            const words = text.split(' ');
+            
+            let allCorrect = true;
+            let grammarWarning = false;
+
+            // Simple Grammar check for B1 (presence of is/has/wears)
+            const hasBe = words.includes('is') || words.includes("he's") || words.includes("she's");
+            const hasHave = words.includes('has') || words.includes('got');
+            const hasWear = words.includes('wears') || words.includes('wearing');
+
+            profile.requirements.forEach(req => {
+                const elPill = document.getElementById(`check-${req.key}`);
+                const iconHolder = elPill.querySelector('.icon-holder');
+                
+                // Check if any expected word is in the text
+                const isFound = req.expected.some(expWord => text.includes(expWord));
+
+                // Update UI Pill
+                elPill.className = 'status-pill animate-pop '; // reset
+                
+                if (isFound) {
+                    elPill.classList.add('status-success');
+                    iconHolder.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                } else {
+                    elPill.classList.add('status-error');
+                    iconHolder.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                    allCorrect = false;
+                }
+
+                // Check verb specific grammar if the word was found
+                if (isFound) {
+                    if (req.verb === 'be' && !hasBe) grammarWarning = true;
+                    if (req.verb === 'have' && !hasHave && !text.includes('bald')) grammarWarning = true; // Exception for "is bald"
+                    if (req.verb === 'wear' && !hasWear && !hasHave) grammarWarning = true; // "has glasses" is also acceptable
+                }
+            });
+
+            // Show global feedback
+            if (allCorrect && !grammarWarning) {
+                elSuccessTip.classList.remove('hidden');
+                elGrammarTip.classList.add('hidden');
+            } else {
+                elSuccessTip.classList.add('hidden');
+                if (grammarWarning) {
+                    elGrammarTip.classList.remove('hidden');
+                } else {
+                    elGrammarTip.classList.add('hidden');
+                }
+            }
+            
+            // Empty text handling
+            if(text.trim() === '') {
+                elGrammarTip.classList.add('hidden');
+                elSuccessTip.classList.add('hidden');
+            }
+        }
+
+        btnAnalyze.addEventListener('click', analyzeDescription);
+
+        // Initialize first profile
+        loadProfile(currentIndex);
+
+    </script>
+</body>
+</html>
