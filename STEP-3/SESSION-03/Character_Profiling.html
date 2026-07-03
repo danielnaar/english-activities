@@ -46,19 +46,39 @@
         }
 
         .animate-pop {
-            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
         }
 
-        .animate-slide-in {
-            animation: slideIn 0.3s ease-out forwards;
+        /* Responsive zoom image container embracing natural proportions */
+        .zoom-container {
+            overflow: hidden;
+            width: 100%;
+            height: auto; /* Fluid height based on natural image aspect ratio */
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            position: relative;
+            cursor: zoom-in;
+            border: 2px solid rgba(11, 25, 44, 0.1);
         }
 
-        /* Premium Textarea */
+        .zoom-image {
+            width: 100%;
+            height: auto;
+            display: block; /* Removes any baseline inline gaps */
+            transition: transform 0.3s ease-out, transform-origin 0.1s ease-out;
+        }
+
+        /* Premium Text Area and validation colors */
         .premium-textarea {
             width: 100%;
             background-color: #F8F9FA;
@@ -82,12 +102,11 @@
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
-        /* Status Indicators */
         .status-pill {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.35rem 0.75rem;
+            padding: 0.45rem 1rem;
             border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 700;
@@ -124,10 +143,10 @@
             <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
             
             <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
-                EXECUTIVE PRACTICE MODULE
+                EXECUTIVE PRACTICE • LEVEL 3
             </p>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
-                Visual Identification
+                Client Profiling
             </h1>
             
             <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
@@ -145,20 +164,22 @@
                 
                 <!-- Left Column: The Subject Image -->
                 <div class="lg:col-span-5 flex flex-col">
-                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-inner h-full flex flex-col items-center">
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-inner h-full flex flex-col justify-between">
                         
-                        <div class="w-full flex justify-between items-center mb-4 px-2">
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Subject Photo</span>
-                            <span id="subject-id" class="bg-[#0B192C] text-[#D4AF37] text-[10px] font-bold px-3 py-1 rounded-full tracking-widest shadow-sm">ID: 001</span>
-                        </div>
+                        <div>
+                            <div class="w-full flex justify-between items-center mb-4 px-2">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Subject Photo</span>
+                                <span id="subject-id" class="bg-[#0B192C] text-[#D4AF37] text-[10px] font-bold px-3 py-1 rounded-full tracking-widest shadow-sm">ID: SH-001</span>
+                            </div>
 
-                        <!-- Image Display -->
-                        <div class="w-full bg-white rounded-lg border-2 border-[#0B192C]/10 overflow-hidden shadow-sm relative flex items-center justify-center">
-                            <img id="subject-image" src="sherlock.jpeg" alt="Subject Profile" class="w-full h-[550px] object-cover rounded shadow-sm">
+                            <!-- Image Display with Smart Zoom capabilities (No cropping) -->
+                            <div class="zoom-container" id="zoom-box">
+                                <img id="subject-image" src="sherlock.jpeg" alt="Subject Profile" class="zoom-image">
+                            </div>
                         </div>
 
                         <div class="mt-6 w-full text-center">
-                            <h3 id="subject-name" class="font-playfair font-bold text-2xl text-[#0B192C] mb-1">Subject Name</h3>
+                            <h3 id="subject-name" class="font-playfair font-bold text-2xl text-[#0B192C] mb-1">Sherlock Holmes</h3>
                             
                             <!-- Profile Navigation -->
                             <div class="flex items-center justify-center gap-4 mt-4">
@@ -183,7 +204,7 @@
                     </div>
 
                     <!-- Text Area -->
-                    <textarea id="description-input" class="premium-textarea mb-6" placeholder="Type your description here... Example: He is tall and slim. He has short curly brown hair and green eyes. He wears glasses."></textarea>
+                    <textarea id="description-input" class="premium-textarea mb-6 shadow-sm" placeholder="Type your description here... Example: He is tall and slim. He has short curly brown hair and green eyes. He wears glasses."></textarea>
                     
                     <!-- Analysis Feedback Panel -->
                     <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 shadow-inner flex-grow">
@@ -201,7 +222,7 @@
                         </div>
 
                         <!-- Grammar Tip Box (Hidden by default) -->
-                        <div id="grammar-tip" class="hidden mt-6 bg-[#FEF2F2] border-l-[4px] border-[#EF4444] p-4 rounded-r-lg">
+                        <div id="grammar-tip" class="hidden mt-6 bg-[#FEF2F2] border-l-[4px] border-[#EF4444] p-4 rounded-r-lg shadow-sm">
                             <p class="text-sm text-[#991B1B] font-medium flex items-start gap-2">
                                 <svg class="w-5 h-5 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                 <span id="grammar-tip-text">Remember to use 'is' for height/build and 'has' for hair/eyes.</span>
@@ -209,7 +230,7 @@
                         </div>
                         
                         <!-- Success Box (Hidden by default) -->
-                        <div id="success-tip" class="hidden mt-6 bg-[#F0FDF4] border-l-[4px] border-[#10B981] p-4 rounded-r-lg">
+                        <div id="success-tip" class="hidden mt-6 bg-[#F0FDF4] border-l-[4px] border-[#10B981] p-4 rounded-r-lg shadow-sm">
                             <p class="text-sm text-[#047857] font-bold flex items-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 Perfect profile! All key features identified.
@@ -237,7 +258,7 @@
 
     <script>
         // 1. Data Architecture
-        // PROFESOR: Aquí puedes editar los rasgos y cambiar las imágenes ('image' property)
+        // Expected: Broad keywords (A2/B1 level) evaluated contextually by the analysis engine.
         const profiles = [
             {
                 id: 1,
@@ -246,10 +267,10 @@
                 image: "sherlock.jpeg",
                 requirements: [
                     { key: "height", label: "Height", expected: ["tall", "high", "big"], verb: "be" },
-                    { key: "build", label: "Build", expected: ["thin", "slim", "skinny", "normal"], verb: "be" },
-                    { key: "hair", label: "Hair", expected: ["short", "straight", "dark", "black", "brown"], verb: "have" },
-                    { key: "eyes", label: "Eyes", expected: ["clear", "greyish", "grey", "gray", "blue", "light"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["jawline", "coat", "collar", "tie", "jacket", "suit", "clothes"], verb: "wear" }
+                    { key: "build", label: "Build", expected: ["thin", "slim", "skinny", "normal", "athletic"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["short", "straight", "dark", "black", "brown", "wavy"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["clear", "greyish", "grey", "gray", "blue", "light", "dark", "black"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["jawline", "coat", "collar", "tie", "jacket", "suit", "clothes", "pipe", "magnifying", "glass"], verb: "wear" }
                 ]
             },
             {
@@ -259,10 +280,10 @@
                 image: "ragnar.jpeg",
                 requirements: [
                     { key: "height", label: "Height", expected: ["tall", "big", "huge"], verb: "be" },
-                    { key: "build", label: "Build", expected: ["bulky", "broad", "muscular", "strong", "big", "heavy"], verb: "be" },
-                    { key: "hair", label: "Hair", expected: ["long", "blonde", "blond", "fair", "braided", "braid", "yellow"], verb: "have" },
+                    { key: "build", label: "Build", expected: ["bulky", "broad", "muscular", "strong", "big", "heavy", "athletic", "fit"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["long", "blonde", "blond", "fair", "braided", "braid", "yellow", "shaved", "bald"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["intense", "light", "blue"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["beard", "rugged", "armor", "leather", "fur", "axe", "weapon", "dirty", "clothes"], verb: "have" }
+                    { key: "extras", label: "Extras", expected: ["beard", "rugged", "armor", "leather", "fur", "axe", "weapon", "dirty", "clothes", "tattoo"], verb: "have" }
                 ]
             },
             {
@@ -271,11 +292,11 @@
                 name: "Alice",
                 image: "alice.jpeg",
                 requirements: [
-                    { key: "height", label: "Height", expected: ["short", "small", "little"], verb: "be" },
-                    { key: "build", label: "Build", expected: ["slender", "petite", "slim", "thin", "normal", "small"], verb: "be" },
-                    { key: "hair", label: "Hair", expected: ["long", "straight", "blonde", "blond", "yellow"], verb: "have" },
-                    { key: "eyes", label: "Eyes", expected: ["big", "round", "blue", "light"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["dress", "apron", "shoes", "clothes", "blue"], verb: "wear" }
+                    { key: "height", label: "Height", expected: ["short", "small", "little", "medium"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["slender", "petite", "slim", "thin", "normal", "small", "delicate"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["long", "straight", "blonde", "blond", "yellow", "wavy"], verb: "have" },
+                    { key: "eyes", label: "Eyes", expected: ["big", "round", "blue", "light", "bright"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["dress", "apron", "shoes", "clothes", "blue", "fair", "pale", "young"], verb: "wear" }
                 ]
             },
             {
@@ -284,11 +305,11 @@
                 name: "Robin Hood",
                 image: "robin.jpeg",
                 requirements: [
-                    { key: "height", label: "Height", expected: ["medium", "average", "normal"], verb: "be" },
+                    { key: "height", label: "Height", expected: ["medium", "average", "normal", "tall"], verb: "be" },
                     { key: "build", label: "Build", expected: ["athletic", "fit", "strong", "slim", "normal"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["short", "wavy", "brown", "dark"], verb: "have" },
-                    { key: "eyes", label: "Eyes", expected: ["sharp", "green", "light"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["beard", "tunic", "bracers", "bow", "arrow", "quiver", "facial hair", "shirt", "clothes", "weapon", "hat"], verb: "wear" }
+                    { key: "eyes", label: "Eyes", expected: ["sharp", "green", "light", "brown", "hazel"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["beard", "tunic", "bracers", "bow", "arrow", "quiver", "facial hair", "shirt", "clothes", "weapon", "hat", "green"], verb: "wear" }
                 ]
             },
             {
@@ -297,11 +318,11 @@
                 name: "Cleopatra",
                 image: "cleopatra.jpeg",
                 requirements: [
-                    { key: "height", label: "Height", expected: ["medium", "average", "normal"], verb: "be" },
+                    { key: "height", label: "Height", expected: ["medium", "average", "normal", "tall"], verb: "be" },
                     { key: "build", label: "Build", expected: ["elegant", "slender", "slim", "thin", "beautiful", "normal"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["short", "straight", "black", "bangs", "dark"], verb: "have" },
-                    { key: "eyes", label: "Eyes", expected: ["dark", "almond", "brown", "black"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["gown", "dress", "headdress", "necklace", "scepter", "crown", "gold", "clothes"], verb: "wear" }
+                    { key: "eyes", label: "Eyes", expected: ["dark", "almond", "brown", "black", "makeup"], verb: "have" },
+                    { key: "extras", label: "Extras", expected: ["gown", "dress", "headdress", "necklace", "scepter", "crown", "gold", "clothes", "jewelry", "olive", "tan"], verb: "wear" }
                 ]
             },
             {
@@ -311,10 +332,10 @@
                 image: "zeus.jpeg",
                 requirements: [
                     { key: "height", label: "Height", expected: ["tall", "giant", "big", "huge"], verb: "be" },
-                    { key: "build", label: "Build", expected: ["robust", "muscular", "bulky", "strong", "fat", "big", "heavy"], verb: "be" },
-                    { key: "hair", label: "Hair", expected: ["long", "wavy", "white", "grey", "gray"], verb: "have" },
+                    { key: "build", label: "Build", expected: ["robust", "muscular", "bulky", "strong", "fat", "big", "heavy", "fit"], verb: "be" },
+                    { key: "hair", label: "Hair", expected: ["long", "wavy", "white", "grey", "gray", "silver"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["intense", "piercing", "blue", "glowing", "light"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["beard", "thunderbolt", "scepter", "eagle", "lightning", "bird", "staff", "stick"], verb: "have" }
+                    { key: "extras", label: "Extras", expected: ["beard", "thunderbolt", "scepter", "eagle", "lightning", "bird", "staff", "stick", "old", "tanned", "robe"], verb: "have" }
                 ]
             }
         ];
@@ -325,6 +346,7 @@
         const elImage = document.getElementById('subject-image');
         const elName = document.getElementById('subject-name');
         const elId = document.getElementById('subject-id');
+        const elZoomBox = document.getElementById('zoom-box');
         const elCounter = document.getElementById('profile-counter');
         const btnPrev = document.getElementById('prev-btn');
         const btnNext = document.getElementById('next-btn');
@@ -334,7 +356,17 @@
         const elChecklist = document.getElementById('checklist-container');
         
         const elGrammarTip = document.getElementById('grammar-tip');
+        const elGrammarTipText = document.getElementById('grammar-tip-text');
         const elSuccessTip = document.getElementById('success-tip');
+
+        // Map anchors to categories to avoid cross-contamination of keywords
+        const categoryAnchors = {
+            height: ["tall", "short", "height", "high", "giant", "medium", "average"],
+            build: ["thin", "slim", "skinny", "normal", "athletic", "bulky", "broad", "muscular", "strong", "big", "heavy", "fit", "robust", "petite", "slender", "overweight"],
+            hair: ["hair", "blonde", "blond", "brunette", "bald", "shaved", "braided", "braid", "curly", "straight", "wavy", "fringe", "bangs"],
+            eyes: ["eyes", "eye", "gaze", "look", "piercing", "hazel"],
+            extras: ["beard", "mustache", "glasses", "tattoo", "freckles", "piercing", "suit", "jacket", "coat", "tie", "armor", "leather", "fur", "axe", "dress", "apron", "shoes", "tunic", "bow", "arrow", "quiver", "gown", "headdress", "necklace", "scepter", "crown", "gold", "jewelry", "thunderbolt", "robe", "eagle", "collar", "jawline", "clothes", "clothing", "weapon", "shield", "staff", "hat"]
+        };
 
         function loadProfile(index) {
             const profile = profiles[index];
@@ -380,53 +412,123 @@
             }
         });
 
+        // --------------------------------------------------------
+        // IMAGE ZOOM LOGIC (Seamless with absolute bounds)
+        // --------------------------------------------------------
+        elZoomBox.addEventListener('mousemove', function(e) {
+            const rect = elZoomBox.getBoundingClientRect();
+            
+            // Calculate mouse position relative to the container (0 to 1)
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+
+            // Set the transform origin dynamically to point of interest
+            elImage.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+            elImage.style.transform = 'scale(2.5)';
+        });
+
+        elZoomBox.addEventListener('mouseleave', function() {
+            // Reset image scale when mouse leaves
+            elImage.style.transformOrigin = 'center center';
+            elImage.style.transform = 'scale(1)';
+        });
+
+        // --------------------------------------------------------
+        // ROBUST PROXIMITY ANALYSIS ENGINE
+        // --------------------------------------------------------
         function analyzeDescription() {
             const profile = profiles[currentIndex];
-            const text = elInput.value.toLowerCase().replace(/[^\w\s]/gi, ''); // remove punctuation
-            const words = text.split(' ');
+            const rawText = elInput.value.toLowerCase();
+            
+            // Split raw input into clauses/sentences using common connectors
+            const clauses = rawText.split(/[.,;]|\band\b|\bbut\b/gi)
+                                   .map(clause => clause.trim())
+                                   .filter(clause => clause.length > 0);
             
             let allCorrect = true;
             let grammarWarning = false;
-
-            // Simple Grammar check for B1 (presence of is/has/wears)
-            const hasBe = words.includes('is') || words.includes("he's") || words.includes("she's");
-            const hasHave = words.includes('has') || words.includes('got');
-            const hasWear = words.includes('wears') || words.includes('wearing');
+            let warningMessage = "";
 
             profile.requirements.forEach(req => {
                 const elPill = document.getElementById(`check-${req.key}`);
                 const iconHolder = elPill.querySelector('.icon-holder');
                 
-                // Check if any expected word is in the text
-                const isFound = req.expected.some(expWord => text.includes(expWord));
+                // 1. Identify which clauses are discussing this specific category (by searching for category anchors)
+                const categoryWords = categoryAnchors[req.key];
+                const matchingClauses = clauses.filter(clause => {
+                    // Special case: if we are checking "hair", look for hair anchors
+                    return categoryWords.some(anchor => clause.includes(anchor));
+                });
 
-                // Update UI Pill
-                elPill.className = 'status-pill animate-pop '; // reset
+                // If no matching clause is found, fall back to evaluating the entire string (for simplistic inputs)
+                const evaluationContext = matchingClauses.length > 0 ? matchingClauses : [rawText];
+
+                // 2. Validate if the correct adjectives exist in those relevant clauses
+                const isFound = req.expected.some(expWord => {
+                    return evaluationContext.some(contextString => contextString.includes(expWord));
+                });
+
+                // Reset visual pill
+                elPill.className = 'status-pill animate-pop ';
                 
                 if (isFound) {
                     elPill.classList.add('status-success');
                     iconHolder.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+                    
+                    // 3. Proximity Grammar Check
+                    // Evaluate grammar only within the matching clauses to avoid false alerts
+                    const targetClauses = matchingClauses.length > 0 ? matchingClauses : clauses;
+                    targetClauses.forEach(clause => {
+                        const words = clause.split(/\s+/);
+                        
+                        if (req.verb === 'be') {
+                            // Expecting is, are, was, were, 's
+                            const hasBe = ["is", "are", "'s", "was", "were", "looks", "look"].some(v => words.includes(v) || clause.includes(v));
+                            // If they used 'has' directly with height/build (e.g. "he has tall")
+                            const incorrectHave = ["has", "have", "had"].some(v => words.includes(v));
+                            if (incorrectHave && !hasBe) {
+                                grammarWarning = true;
+                                warningMessage = `Use 'is' or 'looks' to describe ${req.label} (e.g., "He is tall" or "She looks slim").`;
+                            }
+                        }
+                        
+                        if (req.verb === 'have') {
+                            // Expecting has, have, 've, got
+                            const hasHave = ["has", "have", "'ve", "got", "had"].some(v => words.includes(v) || clause.includes(v));
+                            
+                            // Accept natural BE sentences if the noun is the subject (e.g., "his eyes are blue" or "her hair is blonde")
+                            const isNounSubject = ["hair", "eyes", "eye"].some(noun => clause.includes(noun));
+                            const hasBe = ["is", "are", "were", "was"].some(v => words.includes(v));
+                            
+                            if (isNounSubject && hasBe) {
+                                // This is perfectly correct! (e.g. "His eyes are black")
+                                return;
+                            }
+                            
+                            // If the subject is 'he/she' but they used 'is/are' incorrectly (e.g., "he is black hair")
+                            const incorrectBe = ["is", "are", "am"].some(v => words.includes(v));
+                            if (incorrectBe && !hasHave && !clause.includes("bald")) {
+                                grammarWarning = true;
+                                warningMessage = `Use 'has' or 'has got' to describe ${req.label} (e.g., "He has blue eyes" or "She's got long hair").`;
+                            }
+                        }
+                    });
+
                 } else {
                     elPill.classList.add('status-error');
                     iconHolder.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
                     allCorrect = false;
                 }
-
-                // Check verb specific grammar if the word was found
-                if (isFound) {
-                    if (req.verb === 'be' && !hasBe) grammarWarning = true;
-                    if (req.verb === 'have' && !hasHave && !text.includes('bald')) grammarWarning = true; // Exception for "is bald"
-                    if (req.verb === 'wear' && !hasWear && !hasHave) grammarWarning = true; // "has glasses" is also acceptable
-                }
             });
 
-            // Show global feedback
+            // Display global feedback
             if (allCorrect && !grammarWarning) {
                 elSuccessTip.classList.remove('hidden');
                 elGrammarTip.classList.add('hidden');
             } else {
                 elSuccessTip.classList.add('hidden');
                 if (grammarWarning) {
+                    elGrammarTipText.textContent = warningMessage || "Double-check your verbs! 'is/are' for height/build, 'has' for hair/eyes.";
                     elGrammarTip.classList.remove('hidden');
                 } else {
                     elGrammarTip.classList.add('hidden');
@@ -434,7 +536,7 @@
             }
             
             // Empty text handling
-            if(text.trim() === '') {
+            if (rawText.trim() === '') {
                 elGrammarTip.classList.add('hidden');
                 elSuccessTip.classList.add('hidden');
             }
