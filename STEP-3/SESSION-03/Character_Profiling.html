@@ -143,7 +143,7 @@
             <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
             
             <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
-                EXECUTIVE PRACTICE • LEVEL 3
+                EXECUTIVE PRACTICE MODULE
             </p>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
                 Client Profiling
@@ -241,6 +241,22 @@
                 </div>
             </div>
 
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-10 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-2xl mb-0 leading-relaxed font-medium mx-auto">
+                        You have successfully profiled the subject. Accurate and detailed physical descriptions are essential for clear professional communication. Excellent work!
+                    </p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Footer -->
@@ -270,7 +286,7 @@
                     { key: "build", label: "Build", expected: ["thin", "slim", "skinny", "normal", "athletic"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["short", "straight", "dark", "black", "brown", "wavy"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["clear", "greyish", "grey", "gray", "blue", "light", "dark", "black"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["jawline", "coat", "collar", "tie", "jacket", "suit", "clothes", "pipe", "magnifying", "glass"], verb: "wear" }
+                    { key: "extras", label: "Extras", expected: ["jawline", "coat", "collar", "tie", "jacket", "suit", "clothes", "pipe", "magnifying", "glass"], verb: "none" }
                 ]
             },
             {
@@ -281,9 +297,9 @@
                 requirements: [
                     { key: "height", label: "Height", expected: ["tall", "big", "huge"], verb: "be" },
                     { key: "build", label: "Build", expected: ["bulky", "broad", "muscular", "strong", "big", "heavy", "athletic", "fit"], verb: "be" },
-                    { key: "hair", label: "Hair", expected: ["long", "blonde", "blond", "fair", "braided", "braid", "yellow", "shaved", "bald"], verb: "have" },
+                    { key: "hair", label: "Hair", expected: ["long", "blonde", "blond", "fair", "braided", "braid", "yellow", "shaved", "bald", "red", "orange", "ginger"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["intense", "light", "blue"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["beard", "rugged", "armor", "leather", "fur", "axe", "weapon", "dirty", "clothes", "tattoo"], verb: "have" }
+                    { key: "extras", label: "Extras", expected: ["beard", "rugged", "armor", "leather", "fur", "axe", "weapon", "dirty", "clothes", "tattoo", "shield"], verb: "none" }
                 ]
             },
             {
@@ -293,10 +309,10 @@
                 image: "alice.jpeg",
                 requirements: [
                     { key: "height", label: "Height", expected: ["short", "small", "little", "medium"], verb: "be" },
-                    { key: "build", label: "Build", expected: ["slender", "petite", "slim", "thin", "normal", "small", "delicate"], verb: "be" },
+                    { key: "build", label: "Build", expected: ["slender", "petite", "slim", "thin", "normal", "small", "delicate", "skinny"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["long", "straight", "blonde", "blond", "yellow", "wavy"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["big", "round", "blue", "light", "bright"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["dress", "apron", "shoes", "clothes", "blue", "fair", "pale", "young"], verb: "wear" }
+                    { key: "extras", label: "Extras", expected: ["dress", "apron", "shoes", "clothes", "blue", "fair", "pale", "young"], verb: "none" }
                 ]
             },
             {
@@ -309,7 +325,7 @@
                     { key: "build", label: "Build", expected: ["athletic", "fit", "strong", "slim", "normal"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["short", "wavy", "brown", "dark"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["sharp", "green", "light", "brown", "hazel"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["beard", "tunic", "bracers", "bow", "arrow", "quiver", "facial hair", "shirt", "clothes", "weapon", "hat", "green"], verb: "wear" }
+                    { key: "extras", label: "Extras", expected: ["beard", "tunic", "bracers", "bow", "arrow", "quiver", "facial hair", "shirt", "clothes", "weapon", "hat", "green"], verb: "none" }
                 ]
             },
             {
@@ -318,11 +334,11 @@
                 name: "Cleopatra",
                 image: "cleopatra.jpeg",
                 requirements: [
-                    { key: "height", label: "Height", expected: ["medium", "average", "normal", "tall"], verb: "be" },
+                    { key: "height", label: "Height", expected: ["medium", "average", "normal", "tall", "small", "short"], verb: "be" },
                     { key: "build", label: "Build", expected: ["elegant", "slender", "slim", "thin", "beautiful", "normal"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["short", "straight", "black", "bangs", "dark"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["dark", "almond", "brown", "black", "makeup"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["gown", "dress", "headdress", "necklace", "scepter", "crown", "gold", "clothes", "jewelry", "olive", "tan"], verb: "wear" }
+                    { key: "extras", label: "Extras", expected: ["gown", "dress", "headdress", "necklace", "scepter", "crown", "gold", "clothes", "jewelry", "olive", "tan", "emperor", "queen", "egypt", "ruler"], verb: "none" }
                 ]
             },
             {
@@ -335,7 +351,7 @@
                     { key: "build", label: "Build", expected: ["robust", "muscular", "bulky", "strong", "fat", "big", "heavy", "fit"], verb: "be" },
                     { key: "hair", label: "Hair", expected: ["long", "wavy", "white", "grey", "gray", "silver"], verb: "have" },
                     { key: "eyes", label: "Eyes", expected: ["intense", "piercing", "blue", "glowing", "light"], verb: "have" },
-                    { key: "extras", label: "Extras", expected: ["beard", "thunderbolt", "scepter", "eagle", "lightning", "bird", "staff", "stick", "old", "tanned", "robe"], verb: "have" }
+                    { key: "extras", label: "Extras", expected: ["beard", "thunderbolt", "scepter", "eagle", "lightning", "bird", "staff", "stick", "old", "tanned", "robe", "strikes"], verb: "none" }
                 ]
             }
         ];
@@ -358,15 +374,26 @@
         const elGrammarTip = document.getElementById('grammar-tip');
         const elGrammarTipText = document.getElementById('grammar-tip-text');
         const elSuccessTip = document.getElementById('success-tip');
+        const elSuccessBanner = document.getElementById('success-banner');
 
-        // Map anchors to categories to avoid cross-contamination of keywords
-        const categoryAnchors = {
-            height: ["tall", "short", "height", "high", "giant", "medium", "average"],
-            build: ["thin", "slim", "skinny", "normal", "athletic", "bulky", "broad", "muscular", "strong", "big", "heavy", "fit", "robust", "petite", "slender", "overweight"],
-            hair: ["hair", "blonde", "blond", "brunette", "bald", "shaved", "braided", "braid", "curly", "straight", "wavy", "fringe", "bangs"],
-            eyes: ["eyes", "eye", "gaze", "look", "piercing", "hazel"],
-            extras: ["beard", "mustache", "glasses", "tattoo", "freckles", "piercing", "suit", "jacket", "coat", "tie", "armor", "leather", "fur", "axe", "dress", "apron", "shoes", "tunic", "bow", "arrow", "quiver", "gown", "headdress", "necklace", "scepter", "crown", "gold", "jewelry", "thunderbolt", "robe", "eagle", "collar", "jawline", "clothes", "clothing", "weapon", "shield", "staff", "hat"]
+        // Dynamic generation of category anchors to prevent cross-contamination
+        const baseAnchors = {
+            height: ["tall", "short", "height", "high", "giant", "medium", "average", "small"],
+            build: ["thin", "slim", "skinny", "normal", "athletic", "bulky", "broad", "muscular", "strong", "big", "heavy", "fit", "robust", "petite", "slender", "overweight", "build", "figure", "body"],
+            hair: ["hair", "blonde", "blond", "brunette", "bald", "shaved", "braided", "braid", "curly", "straight", "wavy", "fringe", "bangs", "red", "orange", "ginger", "white", "black", "brown"],
+            eyes: ["eyes", "eye", "gaze", "look", "piercing", "hazel", "blue", "green", "brown", "black", "dark", "light"],
+            extras: ["beard", "mustache", "glasses", "tattoo", "freckles", "piercing", "suit", "jacket", "coat", "tie", "armor", "leather", "fur", "axe", "dress", "apron", "shoes", "tunic", "bow", "arrow", "quiver", "gown", "headdress", "necklace", "scepter", "crown", "gold", "jewelry", "thunderbolt", "robe", "eagle", "collar", "jawline", "clothes", "clothing", "weapon", "shield", "staff", "hat", "emperor", "queen", "egypt", "ruler", "lightning", "strikes"]
         };
+
+        const categoryAnchors = {};
+        for (let key in baseAnchors) {
+            let anchorSet = new Set(baseAnchors[key]);
+            profiles.forEach(p => {
+                const req = p.requirements.find(r => r.key === key);
+                if (req) req.expected.forEach(exp => anchorSet.add(exp));
+            });
+            categoryAnchors[key] = Array.from(anchorSet);
+        }
 
         function loadProfile(index) {
             const profile = profiles[index];
@@ -381,6 +408,8 @@
             elInput.value = '';
             elGrammarTip.classList.add('hidden');
             elSuccessTip.classList.add('hidden');
+            elSuccessBanner.classList.add('hidden');
+            elSuccessBanner.classList.remove('animate-pop');
             
             // Generate Checklist UI
             let listHtml = '';
@@ -456,7 +485,6 @@
                 // 1. Identify which clauses are discussing this specific category (by searching for category anchors)
                 const categoryWords = categoryAnchors[req.key];
                 const matchingClauses = clauses.filter(clause => {
-                    // Special case: if we are checking "hair", look for hair anchors
                     return categoryWords.some(anchor => clause.includes(anchor));
                 });
 
@@ -475,44 +503,47 @@
                     elPill.classList.add('status-success');
                     iconHolder.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
                     
-                    // 3. Proximity Grammar Check
-                    // Evaluate grammar only within the matching clauses to avoid false alerts
-                    const targetClauses = matchingClauses.length > 0 ? matchingClauses : clauses;
-                    targetClauses.forEach(clause => {
-                        const words = clause.split(/\s+/);
-                        
-                        if (req.verb === 'be') {
-                            // Expecting is, are, was, were, 's
-                            const hasBe = ["is", "are", "'s", "was", "were", "looks", "look"].some(v => words.includes(v) || clause.includes(v));
-                            // If they used 'has' directly with height/build (e.g. "he has tall")
-                            const incorrectHave = ["has", "have", "had"].some(v => words.includes(v));
-                            if (incorrectHave && !hasBe) {
-                                grammarWarning = true;
-                                warningMessage = `Use 'is' or 'looks' to describe ${req.label} (e.g., "He is tall" or "She looks slim").`;
-                            }
-                        }
-                        
-                        if (req.verb === 'have') {
-                            // Expecting has, have, 've, got
-                            const hasHave = ["has", "have", "'ve", "got", "had"].some(v => words.includes(v) || clause.includes(v));
+                    // 3. Proximity Grammar Check (Only if a verb rule is strictly enforced)
+                    if (req.verb !== 'none') {
+                        const targetClauses = matchingClauses.length > 0 ? matchingClauses : clauses;
+                        targetClauses.forEach(clause => {
+                            const words = clause.split(/\s+/);
                             
-                            // Accept natural BE sentences if the noun is the subject (e.g., "his eyes are blue" or "her hair is blonde")
-                            const isNounSubject = ["hair", "eyes", "eye"].some(noun => clause.includes(noun));
-                            const hasBe = ["is", "are", "were", "was"].some(v => words.includes(v));
-                            
-                            if (isNounSubject && hasBe) {
-                                // This is perfectly correct! (e.g. "His eyes are black")
-                                return;
+                            if (req.verb === 'be') {
+                                // Expecting is, are, was, were, 's
+                                const hasBe = ["is", "are", "'s", "was", "were", "looks", "look", "am"].some(v => words.includes(v) || clause.includes(v));
+                                // If they used 'has' directly with height/build (e.g. "he has tall")
+                                const incorrectHave = ["has", "have", "had"].some(v => words.includes(v));
+                                if (incorrectHave && !hasBe) {
+                                    grammarWarning = true;
+                                    warningMessage = `Use 'is' or 'looks' to describe ${req.label} (e.g., "He is tall" or "She looks slim").`;
+                                }
                             }
                             
-                            // If the subject is 'he/she' but they used 'is/are' incorrectly (e.g., "he is black hair")
-                            const incorrectBe = ["is", "are", "am"].some(v => words.includes(v));
-                            if (incorrectBe && !hasHave && !clause.includes("bald")) {
-                                grammarWarning = true;
-                                warningMessage = `Use 'has' or 'has got' to describe ${req.label} (e.g., "He has blue eyes" or "She's got long hair").`;
+                            if (req.verb === 'have') {
+                                // Expecting has, have, 've, got
+                                const hasHave = ["has", "have", "'ve", "got", "had"].some(v => words.includes(v) || clause.includes(v));
+                                
+                                // Exceptions for perfectly natural alternative structures
+                                if (clause.includes("with")) return; // e.g., "man with white hair" is valid
+                                
+                                const isNounSubject = ["hair", "eyes", "eye"].some(noun => clause.includes(noun));
+                                const hasBe = ["is", "are", "were", "was", "am"].some(v => words.includes(v));
+                                
+                                if (isNounSubject && hasBe) return; // e.g., "His eyes are black" is valid
+                                
+                                const isHairAdjective = ["blonde", "blond", "brunette", "redhead", "bald"].some(adj => clause.includes(adj));
+                                if (req.key === 'hair' && isHairAdjective && hasBe) return; // e.g., "She is blonde" is valid
+                                
+                                // If none of the exceptions apply and they used 'is' instead of 'has'
+                                const incorrectBe = ["is", "are", "am"].some(v => words.includes(v));
+                                if (incorrectBe && !hasHave && !clause.includes("bald")) {
+                                    grammarWarning = true;
+                                    warningMessage = `Use 'has' or 'has got' to describe ${req.label} (e.g., "He has blue eyes" or "She's got long hair").`;
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
 
                 } else {
                     elPill.classList.add('status-error');
@@ -525,8 +556,17 @@
             if (allCorrect && !grammarWarning) {
                 elSuccessTip.classList.remove('hidden');
                 elGrammarTip.classList.add('hidden');
+                
+                elSuccessBanner.classList.remove('hidden');
+                elSuccessBanner.classList.add('animate-pop');
+                setTimeout(() => {
+                    elSuccessBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
             } else {
                 elSuccessTip.classList.add('hidden');
+                elSuccessBanner.classList.add('hidden');
+                elSuccessBanner.classList.remove('animate-pop');
+                
                 if (grammarWarning) {
                     elGrammarTipText.textContent = warningMessage || "Double-check your verbs! 'is/are' for height/build, 'has' for hair/eyes.";
                     elGrammarTip.classList.remove('hidden');
@@ -539,6 +579,7 @@
             if (rawText.trim() === '') {
                 elGrammarTip.classList.add('hidden');
                 elSuccessTip.classList.add('hidden');
+                elSuccessBanner.classList.add('hidden');
             }
         }
 
