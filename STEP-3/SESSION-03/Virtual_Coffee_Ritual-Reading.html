@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Comprehension - Executive Module</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; /* Azul Noche Premium */
+            --color-accent: #D4AF37;  /* Dorado Éxito */
+            --color-bg: #F8F9FA;      /* Gris Claro */
+            --color-text: #121212;    /* Negro Ébano */
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e5e7eb;
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.15) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Custom Interactive Chips - Premium Rules Applied */
+        .chip-btn {
+            transition: all 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+            text-align: left;
+        }
+        
+        /* Tailwind Hover Override - Only applies if NOT selected or disabled */
+        .chip-btn:hover:not(.selected):not(.disabled) {
+            background-color: #F3F4F6 !important; 
+            border-color: #D1D5DB !important;
+        }
+        
+        /* Selected State - Forces Premium Colors instantly */
+        .chip-btn.selected {
+            background-color: var(--color-primary) !important;
+            color: var(--color-accent) !important;
+            border-color: var(--color-primary) !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chip-btn.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        /* Reading text formatting */
+        .reading-text p {
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            color: #374151;
+        }
+        .reading-text p:last-child {
+            margin-bottom: 0;
+        }
+
+    </style>
+</head>
+<body class="antialiased py-6 sm:py-10 px-2 sm:px-6 lg:px-8 flex justify-center items-start min-h-screen">
+
+    <main class="w-full max-w-[1400px] bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-12 pb-10 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                PREMIUM ENGLISH • READING COMPREHENSION
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                The Virtual Coffee Ritual
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/80 text-sm md:text-base max-w-3xl mx-auto font-light leading-relaxed relative z-10">
+                Read the following executive article carefully. Then, complete the comprehension check in the adjacent panel to demonstrate your analytical reading skills.
+            </p>
+        </header>
+
+        <!-- Content Area: Two Columns (Reading | Activity) -->
+        <div class="flex flex-col lg:flex-row w-full bg-[#F8F9FA]">
+            
+            <!-- Left Column: The Reading Text -->
+            <div class="w-full lg:w-5/12 xl:w-1/2 p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200 bg-white">
+                <div class="sticky top-10">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+                        <svg class="w-6 h-6 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+                        <h2 class="text-2xl font-playfair font-bold text-[#0B192C]">Global Networking</h2>
+                    </div>
+                    
+                    <article class="reading-text bg-gray-50 p-6 md:p-8 rounded-xl border border-gray-100 shadow-inner">
+                        <p>
+                            At <strong class="text-[#0B192C]">Premium English</strong>, there is one modern ritual that unites executives, leaders, and mentors across the globe: the Virtual Coffee Briefing. In every single morning session, professionals log in from their corporate offices in London, New York, Bogotá, and Tokyo, bringing their favorite brew to the screen.
+                        </p>
+                        <p>
+                            While we don't physically serve the 5,000 cups of coffee our international community consumes daily, the shared experience is palpable. It's not just about caffeine—it's about global networking, warmth, and starting each high-stakes communication class with an open and collaborative mindset.
+                        </p>
+                        
+                        <blockquote class="my-6 border-l-[4px] border-[#D4AF37] pl-4 py-2 bg-white rounded-r-lg shadow-sm">
+                            <p class="text-[15px] italic font-playfair text-[#121212] m-0">"Distance cannot break a strong community. You don't need a physical café to build rapport; all you need is a 'Join Meeting' link and a great cup of coffee."</p>
+                        </blockquote>
+                        
+                        <p>
+                            Alumni frequently join our exclusive <em>'Friday Virtual Lounges'</em>, not only to maintain their executive network but also to relive this shared morning ritual. They know that once you become a Premium English member, you are always a global connector. 
+                        </p>
+                        <p>
+                            This digital ritual proves that excellence transcends borders. Who knows? Maybe in your next online negotiation, the simple act of raising your coffee mug to the camera will be the icebreaker that secures the deal.
+                        </p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Right Column: The Activity Workspace -->
+            <div class="w-full lg:w-7/12 xl:w-1/2 p-6 md:p-10 flex flex-col">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
+                    <h2 class="text-2xl font-playfair font-bold text-[#0B192C]">Comprehension Check</h2>
+                    <span class="bg-[#0B192C] text-[#D4AF37] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-sm">Part A</span>
+                </div>
+
+                <!-- Quiz Container (JS Injected) -->
+                <div id="quiz-container" class="space-y-6 flex-grow mb-10">
+                    <!-- Questions will populate here -->
+                </div>
+
+                <!-- Validation Controls -->
+                <div class="mt-auto pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div id="score-display" class="bg-white text-gray-500 border border-gray-300 px-6 py-3 rounded-full font-bold shadow-sm transition-colors duration-300 text-sm w-full sm:w-auto text-center">
+                            Score: 0 / 5
+                        </div>
+                        
+                        <div class="flex gap-3 w-full sm:w-auto">
+                            <button id="reset-btn" class="flex-1 sm:flex-none bg-white border-2 border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-6 py-3 uppercase tracking-widest font-bold shadow-sm text-xs flex justify-center items-center gap-2">
+                                Reset
+                            </button>
+                            <button id="check-btn" class="flex-1 sm:flex-none bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-8 py-3 uppercase tracking-widest font-bold shadow-md text-xs flex justify-center items-center gap-2">
+                                Validate
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Banner -->
+                <div id="success-banner" class="hidden mt-8 bg-[#0B192C] rounded-xl p-8 text-center border-[1px] border-[#D4AF37] shadow-xl relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-4 border border-[#D4AF37]/30">
+                            <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h2 class="text-2xl font-playfair text-[#D4AF37] font-bold mb-2">Excellent Comprehension</h2>
+                        <p class="text-gray-300 text-sm leading-relaxed font-medium">
+                            You have successfully extracted all critical information. Proceed to the open discussion below.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Part B: Executive Discussion (Open Questions) -->
+        <div class="p-8 md:p-12 bg-white border-t border-gray-200">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
+                    <div>
+                        <h2 class="text-2xl font-playfair font-bold text-[#0B192C]">Executive Discussion</h2>
+                        <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mt-1">Part B • Open Questions for Speaking Practice</p>
+                    </div>
+                    <svg class="w-8 h-8 text-[#D4AF37] hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                </div>
+                
+                <div class="bg-[#0B192C] rounded-xl p-8 md:p-10 shadow-2xl border-t-[6px] border-[#D4AF37] relative overflow-hidden">
+                    <!-- Subtle gradient to replace the dot pattern for a cleaner premium look -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+                    
+                    <ul class="space-y-4 relative z-10">
+                        <li class="flex items-start gap-4 p-5 rounded-lg bg-white/5 border border-white/5 hover:bg-[#152744] hover:border-[#D4AF37]/30 transition-all duration-300 shadow-sm group">
+                            <span class="text-[#D4AF37] font-bold text-2xl leading-none mt-0.5 group-hover:scale-110 transition-transform">•</span>
+                            <p class="text-white text-[15px] font-medium leading-relaxed">If you were an alumni, would you join the <strong class="text-[#D4AF37] font-bold">Friday Virtual Lounges</strong>? Why or why not?</p>
+                        </li>
+                        <li class="flex items-start gap-4 p-5 rounded-lg bg-white/5 border border-white/5 hover:bg-[#152744] hover:border-[#D4AF37]/30 transition-all duration-300 shadow-sm group">
+                            <span class="text-[#D4AF37] font-bold text-2xl leading-none mt-0.5 group-hover:scale-110 transition-transform">•</span>
+                            <p class="text-white text-[15px] font-medium leading-relaxed">What do you value more in a professional setting: the drink itself or the <strong class="text-[#D4AF37] font-bold">networking ritual</strong>?</p>
+                        </li>
+                        <li class="flex items-start gap-4 p-5 rounded-lg bg-white/5 border border-white/5 hover:bg-[#152744] hover:border-[#D4AF37]/30 transition-all duration-300 shadow-sm group">
+                            <span class="text-[#D4AF37] font-bold text-2xl leading-none mt-0.5 group-hover:scale-110 transition-transform">•</span>
+                            <p class="text-white text-[15px] font-medium leading-relaxed">How does starting a meeting with a shared, informal ritual impact <strong class="text-[#D4AF37] font-bold">business communication</strong>?</p>
+                        </li>
+                        <li class="flex items-start gap-4 p-5 rounded-lg bg-white/5 border border-white/5 hover:bg-[#152744] hover:border-[#D4AF37]/30 transition-all duration-300 shadow-sm group">
+                            <span class="text-[#D4AF37] font-bold text-2xl leading-none mt-0.5 group-hover:scale-110 transition-transform">•</span>
+                            <p class="text-white text-[15px] font-medium leading-relaxed">In your specific industry, what is a typical <strong class="text-[#D4AF37] font-bold">meeting ritual</strong> or icebreaker?</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
+            <div class="mb-3 md:mb-0">
+                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
+                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+            </div>
+            <div class="italic text-[#D4AF37]">
+                Excellence, exclusivity, and guaranteed results.
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Data Architecture
+        const userState = {};
+
+        const quizData = [
+            { 
+                id: 'q1', 
+                question: "Premium English physically serves 5,000 cups of coffee to its online students globally.", 
+                options: ["True", "False"], 
+                answer: "False"
+            },
+            { 
+                id: 'q2', 
+                question: "What unites executives and leaders across the globe at Premium English?", 
+                options: ["Free Corporate Wi-Fi", "The Virtual Coffee Briefing", "Extra grammar homework"], 
+                answer: "The Virtual Coffee Briefing"
+            },
+            { 
+                id: 'q3', 
+                question: "Why do alumni join the 'Friday Virtual Lounges'?", 
+                options: ["To complain about connection issues.", "To get free physical coffee deliveries.", "To maintain their network and relive the ritual."], 
+                answer: "To maintain their network and relive the ritual."
+            },
+            { 
+                id: 'q4', 
+                question: "According to the text, what is essential to build rapport and strong community?", 
+                options: ["A physical café near the office.", "A 'Join Meeting' link and a great cup of coffee.", "Traveling to London or New York."], 
+                answer: "A 'Join Meeting' link and a great cup of coffee."
+            },
+            { 
+                id: 'q5', 
+                question: "The text suggests that raising your coffee mug to the camera can act as a powerful icebreaker in negotiations.", 
+                options: ["True", "False"], 
+                answer: "True"
+            }
+        ];
+
+        const totalQuestions = quizData.length;
+
+        const containerQuiz = document.getElementById('quiz-container');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const successBanner = document.getElementById('success-banner');
+        const scoreDisplay = document.getElementById('score-display');
+
+        const iconSuccess = `<svg class="w-5 h-5 text-[#10B981] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+        const iconError = `<svg class="w-5 h-5 text-[#EF4444] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+
+        // 2. Dynamic Rendering
+        function renderOptionsHTML(id, optionsArray) {
+            return optionsArray.map(opt => `
+                <button type="button" class="chip-btn px-4 py-3 rounded-lg border border-gray-200 bg-white text-[#121212] font-medium text-sm shadow-sm flex-grow sm:flex-grow-0" data-id="${id}" data-val="${opt.replace(/"/g, '&quot;')}">
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((item, index) => {
+                html += `
+                    <div id="card-${item.id}" class="group relative flex flex-col p-5 bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300">
+                        
+                        <!-- Question Header -->
+                        <div class="flex items-start gap-3 mb-4 pr-8">
+                            <div class="flex items-center justify-center w-7 h-7 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-xs shadow-sm shrink-0 border border-[#D4AF37]/30 mt-0.5">
+                                ${index + 1}
+                            </div>
+                            <h3 class="text-[#121212] font-semibold text-[15px] leading-relaxed">
+                                ${item.question}
+                            </h3>
+                        </div>
+                        
+                        <!-- Options (Chips) -->
+                        <div class="flex flex-col sm:flex-row flex-wrap gap-2 pl-0 sm:pl-10">
+                            ${renderOptionsHTML(item.id, item.options)}
+                        </div>
+
+                        <!-- Feedback Icon Anchor -->
+                        <div id="feedback-icon-${item.id}" class="absolute right-4 top-5 opacity-0 transition-opacity duration-300 pointer-events-none bg-white rounded-full"></div>
+                        
+                    </div>
+                `;
+            });
+            containerQuiz.innerHTML = html;
+
+            // Add Event Listeners for Chips
+            document.querySelectorAll('.chip-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    const val = this.getAttribute('data-val');
+                    
+                    // Remove selected styling from siblings
+                    this.parentElement.querySelectorAll('.chip-btn').forEach(b => {
+                        b.classList.remove('selected');
+                    });
+                    
+                    // Add selected styling to clicked button
+                    this.classList.add('selected');
+                    
+                    // Save to state
+                    userState[itemId] = val;
+                });
+            });
+        }
+
+        function validateAnswers() {
+            let correctCount = 0;
+
+            quizData.forEach(item => {
+                const cardElement = document.getElementById(`card-${item.id}`);
+                const feedbackIcon = document.getElementById(`feedback-icon-${item.id}`);
+                const selectedValue = userState[item.id] || "";
+
+                // Reset states
+                cardElement.classList.remove('animate-shake', 'border-[#FECACA]', 'border-[#A7F3D0]', 'border-[#D4AF37]', 'bg-[#FEF2F2]', 'bg-[#F0FDF4]');
+                feedbackIcon.classList.remove('opacity-100');
+                feedbackIcon.classList.add('opacity-0');
+
+                if (selectedValue === item.answer) {
+                    // Success
+                    cardElement.classList.add('bg-[#F0FDF4]', 'border-[#A7F3D0]', 'animate-pop');
+                    cardElement.classList.remove('bg-white');
+                    
+                    // Disable buttons
+                    cardElement.querySelectorAll('.chip-btn').forEach(b => b.classList.add('disabled'));
+                    
+                    feedbackIcon.innerHTML = iconSuccess;
+                    feedbackIcon.classList.remove('opacity-0');
+                    feedbackIcon.classList.add('opacity-100');
+                    correctCount++;
+                } else {
+                    if (selectedValue !== "") {
+                        // Error 
+                        cardElement.classList.add('animate-shake', 'bg-[#FEF2F2]', 'border-[#FECACA]');
+                        cardElement.classList.remove('bg-white');
+                        
+                        feedbackIcon.innerHTML = iconError;
+                        feedbackIcon.classList.remove('opacity-0');
+                        feedbackIcon.classList.add('opacity-100');
+                        
+                        setTimeout(() => { cardElement.classList.remove('animate-shake'); }, 400);
+                    } else {
+                        // Unanswered highlight
+                        cardElement.classList.add('border-[#D4AF37]');
+                    }
+                }
+            });
+
+            // Update Score Display
+            scoreDisplay.textContent = `Score: ${correctCount} / ${totalQuestions}`;
+            
+            if(correctCount === totalQuestions) {
+                scoreDisplay.classList.remove('bg-white', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                checkBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            } else {
+                scoreDisplay.classList.add('bg-white', 'text-gray-500', 'border-gray-300');
+                scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        function resetQuiz() {
+            // Clear State
+            for (let key in userState) delete userState[key];
+
+            renderQuiz(); 
+            
+            scoreDisplay.textContent = `Score: 0 / ${totalQuestions}`;
+            scoreDisplay.classList.add('bg-white', 'text-gray-500', 'border-gray-300');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            checkBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('.reading-text').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Initialize
+        renderQuiz();
+        checkBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+
+    </script>
+</body>
+</html>
