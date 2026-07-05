@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Reading Analysis</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de fondo Premium */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Estilos críticos para Chips interactivos */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        /* Hover state (sólo si no está seleccionado ni deshabilitado) */
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        /* Selected state ¡CRÍTICO! */
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        /* Disabled state para opciones incorrectas tras acertar */
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        /* Animaciones (Keyframes) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Contenedor de validación dinámica */
+        .question-card {
+            transition: all 0.3s ease;
+        }
+        .question-card.success-state {
+            background-color: #F0FDF4; /* Verde muy sutil */
+            border-color: #A7F3D0;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <!-- Contenedor Principal max-w-5xl -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative">
+        
+        <!-- Encabezado de Alto Impacto (Color Sólido Puro) -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Reading Comprehension Module</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">The Chivas Experience</h1>
+                
+                <!-- Descripción de la actividad -->
+                <p class="text-gray-200 font-sans max-w-2xl mx-auto text-lg leading-relaxed mb-6">
+                    Read the text carefully and analyze the details to answer the comprehension questions correctly.
+                </p>
+                
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+        </header>
+
+        <div class="p-8 md:p-12">
+            
+            <!-- Bloque de lectura -->
+            <section class="mb-12 bg-gray-50 p-6 md:p-10 rounded-lg border-l-[4px] border-navy shadow-inner">
+                <h2 class="text-2xl font-serif text-navy mb-6">Chivas, ra, ra, ra!</h2>
+                <div class="space-y-4 text-lg leading-relaxed text-gray-700">
+                    <p>I've never liked football. I don't know the rules, I can't name the players, and honestly, I've never cared. But somehow, for most of my life, people have connected me with one team: the <strong>Chivas Rayadas de Guadalajara</strong>.</p>
+                    <p>It all started when I was a kid. Everyone kept asking, <em>"Which team do you support?"</em> I didn't have an answer. One day, watching Mexican TV, I heard the name <em>Chivas Rayadas de Guadalajara</em>. It sounded funny, so I decided to use it as my "team," just to stop the questions.</p>
+                    <p>The opposite happened. Whenever I said "I'm with Chivas," people got curious. In Canada, that name sounded exotic, and nobody forgot it. Over the years, friends gave me Chivas gifts like caps, shirts, mugs, even scarves, as if I were actually a fan of the team.</p>
+                    <p>The "joke" went so far that I eventually traveled to Mexico and attended a real Chivas match. The stadium was amazing, the fans were crazy, and the experience was unforgettable... I did it just to play along with everyone who decided I was a fan. Even though I still don't like football, I'm not even a fan of any team.</p>
+                </div>
+            </section>
+
+            <!-- Divisor -->
+            <div class="flex items-center justify-center space-x-4 mb-10">
+                <span class="w-16 h-px bg-gray-300"></span>
+                <span class="text-gold font-serif italic text-xl">Comprehension Check</span>
+                <span class="w-16 h-px bg-gray-300"></span>
+            </div>
+
+            <!-- Contenedor del Quiz (Inyectado por JS) -->
+            <div id="quiz-container" class="space-y-8">
+                <!-- Las preguntas se renderizan aquí -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Banner de Celebración (Color Azul sólido puro sin efectos y texto Dorado) -->
+    <div id="success-banner" class="hidden w-full max-w-5xl mt-8 bg-[#0B192C] border-[2px] border-gold rounded-xl p-8 relative shadow-xl">
+        <div class="flex flex-col items-center text-center">
+            <svg class="w-16 h-16 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+            <h2 class="text-3xl font-serif text-gold mb-2">Excellent Work!</h2>
+            <p class="text-gold text-lg font-medium">You have successfully completed the reading analysis.</p>
+        </div>
+    </div>
+
+    <!-- Pie de página Corporativo Premium English (Bottom) -->
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-12 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <!-- Lógica del Motor de Evaluación -->
+    <script>
+        const quizData = [
+            {
+                id: 1,
+                question: "Why did the narrator choose Chivas as \"his team\"?",
+                options: [
+                    "To stop people from asking questions",
+                    "Because he was a real fan",
+                    "Because his family is from Mexico"
+                ],
+                correctIndex: 0
+            },
+            {
+                id: 2,
+                question: "People in Canada thought the name \"Chivas\" was...",
+                options: [
+                    "Boring",
+                    "Exotic and interesting",
+                    "Difficult to pronounce"
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 3,
+                question: "True or False: The narrator has always loved football.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 4,
+                question: "What kind of gifts did the narrator receive?",
+                options: [
+                    "Balls, tickets, shoes",
+                    "Caps, shirts, mugs, scarves",
+                    "CDs, posters, magazines"
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 5,
+                question: "In the end, what happened when the narrator went to a Chivas match?",
+                options: [
+                    "He became a big football fan",
+                    "He decided to support another team",
+                    "He enjoyed the experience but still doesn't like football"
+                ],
+                correctIndex: 2
+            }
+        ];
+
+        let score = 0;
+        const totalQuestions = quizData.length;
+        const container = document.getElementById('quiz-container');
+
+        function renderQuiz() {
+            let htmlContent = '';
+
+            quizData.forEach((q, index) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <button 
+                            class="chip-btn w-full md:w-auto text-left md:text-center px-6 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-medium tracking-wide shadow-sm"
+                            onclick="handleSelection(${index}, ${optIdx}, this)"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                htmlContent += `
+                    <div id="card-${index}" class="question-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm relative overflow-hidden">
+                        <!-- Estructura Flexbox garantizada para NO colisionar textos con el icono -->
+                        <div class="flex flex-row justify-between items-start gap-4 mb-5">
+                            <h3 class="text-lg md:text-xl font-semibold text-navy leading-relaxed">
+                                <span class="text-gold mr-2">${q.id}.</span>${q.question}
+                            </h3>
+                            <!-- Contenedor del icono con flex-shrink-0 para que nunca se reduzca ni solape -->
+                            <div id="icon-${index}" class="hidden flex-shrink-0 w-7 h-7 mt-1">
+                                <svg class="w-full h-full text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row flex-wrap gap-3" id="options-${index}">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function handleSelection(questionIndex, selectedOptionIndex, buttonElement) {
+            const questionData = quizData[questionIndex];
+            const card = document.getElementById(`card-${questionIndex}`);
+            const optionsContainer = document.getElementById(`options-${questionIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            if (selectedOptionIndex === questionData.correctIndex) {
+                buttonElement.classList.add('selected');
+                
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                });
+
+                card.classList.add('success-state');
+                const icon = document.getElementById(`icon-${questionIndex}`);
+                icon.classList.remove('hidden');
+                icon.classList.add('animate-pop');
+
+                score++;
+                checkWinCondition();
+
+            } else {
+                buttonElement.classList.add('animate-shake');
+                setTimeout(() => {
+                    buttonElement.classList.remove('animate-shake');
+                }, 400);
+            }
+        }
+
+        function checkWinCondition() {
+            if (score === totalQuestions) {
+                setTimeout(() => {
+                    const banner = document.getElementById('success-banner');
+                    banner.classList.remove('hidden');
+                    banner.classList.add('animate-pop');
+                    
+                    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
