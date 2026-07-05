@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Reading Challenge</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de fondo Premium */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Inputs interactivos */
+        .premium-input {
+            transition: all 0.3s ease;
+        }
+        .premium-input:focus {
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3); /* Gold shadow on focus */
+        }
+        
+        /* Estado de éxito estricto para Inputs y Botones */
+        .success-input {
+            background-color: #F0FDF4 !important;
+            border-color: #22c55e !important;
+            color: #166534 !important;
+            font-weight: 600;
+        }
+        .success-btn {
+            background-color: #22c55e !important;
+            border-color: #22c55e !important;
+            color: white !important;
+            pointer-events: none;
+        }
+
+        /* Animaciones (Keyframes) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <!-- Contenedor Principal max-w-5xl -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative">
+        
+        <!-- Encabezado de Alto Impacto (Color Sólido Puro) -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Reading Comprehension</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">Unusual Festivals</h1>
+                
+                <!-- Descripción de la actividad -->
+                <p class="text-gray-200 font-sans max-w-2xl mx-auto text-lg leading-relaxed mb-6">
+                    Read about these unusual festivals around the world. Then answer the questions using ordinal numbers.
+                </p>
+                
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+        </header>
+
+        <div class="p-8 md:p-12">
+            
+            <!-- SECCIÓN LECTURA: 5 Festivales Nuevos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                
+                <!-- Festival 1 (Navy border top) -->
+                <article class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm border-t-[4px] border-t-navy hover:shadow-md transition overflow-hidden flex flex-col">
+                    <img src="taiwan.jpg" alt="Pingxi Lantern Festival" class="w-full h-48 md:h-56 object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0B192C/D4AF37?text=Taiwan';">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-navy text-gold flex items-center justify-center font-serif text-xl">1</span>
+                            <h2 class="text-xl font-serif text-dark leading-tight">Pingxi Lantern Festival <span class="text-gray-500 text-sm block font-sans font-medium">(Taiwan)</span></h2>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            Every year, people in Taiwan celebrate a beautiful festival of light. They write their wishes and dreams on paper lanterns. Then, they release the lanterns into the night sky. The sky looks amazing, full of thousands of floating lights. People believe the lanterns take their messages to the gods. It is a quiet, magical, and very peaceful event.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Festival 2 (Gold border top) -->
+                <article class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm border-t-[4px] border-t-gold hover:shadow-md transition overflow-hidden flex flex-col">
+                    <img src="china.jpg" alt="Harbin Ice Festival" class="w-full h-48 md:h-56 object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x400/D4AF37/0B192C?text=China';">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-gold text-navy flex items-center justify-center font-serif text-xl font-bold">2</span>
+                            <h2 class="text-xl font-serif text-dark leading-tight">Harbin Ice Festival <span class="text-gray-500 text-sm block font-sans font-medium">(China)</span></h2>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            In winter, the city of Harbin becomes a freezing wonderland. Artists use blocks of ice from a frozen river to build huge castles, towers, and animals. At night, they put colorful lights inside the ice. It looks like a city made of beautiful glass. It is very cold, but millions of people visit to see this incredible winter magic.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Festival 3 -->
+                <article class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm border-t-[4px] border-t-navy hover:shadow-md transition overflow-hidden flex flex-col">
+                    <img src="india.jpg" alt="International Kite Festival" class="w-full h-48 md:h-56 object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x400/0B192C/D4AF37?text=India';">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-navy text-gold flex items-center justify-center font-serif text-xl">3</span>
+                            <h2 class="text-xl font-serif text-dark leading-tight">International Kite Festival <span class="text-gray-500 text-sm block font-sans font-medium">(India)</span></h2>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            In the state of Gujarat, January is a time to look up. During this festival, millions of colorful kites fly in the sky. People of all ages go to their roofs to fly kites and compete with their friends. They eat special sweets and enjoy the warm weather. The sky is completely full of kites from morning until night.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Festival 4 -->
+                <article class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm border-t-[4px] border-t-gold hover:shadow-md transition overflow-hidden flex flex-col">
+                    <img src="belgium.jpg" alt="The Flower Carpet" class="w-full h-48 md:h-56 object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/600x400/D4AF37/0B192C?text=Belgium';">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-gold text-navy flex items-center justify-center font-serif text-xl font-bold">4</span>
+                            <h2 class="text-xl font-serif text-dark leading-tight">The Flower Carpet <span class="text-gray-500 text-sm block font-sans font-medium">(Belgium)</span></h2>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            Every two years in August, the center of Brussels changes completely. People create a giant carpet on the ground using more than 500,000 real flowers. They work very fast to put the colorful flowers in beautiful patterns. The result is a massive piece of art. Tourists love taking pictures from the balconies around the main square.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Festival 5 (Ocupa dos columnas en desktop) -->
+                <article class="bg-gray-50 rounded-xl border border-gray-200 shadow-sm border-t-[4px] border-t-navy hover:shadow-md transition md:col-span-2 overflow-hidden flex flex-col">
+                    <img src="thailand.jpg" alt="Songkran Water Festival" class="w-full h-48 md:h-64 object-cover block" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0B192C/D4AF37?text=Thailand';">
+                    <div class="p-6 flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-navy text-gold flex items-center justify-center font-serif text-xl">5</span>
+                            <h2 class="text-xl font-serif text-dark leading-tight">Songkran Water Festival <span class="text-gray-500 text-sm block font-sans font-medium">(Thailand)</span></h2>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                            April is the hottest month in Thailand, so people cool down with a giant water fight! Songkran is the traditional Thai New Year. People use buckets, water guns, and hoses to throw water at each other in the streets. It is a very happy celebration. The water means washing away bad luck and starting the new year fresh and clean.
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Divisor para la sección interactiva -->
+            <div class="flex items-center justify-center space-x-4 mb-10">
+                <span class="w-16 h-px bg-gray-300"></span>
+                <span class="text-gold font-serif italic text-xl">Challenge</span>
+                <span class="w-16 h-px bg-gray-300"></span>
+            </div>
+
+            <!-- SECCIÓN DE PREGUNTAS -->
+            <div class="bg-white border border-gray-200 rounded-xl p-8 shadow-sm">
+                <div class="bg-blue-50 border-l-4 border-navy p-4 rounded-r-lg mb-8">
+                    <p class="text-navy font-semibold text-sm">Instructions:</p>
+                    <p class="text-gray-700 text-sm">Read the question and identify which text has the answer. Then, write the position of that text using <strong class="text-gold">ordinal numbers</strong> (e.g., "first", "second").</p>
+                </div>
+
+                <!-- Contenedor del Quiz (Inyectado por JS) -->
+                <div id="drill-container" class="space-y-6">
+                    <!-- Las filas de inputs se renderizan aquí -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Banner de Celebración -->
+    <div id="success-banner" class="hidden w-full max-w-5xl mt-8 bg-[#0B192C] border-[2px] border-gold rounded-xl p-8 relative shadow-xl">
+        <div class="flex flex-col items-center text-center">
+            <svg class="w-16 h-16 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+            <h2 class="text-3xl font-serif text-gold mb-2">Excellent Work!</h2>
+            <p class="text-gold text-lg font-medium">You have mastered reading comprehension and ordinal numbers.</p>
+        </div>
+    </div>
+
+    <!-- Pie de página Corporativo Premium English -->
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-12 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <!-- Lógica del Motor de Evaluación Textual Estricto (Ordinales) -->
+    <script>
+        const drillData = [
+            { id: 1, question: "Which festival uses blocks of frozen water to build things?", expected: ["second"] },
+            { id: 2, question: "Which festival creates a massive piece of art using half a million plants?", expected: ["fourth"] },
+            { id: 3, question: "Which festival cools people down with a giant street fight?", expected: ["fifth"] },
+            { id: 4, question: "Which festival involves sending wishes and dreams into the night sky?", expected: ["first"] },
+            { id: 5, question: "Which festival is about competing from roofs with objects on strings?", expected: ["third"] }
+        ];
+
+        let score = 0;
+        const totalItems = drillData.length;
+        const container = document.getElementById('drill-container');
+
+        function renderDrill() {
+            let htmlContent = '';
+
+            drillData.forEach((item, index) => {
+                htmlContent += `
+                    <div id="row-${index}" class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 bg-gray-50 p-5 rounded-xl border border-gray-200 shadow-sm transition-all duration-300">
+                        
+                        <!-- Bloque Pregunta -->
+                        <div class="flex-grow flex gap-3">
+                            <span class="text-gold font-serif font-bold text-lg pt-0.5">${item.id}.</span>
+                            <p class="text-navy font-medium text-lg">${item.question}</p>
+                        </div>
+                        
+                        <!-- Contenedor de Input y Check -->
+                        <div class="flex flex-col sm:flex-row w-full lg:w-auto gap-3 flex-shrink-0">
+                            <!-- Input del usuario -->
+                            <div class="relative w-full sm:w-64">
+                                <input 
+                                    type="text" 
+                                    id="input-${index}" 
+                                    class="premium-input w-full bg-white border-2 border-gray-300 text-gray-700 text-lg rounded-lg focus:outline-none focus:border-navy block p-3 pr-10" 
+                                    placeholder="Type the ordinal (e.g. first)"
+                                    onkeypress="handleKeyPress(event, ${index})"
+                                    autocomplete="off"
+                                >
+                                <!-- Icono de éxito (Oculto por defecto) -->
+                                <div id="icon-${index}" class="absolute inset-y-0 right-0 flex items-center pr-3 hidden pointer-events-none">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                            </div>
+
+                            <!-- Botón de verificación -->
+                            <button 
+                                id="btn-${index}" 
+                                class="w-full sm:w-32 bg-gold hover:bg-yellow-500 text-navy font-bold uppercase tracking-wider py-3 px-6 rounded-lg transition-colors border-2 border-gold shadow-sm flex-shrink-0"
+                                onclick="checkAnswer(${index})"
+                            >
+                                Check
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function handleKeyPress(event, index) {
+            if (event.key === 'Enter') {
+                checkAnswer(index);
+            }
+        }
+
+        // Motor de Validación Textual
+        function checkAnswer(index) {
+            const inputElement = document.getElementById(`input-${index}`);
+            const rowElement = document.getElementById(`row-${index}`);
+            const btnElement = document.getElementById(`btn-${index}`);
+            const iconElement = document.getElementById(`icon-${index}`);
+            
+            // Lógica de limpieza
+            let userInput = inputElement.value.trim().toLowerCase();
+            const expectedAnswers = drillData[index].expected;
+
+            // Validación contextual
+            if (expectedAnswers.includes(userInput)) {
+                // ÉXITO
+                inputElement.classList.add('success-input');
+                inputElement.disabled = true;
+                
+                btnElement.classList.add('success-btn');
+                btnElement.innerText = "Correct";
+                
+                iconElement.classList.remove('hidden');
+                iconElement.classList.add('animate-pop');
+
+                rowElement.classList.add('border-green-300', 'bg-green-50/40');
+
+                // Aumentar score y validar victoria
+                score++;
+                checkWinCondition();
+
+            } else {
+                // ERROR: Animación Shake visual y limpieza temporal
+                rowElement.classList.add('animate-shake');
+                inputElement.classList.add('border-red-400', 'text-red-500', 'bg-red-50');
+                
+                setTimeout(() => {
+                    rowElement.classList.remove('animate-shake');
+                    inputElement.classList.remove('border-red-400', 'text-red-500', 'bg-red-50');
+                }, 500);
+            }
+        }
+
+        function checkWinCondition() {
+            if (score === totalItems) {
+                setTimeout(() => {
+                    const banner = document.getElementById('success-banner');
+                    banner.classList.remove('hidden');
+                    banner.classList.add('animate-pop');
+                    
+                    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 400);
+            }
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDrill();
+        });
+
+    </script>
+</body>
+</html>
