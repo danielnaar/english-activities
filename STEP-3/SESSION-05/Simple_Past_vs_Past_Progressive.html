@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Grammar Module</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de fondo Premium */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Estilos críticos para Chips interactivos */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        /* Hover state (sólo si no está seleccionado ni deshabilitado) */
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        /* Selected state ¡CRÍTICO! - Color azul marino sólido y texto dorado */
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        /* Disabled state para opciones incorrectas tras acertar */
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        /* Animaciones (Keyframes) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Contenedor de validación dinámica */
+        .question-card {
+            transition: all 0.3s ease;
+        }
+        .question-card.success-state {
+            background-color: #F0FDF4; /* Verde muy sutil corporativo */
+            border-color: #A7F3D0;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <!-- Contenedor Principal max-w-5xl -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative">
+        
+        <!-- Encabezado de Alto Impacto (Color Sólido Puro) -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Grammar Module</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">Simple Past vs Past Progressive</h1>
+                
+                <!-- Descripción de la actividad -->
+                <p class="text-gray-200 font-sans max-w-2xl mx-auto text-lg leading-relaxed mb-6">
+                    Master the difference between completed actions and actions in progress. Daily routines, free time & vacations.
+                </p>
+                
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+        </header>
+
+        <div class="p-8 md:p-12">
+            
+            <!-- Bloque de Teoría (Grammar Cards) -->
+            <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Simple Past (Dorado) -->
+                <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-lg border-t-[6px] border-t-gold relative overflow-hidden">
+                    <h2 class="text-2xl font-serif text-dark mb-2">Simple Past</h2>
+                    <p class="text-sm font-semibold text-gray-500 mb-6 uppercase tracking-wider">Verb + ed (regular) / irregular</p>
+                    
+                    <ul class="space-y-3 text-gray-700 mb-6 font-medium">
+                        <li class="flex items-start">
+                            <span class="text-gold mr-2 mt-1">•</span> Completed actions in the past
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gold mr-2 mt-1">•</span> One-time events
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-gold mr-2 mt-1">•</span> Short, finished stories
+                        </li>
+                    </ul>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border-l-[3px] border-gold space-y-2 text-dark">
+                        <p><em>I <strong>swam</strong> in the ocean last summer.</em></p>
+                        <p><em>She <strong>danced</strong> at the party.</em></p>
+                        <p><em>We <strong>visited</strong> Paris in 2022.</em></p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Past Progressive (Azul Marino porque usa Verbo TO BE 'was/were') -->
+                <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-lg border-t-[6px] border-t-navy relative overflow-hidden">
+                    <h2 class="text-2xl font-serif text-dark mb-2">Past Progressive</h2>
+                    <p class="text-sm font-semibold text-gray-500 mb-6 uppercase tracking-wider">was/were + verb + ing</p>
+                    
+                    <ul class="space-y-3 text-gray-700 mb-6 font-medium">
+                        <li class="flex items-start">
+                            <span class="text-navy mr-2 mt-1">•</span> Actions in progress at a past moment
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-navy mr-2 mt-1">•</span> Interrupted actions
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-navy mr-2 mt-1">•</span> Background stories
+                        </li>
+                    </ul>
+
+                    <div class="bg-gray-50 p-4 rounded-lg border-l-[3px] border-navy space-y-2 text-dark">
+                        <p><em>I <strong>was swimming</strong> when it started raining.</em></p>
+                        <p><em>She <strong>was dancing</strong> when the music stopped.</em></p>
+                        <p><em>We <strong>were visiting</strong> Paris when the strike began.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Tips Banner -->
+            <div class="bg-navy rounded-xl p-6 md:p-8 mb-8 shadow-md border-l-[6px] border-gold flex flex-col md:flex-row items-center gap-6">
+                <div class="flex-shrink-0 bg-gold rounded-full p-4">
+                    <svg class="w-8 h-8 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-serif text-white mb-2">Quick Tips</h3>
+                    <p class="text-gray-300 text-lg">Use <span class="text-gold font-semibold">Simple Past</span> for finished actions. Use <span class="text-gold font-semibold">Past Progressive</span> for actions in progress.</p>
+                    <p class="text-white mt-2 font-medium italic">Mix them: "While I was watching Netflix, my mom called me."</p>
+                </div>
+            </div>
+
+            <!-- NUEVO: Sección de Errores Comunes (Common Mistakes) -->
+            <div class="mb-12 bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                <div class="bg-red-50/50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+                    <svg class="w-7 h-7 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <h3 class="text-xl font-serif text-dark font-semibold">Common Mistakes</h3>
+                </div>
+                
+                <div class="p-6 md:p-8 space-y-5">
+                    
+                    <!-- Error 1 -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                        <div class="flex items-center gap-3 text-red-600 bg-red-50 px-5 py-3 rounded-lg flex-1 border border-red-100">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            <span class="line-through italic text-[15px]">I was went to the beach.</span>
+                        </div>
+                        <div class="hidden md:flex justify-center text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-3 text-green-700 bg-green-50 px-5 py-3 rounded-lg flex-1 border border-green-100 shadow-sm">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="font-medium italic text-[15px]">I went to the beach.</span>
+                        </div>
+                    </div>
+
+                    <!-- Error 2 -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                        <div class="flex items-center gap-3 text-red-600 bg-red-50 px-5 py-3 rounded-lg flex-1 border border-red-100">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            <span class="line-through italic text-[15px]">I swam when it was raining.</span>
+                        </div>
+                        <div class="hidden md:flex justify-center text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-3 text-green-700 bg-green-50 px-5 py-3 rounded-lg flex-1 border border-green-100 shadow-sm">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="font-medium italic text-[15px]">I was swimming when it was raining.</span>
+                        </div>
+                    </div>
+
+                    <!-- Error 3 -->
+                    <div class="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
+                        <div class="flex items-center gap-3 text-red-600 bg-red-50 px-5 py-3 rounded-lg flex-1 border border-red-100">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            <span class="line-through italic text-[15px]">They were play football yesterday.</span>
+                        </div>
+                        <div class="hidden md:flex justify-center text-gray-300">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </div>
+                        <div class="flex items-center gap-3 text-green-700 bg-green-50 px-5 py-3 rounded-lg flex-1 border border-green-100 shadow-sm">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="font-medium italic text-[15px]">They played football yesterday.</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Divisor para la sección interactiva -->
+            <div class="flex items-center justify-center space-x-4 mb-10">
+                <span class="w-16 h-px bg-gray-300"></span>
+                <span class="text-gold font-serif italic text-xl">Interactive Drill: Fix the Mistakes</span>
+                <span class="w-16 h-px bg-gray-300"></span>
+            </div>
+
+            <!-- Contenedor del Quiz (Inyectado por JS) -->
+            <div id="quiz-container" class="space-y-8">
+                <!-- Las preguntas se renderizan aquí -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Banner de Celebración (Color Azul sólido puro sin efectos y texto Dorado) -->
+    <div id="success-banner" class="hidden w-full max-w-5xl mt-8 bg-navy border-[2px] border-gold rounded-xl p-8 relative shadow-xl">
+        <div class="flex flex-col items-center text-center">
+            <svg class="w-16 h-16 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+            <h2 class="text-3xl font-serif text-gold mb-2">Excellent Work!</h2>
+            <p class="text-gold text-lg font-medium">You have successfully mastered the Past Tenses.</p>
+        </div>
+    </div>
+
+    <!-- Pie de página Corporativo Premium English (Bottom) -->
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-12 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <!-- Lógica del Motor de Evaluación -->
+    <script>
+        // Data del Quiz basada en los "Common Mistakes" del PDF
+        const quizData = [
+            {
+                id: 1,
+                question: "Which is the grammatically correct sentence?",
+                options: [
+                    "I was went to the beach.",
+                    "I went to the beach."
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 2,
+                question: "How do you correctly express an interrupted action?",
+                options: [
+                    "I swam when it was raining.",
+                    "I was swimming when it started raining."
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 3,
+                question: "Identify the correct way to talk about a completed action yesterday.",
+                options: [
+                    "They played football yesterday.",
+                    "They were play football yesterday."
+                ],
+                correctIndex: 0
+            },
+            {
+                id: 4,
+                question: "Mix them! Choose the correct form for the background action: <br/> <em>\"While I ____ Netflix, my mom called me.\"</em>",
+                options: [
+                    "watched",
+                    "was watching"
+                ],
+                correctIndex: 1
+            }
+        ];
+
+        let score = 0;
+        const totalQuestions = quizData.length;
+        const container = document.getElementById('quiz-container');
+
+        function renderQuiz() {
+            let htmlContent = '';
+
+            quizData.forEach((q, index) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <button 
+                            class="chip-btn w-full md:w-auto text-left md:text-center px-6 py-3 rounded-full border-2 border-gray-200 text-gray-700 font-medium tracking-wide shadow-sm"
+                            onclick="handleSelection(${index}, ${optIdx}, this)"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                htmlContent += `
+                    <div id="card-${index}" class="question-card bg-white p-6 rounded-xl border border-gray-100 shadow-sm relative overflow-hidden">
+                        <!-- Estructura Flexbox garantizada para NO colisionar textos con el icono -->
+                        <div class="flex flex-row justify-between items-start gap-4 mb-5">
+                            <h3 class="text-lg md:text-xl font-semibold text-navy leading-relaxed">
+                                <span class="text-gold mr-2">${q.id}.</span>${q.question}
+                            </h3>
+                            <!-- Contenedor del icono con flex-shrink-0 para que nunca se reduzca ni solape -->
+                            <div id="icon-${index}" class="hidden flex-shrink-0 w-7 h-7 mt-1">
+                                <svg class="w-full h-full text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="flex flex-col md:flex-row flex-wrap gap-3" id="options-${index}">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function handleSelection(questionIndex, selectedOptionIndex, buttonElement) {
+            const questionData = quizData[questionIndex];
+            const card = document.getElementById(`card-${questionIndex}`);
+            const optionsContainer = document.getElementById(`options-${questionIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            // Si es correcto
+            if (selectedOptionIndex === questionData.correctIndex) {
+                buttonElement.classList.add('selected');
+                
+                // Deshabilitar todos los botones de esta pregunta
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                });
+
+                // Activar estilos de éxito
+                card.classList.add('success-state');
+                const icon = document.getElementById(`icon-${questionIndex}`);
+                icon.classList.remove('hidden');
+                icon.classList.add('animate-pop');
+
+                // Validar progreso
+                score++;
+                checkWinCondition();
+
+            } else {
+                // Si es incorrecto: animar shake
+                buttonElement.classList.add('animate-shake');
+                setTimeout(() => {
+                    buttonElement.classList.remove('animate-shake');
+                }, 400);
+            }
+        }
+
+        function checkWinCondition() {
+            if (score === totalQuestions) {
+                setTimeout(() => {
+                    const banner = document.getElementById('success-banner');
+                    banner.classList.remove('hidden');
+                    banner.classList.add('animate-pop');
+                    
+                    // Hacer scroll suave hacia el banner de celebración
+                    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+        }
+
+        // Iniciar app
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
