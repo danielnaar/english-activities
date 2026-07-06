@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Email Writing Simulator</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Chips Interactivos */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Textarea premium focus */
+        .premium-input:focus {
+            outline: none;
+            border-color: #0B192C;
+            box-shadow: 0 0 0 3px rgba(11, 25, 44, 0.1);
+        }
+
+        /* Animaciones */
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        /* Checklist items transition */
+        .check-item {
+            transition: all 0.3s ease;
+        }
+        .check-item.passed {
+            color: #15803d; /* Tailwind green-700 */
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative flex flex-col min-h-[750px]">
+        
+        <!-- Header -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-8 flex-shrink-0">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Interactive Simulator</p>
+                <h1 class="text-3xl md:text-4xl text-white font-serif tracking-wide mb-3">Write Mails like a Native</h1>
+                <p class="text-gray-200 font-sans max-w-2xl mx-auto text-base leading-relaxed">
+                    Set your tone, draft your message, and pass the live checklist to unlock the send button.
+                </p>
+            </div>
+        </header>
+
+        <!-- Dynamic Wrapper (Switches between App and Success Banner) -->
+        <div id="dynamic-wrapper" class="flex-1 flex flex-col relative bg-gray-50">
+            
+            <div id="app-area" class="w-full h-full flex flex-col md:flex-row flex-1">
+                
+                <!-- LEFT COLUMN: Setup & Compose -->
+                <div class="w-full md:w-2/3 p-6 md:p-8 flex flex-col border-r border-gray-200 bg-white">
+                    
+                    <h2 class="text-xl font-serif text-navy mb-4 border-b pb-2 flex items-center justify-between">
+                        <span>1. Setup & Compose</span>
+                        <span id="category-badge" class="text-xs font-sans font-bold uppercase tracking-wider bg-gray-100 text-gray-500 px-3 py-1 rounded-full hidden"></span>
+                    </h2>
+
+                    <!-- Setup Rows -->
+                    <div class="space-y-4 mb-6">
+                        <!-- To -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">To (Teacher Email)</label>
+                            <input type="email" id="email-to" value="danielnaar@premiumenglish.edu.co" class="premium-input w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 transition-all">
+                        </div>
+                        
+                        <!-- Subject + Roll Button -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-1">Subject Line</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="email-subject" placeholder="Type or roll a random subject..." class="premium-input flex-1 px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 transition-all">
+                                <button onclick="rollSubject()" class="bg-navy hover:bg-[#152844] text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-colors shadow-sm whitespace-nowrap">
+                                    <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                                    Roll
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Tone Selection -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-600 mb-2">Tone</label>
+                            <div class="flex gap-3">
+                                <button onclick="setTone('Formal', this)" class="tone-chip chip-btn flex-1 py-2 rounded-md border border-gray-300 text-sm font-bold uppercase tracking-wider text-gray-600">Formal</button>
+                                <button onclick="setTone('Neutral', this)" class="tone-chip chip-btn flex-1 py-2 rounded-md border border-gray-300 text-sm font-bold uppercase tracking-wider text-gray-600 selected">Neutral</button>
+                                <button onclick="setTone('Friendly', this)" class="tone-chip chip-btn flex-1 py-2 rounded-md border border-gray-300 text-sm font-bold uppercase tracking-wider text-gray-600">Friendly</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Body -->
+                    <div class="flex-1 flex flex-col mb-4">
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="block text-sm font-semibold text-gray-600">Message Body</label>
+                            <button onclick="insertTemplate()" class="text-xs font-bold uppercase tracking-wider text-navy bg-gold/20 hover:bg-gold/40 px-3 py-1 rounded transition-colors">
+                                + Insert Template
+                            </button>
+                        </div>
+                        <textarea id="email-body" rows="8" placeholder="Start typing your email here..." class="premium-input w-full flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-800 transition-all resize-none"></textarea>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-3 mt-auto">
+                        <button onclick="clearForm()" class="px-5 py-3 rounded-lg font-bold text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors uppercase text-sm tracking-wider">
+                            Clear
+                        </button>
+                        <button id="send-btn" onclick="sendEmail()" disabled class="flex-1 px-5 py-3 rounded-lg font-bold text-white bg-gray-300 cursor-not-allowed transition-all uppercase text-sm tracking-wider flex justify-center items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                            Pass Checklist to Send
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/3 bg-gray-50 p-6 md:p-8 flex flex-col">
+                    <h2 class="text-xl font-serif text-navy mb-6 border-b border-gray-200 pb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Live Checklist
+                    </h2>
+
+                    <div class="space-y-5 flex-1" id="checklist-container">
+                        <!-- Items injected by JS to allow easy state management -->
+                    </div>
+
+                    <!-- Metrics -->
+                    <div class="mt-6 pt-4 border-t border-gray-200 flex justify-between text-sm font-semibold text-gray-500">
+                        <span>Chars (Subj): <span id="char-count" class="text-navy">0</span></span>
+                        <span>Words: <span id="word-count" class="text-navy">0</span></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="success-banner" class="hidden absolute inset-0 bg-navy flex flex-col items-center justify-center p-8 z-50">
+                <div class="bg-pattern"></div>
+                <div class="relative z-10 flex flex-col items-center text-center max-w-2xl">
+                    <div class="w-24 h-24 bg-gold rounded-full flex items-center justify-center mb-6 animate-pop shadow-lg">
+                        <svg class="w-12 h-12 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif text-gold mb-4 tracking-wide">Email Sent Successfully!</h2>
+                    <p class="text-white text-xl font-medium leading-relaxed">
+                        Excellent work. Your email structure, tone, and etiquette perfectly match the standards of a native speaker.
+                    </p>
+                    <div class="w-32 h-1 bg-gold mt-8 rounded-full opacity-50"></div>
+                    
+                    <button onclick="resetApp()" class="mt-8 px-6 py-3 bg-white text-navy font-bold uppercase tracking-wider rounded-lg hover:bg-gray-100 transition-colors shadow-md">
+                        Draft Another Email
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-8 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <script>
+        // Data Configuration
+        const randomSubjects = [
+            { text: "Link in the assignment page is broken", category: "Complaint" },
+            { text: "Schedule for Thursday demo", category: "Scheduling" },
+            { text: "Requesting the 2026 financial report", category: "Request" },
+            { text: "Project Alpha - weekly status update", category: "Update" },
+            { text: "Apology regarding yesterday's delay", category: "Apology" }
+        ];
+
+        // Matriz de plantillas (Categoría vs Tono)
+        const templates = {
+            'General': {
+                'Formal': "Dear [Title Lastname],\n\nI am writing to [state purpose in one sentence].\n[One or two short lines of context].\n\nCould you please [clear ask] by [day/time]?\n\nKind regards,\n[Your name]",
+                'Neutral': "Hi [Name],\n\nQuick note to [purpose in one sentence].\n[1-2 short lines of context or detail].\n\nCan you [clear ask] by [day/time]?\n\nBest,\n[Your name]",
+                'Friendly': "Hey team,\n\nHope everyone is having a great week!\nJust wanted to touch base regarding [purpose]. [Context].\n\nWould you mind [clear ask] before [day/time]?\n\nCheers,\n[Your name]"
+            },
+            'Complaint': {
+                'Formal': "Dear [Title Lastname],\n\nI am writing to formally report an issue regarding [Issue].\nThis situation has unfortunately caused [Effect].\n\nCould you please resolve this matter by [day/time]?\n\nKind regards,\n[Your name]",
+                'Neutral': "Hi [Name],\n\nI want to bring to your attention a problem with [Issue].\nIt is currently affecting [Effect].\n\nCan you please look into this and fix it by [day/time]?\n\nBest,\n[Your name]",
+                'Friendly': "Hey [Name],\n\nHope you're doing well! Just a quick heads-up that there's a small hiccup with [Issue].\nIt's holding us up a bit.\n\nCould you give us a hand with this by [day/time]?\n\nCheers,\n[Your name]"
+            },
+            'Scheduling': {
+                'Formal': "Dear [Title Lastname],\n\nI would like to schedule a meeting to discuss [Topic].\n\nCould we arrange a brief call for either Tuesday at 10:00 AM or Wednesday at 2:00 PM?\n\nKind regards,\n[Your name]",
+                'Neutral': "Hi [Name],\n\nLet's set up some time to go over [Topic].\n\nAre you available for a quick chat this Thursday at 11:00 AM or Friday at 3:00 PM?\n\nBest,\n[Your name]",
+                'Friendly': "Hey [Name],\n\nWould love to catch up and talk about [Topic].\n\nGot 15 mins this week? Maybe Thursday morning before noon?\n\nCheers,\n[Your name]"
+            },
+            'Request': {
+                'Formal': "Dear [Title Lastname],\n\nI hope this email finds you well.\nI am writing to formally request access to the [Document/Resource].\n\nCould you please provide this by [day/time]?\n\nKind regards,\n[Your name]",
+                'Neutral': "Hi [Name],\n\nI need to take a look at the [Document/Resource] for our upcoming review.\n\nCan you send that over to me by [day/time]?\n\nBest,\n[Your name]",
+                'Friendly': "Hey [Name],\n\nHope you're having a good week!\nJust wondering if you could share the [Document/Resource] with me.\n\nCould I get it before [day/time]?\n\nCheers,\n[Your name]"
+            },
+            'Update': {
+                'Formal': "Dear [Title Lastname],\n\nI am writing to provide a status update on [Project/Task].\nWe have successfully completed [Milestone].\n\nCould you please review the attached summary by [day/time]?\n\nKind regards,\n[Your name]",
+                'Neutral': "Hi [Name],\n\nHere is a quick progress update on [Project/Task].\nEverything is on track and [Milestone] is done.\n\nCan you check the attached notes by [day/time]?\n\nBest,\n[Your name]",
+                'Friendly': "Hey [Name],\n\nGreat news on [Project/Task] – we've finished [Milestone]!\n\nWould you mind taking a quick look at the attached file before [day/time]?\n\nCheers,\n[Your name]"
+            },
+            'Apology': {
+                'Formal': "Dear [Title Lastname],\n\nPlease accept my sincere apologies for the delay regarding [Issue].\nWe are taking immediate steps to ensure this does not happen again.\n\nCould we schedule a brief review call by [day/time]?\n\nKind regards,\n[Your name]",
+                'Neutral': "Hi [Name],\n\nI am sorry for the mix-up with [Issue].\nI have already corrected it and sent the updated files.\n\nCan you confirm receipt by [day/time]?\n\nBest,\n[Your name]",
+                'Friendly': "Hey [Name],\n\nSo sorry about the confusion with [Issue]!\nMy mistake, I've just fixed it on my end.\n\nCould you check if it looks good to you by [day/time]?\n\nCheers,\n[Your name]"
+            }
+        };
+
+        // State
+        let currentTone = 'Neutral';
+        let currentCategory = 'General';
+        let checklistPassed = false;
+
+        // DOM Elements
+        const subjectInput = document.getElementById('email-subject');
+        const bodyInput = document.getElementById('email-body');
+        const badge = document.getElementById('category-badge');
+        const checklistContainer = document.getElementById('checklist-container');
+        const charCountEl = document.getElementById('char-count');
+        const wordCountEl = document.getElementById('word-count');
+        const sendBtn = document.getElementById('send-btn');
+        const appArea = document.getElementById('app-area');
+        const banner = document.getElementById('success-banner');
+
+        // Checklist Criteria Definition
+        const criteriaList = [
+            { id: 'subj-len', label: 'Subject 20-60 chars', check: () => subjectInput.value.length >= 20 && subjectInput.value.length <= 60 },
+            { id: 'greeting', label: 'Greeting detected', check: () => /^(hi|hello|dear|hey|good morning|good afternoon)/i.test(bodyInput.value.trim()) },
+            { id: 'closing', label: 'Closing detected', check: () => /(best|regards|cheers|sincerely|thanks|thank you|kind regards)/i.test(bodyInput.value.slice(-60)) },
+            { id: 'ask', label: 'Clear ask or deadline', check: () => /\?|by (monday|tuesday|wednesday|thursday|friday|today|tomorrow|noon)|before/i.test(bodyInput.value) },
+            { id: 'paragraphs', label: 'Paragraphs 1-3', check: () => {
+                const text = bodyInput.value.trim();
+                if(!text) return false;
+                const blocks = text.split(/\n\s*\n/).filter(p => p.trim() !== '').length;
+                return blocks >= 1 && blocks <= 4; // 4 because signature usually adds an extra block
+            }},
+            { id: 'words', label: 'Word count > 15', check: () => bodyInput.value.trim().split(/\s+/).filter(w => w.length > 0).length > 15 }
+        ];
+
+        // Core Functions
+        function setTone(tone, btnElement) {
+            currentTone = tone;
+            document.querySelectorAll('.tone-chip').forEach(btn => btn.classList.remove('selected'));
+            btnElement.classList.add('selected');
+            validateEmail();
+        }
+
+        function rollSubject() {
+            const randomObj = randomSubjects[Math.floor(Math.random() * randomSubjects.length)];
+            subjectInput.value = randomObj.text;
+            
+            // Set internal state to match the rolled category
+            currentCategory = randomObj.category;
+            
+            badge.innerText = currentCategory;
+            badge.classList.remove('hidden');
+            validateEmail();
+        }
+
+        function insertTemplate() {
+            // Dynamically injects template based on both Category and Tone
+            bodyInput.value = templates[currentCategory][currentTone];
+            validateEmail();
+        }
+
+        function clearForm() {
+            subjectInput.value = '';
+            bodyInput.value = '';
+            currentCategory = 'General'; // Reset to default general template
+            badge.classList.add('hidden');
+            validateEmail();
+        }
+
+        function sendEmail() {
+            if(!checklistPassed) return;
+            
+            // Trigger immersive success screen (Simulated sending, without opening external apps)
+            appArea.classList.add('hidden');
+            banner.classList.remove('hidden');
+        }
+
+        function resetApp() {
+            clearForm();
+            banner.classList.add('hidden');
+            appArea.classList.remove('hidden');
+        }
+
+        // Live Checker Engine
+        function validateEmail() {
+            let allPassed = true;
+            let html = '';
+
+            criteriaList.forEach(c => {
+                const passed = c.check();
+                if (!passed) allPassed = false;
+                
+                // SVG logic: Gray dot if false, Green check if true
+                const icon = passed 
+                    ? `<svg class="w-5 h-5 text-green-600 flex-shrink-0 animate-pop" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>`
+                    : `<svg class="w-5 h-5 text-gray-300 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"></circle></svg>`;
+                
+                const textClass = passed ? "text-green-700 font-semibold" : "text-gray-600 font-medium";
+                const bgClass = passed ? "bg-green-50 border-green-200 shadow-sm" : "bg-white border-gray-100";
+
+                html += `
+                    <div class="flex items-center gap-3 p-3 rounded-lg border ${bgClass} transition-colors duration-300">
+                        ${icon}
+                        <span class="${textClass} text-sm">${c.label}</span>
+                    </div>
+                `;
+            });
+
+            checklistContainer.innerHTML = html;
+            checklistPassed = allPassed;
+
+            // Update metrics
+            charCountEl.innerText = subjectInput.value.length;
+            const words = bodyInput.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+            wordCountEl.innerText = bodyInput.value.trim() === '' ? 0 : words;
+
+            // Button State
+            if(allPassed) {
+                sendBtn.disabled = false;
+                sendBtn.classList.remove('bg-gray-300', 'cursor-not-allowed', 'text-white');
+                sendBtn.classList.add('bg-navy', 'hover:bg-[#152844]', 'text-gold', 'shadow-md');
+                sendBtn.innerHTML = `
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    Send Email
+                `;
+            } else {
+                sendBtn.disabled = true;
+                sendBtn.classList.add('bg-gray-300', 'cursor-not-allowed', 'text-white');
+                sendBtn.classList.remove('bg-navy', 'hover:bg-[#152844]', 'text-gold', 'shadow-md');
+                sendBtn.innerHTML = `
+                    <svg class="w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    Pass Checklist to Send
+                `;
+            }
+        }
+
+        // Event Listeners for real-time checking
+        subjectInput.addEventListener('input', validateEmail);
+        bodyInput.addEventListener('input', validateEmail);
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', validateEmail);
+
+    </script>
+</body>
+</html>
