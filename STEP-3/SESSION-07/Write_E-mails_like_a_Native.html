@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Business Email Mastery</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de fondo Premium */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Estilos para Tabs */
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background-color: #0B192C;
+            color: #D4AF37;
+            border-left: 4px solid #D4AF37;
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilos para el Mini Quiz (reutilizados y optimizados) */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .question-card.success-state {
+            background-color: #F0FDF4;
+            border-color: #A7F3D0;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative flex flex-col md:flex-row min-h-[800px]">
+        
+        <!-- Sidebar de Navegación (Tabs) -->
+        <aside class="w-full md:w-64 bg-gray-50 border-r border-gray-200 flex flex-col z-10 flex-shrink-0">
+            <div class="p-6 bg-navy text-center border-b-[4px] border-gold relative overflow-hidden">
+                <div class="bg-pattern"></div>
+                <h2 class="text-xl font-serif text-white relative z-10">Email Mastery</h2>
+                <p class="text-xs text-gold uppercase tracking-widest mt-1 relative z-10">Native Writer</p>
+            </div>
+            
+            <nav class="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible p-4 gap-2 flex-grow">
+                <button onclick="openTab('anatomy')" class="tab-btn active text-left px-4 py-3 rounded-lg text-sm md:text-base text-gray-600 hover:bg-gray-100 whitespace-nowrap md:whitespace-normal">
+                    1. Anatomy & Types
+                </button>
+                <button onclick="openTab('tone')" class="tab-btn text-left px-4 py-3 rounded-lg text-sm md:text-base text-gray-600 hover:bg-gray-100 whitespace-nowrap md:whitespace-normal">
+                    2. Tone & Subject
+                </button>
+                <button onclick="openTab('templates')" class="tab-btn text-left px-4 py-3 rounded-lg text-sm md:text-base text-gray-600 hover:bg-gray-100 whitespace-nowrap md:whitespace-normal">
+                    3. Templates
+                </button>
+                <button onclick="openTab('rules')" class="tab-btn text-left px-4 py-3 rounded-lg text-sm md:text-base text-gray-600 hover:bg-gray-100 whitespace-nowrap md:whitespace-normal">
+                    4. Rules & Etiquette
+                </button>
+                <button onclick="openTab('quiz')" class="tab-btn text-left px-4 py-3 rounded-lg text-sm md:text-base text-gray-600 hover:bg-gray-100 whitespace-nowrap md:whitespace-normal">
+                    5. Knowledge Check
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <div class="flex-1 p-6 md:p-10 lg:p-12 overflow-y-auto bg-white relative">
+            
+            <!-- TAB 1: Anatomy & Types -->
+            <section id="anatomy" class="tab-content active">
+                <div class="mb-10">
+                    <h1 class="text-4xl font-serif text-navy mb-4">Anatomy of a Great Email</h1>
+                    <p class="text-gray-600 mb-8 text-lg">Understand the core structure before you start typing.</p>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 shadow-sm relative overflow-hidden">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-gold"></div>
+                        
+                        <div class="space-y-4">
+                            <!-- Email Structure Mockup -->
+                            <div class="bg-white p-4 rounded border border-gray-200">
+                                <p class="text-sm text-gray-500 font-semibold mb-1 uppercase tracking-wider">Subject</p>
+                                <p class="text-navy font-medium">Schedule for Thursday demo</p>
+                            </div>
+                            
+                            <div class="bg-white p-5 rounded border border-gray-200 space-y-4">
+                                <div>
+                                    <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded mb-1 font-semibold uppercase">Greeting</span>
+                                    <p class="text-gray-800">Hi Maria,</p>
+                                </div>
+                                
+                                <div>
+                                    <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded mb-1 font-semibold uppercase">Hook / Context</span>
+                                    <p class="text-gray-800">Thanks for your reply. As discussed, here is the 20 min plan for Thursday.</p>
+                                </div>
+                                
+                                <div class="bg-yellow-50 p-3 rounded-md border border-yellow-200">
+                                    <span class="inline-block bg-gold text-navy text-xs px-2 py-1 rounded mb-1 font-bold uppercase">Ask / Action (CTA)</span>
+                                    <p class="text-navy font-medium">Could you confirm the 10:30 am slot and the 2 documents attached by today?</p>
+                                </div>
+                                
+                                <div>
+                                    <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mb-1 font-semibold uppercase">Closing & Signature</span>
+                                    <p class="text-gray-800">Best,<br>Leo</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex items-start gap-3 bg-navy p-4 rounded-lg">
+                            <svg class="w-6 h-6 text-gold flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <p class="text-white text-sm">
+                                <strong class="text-gold">Golden Rule:</strong> Keep the CTA clear = ONE ask per email. Always add a deadline and an owner.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-3xl font-serif text-navy mb-6">Types of Emails</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <div class="border border-gray-200 p-5 rounded-lg border-l-[4px] border-l-navy hover:shadow-md transition-shadow">
+                            <h3 class="font-bold text-navy text-lg mb-2">Request</h3>
+                            <p class="text-sm text-gray-600 mb-3">Info, documents, or approval.</p>
+                            <span class="inline-block bg-navy text-gold text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-sm">Be clear and specific</span>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg border-l-[4px] border-l-gold hover:shadow-md transition-shadow">
+                            <h3 class="font-bold text-navy text-lg mb-2">Scheduling</h3>
+                            <p class="text-sm text-gray-600 mb-3">Propose 2 or 3 specific time slots.</p>
+                            <span class="inline-block bg-navy text-gold text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-sm">Include Timezones</span>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg border-l-[4px] border-l-navy hover:shadow-md transition-shadow">
+                            <h3 class="font-bold text-navy text-lg mb-2">Update</h3>
+                            <p class="text-sm text-gray-600 mb-3">Status, next steps, blockers.</p>
+                            <span class="inline-block bg-navy text-gold text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-sm">Keep it short & timely</span>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg border-l-[4px] border-l-gold hover:shadow-md transition-shadow">
+                            <h3 class="font-bold text-navy text-lg mb-2">Apology</h3>
+                            <p class="text-sm text-gray-600 mb-3">Own it, fix it, prevent it.</p>
+                            <span class="inline-block bg-navy text-gold text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-sm">Don't make excuses</span>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg border-l-[4px] border-l-navy hover:shadow-md transition-shadow">
+                            <h3 class="font-bold text-navy text-lg mb-2">Complaint</h3>
+                            <p class="text-sm text-gray-600 mb-3">Facts, effect, expected action.</p>
+                            <span class="inline-block bg-navy text-gold text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-sm">Stay polite & precise</span>
+                        </div>
+
+                        <div class="border border-gray-200 p-5 rounded-lg border-l-[4px] border-l-gold hover:shadow-md transition-shadow">
+                            <h3 class="font-bold text-navy text-lg mb-2">Networking</h3>
+                            <p class="text-sm text-gray-600 mb-3">Short intro + value proposition.</p>
+                            <span class="inline-block bg-navy text-gold text-[10px] font-bold px-3 py-1.5 rounded-md uppercase tracking-wider shadow-sm">Follow up if no response</span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Tone & Subject -->
+            <section id="tone" class="tab-content">
+                <div class="mb-12">
+                    <h1 class="text-4xl font-serif text-navy mb-4">Mastering the Tone</h1>
+                    <p class="text-gray-600 mb-8 text-lg">Adapt your language based on your relationship with the recipient.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Formal -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                            <div class="bg-navy py-3 px-4 text-center">
+                                <h3 class="text-white font-serif text-xl tracking-wide">Formal</h3>
+                            </div>
+                            <div class="p-5 space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Greeting</span>
+                                    <p class="text-gray-800 font-medium">Dear Ms. Chen,</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Opener</span>
+                                    <p class="text-gray-800 font-medium italic">"I hope this message finds you well."</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">The Ask</span>
+                                    <p class="text-gray-800 font-medium">"Could you please share the signed agreement by Friday?"</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Closing</span>
+                                    <p class="text-gray-800 font-medium">Kind regards,</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Neutral -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden relative">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gold"></div>
+                            <div class="bg-gray-50 py-3 px-4 text-center border-b border-gray-200">
+                                <h3 class="text-navy font-serif text-xl tracking-wide">Neutral</h3>
+                            </div>
+                            <div class="p-5 space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Greeting</span>
+                                    <p class="text-gray-800 font-medium">Hi Daniel,</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Opener</span>
+                                    <p class="text-gray-800 font-medium italic">"Thanks for your note."</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">The Ask</span>
+                                    <p class="text-gray-800 font-medium">"Can you confirm the delivery date?"</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Closing</span>
+                                    <p class="text-gray-800 font-medium">Best,</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Friendly -->
+                        <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden relative">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-green-500"></div>
+                            <div class="bg-gray-50 py-3 px-4 text-center border-b border-gray-200">
+                                <h3 class="text-navy font-serif text-xl tracking-wide">Friendly</h3>
+                            </div>
+                            <div class="p-5 space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Greeting</span>
+                                    <p class="text-gray-800 font-medium">Hey team,</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Opener</span>
+                                    <p class="text-gray-800 font-medium italic">"Quick update on the launch."</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">The Ask</span>
+                                    <p class="text-gray-800 font-medium">"Mind sending the photos by noon?"</p>
+                                </div>
+                                <hr class="border-gray-100">
+                                <div>
+                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-wider">Closing</span>
+                                    <p class="text-gray-800 font-medium">Cheers,</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subject Lines -->
+                <div class="bg-[#121212] rounded-xl p-8 shadow-lg border-l-[6px] border-l-gold text-white relative overflow-hidden">
+                    <div class="bg-pattern opacity-10"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-2xl font-serif text-gold mb-2">Subject Lines That Work</h2>
+                        <p class="text-gray-300 text-sm mb-6">Keep it under 60 characters. Put the action word first.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-3 border-b border-gray-700 pb-2">Action</h4>
+                                <ul class="space-y-2 text-sm text-gray-300">
+                                    <li><span class="text-gold">›</span> Approval needed by [Fri]</li>
+                                    <li><span class="text-gold">›</span> Confirm your slot 10:30 or 14:00</li>
+                                    <li><span class="text-gold">›</span> Docs for review attached</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-3 border-b border-gray-700 pb-2">Update</h4>
+                                <ul class="space-y-2 text-sm text-gray-300">
+                                    <li><span class="text-gold">›</span> Project X - weekly update</li>
+                                    <li><span class="text-gold">›</span> Status + next steps</li>
+                                    <li><span class="text-gold">›</span> Summary of today's call</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-3 border-b border-gray-700 pb-2">Relationship</h4>
+                                <ul class="space-y-2 text-sm text-gray-300">
+                                    <li><span class="text-gold">›</span> Great to connect at [event]</li>
+                                    <li><span class="text-gold">›</span> Thanks for your help with [topic]</li>
+                                    <li><span class="text-gold">›</span> Intro to [Name] re [topic]</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: Templates -->
+            <section id="templates" class="tab-content">
+                <h1 class="text-4xl font-serif text-navy mb-4">Templates You Can Reuse</h1>
+                <p class="text-gray-600 mb-8 text-lg">Copy, paste, and adapt these proven structures.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Template 1: Request -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Request</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Request for [document]</p>
+                            <p class="mb-2">Hi [Name],</p>
+                            <p class="mb-2">Could you please share [document] by [day] so we can [reason]?</p>
+                            <p class="mb-2">Thanks in advance.</p>
+                            <p>Best,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                    <!-- Template 2: Scheduling -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Scheduling</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Meeting regarding [topic]</p>
+                            <p class="mb-2">Hi [Name],</p>
+                            <p class="mb-2">I'd like to schedule a quick call to discuss [topic]. Would either of these times work for you?</p>
+                            <ul class="list-disc pl-4 mb-2 text-gray-600">
+                                <li>[Option 1: Day, Time, Timezone]</li>
+                                <li>[Option 2: Day, Time, Timezone]</li>
+                            </ul>
+                            <p class="mb-2">Let me know!</p>
+                            <p>Best,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                    <!-- Template 3: Update -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Update</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Update: [Project Name]</p>
+                            <p class="mb-2">Hi Team,</p>
+                            <p class="mb-2">Quick update on [Project]:</p>
+                            <ul class="list-disc pl-4 mb-2 text-gray-600">
+                                <li><strong>Done:</strong> [Action completed]</li>
+                                <li><strong>Next:</strong> [Next step]</li>
+                                <li><strong>Blockers:</strong> [Any issues, or "None"]</li>
+                            </ul>
+                            <p>Thanks,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                    <!-- Template 4: Apology -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Apology</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Apologies for [issue]</p>
+                            <p class="mb-2">Hi [Name],</p>
+                            <p class="mb-2">I apologize for the confusion regarding [issue]. I realize this caused a delay.</p>
+                            <p class="mb-2">I have now [action taken to fix it]. To ensure this doesn't happen again, I will [preventive action].</p>
+                            <p class="mb-2">Thank you for your patience.</p>
+                            <p>Best,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                    <!-- Template 5: Complaint -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Complaint</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Issue with [Product/Service/Invoice #]</p>
+                            <p class="mb-2">Dear [Name/Support Team],</p>
+                            <p class="mb-2">I am writing to report an issue with [Product/Service]. On [Date], [describe the factual issue].</p>
+                            <p class="mb-2">Because of this, [effect it had].</p>
+                            <p class="mb-2">Could you please [expected action, e.g., refund/replace/investigate] by [Date]?</p>
+                            <p>Regards,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                    <!-- Template 6: Networking -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Networking</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Following up from [Event Name]</p>
+                            <p class="mb-2">Hi [Name],</p>
+                            <p class="mb-2">It was great meeting you at [Event] yesterday. I really enjoyed our chat about [Topic].</p>
+                            <p class="mb-2">I'd love to stay in touch and learn more about your work at [Company]. Let me know if you ever have 15 minutes for a virtual coffee.</p>
+                            <p>Best,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                    <!-- Template 7 (Ooo) -->
+                    <div class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden shadow-sm flex flex-col h-full">
+                        <div class="bg-gray-200 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-navy uppercase tracking-wider">Out of Office</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-400"></div><div class="w-2 h-2 rounded-full bg-yellow-400"></div><div class="w-2 h-2 rounded-full bg-green-400"></div>
+                            </div>
+                        </div>
+                        <div class="p-4 font-mono text-xs text-gray-800 leading-relaxed flex-grow">
+                            <p class="mb-2"><span class="text-gray-500">Subject:</span> Out of office: [Your Name]</p>
+                            <p class="mb-2">Hi,</p>
+                            <p class="mb-2">I am currently out of the office with limited access to email. I will return on [Date].</p>
+                            <p class="mb-2">For urgent matters, please contact [Colleague Name] at [Colleague Email].</p>
+                            <p class="mb-2">I will review my emails upon my return.</p>
+                            <p>Best,<br>[Your name]</p>
+                        </div>
+                    </div>
+
+                     <!-- Signature Panel -->
+                    <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-white rounded-lg border border-gold p-6 shadow-md relative overflow-hidden mt-4">
+                        <div class="absolute right-0 top-0 w-16 h-16 bg-gold opacity-10 rounded-bl-full"></div>
+                        <h3 class="text-lg font-serif text-navy mb-4 border-b border-gray-100 pb-2">Professional Signature Example</h3>
+                        
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <div class="bg-gray-50 p-4 border-l-[3px] border-navy flex-1 w-full">
+                                <p class="text-gray-800 text-sm">Best,</p>
+                                <p class="font-bold text-navy mt-1">Eleanor Vance</p>
+                                <p class="text-xs text-gray-500">Director of Operations | Premium English</p>
+                                <p class="text-xs text-gold font-medium mt-1">+1 800 555 0199 | eleanor@premiumenglish.com</p>
+                            </div>
+                            
+                            <div class="flex-1">
+                                <ul class="space-y-2">
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                        Keep it 3 or 4 lines max.
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <svg class="w-4 h-4 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        Avoid heavy images or inspirational quotes.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- TAB 4: Rules & Etiquette -->
+            <section id="rules" class="tab-content">
+                <h1 class="text-4xl font-serif text-navy mb-8">Rules & Etiquette</h1>
+                
+                <!-- Do vs Don't -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    
+                    <!-- DOs -->
+                    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                        <div class="bg-green-50 border-b border-green-100 py-3 px-4 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <h3 class="font-serif text-xl text-green-800">DO</h3>
+                        </div>
+                        <ul class="p-5 space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 mt-1">✔</span>
+                                <span class="text-gray-700 text-sm">Clear subject with one action.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 mt-1">✔</span>
+                                <span class="text-gray-700 text-sm">One topic per email.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 mt-1">✔</span>
+                                <span class="text-gray-700 text-sm">Short paragraphs (2-3 lines).</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 mt-1">✔</span>
+                                <span class="text-gray-700 text-sm">Use dates and time zones: <em>Thu 12 Dec, 10:30 am ET</em>.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-green-500 mr-2 mt-1">✔</span>
+                                <span class="text-gray-700 text-sm">Name files clearly: <em>invoice_2025-10-04.pdf</em>.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- DON'Ts -->
+                    <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden">
+                        <div class="bg-red-50 border-b border-red-100 py-3 px-4 flex items-center gap-2">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <h3 class="font-serif text-xl text-red-800">DON'T</h3>
+                        </div>
+                        <ul class="p-5 space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2 mt-1">✘</span>
+                                <span class="text-gray-700 text-sm">Walls of text or multiple asks.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2 mt-1">✘</span>
+                                <span class="text-gray-700 text-sm">ALL CAPS or too many exclamation marks.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2 mt-1">✘</span>
+                                <span class="text-gray-700 text-sm">Ambiguous words: <em>soon, later, ASAP</em>.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2 mt-1">✘</span>
+                                <span class="text-gray-700 text-sm">Hidden requests inside long threads.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-red-500 mr-2 mt-1">✘</span>
+                                <span class="text-gray-700 text-sm">Attachments with generic names (e.g. <em>document1.pdf</em>).</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Etiquette Panel -->
+                <div class="bg-navy p-8 rounded-xl shadow-lg border-t-[4px] border-gold text-white">
+                    <h2 class="text-2xl font-serif text-gold mb-6">Etiquette, CC & Attachments</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-gold font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Response Time</h4>
+                                <p class="text-sm text-gray-300">Same day for internal emails, 24-48h for external clients.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-gold font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold mb-1">CC vs BCC</h4>
+                                <p class="text-sm text-gray-300">CC is for visibility. Use BCC for large lists or to drop a person after an intro to spare their inbox.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-gold font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Attachments</h4>
+                                <p class="text-sm text-gray-300">Call them out in the body: <em>"2 files attached: contract.pdf and plan.docx."</em></p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0 text-gold font-bold">4</div>
+                            <div>
+                                <h4 class="font-bold mb-1">Thread Discipline</h4>
+                                <p class="text-sm text-gray-300">When changing the topic completely, start a new thread with a new subject line.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: Knowledge Check (Mini Quiz) -->
+            <section id="quiz" class="tab-content">
+                
+                <div class="bg-[#0B192C] inline-block px-6 py-2 rounded-full shadow-md mb-8">
+                    <span class="text-gold font-serif italic text-xl tracking-wide">Final Checklist: Knowledge Check</span>
+                </div>
+
+                <p class="text-gray-600 mb-6 font-medium">Select the best option based on the Native Email Etiquette you just learned.</p>
+                
+                <div id="quiz-container" class="space-y-6">
+                    <!-- Las preguntas se renderizan aquí mediante JS -->
+                </div>
+                
+                <!-- Banner de Celebración Interno -->
+                <div id="success-banner" class="hidden w-full mt-8 bg-navy border-2 border-gold rounded-xl p-8 relative shadow-lg text-center">
+                    <div class="w-16 h-16 bg-transparent rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-12 h-12 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-serif text-gold mb-2">You are ready to hit Send!</h2>
+                    <p class="text-gray-300 text-sm">You've mastered the anatomy, tone, and etiquette of professional emails.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+    
+    <!-- Pie de página -->
+    <footer class="w-full max-w-6xl bg-[#121212] py-5 px-8 mt-6 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <!-- Lógica del Dashboard y Quiz -->
+    <script>
+        // --- 1. Lógica de Pestañas (Tabs) ---
+        function openTab(tabId) {
+            // Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // Quitar clase active de los botones
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            
+            // Activar el tab seleccionado
+            document.getElementById(tabId).classList.add('active');
+            
+            // Encontrar el botón que fue clickeado (por su onclick attribute)
+            const clickedBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick') === `openTab('${tabId}')`);
+            if(clickedBtn) clickedBtn.classList.add('active');
+        }
+
+        // --- 2. Lógica del Mini Quiz (Híbrido) ---
+        const quizData = [
+            {
+                id: 1,
+                question: "If you want to remove someone from an email thread politely after an introduction, you should use:",
+                options: [
+                    "CC (Carbon Copy)",
+                    "BCC (Blind Carbon Copy)"
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 2,
+                question: "Which subject line is better?",
+                options: [
+                    "Can you send me the files ASAP?",
+                    "Approval needed by Friday: Q3 Report"
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 3,
+                question: "How many asks (Call to Actions) should you include in a single email?",
+                options: [
+                    "Just one clear ask.",
+                    "As many as needed to save time."
+                ],
+                correctIndex: 0
+            }
+        ];
+
+        let score = 0;
+        const totalQuestions = quizData.length;
+        const container = document.getElementById('quiz-container');
+
+        function renderQuiz() {
+            let htmlContent = '';
+
+            quizData.forEach((q, index) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <button 
+                            class="chip-btn w-full text-left px-5 py-3 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium shadow-sm"
+                            onclick="handleSelection(${index}, ${optIdx}, this)"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                htmlContent += `
+                    <div id="card-${index}" class="question-card bg-gray-50 p-5 rounded-xl border border-gray-200 relative overflow-hidden">
+                        <div class="flex justify-between items-start gap-4 mb-4">
+                            <h3 class="text-base font-semibold text-navy leading-relaxed">
+                                <span class="text-gold mr-1">${q.id}.</span> ${q.question}
+                            </h3>
+                            <div id="icon-${index}" class="hidden flex-shrink-0 w-6 h-6 mt-1">
+                                <svg class="w-full h-full text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2" id="options-${index}">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function handleSelection(questionIndex, selectedOptionIndex, buttonElement) {
+            const questionData = quizData[questionIndex];
+            const card = document.getElementById(`card-${questionIndex}`);
+            const optionsContainer = document.getElementById(`options-${questionIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            if (selectedOptionIndex === questionData.correctIndex) {
+                // Éxito
+                buttonElement.classList.add('selected');
+                buttons.forEach(btn => btn.disabled = true);
+                card.classList.add('success-state');
+                const icon = document.getElementById(`icon-${questionIndex}`);
+                icon.classList.remove('hidden');
+                icon.classList.add('animate-pop');
+
+                score++;
+                if (score === totalQuestions) {
+                    setTimeout(() => {
+                        const banner = document.getElementById('success-banner');
+                        banner.classList.remove('hidden');
+                        banner.classList.add('animate-pop');
+                    }, 400);
+                }
+            } else {
+                // Error
+                buttonElement.classList.add('animate-shake');
+                setTimeout(() => {
+                    buttonElement.classList.remove('animate-shake');
+                }, 400);
+            }
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
