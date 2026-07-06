@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Interactive Drill</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de fondo Premium */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Estilos críticos para Chips interactivos */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        /* Selected state corporativo (Supera el hover nativo) */
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        /* Hueco dinámico en el texto */
+        .blank-space {
+            display: inline-block;
+            min-width: 160px;
+            border-bottom: 2px dashed #9ca3af;
+            text-align: center;
+            color: #0B192C;
+            font-weight: 700;
+            padding: 0 10px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+        .blank-space.filled {
+            border-bottom-style: solid;
+            border-bottom-color: #D4AF37;
+            color: #0B192C;
+            background-color: rgba(212, 175, 55, 0.1); /* Resalte dorado sutil al llenarse */
+            border-radius: 4px 4px 0 0;
+        }
+
+        /* Animaciones (Keyframes) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
+        }
+        .animate-fade-out {
+            animation: fadeOut 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        /* Contenedor de validación dinámica */
+        .question-card.success-state {
+            background-color: #F0FDF4; 
+            border-color: #A7F3D0;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <!-- Contenedor Principal max-w-5xl -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative flex flex-col min-h-[650px]">
+        
+        <!-- Encabezado de Alto Impacto -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10 flex-shrink-0">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Interactive Drill</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">For, Since, Yet & Already Challenge</h1>
+                <p class="text-gray-200 font-sans text-lg max-w-2xl mx-auto">
+                    Choose the correct word to complete the sentence.
+                </p>
+            </div>
+        </header>
+
+        <!-- Contenedor Envolvente Dinámico (Aquí alternamos entre el Juego y el Banner Final) -->
+        <div id="dynamic-wrapper" class="flex-1 p-8 md:p-12 flex flex-col relative bg-gray-50">
+            
+            <!-- ====== ÁREA DE JUEGO (Visible por defecto) ====== -->
+            <div id="game-area" class="w-full h-full flex flex-col items-center justify-center flex-1">
+                
+                <!-- Barra de Progreso y Contador -->
+                <div class="w-full max-w-3xl mb-10">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-bold text-navy uppercase tracking-wider">Mastery Progress</span>
+                        <span id="question-counter" class="text-sm font-bold text-gold bg-navy px-3 py-1 rounded-full">1 / 10</span>
+                    </div>
+                    <div class="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
+                        <div id="progress-bar" class="h-full bg-gold transition-all duration-500 ease-out" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <!-- Contenedor de la Pregunta Activa -->
+                <div id="active-question-container" class="w-full max-w-3xl flex-1 flex flex-col justify-center min-h-[250px]">
+                    <!-- La pregunta se inyecta aquí -->
+                </div>
+
+            </div>
+
+            <!-- ====== BANNER DE CELEBRACIÓN (Oculto por defecto, ocupa TODO el #dynamic-wrapper) ====== -->
+            <div id="success-banner" class="hidden absolute inset-0 bg-navy flex flex-col items-center justify-center p-8 z-20">
+                <div class="bg-pattern"></div>
+                <div class="relative z-10 flex flex-col items-center text-center max-w-2xl">
+                    <div class="w-24 h-24 bg-gold rounded-full flex items-center justify-center mb-6 animate-pop">
+                        <svg class="w-12 h-12 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif text-gold mb-4 tracking-wide">Challenge Completed!</h2>
+                    <p class="text-white text-xl font-medium leading-relaxed">
+                        Excellent work. You have successfully mastered the use of <span class="text-gold">For, Since, Yet & Already</span> in context.
+                    </p>
+                    <div class="w-32 h-1 bg-gold mt-8 rounded-full opacity-50"></div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Pie de página Corporativo Premium English -->
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-8 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <!-- Lógica del Motor de Evaluación -->
+    <script>
+        // Data del Ejercicio parseada textualmente del PDF
+        // Las opciones siempre son las 4 palabras clave del título
+        const globalOptions = ["for", "since", "already", "yet"];
+
+        const quizData = [
+            { id: 1, parts: ["I haven't finished the project", "."], correct: "yet" },
+            { id: 2, parts: ["We've lived in this town", "2019."], correct: "since" },
+            { id: 3, parts: ["I've", "finished my homework."], correct: "already" },
+            { id: 4, parts: ["She hasn't called me", "."], correct: "yet" },
+            { id: 5, parts: ["He has worked here", "five years."], correct: "for" },
+            { id: 6, parts: ["We haven't eaten dinner", "."], correct: "yet" },
+            { id: 7, parts: ["They've been friends", "childhood."], correct: "since" },
+            { id: 8, parts: ["I've", "told you that twice!"], correct: "already" },
+            { id: 9, parts: ["She's lived abroad", "two years."], correct: "for" },
+            { id: 10, parts: ["Have you done your homework", "?"], correct: "yet" }
+        ];
+
+        let currentIndex = 0;
+        const totalQuestions = quizData.length;
+
+        // Referencias al DOM
+        const gameArea = document.getElementById('game-area');
+        const activeContainer = document.getElementById('active-question-container');
+        const progressBar = document.getElementById('progress-bar');
+        const questionCounter = document.getElementById('question-counter');
+        const successBanner = document.getElementById('success-banner');
+
+        function loadQuestion(index) {
+            // Actualizar UI de progreso
+            questionCounter.innerText = `${index + 1} / ${totalQuestions}`;
+            progressBar.style.width = `${((index) / totalQuestions) * 100}%`;
+
+            const q = quizData[index];
+
+            // Renderizar Opciones (Chips Grandes para Proyección)
+            let optionsHtml = '';
+            globalOptions.forEach((opt) => {
+                optionsHtml += `
+                    <button 
+                        class="chip-btn flex-1 min-w-[140px] text-center px-6 py-4 rounded-xl border-2 border-gray-200 text-gray-800 font-bold tracking-wider uppercase text-base shadow-sm"
+                        onclick="handleSelection(${index}, this, '${opt}')"
+                    >
+                        ${opt}
+                    </button>
+                `;
+            });
+
+            // Construir la estructura visual con espacio dinámico
+            const htmlContent = `
+                <div id="card-${index}" class="question-card bg-white p-10 md:p-14 rounded-2xl border border-gray-200 shadow-lg relative overflow-hidden animate-fade-in w-full">
+                    
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="w-12 h-12 rounded-full bg-navy text-gold font-bold flex items-center justify-center flex-shrink-0 text-xl shadow-inner border-2 border-gold">
+                            ${q.id}
+                        </div>
+                        <!-- Icono de éxito oculto -->
+                        <div id="icon-${index}" class="hidden flex-shrink-0 w-12 h-12">
+                            <svg class="w-full h-full text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                    </div>
+
+                    <!-- Texto Dinámico con Hueco (Tamaño de fuente ajustado) -->
+                    <div class="text-xl md:text-2xl font-medium text-navy leading-relaxed mb-12 text-center md:text-left min-h-[100px] flex items-center justify-center md:justify-start flex-wrap gap-y-4">
+                        <span>${q.parts[0]}</span>
+                        <span id="blank-${index}" class="blank-space text-transparent select-none">____</span>
+                        <span>${q.parts[1]}</span>
+                    </div>
+                    
+                    <!-- Botones de Opciones -->
+                    <div class="flex flex-row flex-wrap justify-center gap-4 mt-4" id="options-${index}">
+                        ${optionsHtml}
+                    </div>
+                </div>
+            `;
+
+            activeContainer.innerHTML = htmlContent;
+        }
+
+        function handleSelection(qIndex, btnElement, selectedWord) {
+            const q = quizData[qIndex];
+            const card = document.getElementById(`card-${qIndex}`);
+            const blankSpace = document.getElementById(`blank-${qIndex}`);
+            const optionsContainer = document.getElementById(`options-${qIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            if (selectedWord === q.correct) {
+                // CORRECTO
+                
+                // 1. Estilos del botón (¡El !important en CSS asegura que cambie al instante!)
+                btnElement.classList.add('selected');
+                buttons.forEach(btn => btn.disabled = true);
+                
+                // 2. Llenar el espacio en blanco dinámicamente con la palabra
+                blankSpace.innerText = selectedWord;
+                blankSpace.classList.add('filled');
+                blankSpace.classList.remove('text-transparent');
+
+                // 3. Feedback visual del contenedor
+                card.classList.add('success-state');
+                const icon = document.getElementById(`icon-${qIndex}`);
+                icon.classList.remove('hidden');
+                icon.classList.add('animate-pop');
+
+                // 4. Transición a la siguiente pregunta (delay para lectura)
+                setTimeout(() => {
+                    card.classList.add('animate-fade-out');
+                    
+                    setTimeout(() => {
+                        currentIndex++;
+                        if (currentIndex < totalQuestions) {
+                            loadQuestion(currentIndex);
+                        } else {
+                            // Si era la última, llenar la barra al 100% y mostrar victoria
+                            progressBar.style.width = '100%';
+                            setTimeout(showVictory, 400); 
+                        }
+                    }, 400); // Esperar que termine fadeOut
+                }, 1800); // Pausa de 1.8s para que el profesor y alumno lean la frase completa
+
+            } else {
+                // INCORRECTO
+                btnElement.classList.add('animate-shake');
+                setTimeout(() => {
+                    btnElement.classList.remove('animate-shake');
+                }, 400);
+            }
+        }
+
+        function showVictory() {
+            // Ocultamos completamente el game area (esto oculta progreso y tarjeta)
+            gameArea.classList.add('hidden');
+            
+            // Mostramos el banner que está diseñado como absolute inset-0 para cubrir todo
+            successBanner.classList.remove('hidden');
+            
+            // Focus visual automático
+            successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Iniciar la app
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestion(0);
+        });
+    </script>
+</body>
+</html>
