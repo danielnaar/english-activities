@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Present Perfect Simple</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Patrón de fondo Premium */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Chips Interactivos */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        /* Selected state ¡CRÍTICO! */
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        /* Disabled state */
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        /* Animaciones (Keyframes) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Contenedor de validación dinámica */
+        .question-card {
+            transition: all 0.3s ease;
+        }
+        .question-card.success-state {
+            background-color: #F0FDF4;
+            border-color: #A7F3D0;
+        }
+
+        /* Espacios en blanco dinámicos */
+        .dynamic-blank {
+            display: inline-block;
+            min-width: 90px;
+            text-align: center;
+            border-bottom: 2px solid #9ca3af;
+            padding: 0 8px;
+            font-weight: 600;
+            color: transparent; 
+            transition: all 0.3s ease;
+        }
+        .dynamic-blank.filled {
+            color: #D4AF37; 
+            border-bottom-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative">
+        
+        <!-- Encabezado de Alto Impacto -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Grammar Mastery</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">Present Perfect Simple</h1>
+                
+                <p class="text-gray-200 font-sans max-w-2xl mx-auto text-lg leading-relaxed mb-6">
+                    Learn how and when to connect past events to the present moment. Master the structure and key expressions.
+                </p>
+                
+                <div class="w-24 h-1 bg-gold mx-auto rounded-full"></div>
+            </div>
+        </header>
+
+        <div class="p-8 md:p-12">
+            
+            <!-- INFOGRAFÍA: Cuadrícula Teórica 2x2 -->
+            <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Card 1: Uses -->
+                <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-md border-t-[4px] border-t-gold relative">
+                    <h2 class="text-2xl font-serif text-navy mb-5 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Main Uses
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-[3px] border-navy">
+                            <p class="text-sm font-bold text-navy mb-1 uppercase tracking-wider">Past Actions (No Time)</p>
+                            <p class="text-gray-700 italic flex items-start gap-2"><span class="text-gold font-bold">-</span> I've travelled to Canada twice.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-[3px] border-navy">
+                            <p class="text-sm font-bold text-navy mb-1 uppercase tracking-wider">States Continuing Now</p>
+                            <p class="text-gray-700 italic flex items-start gap-2"><span class="text-gold font-bold">-</span> I have lived in Hamilton since 1990.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg border-l-[3px] border-navy">
+                            <p class="text-sm font-bold text-navy mb-1 uppercase tracking-wider">Past Actions with Results</p>
+                            <p class="text-gray-700 italic flex items-start gap-2"><span class="text-gold font-bold">-</span> I'm tired. I've just finished studying.</p>
+                            <p class="text-gray-700 italic flex items-start gap-2"><span class="text-gold font-bold">-</span> Look! Daniel has broken his leg.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Structure -->
+                <div class="bg-navy p-8 rounded-xl shadow-lg border-t-[4px] border-t-gold relative flex flex-col justify-center overflow-hidden">
+                    <!-- Patrón de fondo para textura -->
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#D4AF37_1px,_transparent_1px)] bg-[size:24px_24px] opacity-[0.03] pointer-events-none"></div>
+                    
+                    <div class="relative z-10">
+                        <h2 class="text-2xl font-serif text-white mb-4 text-center tracking-wide">Structure</h2>
+                        <div class="w-16 h-px bg-gold/50 mx-auto mb-6"></div>
+                        
+                        <!-- Fórmula visual mejorada -->
+                        <div class="flex flex-wrap justify-center items-center gap-2 mb-8 bg-white/5 p-4 rounded-lg border border-white/10 shadow-inner">
+                            <div class="bg-white/10 px-3 py-1.5 rounded text-sm font-semibold text-gray-200 tracking-wider">SUBJECT</div>
+                            <span class="text-gold font-light text-xl">+</span>
+                            <div class="bg-gradient-to-br from-gold to-yellow-600 text-navy px-4 py-1.5 rounded font-bold shadow-md">have / has</div>
+                            <span class="text-gold font-light text-xl">+</span>
+                            <div class="bg-white/10 px-3 py-1.5 rounded text-sm font-semibold text-gray-200 tracking-wider text-center">PAST<br>PARTICIPLE</div>
+                        </div>
+
+                        <!-- Ejemplos con diseño tipo código/cristal -->
+                        <div class="bg-black/20 rounded-lg p-5 border-l-[3px] border-gold">
+                            <ul class="space-y-3 text-gray-200 font-medium text-center md:text-left text-lg">
+                                <li class="flex items-center justify-center md:justify-start gap-3">
+                                    <svg class="w-4 h-4 text-gold opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>She <span class="text-gold font-bold">has eaten</span></span>
+                                </li>
+                                <li class="flex items-center justify-center md:justify-start gap-3">
+                                    <svg class="w-4 h-4 text-gold opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>He <span class="text-gold font-bold">has worked</span></span>
+                                </li>
+                                <li class="flex items-center justify-center md:justify-start gap-3">
+                                    <svg class="w-4 h-4 text-gold opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                    <span>We <span class="text-gold font-bold">have studied</span></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Tips (Since/For) -->
+                <div class="bg-white p-8 rounded-xl border border-gray-100 shadow-md border-t-[4px] border-t-gold">
+                    <h2 class="text-2xl font-serif text-navy mb-5 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        Essential Tips
+                    </h2>
+                    <ul class="space-y-5 text-gray-700">
+                        <li class="flex items-start">
+                            <!-- Cambio de color: Fondo navy, texto dorado -->
+                            <span class="bg-navy text-gold font-bold px-2.5 py-1 rounded text-xs mr-3 mt-0.5 shadow-sm tracking-wider">SINCE</span>
+                            <span>Starting point in time <em>(since 2010)</em>.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-navy text-gold font-bold px-2.5 py-1 rounded text-xs mr-3 mt-0.5 shadow-sm tracking-wider">FOR</span>
+                            <span>Duration of time <em>(for 5 years)</em>.</span>
+                        </li>
+                        <li class="flex items-start border-t border-gray-100 pt-5">
+                            <span class="bg-navy text-gold font-bold px-2.5 py-1 rounded text-xs mr-3 mt-0.5 shadow-sm tracking-wider whitespace-nowrap">EVER / NEVER</span>
+                            <div>
+                                <span class="block mb-2 font-medium text-gray-800">To talk about life experiences.</span>
+                                <span class="block italic text-sm text-gray-500 mb-1"><span class="text-gold font-bold mr-1">-</span> Have you ever tried sushi?</span>
+                                <span class="block italic text-sm text-gray-500"><span class="text-gold font-bold mr-1">-</span> I've never been to Paris.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Watch Out! (Common Mistakes) -->
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden flex flex-col">
+                    <div class="bg-red-50/50 px-6 py-4 border-b border-gray-200 flex items-center gap-3">
+                        <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                        <h3 class="text-xl font-serif text-dark font-semibold">Watch Out!</h3>
+                    </div>
+                    
+                    <div class="p-6 flex-grow flex flex-col justify-center space-y-4">
+                        <div class="flex items-center gap-3 text-red-600 bg-red-50 px-4 py-3 rounded-lg border border-red-100">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            <span class="line-through italic text-sm">I have finished my homework yesterday.</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-green-700 bg-green-50 px-4 py-3 rounded-lg border border-green-100 shadow-sm">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="font-medium italic text-sm">I went to the cinema yesterday.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 5 (NUEVA): Rule of Thumb (Negro Elegante) -->
+                <div class="col-span-1 md:col-span-2 bg-[#121212] p-6 rounded-xl shadow-lg border border-gray-800 border-l-[6px] border-l-gold flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                    <!-- Patrón sutil en la tarjeta negra -->
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_#ffffff_1px,_transparent_1px)] bg-[size:16px_16px] opacity-[0.02] pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex-shrink-0">
+                         <h3 class="text-xl font-serif text-white font-semibold flex items-center gap-2">
+                             <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                             Rule of Thumb
+                         </h3>
+                    </div>
+                    
+                    <div class="relative z-10 flex-grow text-gray-300 text-[15px] space-y-2 w-full md:w-auto bg-white/5 p-4 rounded-lg">
+                        <p class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gold inline-block"></span>
+                            <span>If the <strong class="text-white">result</strong> matters now &rarr; <span class="text-gold font-bold tracking-wide">Present Perfect</span></span>
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-gray-500 inline-block"></span>
+                            <span>If the <strong class="text-white">exact time</strong> matters &rarr; <span class="text-gray-400 font-bold tracking-wide">Past Simple</span></span>
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- DIVISOR MEJORADO (Fondo Azul Marino para el título) -->
+            <div class="flex items-center justify-center space-x-4 mb-10 relative">
+                <span class="w-full h-px bg-gray-200 absolute top-1/2 left-0 -z-10"></span>
+                <div class="bg-navy border border-gold/30 px-8 py-2.5 rounded-full shadow-md text-center">
+                    <span class="text-gold font-serif italic text-xl tracking-wide">Mini Quiz: Knowledge Check</span>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DEL QUIZ (Inyectado por JS) -->
+            <div id="quiz-container" class="space-y-6">
+                <!-- Preguntas Híbridas Renderizadas Aquí -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- BANNER DE CELEBRACIÓN -->
+    <div id="success-banner" class="hidden w-full max-w-5xl mt-8 bg-[#0B192C] border-[2px] border-gold rounded-xl p-8 relative shadow-xl">
+        <div class="flex flex-col items-center text-center">
+            <svg class="w-16 h-16 text-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+            <h2 class="text-3xl font-serif text-gold mb-2">Excellent Work!</h2>
+            <p class="text-gold text-lg font-medium">You have successfully mastered the Present Perfect Simple.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER CORPORATIVO -->
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-12 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <script>
+        // Data del Quiz Híbrido: Soporta 'choice' (sin blancos) y 'fill' (con blanco dinámico)
+        const quizData = [
+            {
+                id: 1,
+                type: "choice",
+                question: "Identify the grammatically correct sentence:",
+                options: [
+                    "I have finished my homework yesterday.",
+                    "I finished my homework yesterday."
+                ],
+                correctIndex: 1
+            },
+            {
+                id: 2,
+                type: "fill",
+                parts: ["She", "that movie."],
+                options: [
+                    "has never seen",
+                    "never has saw",
+                    "has never saw"
+                ],
+                correctIndex: 0
+            },
+            {
+                id: 3,
+                type: "fill",
+                parts: ["How long", "in this city?"],
+                options: [
+                    "did you lived",
+                    "have you lived",
+                    "you have lived"
+                ],
+                correctIndex: 1
+            }
+        ];
+
+        let score = 0;
+        const totalQuestions = quizData.length;
+        const container = document.getElementById('quiz-container');
+
+        function renderQuiz() {
+            let htmlContent = '';
+
+            quizData.forEach((q, index) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <button 
+                            class="chip-btn px-5 py-2.5 rounded-full border-2 border-gray-200 text-gray-700 font-medium tracking-wide shadow-sm text-sm"
+                            onclick="handleSelection(${index}, ${optIdx}, this, '${opt}')"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                // Lógica de Renderizado Híbrido
+                let questionSentence = '';
+                if (q.type === 'choice') {
+                    questionSentence = `<span class="text-navy font-medium text-[17px] md:text-lg leading-loose">${q.question}</span>`;
+                } else if (q.type === 'fill') {
+                    questionSentence = `
+                        <span class="text-navy font-medium text-[17px] md:text-lg leading-loose">
+                            ${q.parts[0]} 
+                            <span id="blank-${index}" class="dynamic-blank">______</span> 
+                            ${q.parts[1]}
+                        </span>
+                    `;
+                }
+
+                htmlContent += `
+                    <div id="card-${index}" class="question-card bg-white p-5 md:p-6 rounded-xl border border-gray-100 shadow-sm relative overflow-hidden">
+                        <div class="flex flex-row justify-between items-start gap-4 mb-5">
+                            
+                            <!-- Número en círculo Azul Marino y texto Dorado -->
+                            <div class="flex-shrink-0 w-10 h-10 rounded-full bg-navy flex items-center justify-center text-gold font-bold shadow-md border-[2px] border-gold/30 mt-1">
+                                ${q.id}
+                            </div>
+                            
+                            <div class="flex-grow pt-1">
+                                ${questionSentence}
+                            </div>
+                            
+                            <!-- Contenedor del icono -->
+                            <div id="icon-${index}" class="hidden flex-shrink-0 w-7 h-7 mt-2">
+                                <svg class="w-full h-full text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-3 mt-4 pt-4 border-t border-gray-100 pl-0 md:pl-14" id="options-${index}">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        function handleSelection(questionIndex, selectedOptionIndex, buttonElement, optionText) {
+            const questionData = quizData[questionIndex];
+            const card = document.getElementById(`card-${questionIndex}`);
+            const optionsContainer = document.getElementById(`options-${questionIndex}`);
+            const buttons = optionsContainer.querySelectorAll('button');
+
+            // Validar la respuesta
+            if (selectedOptionIndex === questionData.correctIndex) {
+                
+                // Si la pregunta es de tipo 'fill', rellenar la línea en blanco dinámicamente
+                if (questionData.type === 'fill') {
+                    const blank = document.getElementById(`blank-${questionIndex}`);
+                    blank.innerText = optionText;
+                    blank.classList.add('filled');
+                }
+
+                // Aplicar estilos de éxito al botón y tarjeta
+                buttonElement.classList.add('selected');
+                
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                });
+
+                card.classList.add('success-state');
+                const icon = document.getElementById(`icon-${questionIndex}`);
+                icon.classList.remove('hidden');
+                icon.classList.add('animate-pop');
+
+                // Validar victoria global
+                score++;
+                checkWinCondition();
+
+            } else {
+                // Error visual (animación de shake corporativa)
+                buttonElement.classList.add('animate-shake');
+                setTimeout(() => {
+                    buttonElement.classList.remove('animate-shake');
+                }, 400);
+            }
+        }
+
+        function checkWinCondition() {
+            if (score === totalQuestions) {
+                setTimeout(() => {
+                    const banner = document.getElementById('success-banner');
+                    banner.classList.remove('hidden');
+                    banner.classList.add('animate-pop');
+                    
+                    banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }
+        }
+
+        // Inicializar app
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
