@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Describing Experiences</title>
+    
+    <!-- Google Fonts: Montserrat & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config & Custom CSS -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Chips Interactivos Estrictos */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important; 
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Barras y utilidades */
+        .progress-fill {
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .blueprint-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0B192C;
+            border: 1px solid #0B192C;
+            color: #D4AF37;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold relative">
+        
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Grammar Mastery</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">Describing Experiences</h1>
+                <p class="text-gray-300 font-sans max-w-3xl mx-auto text-lg leading-relaxed">
+                    Learn how to tell a great story step by step: plan, grammar, details, and useful phrases.
+                </p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-6 rounded-full"></div>
+            </div>
+        </header>
+
+        <div class="p-8 md:p-12 space-y-12">
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- 1) Plan Your Story (Simplified from Experience Blueprint) -->
+                <section class="lg:col-span-4 bg-white border border-gray-200 rounded-xl p-6 shadow-sm border-t-[4px] border-t-gold">
+                    <h2 class="text-2xl font-serif text-navy mb-5 border-b pb-2">1. Plan Your Story</h2>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">When</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Where</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Who</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Goal</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Obstacle</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Climax</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Outcome</span>
+                        <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Reflection</span>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border-l-[3px] border-navy text-sm font-medium text-navy/80">
+                        <span class="text-gold font-bold uppercase tracking-wider text-xs block mb-1">Golden Rule</span>
+                        Keep one main line of action. Each sentence should move time forward or add a vivid detail.
+                    </div>
+                </section>
+
+                <!-- 2) Verb Tenses (Simplified from Tense toolkit) -->
+                <section class="lg:col-span-8 bg-white border border-gray-200 rounded-xl p-6 shadow-sm border-t-[4px] border-t-navy">
+                    <h2 class="text-2xl font-serif text-navy mb-5 border-b pb-2">2. Verb Tenses</h2>
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 uppercase text-xs tracking-wider border-b-2 border-gray-200">
+                                <th class="p-3 font-semibold">Use</th>
+                                <th class="p-3 font-semibold">Form</th>
+                                <th class="p-3 font-semibold">Mini Example</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm divide-y divide-gray-100">
+                            <tr>
+                                <td class="p-3 font-medium text-navy">Main events</td>
+                                <td class="p-3 text-gray-600">Past simple</td>
+                                <td class="p-3 italic text-gray-700">I <span class="text-gold font-semibold">arrived</span>, met the team, and signed in.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium text-navy">Background / Earlier past</td>
+                                <td class="p-3 text-gray-600">Past continuous<br>Past perfect</td>
+                                <td class="p-3 italic text-gray-700">People <span class="text-gold font-semibold">were cheering</span> while we waited.<br>We <span class="text-gold font-semibold">had booked</span> everything, so check-in was easy.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium text-navy">Up to now / Duration</td>
+                                <td class="p-3 text-gray-600">Present perfect<br>Past perfect continuous</td>
+                                <td class="p-3 italic text-gray-700">I <span class="text-gold font-semibold">have never felt</span> that proud before.<br>I <span class="text-gold font-semibold">had been training</span> for months.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium text-navy">Habits then</td>
+                                <td class="p-3 text-gray-600">Used to / would</td>
+                                <td class="p-3 italic text-gray-700">We <span class="text-gold font-semibold">used to camp</span> by the river.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+            <section>
+                <div class="flex items-center gap-3 mb-6">
+                    <h2 class="text-2xl font-serif text-navy whitespace-nowrap">3. Add Details (The 5 Senses)</h2>
+                    <div class="h-px bg-gray-200 flex-1"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- The 5 Senses -->
+                    <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                        <h3 class="text-sm font-bold text-navy uppercase tracking-wider mb-4">Make it Vivid</h3>
+                        <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+                            <div><strong class="text-gold">Saw:</strong> glow, blur, skyline</div>
+                            <div><strong class="text-gold">Heard:</strong> buzz, chant, crack</div>
+                            <div><strong class="text-gold">Tasted:</strong> smoky, bitter, fresh</div>
+                            <div><strong class="text-gold">Smelled:</strong> salty air, cinnamon, fuel</div>
+                            <div class="col-span-2"><strong class="text-gold">Felt:</strong> numb fingers, shaky knees</div>
+                        </div>
+                        
+                        <h3 class="text-sm font-bold text-navy uppercase tracking-wider mb-3">Time Phrases</h3>
+                        <div class="flex flex-wrap gap-2 text-xs font-medium">
+                            <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Last summer</span>
+                            <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Back in 2019</span>
+                            <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">One rainy evening</span>
+                            <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">On my first day</span>
+                            <span class="bg-navy text-gold px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">Minutes before the show</span>
+                        </div>
+                    </div>
+
+                    <!-- Show vs Tell -->
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden flex flex-col">
+                        <div class="bg-navy px-4 py-3 border-b border-gray-200">
+                            <h3 class="text-sm font-bold text-gold uppercase tracking-wider">Show, Don't Tell</h3>
+                        </div>
+                        <table class="w-full text-left h-full">
+                            <thead>
+                                <tr>
+                                    <th class="p-4 bg-gray-50 text-gray-500 font-semibold uppercase text-xs">Tell (Boring)</th>
+                                    <th class="p-4 bg-gray-50 text-navy font-semibold uppercase text-xs">Show (Vivid)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm divide-y divide-gray-100">
+                                <tr>
+                                    <td class="p-4 text-gray-500">I was nervous.</td>
+                                    <td class="p-4 font-medium italic text-navy">My hands wouldn't stop tapping the rail.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 text-gray-500">The place was crowded.</td>
+                                    <td class="p-4 font-medium italic text-navy">Shoulders brushed my backpack at every step.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 text-gray-500">It was unforgettable.</td>
+                                    <td class="p-4 font-medium italic text-navy">The song still echoes when I pass that street.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif text-navy mb-6 border-b pb-2">4. Connecting Words</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+                    <!-- Sequence -->
+                    <div class="bg-white border border-gray-200 p-5 rounded-lg shadow-sm border-t-[3px] border-t-gold">
+                        <h4 class="font-bold text-navy mb-3 text-sm uppercase tracking-wider">Order of Events</h4>
+                        <ul class="text-sm space-y-2 text-gray-600">
+                            <li>• At first / By then</li>
+                            <li>• Afterwards</li>
+                            <li>• Meanwhile</li>
+                            <li>• Eventually / Suddenly</li>
+                        </ul>
+                    </div>
+                    <!-- Cause / Contrast -->
+                    <div class="bg-white border border-gray-200 p-5 rounded-lg shadow-sm border-t-[3px] border-t-gold">
+                        <h4 class="font-bold text-navy mb-3 text-sm uppercase tracking-wider">Reasons & Differences</h4>
+                        <ul class="text-sm space-y-2 text-gray-600">
+                            <li>• Because / So</li>
+                            <li>• Although / However</li>
+                            <li>• In spite of</li>
+                            <li>• Despite</li>
+                        </ul>
+                    </div>
+                    <!-- Evaluation -->
+                    <div class="bg-white border border-gray-200 p-5 rounded-lg shadow-sm border-t-[3px] border-t-gold">
+                        <h4 class="font-bold text-navy mb-3 text-sm uppercase tracking-wider">Feelings & Reactions</h4>
+                        <ul class="text-sm space-y-2 text-gray-600">
+                            <li>• Surprisingly / Incredibly</li>
+                            <li>• To my relief</li>
+                            <li>• To be honest</li>
+                            <li>• Luckily / Oddly enough</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl font-serif text-navy mb-6 border-b pb-2">5. Useful Words & Phrases</h2>
+                <div class="bg-navy rounded-xl p-6 md:p-8 flex flex-col md:flex-row gap-8 shadow-md">
+                    
+                    <!-- Connectors and frames -->
+                    <div class="flex-1 border-b md:border-b-0 md:border-r border-gray-600 pb-6 md:pb-0 md:pr-6">
+                        <h4 class="text-gold font-serif text-xl mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Connectors & Frames
+                        </h4>
+                        <p class="text-gray-400 text-xs uppercase tracking-wider mb-3">To organize your story</p>
+                        <ul class="text-gray-200 space-y-3 text-sm font-medium">
+                            <li><span class="text-gold">To start:</span> "It all started when..." / "To begin with..."</li>
+                            <li><span class="text-gold">During the event:</span> "All of a sudden," / "Out of nowhere,"</li>
+                            <li><span class="text-gold">To highlight:</span> "What stood out the most was..."</li>
+                            <li><span class="text-gold">To reflect:</span> "Looking back,..." / "In the end,..."</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Adverbs and intensifiers -->
+                    <div class="flex-1">
+                        <h4 class="text-gold font-serif text-xl mb-4 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            Adverbs & Intensifiers
+                        </h4>
+                        <p class="text-gray-400 text-xs uppercase tracking-wider mb-3">To make feelings stronger</p>
+                        <div class="space-y-3 text-sm text-gray-200 font-medium">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-[#152844] text-gold px-2 py-1 rounded">Absolutely</span> 
+                                <span class="italic text-gray-400">e.g., absolutely terrifying</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-[#152844] text-gold px-2 py-1 rounded">Incredibly</span> 
+                                <span class="italic text-gray-400">e.g., incredibly beautiful</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-[#152844] text-gold px-2 py-1 rounded">Surprisingly</span> 
+                                <span class="italic text-gray-400">e.g., surprisingly calm</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-[#152844] text-gold px-2 py-1 rounded">Deeply</span> 
+                                <span class="italic text-gray-400">e.g., deeply moving</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-[#152844] text-gold px-2 py-1 rounded">Utterly</span> 
+                                <span class="italic text-gray-400">e.g., utterly exhausted</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-[#121212] rounded-xl p-8 md:p-10 shadow-xl border-l-[6px] border-gold relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-5 pointer-events-none">
+                    <svg class="w-64 h-64 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.714 4.053-8.609 8.983-8.609l-1.006 3.03c-3.153 0-4.977 1.543-4.977 5.97h4.983v7H14.017zM1.983 21v-7.391c0-5.714 4.053-8.609 8.983-8.609l-1.006 3.03c-3.153 0-4.977 1.543-4.977 5.97h4.983v7H1.983z"/></svg>
+                </div>
+                
+                <h2 class="text-2xl font-serif text-gold mb-6 relative z-10">6. Example Story</h2>
+                <div class="space-y-4 text-gray-300 text-lg leading-relaxed font-serif relative z-10">
+                    <p><span class="text-white font-medium">Last summer</span>, I <span class="border-b border-gray-600 pb-0.5">arrived</span> at a tiny coastal town for a night run.</p>
+                    <p>The boardwalk <span class="border-b border-gray-600 pb-0.5">was buzzing</span> with music and the smell of grilled corn.</p>
+                    <p>By the time the horn blew, I <span class="border-b border-gray-600 pb-0.5">had been training</span> for ten weeks, but the first hill hit like a wall.</p>
+                    <p>Halfway up, a stranger shouted my name from a homemade sign.</p>
+                    <p><span class="text-white font-medium">Eventually</span>, I crossed the finish line with <span class="italic">shaky legs, salt on my lips, and a stupid grin</span>.</p>
+                    <p>I <span class="border-b border-gray-600 pb-0.5">have kept</span> the paper bib in my wallet ever since.</p>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-gray-800 text-sm text-gray-400 relative z-10">
+                    <strong class="text-gold">Spot the grammar tools:</strong> past simple for events, past continuous for background, past perfect continuous for preparation, present perfect for the lasting result.
+                </div>
+            </section>
+
+            <section id="interactive-workspace" class="relative bg-gray-50 rounded-xl p-8 md:p-10 border border-gray-200 shadow-inner overflow-hidden min-h-[350px] flex flex-col justify-center">
+                
+                <!-- QUIZ UI -->
+                <div id="quiz-ui" class="relative z-10 w-full max-w-3xl mx-auto transition-opacity duration-300">
+                    
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="bg-navy text-gold px-4 py-1.5 rounded-full text-sm font-bold tracking-wider uppercase">
+                            Interactive Practice
+                        </div>
+                        <div class="text-sm font-bold text-gray-500">
+                            <span id="current-q">1</span> / <span id="total-q">4</span>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-200 h-2 rounded-full mb-8 overflow-hidden">
+                        <div id="progress-bar" class="h-full bg-gold progress-fill w-0"></div>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
+                        <h3 id="question-text" class="text-xl md:text-2xl font-serif text-navy mb-8 leading-relaxed text-center">
+                            <!-- Injected by JS -->
+                        </h3>
+                        <div id="options-container" class="flex flex-wrap justify-center gap-3">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FULL COVER SUCCESS BANNER -->
+                <div id="success-banner" class="hidden absolute inset-0 z-50 bg-navy flex flex-col items-center justify-center p-8">
+                    <div class="bg-pattern"></div>
+                    <div class="relative z-10 flex flex-col items-center text-center">
+                        <svg class="w-20 h-20 text-gold mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h2 class="text-4xl md:text-5xl font-serif text-gold mb-3">Excellent Work!</h2>
+                        <p class="text-white text-lg font-medium max-w-md">You have mastered the toolkit for describing experiences.</p>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="w-full max-w-5xl bg-[#121212] py-5 px-8 mt-12 mb-8 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                text: "By the time the race started, I <span class='inline-block min-w-[120px] border-b-2 border-gray-400 mx-2 text-center text-gold font-bold bg-white px-2' id='blank'>____</span> for ten weeks.",
+                options: ["was training", "had been training", "train"],
+                correct: 1
+            },
+            {
+                text: "Which option uses 'SHOW' instead of 'TELL' for being nervous?",
+                options: ["I felt very bad.", "I didn't like the feeling.", "My hands wouldn't stop shaking."],
+                correct: 2
+            },
+            {
+                text: "We <span class='inline-block min-w-[120px] border-b-2 border-gray-400 mx-2 text-center text-gold font-bold bg-white px-2' id='blank'>____</span> camp by that river when we were kids.",
+                options: ["used to", "had been", "were"],
+                correct: 0
+            },
+            {
+                text: "I looked everywhere for my keys. <span class='inline-block min-w-[120px] border-b-2 border-gray-400 mx-2 text-center text-gold font-bold bg-white px-2' id='blank'>____</span>, I realized they were in my pocket.",
+                options: ["Meanwhile", "Suddenly", "Eventually"],
+                correct: 2
+            }
+        ];
+
+        let currentIndex = 0;
+        
+        const qText = document.getElementById('question-text');
+        const optContainer = document.getElementById('options-container');
+        const progressBar = document.getElementById('progress-bar');
+        const currentQEl = document.getElementById('current-q');
+        const uiContainer = document.getElementById('quiz-ui');
+        const successBanner = document.getElementById('success-banner');
+
+        function loadQuestion() {
+            const q = questions[currentIndex];
+            
+            // Update UI Counters
+            currentQEl.innerText = currentIndex + 1;
+            progressBar.style.width = `${((currentIndex) / questions.length) * 100}%`;
+            
+            // Set Question Text
+            qText.innerHTML = q.text;
+            
+            // Set Options
+            optContainer.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "chip-btn px-6 py-3 rounded-md border-2 border-gray-200 text-gray-700 font-semibold tracking-wide shadow-sm text-sm md:text-base";
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(idx, btn, opt);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function handleAnswer(selectedIndex, btnElement, textValue) {
+            const q = questions[currentIndex];
+            const buttons = optContainer.querySelectorAll('button');
+            const blank = document.getElementById('blank');
+
+            if (selectedIndex === q.correct) {
+                // Correct Flow
+                btnElement.classList.add('selected');
+                if(blank) {
+                    blank.innerText = textValue;
+                    blank.classList.remove('border-gray-400');
+                    blank.classList.add('border-gold');
+                }
+                
+                buttons.forEach(b => b.disabled = true);
+                progressBar.style.width = `${((currentIndex + 1) / questions.length) * 100}%`;
+                
+                setTimeout(() => {
+                    currentIndex++;
+                    if (currentIndex < questions.length) {
+                        uiContainer.classList.add('opacity-0');
+                        setTimeout(() => {
+                            loadQuestion();
+                            uiContainer.classList.remove('opacity-0');
+                        }, 300);
+                    } else {
+                        triggerWin();
+                    }
+                }, 1000);
+
+            } else {
+                // Error Flow
+                btnElement.classList.add('animate-shake');
+                setTimeout(() => {
+                    btnElement.classList.remove('animate-shake');
+                }, 400);
+            }
+        }
+
+        function triggerWin() {
+            // Activar el banner que cubre absolutamente todo el workspace
+            successBanner.classList.remove('hidden');
+            successBanner.classList.add('animate-pop');
+        }
+
+        // Init
+        document.addEventListener('DOMContentLoaded', loadQuestion);
+
+    </script>
+</body>
+</html>
