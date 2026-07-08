@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium English - Reading Analysis</title>
+    
+    <!-- Google Fonts: Montserrat (Base) & Playfair Display (Titles) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0B192C',
+                        gold: '#D4AF37',
+                        light: '#F8F9FA',
+                        dark: '#121212'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        /* Highlight Classes for Grammar Analysis */
+        .hl-past-simple { transition: background-color 0.3s, color 0.3s; }
+        .hl-past-continuous { transition: background-color 0.3s, color 0.3s; }
+        .hl-past-perfect { transition: background-color 0.3s, color 0.3s; }
+        .hl-present-perfect { transition: background-color 0.3s, color 0.3s; }
+
+        /* Active Highlight States (Tailwind colors applied via JS classes) */
+        .active-past-simple { background-color: #fef08a; color: #854d0e; padding: 2px 4px; border-radius: 4px; font-weight: 500;} /* Yellow */
+        .active-past-continuous { background-color: #bfdbfe; color: #1e3a8a; padding: 2px 4px; border-radius: 4px; font-weight: 500;} /* Blue */
+        .active-past-perfect { background-color: #fbcfe8; color: #831843; padding: 2px 4px; border-radius: 4px; font-weight: 500;} /* Pink */
+        .active-present-perfect { background-color: #bbf7d0; color: #14532d; padding: 2px 4px; border-radius: 4px; font-weight: 500;} /* Green */
+
+        /* Interactive Chips */
+        .chip-btn {
+            transition: all 0.3s ease;
+        }
+        .chip-btn:not(.selected):not([disabled]):hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+            transform: translateY(-2px);
+        }
+        .chip-btn.selected {
+            background-color: #0B192C !important;
+            color: #D4AF37 !important;
+            border-color: #0B192C !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.4) !important;
+            transform: translateY(0) !important;
+        }
+        .chip-btn[disabled]:not(.selected) {
+            opacity: 0.4;
+            cursor: not-allowed;
+            background-color: #f9fafb;
+            border-color: #e5e7eb;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: #ef4444 !important;
+            color: #ef4444 !important;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .success-state {
+            background-color: #F0FDF4;
+            border-color: #A7F3D0;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 lg:px-8">
+
+    <main class="w-full max-w-7xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-navy relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Describing Experiences - Reading</p>
+                <h1 class="text-4xl md:text-5xl text-white font-serif tracking-wide mb-4">The Quiet Magic of Kyoto</h1>
+                <p class="text-gray-200 font-sans max-w-2xl mx-auto text-lg leading-relaxed mb-4">
+                    Analyze the narrative structure and spot the grammar tools in context.
+                </p>
+            </div>
+        </header>
+
+        <!-- Contenedor maestro de la actividad (Se ocultará al 100%) -->
+        <div class="flex flex-col lg:flex-row flex-1" id="activity-columns">
+            
+            <!-- Left Column: Reading & Grammar Highlights -->
+            <section class="w-full lg:w-3/5 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-gray-200 bg-gray-50/50">
+                
+                <!-- Grammar Toggles -->
+                <div class="mb-8 bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-sm font-bold text-navy uppercase tracking-wider mb-3">Click to toggle highlights:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="toggleHighlight('past-simple')" id="btn-past-simple" class="px-3 py-1.5 rounded text-sm font-semibold transition-colors bg-gray-100 text-gray-600 hover:bg-yellow-200 hover:text-yellow-900">Past Simple</button>
+                        <button onclick="toggleHighlight('past-continuous')" id="btn-past-continuous" class="px-3 py-1.5 rounded text-sm font-semibold transition-colors bg-gray-100 text-gray-600 hover:bg-blue-200 hover:text-blue-900">Past Continuous</button>
+                        <button onclick="toggleHighlight('past-perfect')" id="btn-past-perfect" class="px-3 py-1.5 rounded text-sm font-semibold transition-colors bg-gray-100 text-gray-600 hover:bg-pink-200 hover:text-pink-900">Past Perfect</button>
+                        <button onclick="toggleHighlight('present-perfect')" id="btn-present-perfect" class="px-3 py-1.5 rounded text-sm font-semibold transition-colors bg-gray-100 text-gray-600 hover:bg-green-200 hover:text-green-900">Present Perfect</button>
+                    </div>
+                </div>
+
+                <!-- Reading Content -->
+                <div class="prose prose-lg text-gray-700 font-serif leading-loose max-w-none">
+                    
+                    <p><span class="hl-past-perfect">I had always dreamed</span> of visiting Japan before <span class="hl-past-simple">I booked</span> my ticket. From the very first morning in Kyoto, <span class="hl-past-simple">the old capital felt</span> like a place out of a movie. <span class="hl-past-continuous">Small rivers were flowing</span> quietly, <span class="hl-past-continuous">wooden doors were creaking</span>, and <span class="hl-past-continuous">shop owners were preparing</span> their stalls.</p>
+
+                    <!-- Image 1 -->
+                    <div class="my-8 rounded-xl overflow-hidden shadow-md border-[3px] border-white">
+                        <img src="https://placehold.co/800x400/0B192C/D4AF37?text=Traditional+streets+of+Kyoto" alt="Kyoto Streets" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x400/0B192C/D4AF37?text=Kyoto+Image+1'">
+                        <p class="text-sm text-center text-gray-500 italic mt-2 pb-2">Wooden doors and quiet morning streets.</p>
+                    </div>
+
+                    <p><span class="hl-present-perfect">I have traveled</span> to many countries, but <span class="hl-present-perfect">I have never experienced</span> such perfect harmony. <span class="hl-past-simple">Locals bowed, offered</span> me matcha tea, and <span class="hl-past-simple">guided</span> me when <span class="hl-past-simple">I was</span> lost. The city is deeply historic; <span class="hl-past-simple">temple bells rang</span> through the air, and tradition often <span class="hl-past-simple">blended</span> with modern life.</p>
+
+                    <p>For a week <span class="hl-past-continuous">I was exploring</span> narrow alleys and <span class="hl-past-simple">I discovered</span> hidden gardens. <span class="hl-past-perfect">I had walked</span> for hours when <span class="hl-past-simple">I saw</span> a real geisha. <span class="hl-past-continuous">Tourists were taking</span> photos, but she just <span class="hl-past-simple">smiled</span> and <span class="hl-past-simple">disappeared</span> into a teahouse. <span class="hl-past-simple">Shopkeepers invited</span> me in, and <span class="hl-past-simple">chefs cooked</span> incredible street food.</p>
+
+                    <!-- Image 2 -->
+                    <div class="my-8 rounded-xl overflow-hidden shadow-md border-[3px] border-white">
+                        <img src="https://placehold.co/800x400/0B192C/D4AF37?text=Arashiyama+Bamboo+Forest" alt="Bamboo Forest" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/800x400/0B192C/D4AF37?text=Kyoto+Image+2'">
+                        <p class="text-sm text-center text-gray-500 italic mt-2 pb-2">The towering stalks of the bamboo forest.</p>
+                    </div>
+
+                    <p><span class="hl-past-simple">We visited</span> the famous Arashiyama bamboo forest. In the green shadows, the air <span class="hl-past-simple">smelled</span> of wet earth, and <span class="hl-past-continuous">tall bamboo stalks were swaying</span> while our guide <span class="hl-past-simple">explained</span> the history of the paths that <span class="hl-past-perfect">had survived</span> for centuries. At a small shrine after a quick rain, the stone steps <span class="hl-past-simple">were</span> shiny and beautiful.</p>
+
+                    <p><span class="hl-present-perfect">Kyoto has been</span> one of the most peaceful trips <span class="hl-present-perfect">I have ever taken</span>. When it <span class="hl-past-simple">was</span> time to leave, <span class="hl-past-simple">I took</span> the bullet train, carrying the calm energy the city <span class="hl-past-simple">gave</span> me. Since then, <span class="hl-present-perfect">I have kept</span> the habit of drinking green tea and <span class="hl-present-perfect">I have tried</span> to appreciate the quiet moments.</p>
+
+                </div>
+            </section>
+
+            <!-- Right Column: Interactive Quiz -->
+            <section class="w-full lg:w-2/5 p-8 relative flex flex-col" id="quiz-wrapper">
+                
+                <!-- Contenedor principal de la actividad (Se ocultará al ganar) -->
+                <div id="quiz-main-content" class="flex flex-col w-full h-full">
+                    <h2 class="text-2xl font-serif text-navy mb-2">Comprehension Check</h2>
+                    <div class="w-16 h-1 bg-gold rounded-full mb-8"></div>
+
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-200 h-2 rounded-full mb-8 overflow-hidden">
+                        <div id="progress-bar" class="h-full bg-navy transition-all duration-500 w-0"></div>
+                    </div>
+
+                    <div id="quiz-container" class="space-y-6 flex-1">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- Banner de Celebración Global (Se inyecta entre el header y el final) -->
+        <div id="global-success-banner" class="hidden w-full flex-1 flex-col items-center justify-center py-16 px-6 bg-gray-50/30">
+            <div class="w-full max-w-xl bg-[#0B192C] flex flex-col items-center justify-center py-12 px-8 rounded-xl border-[2px] border-gold shadow-2xl relative overflow-hidden mx-auto my-6">
+                <div class="bg-pattern"></div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <svg class="w-20 h-20 text-gold mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h2 class="text-4xl font-serif text-gold mb-3">Mastery Achieved!</h2>
+                    <p class="text-gray-200 text-lg font-medium">You have successfully analyzed the narrative and grammar.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto bg-[#121212] py-5 px-8 mt-12 mb-8 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gold uppercase tracking-[0.2em] text-xs font-semibold">
+            Mastery Through Excellence
+        </div>
+    </footer>
+
+    <script>
+        // --- HIGHLIGHT LOGIC ---
+        const states = {
+            'past-simple': false,
+            'past-continuous': false,
+            'past-perfect': false,
+            'present-perfect': false
+        };
+
+        const buttonColors = {
+            'past-simple': 'bg-yellow-200 text-yellow-900',
+            'past-continuous': 'bg-blue-200 text-blue-900',
+            'past-perfect': 'bg-pink-200 text-pink-900',
+            'present-perfect': 'bg-green-200 text-green-900'
+        };
+
+        function toggleHighlight(type) {
+            states[type] = !states[type];
+            const btn = document.getElementById(`btn-${type}`);
+            const elements = document.querySelectorAll(`.hl-${type}`);
+            
+            if (states[type]) {
+                // Activate
+                btn.className = `px-3 py-1.5 rounded text-sm font-bold transition-colors ${buttonColors[type]} shadow-inner`;
+                elements.forEach(el => el.classList.add(`active-${type}`));
+            } else {
+                // Deactivate
+                btn.className = `px-3 py-1.5 rounded text-sm font-semibold transition-colors bg-gray-100 text-gray-600 hover:${buttonColors[type].split(' ')[0]}`;
+                elements.forEach(el => el.classList.remove(`active-${type}`));
+            }
+        }
+
+        // --- QUIZ LOGIC ---
+        const quizData = [
+            {
+                id: 1,
+                question: "What did the writer think about the old capital on the first morning?",
+                options: ["It was too noisy.", "It felt like a place out of a movie.", "It looked like Bangkok."],
+                correct: 1
+            },
+            {
+                id: 2,
+                question: "True or False: The writer got lost and locals ignored him.",
+                options: ["True", "False"],
+                correct: 1
+            },
+            {
+                id: 3,
+                question: "What was the guide explaining in the forest?",
+                options: ["How to plant bamboo.", "The history of the paths.", "Where to buy tea."],
+                correct: 1
+            },
+            {
+                id: 4,
+                question: "Which line shows an action earlier than another past action?",
+                options: ["I had always dreamed of visiting Japan before I booked my ticket.", "I took the bullet train.", "Shop owners were preparing their stalls."],
+                correct: 0
+            },
+            {
+                id: 5,
+                question: "Which sentence uses Present Perfect to show an experience in the writer's life?",
+                options: ["I have traveled to many countries.", "Temple bells rang through the air.", "We visited the famous bamboo forest."],
+                correct: 0
+            }
+        ];
+
+        let score = 0;
+        const totalQ = quizData.length;
+        const quizContainer = document.getElementById('quiz-container');
+        const progressBar = document.getElementById('progress-bar');
+
+        function renderQuiz() {
+            let html = '';
+            quizData.forEach((q, qIndex) => {
+                let optionsHtml = '';
+                q.options.forEach((opt, optIndex) => {
+                    optionsHtml += `
+                        <button 
+                            class="chip-btn w-full text-left px-4 py-3 rounded-lg border-2 border-gray-200 text-gray-700 font-medium text-sm shadow-sm"
+                            onclick="checkAnswer(${qIndex}, ${optIndex}, this)"
+                        >
+                            ${opt}
+                        </button>
+                    `;
+                });
+
+                html += `
+                    <div id="card-${qIndex}" class="bg-white p-5 rounded-xl border border-gray-100 shadow-sm relative overflow-hidden transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <h4 class="text-md font-bold text-navy leading-snug"><span class="text-gold mr-2">${q.id}.</span> ${q.question}</h4>
+                            <div id="icon-${qIndex}" class="hidden flex-shrink-0 w-6 h-6 text-green-500">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2" id="opts-${qIndex}">
+                            ${optionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            quizContainer.innerHTML = html;
+        }
+
+        function checkAnswer(qIndex, optIndex, btnEl) {
+            const q = quizData[qIndex];
+            const card = document.getElementById(`card-${qIndex}`);
+            const optsContainer = document.getElementById(`opts-${qIndex}`);
+            const allBtns = optsContainer.querySelectorAll('button');
+
+            if(optIndex === q.correct) {
+                // Success
+                btnEl.classList.add('selected');
+                allBtns.forEach(b => b.disabled = true);
+                card.classList.add('success-state');
+                document.getElementById(`icon-${qIndex}`).classList.remove('hidden');
+                document.getElementById(`icon-${qIndex}`).classList.add('animate-pop');
+
+                score++;
+                progressBar.style.width = `${(score / totalQ) * 100}%`;
+
+                if(score === totalQ) {
+                    setTimeout(() => {
+                        const columns = document.getElementById('activity-columns');
+                        const globalBanner = document.getElementById('global-success-banner');
+                        
+                        // Desaparece toda la zona de trabajo
+                        columns.style.display = 'none';
+                        
+                        // Aparece la tarjeta corporativa de éxito
+                        globalBanner.classList.remove('hidden');
+                        globalBanner.classList.add('flex', 'animate-pop');
+
+                        // Hace scroll automático y SUAVE directo hacia el banner de celebración, no al tope
+                        setTimeout(() => {
+                            globalBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 50); // Un delay microscópico asegura que el DOM ya haya renderizado el banner antes de scrollear hacia él
+
+                    }, 600);
+                }
+            } else {
+                // Error
+                btnEl.classList.add('animate-shake');
+                setTimeout(() => btnEl.classList.remove('animate-shake'), 400);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', renderQuiz);
+
+    </script>
+</body>
+</html>
