@@ -254,6 +254,17 @@
         const CATEGORIES = ['Name', 'Place', 'Food', 'Object', 'Animal', 'Color'];
         const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVW'.split(''); // Excluded X,Y,Z
         const ROUND_TIME = 75;
+        const MAX_STUDENTS = 3; // Limite estricto a 3 estudiantes
+
+        // Servidores STUN de Google para garantizar conexión entre diferentes redes WiFi/Móviles
+        const PEER_CONFIG = {
+            config: {
+                'iceServers': [
+                    { urls: 'stun:stun.l.google.com:19302' },
+                    { urls: 'stun:stun1.l.google.com:19302' }
+                ]
+            }
+        };
 
         let role = null;
         let peer = null;
@@ -304,13 +315,28 @@
             const pin = Math.floor(1000 + Math.random() * 9000).toString();
             document.getElementById('display-pin').innerText = pin;
             
-            peer = new Peer(PREFIX + pin);
+            peer = new Peer(PREFIX + pin, PEER_CONFIG);
 
             peer.on('open', (id) => console.log('Room Created:', id));
+
+            // Auto-reconectar si el profesor pierde señal brevemente
+            peer.on('disconnected', () => {
+                console.log('Connection to signaling server lost. Reconnecting...');
+                peer.reconnect();
+            });
 
             peer.on('connection', (connection) => {
                 const studentId = connection.peer;
                 
+                // Limitar exactamente a 3 estudiantes
+                if (Object.keys(connections).length >= MAX_STUDENTS && !connections[studentId]) {
+                    connection.on('open', () => {
+                        connection.send({ type: 'ERROR', message: 'Room is full (Max 3 players).' });
+                        setTimeout(() => connection.close(), 1000);
+                    });
+                    return;
+                }
+
                 connection.on('open', () => {
                     connections[studentId] = connection;
                     updateConnectedCount();
@@ -505,10 +531,10 @@
             msgEl.className = "text-center text-sm font-bold mt-4 text-gold block";
             document.getElementById('btn-connect').disabled = true;
 
-            peer = new Peer();
+            peer = new Peer(PEER_CONFIG);
 
             peer.on('open', (id) => {
-                conn = peer.connect(PREFIX + pin);
+                conn = peer.connect(PREFIX + pin, { reliable: true }); // Garantiza que no se pierdan datos
 
                 conn.on('open', () => {
                     conn.send({ type: 'JOIN', name: name });
@@ -524,9 +550,10 @@
                 conn.on('data', (data) => {
                     if (data.type === 'START') studentStartRound(data.letter);
                     else if (data.type === 'END') studentEndRound();
+                    else if (data.type === 'ERROR') showStudentError(data.message);
                 });
 
-                conn.on('error', () => showStudentError("Connection dropped."));
+                conn.on('error', () => showStudentError("Connection dropped. Please try again."));
             });
 
             peer.on('error', () => showStudentError("Invalid PIN or connection failed."));
