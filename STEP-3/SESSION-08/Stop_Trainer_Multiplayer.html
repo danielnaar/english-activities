@@ -73,7 +73,6 @@
 </head>
 <body class="bg-light text-dark font-sans min-h-screen py-8 px-4 lg:px-8 flex flex-col items-center">
 
-    <!-- Main Container -->
     <main class="w-full max-w-7xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold flex flex-col mb-8 animate-pop">
         
         <!-- Classic Header (Dark & Gold) -->
@@ -81,7 +80,11 @@
             <div class="bg-pattern opacity-20 absolute inset-0 pointer-events-none"></div>
             <div class="relative z-10 text-center flex flex-col items-center">
                 <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Live Multiplayer Arena</p>
-                <h1 class="text-4xl md:text-5xl text-gold font-serif tracking-wide mb-4">Stop Trainer</h1>
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <h1 class="text-4xl md:text-5xl text-gold font-serif tracking-wide">Stop Trainer</h1>
+                    <!-- Version Badge to verify cache update -->
+                    <span class="bg-purple-900 text-white border border-purple-500 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded shadow-lg transform rotate-2">AI Spellcheck V2</span>
+                </div>
                 <p class="text-gray-400 font-sans max-w-2xl mx-auto text-md leading-relaxed">
                     Test your quick-thinking vocabulary against the clock.<br/>
                     <span class="text-white font-semibold">Earn points for correct words and speed bonuses!</span>
@@ -89,7 +92,6 @@
             </div>
         </header>
 
-        <!-- Dynamic Content Area -->
         <div class="p-6 md:p-8 relative min-h-[400px]">
             
             <div id="view-role" class="flex flex-col items-center justify-center space-y-6 animate-pop py-10">
@@ -145,18 +147,17 @@
                     </button>
                 </div>
                 
-                <!-- Teacher Success Banner (Dark/Gold sync) -->
+                <!-- Teacher Success Banner -->
                 <div id="teacher-success-banner" class="hidden flex-col items-center justify-center p-8 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold mb-6 text-center animate-pop">
                     <div class="bg-gold/10 p-4 rounded-full mb-4 inline-block">
                         <i class="fa-solid fa-check-double text-4xl text-gold"></i>
                     </div>
                     <h3 class="text-3xl font-serif font-bold text-gold mb-2">Round Complete!</h3>
-                    <p class="text-gray-300 text-sm tracking-widest uppercase font-medium">Final Scores are calculated below.</p>
+                    <p class="text-gray-300 text-sm tracking-widest uppercase font-medium">Final Scores calculated by AI Spellchecker.</p>
                 </div>
 
                 <!-- Teacher Live Board (Grid for students) -->
                 <div id="teacher-board" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Default waiting message -->
                     <div class="col-span-full text-center py-16 text-gray-400 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50">
                         <i class="fa-solid fa-satellite-dish text-5xl mb-4 animate-pulse text-gold"></i>
                         <p class="uppercase tracking-widest font-bold">Waiting for students to join...</p>
@@ -189,7 +190,6 @@
                     <p id="student-status-msg" class="text-center text-sm font-bold mt-4 text-gray-500 hidden"></p>
                 </div>
 
-                <!-- Student Game Arena Container -->
                 <div id="student-arena" class="w-full hidden flex-col gap-4">
                     
                     <!-- Waiting Banner -->
@@ -242,13 +242,12 @@
 
     </main>
     
-    <!-- Classic Footer -->
     <footer class="w-full max-w-7xl mx-auto bg-[#121212] py-5 px-8 mt-auto rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
         <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
             PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
         </div>
         <div class="text-gray-400 text-xs font-sans text-center md:text-right leading-relaxed">
-            Words are verified instantly by <span class="text-gold font-semibold">Premium English Validator</span>.<br>
+            Words are verified instantly by <span class="text-gold font-semibold">AI Spellcheck V2</span>.<br>
             <span class="italic">Multiplayer Edition Framework.</span>
         </div>
     </footer>
@@ -266,6 +265,7 @@
         const ROUND_TIME = 135; // 2 minutes and 15 seconds
         const MAX_STUDENTS = 3; 
 
+        // STUN Servers to bypass home network firewalls
         const PEER_CONFIG = {
             config: {
                 'iceServers': [
@@ -316,9 +316,6 @@
             }
         }
 
-        // ==========================================
-        // TEACHER LOGIC
-        // ==========================================
         function initTeacher() {
             const pin = Math.floor(1000 + Math.random() * 9000).toString();
             document.getElementById('display-pin').innerText = pin;
@@ -409,7 +406,7 @@
                 studentData[studentId] = { 
                     name: data.name, 
                     answers: {}, 
-                    validations: {}, // True/False for scoring
+                    validations: {}, 
                     submitted: false, 
                     timeRemaining: 0, 
                     finalScore: 0 
@@ -438,45 +435,43 @@
             }
         }
 
-        // ==========================================
-        // AI SPELLCHECKER ENGINE (Datamuse API)
-        // ==========================================
         async function validateSpelling(word, category, letter) {
             const cleanWord = word.trim().toUpperCase().replace(/[^A-Z\s]/g, ''); 
             
-            // 1. Basic Rule: Must start with correct letter and not be empty
+            // Basic Rule: Must start with correct letter and not be empty
             if (cleanWord.length < 2 || cleanWord.charAt(0) !== letter) return false;
             
-            // 2. Names & Places: Too subjective for strict dictionary. Accept if basic rule passes.
+            // Names & Places are too subjective for a strict dictionary
             if (['Name', 'Place'].includes(category)) {
                 return true;
             }
 
-            // 3. Strict Spelling Check for standard vocabulary via Free API
+            // Strict Spelling Check via API
             try {
                 const queryWord = cleanWord.toLowerCase();
-                // Datamuse 'sp' checks exact spelling. If mispelled, it returns suggestions.
-                // We check if the exact word we typed is in the returned array.
-                const res = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(queryWord)}&max=1`);
+                // Adding a timeout so it doesn't freeze if API is slow
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 3000); 
+                
+                const res = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(queryWord)}&max=1`, {
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
                 const data = await res.json();
                 
                 if (data && data.length > 0) {
-                    // Exact match check
                     return data[0].word.toLowerCase() === queryWord;
                 }
                 return false;
             } catch (e) {
-                // If API fails (no internet/blocked), fallback to true to not ruin the game
+                // If API fails (no internet/timeout), fallback to true to not ruin the game
                 return true; 
             }
         }
 
-        // ==========================================
-        // TEACHER MANUAL OVERRIDE
-        // ==========================================
         function toggleValidation(sid, cat) {
             if (studentData[sid] && studentData[sid].validations !== undefined) {
-                // Flip the boolean
                 studentData[sid].validations[cat] = !studentData[sid].validations[cat];
                 recalculateScores();
             }
@@ -501,7 +496,6 @@
         function renderTeacherBoard(isEnd = false) {
             const board = document.getElementById('teacher-board');
             
-            // Si está cargando la IA, no sobrescribimos el HTML completo
             if(document.getElementById('ai-loading-banner')) return;
 
             board.innerHTML = '';
@@ -614,29 +608,31 @@
             isRoundActive = false;
             clearInterval(timerInterval);
             document.getElementById('teacher-timer').innerText = "0s";
-            document.getElementById('btn-start-round').disabled = true; // Block until calculations done
+            document.getElementById('btn-start-round').disabled = true; 
             
             Object.values(connections).forEach(c => c.send({ type: 'END' }));
             
-            // 1. Mostrar pantalla de carga de la IA
             const board = document.getElementById('teacher-board');
             board.innerHTML = `
                 <div id="ai-loading-banner" class="col-span-full text-center py-16 bg-white rounded-xl shadow border border-gray-200">
-                    <i class="fa-solid fa-robot text-5xl mb-4 animate-bounce text-navy"></i>
-                    <h3 class="text-2xl font-serif font-bold text-gold mb-2">AI Spellchecking...</h3>
-                    <p class="text-sm text-gray-500 uppercase tracking-widest font-bold">Verifying vocabulary in real time</p>
+                    <i class="fa-solid fa-robot text-5xl mb-4 animate-bounce text-purple-700"></i>
+                    <h3 class="text-2xl font-serif font-bold text-navy mb-2">AI Spellchecking...</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-widest font-bold">Verifying spelling in real time</p>
                 </div>
             `;
 
-            // 2. Correr validaciones asíncronas
+            // Process validations in parallel for maximum speed
+            const validationPromises = [];
             for (let sid of Object.keys(studentData)) {
                 const s = studentData[sid];
                 for (let cat of CATEGORIES) {
-                    s.validations[cat] = await validateSpelling(s.answers[cat], cat, currentLetter);
+                    const p = validateSpelling(s.answers[cat], cat, currentLetter)
+                                .then(res => s.validations[cat] = res);
+                    validationPromises.push(p);
                 }
             }
+            await Promise.all(validationPromises);
 
-            // 3. Remover pantalla de carga y mostrar resultados finales
             const loadingBanner = document.getElementById('ai-loading-banner');
             if(loadingBanner) loadingBanner.remove();
 
@@ -654,9 +650,6 @@
             document.getElementById('btn-start-round').innerText = "New Round";
         }
 
-        // ==========================================
-        // STUDENT LOGIC
-        // ==========================================
         function studentConnect() {
             const pin = document.getElementById('input-pin').value.trim();
             const name = document.getElementById('input-name').value.trim();
@@ -780,9 +773,6 @@
             }
         }
 
-        // ==========================================
-        // SHARED TIMER LOGIC
-        // ==========================================
         function startTimer(isHost) {
             clearInterval(timerInterval);
             timeLeft = ROUND_TIME;
