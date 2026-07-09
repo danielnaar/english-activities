@@ -484,7 +484,7 @@
 
         // Activador Manual para el Profesor (Sobrescribir IA)
         window.toggleValidation = function(sid, cat) {
-            if (studentData[sid] && studentData[sid].validations) {
+            if (studentData[sid] && studentData[sid].validations !== undefined) {
                 // Cambia de True a False o viceversa
                 studentData[sid].validations[cat] = !studentData[sid].validations[cat];
                 recalculateScores();
