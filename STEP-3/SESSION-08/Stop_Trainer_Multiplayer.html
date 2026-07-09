@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stop Trainer - Premium English</title>
     
-    <!-- Google Fonts: Montserrat & Playfair Display -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,10 +40,8 @@
 
     <style>
         .bg-pattern {
-            background-color: #0B192C;
-            background-image: radial-gradient(#D4AF37 1px, transparent 1px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+            background-image: radial-gradient(circle at center, #D4AF37 1px, transparent 1px);
+            background-size: 24px 24px;
         }
         
         .animate-pop {
@@ -51,7 +49,7 @@
         }
 
         @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
+            0% { transform: scale(0.95); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
 
@@ -66,28 +64,35 @@
             75% { transform: translateX(-5px); }
         }
 
-        /* Custom Scrollbar for Teacher Board */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #F8F9FA; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-gray-200 text-dark font-sans min-h-screen p-4 md:p-8 flex items-center justify-center">
+<body class="bg-light text-dark font-sans min-h-screen py-8 px-4 lg:px-8 flex flex-col items-center">
 
-    <div class="w-full max-w-6xl mx-auto bg-light shadow-2xl rounded-xl overflow-hidden border-t-[6px] border-gold relative animate-pop">
+    <!-- Main Container -->
+    <main class="w-full max-w-6xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold flex flex-col mb-8 animate-pop">
         
-        <!-- Header -->
-        <header class="bg-pattern text-white p-6 md:p-8 text-center border-b-[4px] border-gold relative">
-            <h1 class="font-serif text-3xl md:text-5xl font-bold tracking-wide text-gold drop-shadow-md">Stop Trainer</h1>
-            <p class="mt-2 text-sm md:text-base font-medium tracking-widest uppercase opacity-90">Live Multiplayer Arena</p>
-            <div class="absolute top-4 right-4 bg-gold text-navy text-xs font-bold px-3 py-1 rounded-full uppercase">Premium English</div>
+        <!-- Classic Header (Dark & Gold) -->
+        <header class="bg-[#121212] relative border-b-[6px] border-gold px-8 py-10">
+            <div class="bg-pattern opacity-20 absolute inset-0 pointer-events-none"></div>
+            <div class="relative z-10 text-center flex flex-col items-center">
+                <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Live Multiplayer Arena</p>
+                <h1 class="text-4xl md:text-5xl text-gold font-serif tracking-wide mb-4">Stop Trainer</h1>
+                <p class="text-gray-400 font-sans max-w-2xl mx-auto text-md leading-relaxed">
+                    Test your quick-thinking vocabulary against the clock.<br/>
+                    <span class="text-white font-semibold">Every word must start with the active letter.</span>
+                </p>
+            </div>
         </header>
 
+        <!-- Dynamic Content Area -->
         <div class="p-6 md:p-8 relative min-h-[400px]">
             
-            <!-- VIEW 1: ROLE SELECTION -->
-            <div id="view-role" class="flex flex-col items-center justify-center space-y-6 animate-pop">
-                <h2 class="text-2xl font-serif font-bold text-navy mb-4">Choose your role</h2>
+            <div id="view-role" class="flex flex-col items-center justify-center space-y-6 animate-pop py-10">
+                <h2 class="text-2xl font-serif font-bold text-navy mb-8">Choose your role</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
                     
                     <button onclick="selectRole('teacher')" class="group relative overflow-hidden bg-white border-2 border-navy rounded-xl p-8 hover:bg-navy hover:text-white transition-all duration-300 shadow-md hover:shadow-xl flex flex-col items-center gap-4">
@@ -104,60 +109,70 @@
                 </div>
             </div>
 
-            <!-- VIEW 2: TEACHER DASHBOARD -->
             <div id="view-teacher" class="hidden flex-col h-full animate-pop">
                 
-                <div class="flex flex-col md:flex-row justify-between items-center bg-navy text-white p-4 rounded-xl shadow-inner mb-6 gap-4">
-                    <div class="text-center md:text-left flex-1">
-                        <p class="text-sm text-gold uppercase tracking-widest mb-1">Share this link with students:</p>
-                        <div class="flex items-center gap-2 bg-white/10 p-2 rounded-lg border border-white/20">
-                            <input type="text" id="share-url" readonly class="w-full bg-transparent outline-none text-white font-mono text-sm md:text-base" value="Generating...">
-                            <button onclick="copyShareUrl(event)" class="bg-gold text-navy hover:bg-white px-4 py-1.5 rounded font-bold transition-colors flex items-center gap-2 whitespace-nowrap" title="Copy Link">
-                                <i class="fa-solid fa-copy"></i> Copy
-                            </button>
+                <!-- Dashboard Top Bar -->
+                <div class="flex flex-col md:flex-row justify-between items-center bg-white border-2 border-gray-200 p-4 rounded-xl shadow-sm mb-6 gap-4">
+                    
+                    <div class="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+                        <div class="text-center md:text-left">
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-1">Room PIN</p>
+                            <div class="text-3xl font-bold tracking-widest text-navy" id="display-pin">----</div>
                         </div>
+                        <button onclick="copyInviteLink()" id="btn-copy" class="ml-2 bg-[#121212] hover:bg-navy text-gold text-xs px-4 py-2 rounded shadow transition-all font-bold uppercase flex items-center gap-2">
+                            <i class="fa-solid fa-link"></i> Copy URL
+                        </button>
                     </div>
                     
-                    <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-6 md:gap-10">
                         <div class="text-center">
-                            <p class="text-xs uppercase text-gray-400">Connected</p>
-                            <p class="text-2xl font-bold text-gold" id="connected-count">0</p>
+                            <p class="text-[10px] uppercase text-gray-500 font-bold">Connected</p>
+                            <p class="text-2xl font-bold text-navy" id="connected-count">0</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-xs uppercase text-gray-400">Time</p>
-                            <p class="text-3xl font-bold" id="teacher-timer">75s</p>
+                            <p class="text-[10px] uppercase text-gray-500 font-bold">Time</p>
+                            <p class="text-3xl font-bold text-navy" id="teacher-timer">75s</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-xs uppercase text-gray-400">Letter</p>
+                            <p class="text-[10px] uppercase text-gray-500 font-bold">Letter</p>
                             <p class="text-4xl font-bold text-gold font-serif" id="teacher-letter">?</p>
                         </div>
                     </div>
 
-                    <button id="btn-start-round" onclick="teacherStartRound()" class="bg-gold text-navy font-bold uppercase tracking-wider px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="btn-start-round" onclick="teacherStartRound()" class="bg-navy text-gold font-bold uppercase tracking-wider px-8 py-3 rounded-lg shadow hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
                         Start Round
                     </button>
+                </div>
+                
+                <!-- Teacher Success Banner (Dark/Gold sync) -->
+                <div id="teacher-success-banner" class="hidden flex-col items-center justify-center p-8 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold mb-6 text-center animate-pop">
+                    <div class="bg-gold/10 p-4 rounded-full mb-4 inline-block">
+                        <i class="fa-solid fa-check-double text-4xl text-gold"></i>
+                    </div>
+                    <h3 class="text-3xl font-serif font-bold text-gold mb-2">Round Complete!</h3>
+                    <p class="text-gray-300 text-sm tracking-widest uppercase font-medium">Let's review the students' answers below.</p>
                 </div>
 
                 <!-- Teacher Live Board (Grid for students) -->
                 <div id="teacher-board" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Student columns will be injected here dynamically -->
-                    <div class="col-span-full text-center py-12 text-gray-400 border-2 border-dashed border-gray-300 rounded-xl">
-                        <i class="fa-solid fa-satellite-dish text-4xl mb-3 animate-pulse"></i>
-                        <p class="uppercase tracking-widest">Waiting for students to connect...</p>
+                    <!-- Default waiting message -->
+                    <div class="col-span-full text-center py-16 text-gray-400 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50">
+                        <i class="fa-solid fa-satellite-dish text-5xl mb-4 animate-pulse text-gold"></i>
+                        <p class="uppercase tracking-widest font-bold">Waiting for students to join...</p>
+                        <p class="text-sm mt-2 opacity-70">Share the URL with your students.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- VIEW 3: STUDENT DASHBOARD -->
             <div id="view-student" class="hidden flex-col items-center animate-pop max-w-md mx-auto w-full">
                 
-                <!-- Student Setup -->
-                <div id="student-setup" class="w-full bg-white p-6 rounded-xl shadow-md border-t-4 border-navy">
-                    <h2 class="font-serif text-2xl font-bold text-navy text-center mb-6">Join the Game</h2>
+                <!-- Student Setup (Join Form) -->
+                <div id="student-setup" class="w-full bg-white p-6 rounded-xl shadow-lg border-t-[4px] border-gold">
+                    <h2 class="font-serif text-2xl font-bold text-navy text-center mb-6">Join the Arena</h2>
                     
                     <div class="mb-4">
                         <label class="block text-xs uppercase tracking-wider text-gray-500 mb-2 font-bold">Room PIN</label>
-                        <input type="number" id="input-pin" class="w-full bg-gray-50 border border-gray-300 text-dark text-lg rounded-lg focus:ring-gold focus:border-gold block p-3 text-center tracking-[0.5em] font-bold" placeholder="1234">
+                        <input type="number" id="input-pin" class="w-full bg-gray-50 border border-gray-300 text-dark text-xl rounded-lg focus:ring-gold focus:border-gold block p-3 text-center tracking-[0.5em] font-bold" placeholder="1234">
                     </div>
                     
                     <div class="mb-6">
@@ -165,47 +180,69 @@
                         <input type="text" id="input-name" class="w-full bg-gray-50 border border-gray-300 text-dark text-lg rounded-lg focus:ring-gold focus:border-gold block p-3" placeholder="e.g. Carlos">
                     </div>
 
-                    <button id="btn-connect" onclick="studentConnect()" class="w-full bg-navy text-white font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-90 transition-all flex items-center justify-center gap-2">
+                    <button id="btn-connect" onclick="studentConnect()" class="w-full bg-[#121212] text-gold font-bold uppercase tracking-wider px-6 py-4 rounded-lg shadow-lg hover:bg-navy transition-all flex items-center justify-center gap-2">
                         <span>Connect</span>
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="fa-solid fa-paper-plane"></i>
                     </button>
                     
                     <p id="student-status-msg" class="text-center text-sm font-bold mt-4 text-gray-500 hidden"></p>
                 </div>
 
-                <!-- Student Game Arena -->
+                <!-- Student Game Arena Container -->
                 <div id="student-arena" class="w-full hidden flex-col gap-4">
-                    <div class="bg-navy text-white p-4 rounded-xl shadow-md flex justify-between items-center border-b-4 border-gold">
-                        <div>
-                            <p class="text-xs uppercase text-gray-400">Time Limit</p>
-                            <p class="text-3xl font-bold" id="student-timer">75s</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-xs uppercase text-gray-400">Letter</p>
-                            <p class="text-5xl font-bold text-gold font-serif" id="student-letter">?</p>
-                        </div>
+                    
+                    <!-- Waiting Banner -->
+                    <div id="waiting-banner" class="flex flex-col items-center justify-center p-10 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold/50 text-center animate-pop w-full mx-auto mt-4">
+                        <i class="fa-solid fa-hourglass-half text-5xl text-gold animate-bounce mb-6"></i>
+                        <h2 class="text-2xl font-serif font-bold text-gold mb-2">Waiting for Teacher</h2>
+                        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">Eyes on the main screen!</p>
                     </div>
 
-                    <div id="student-inputs" class="bg-white p-4 rounded-xl shadow-md space-y-3 border border-gray-200">
-                        <!-- Inputs injected dynamically -->
+                    <!-- Success Banner (End of Round) -->
+                    <div id="success-banner" class="hidden flex-col items-center justify-center p-10 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold text-center animate-pop w-full mx-auto mt-4">
+                        <div class="bg-gold/10 p-5 rounded-full mb-6 inline-block">
+                            <i class="fa-solid fa-trophy text-6xl text-gold"></i>
+                        </div>
+                        <h2 class="text-4xl font-serif font-bold text-gold mb-4">Time's Up!</h2>
+                        <div class="w-16 h-1 bg-gold mx-auto mb-4 rounded-full"></div>
+                        <p class="text-white text-lg font-medium tracking-wide">Check the main screen to see the results.</p>
                     </div>
 
-                    <div id="waiting-screen" class="bg-white p-8 rounded-xl shadow-md border border-gray-200 text-center hidden">
-                        <i class="fa-solid fa-hourglass-half text-4xl text-gold animate-bounce mb-4"></i>
-                        <h3 class="text-xl font-bold text-navy mb-2">Waiting for the Teacher</h3>
-                        <p class="text-sm text-gray-500">Eyes on the main screen! The round will start soon.</p>
+                    <!-- Active Game Inputs -->
+                    <div id="student-active-game" class="w-full hidden flex-col gap-4">
+                        <div class="bg-[#121212] text-white p-4 rounded-xl shadow-md flex justify-between items-center border-b-[3px] border-gold">
+                            <div>
+                                <p class="text-[10px] uppercase text-gray-400 tracking-widest font-bold">Time Limit</p>
+                                <p class="text-3xl font-bold text-gold" id="student-timer">75s</p>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-[10px] uppercase text-gray-400 tracking-widest font-bold">Letter</p>
+                                <p class="text-5xl font-bold text-white font-serif" id="student-letter">?</p>
+                            </div>
+                        </div>
+
+                        <div id="student-inputs" class="bg-white p-5 rounded-xl shadow-md space-y-4 border border-gray-200">
+                            <!-- Inputs injected dynamically -->
+                        </div>
                     </div>
                 </div>
 
             </div>
 
         </div>
-        
-        <!-- Footer -->
-        <footer class="bg-[#121212] text-white py-4 text-center text-sm font-medium tracking-wide">
-            © 2026 Premium English - Interactive Live Framework
-        </footer>
-    </div>
+
+    </main>
+    
+    <!-- Classic Footer -->
+    <footer class="w-full max-w-6xl mx-auto bg-[#121212] py-5 px-8 mt-auto rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+        <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
+            PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
+        </div>
+        <div class="text-gray-400 text-xs font-sans text-center md:text-right leading-relaxed">
+            Words are verified instantly by <span class="text-gold font-semibold">Premium English Validator</span>.<br>
+            <span class="italic">Multiplayer Edition Framework.</span>
+        </div>
+    </footer>
 
     <!-- AUDIO EFFECTS -->
     <audio id="sfx-tick" src="https://assets.mixkit.co/sfx/preview/mixkit-tick-tock-clock-timer-1045.mp3" preload="auto"></audio>
@@ -213,46 +250,41 @@
     <audio id="sfx-connect" src="https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3" preload="auto"></audio>
 
     <script>
-        // --- CONSTANTS & STATE ---
         const PREFIX = 'PREMIUM-ENG-';
         const CATEGORIES = ['Name', 'Place', 'Food', 'Object', 'Animal', 'Color'];
-        const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVW'.split(''); // Removed hard letters X, Y, Z
+        const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVW'.split(''); // Excluded X,Y,Z
         const ROUND_TIME = 75;
 
         let role = null;
         let peer = null;
-        let conn = null; // Used by student
-        let connections = {}; // Used by teacher { studentId: connectionObj }
-        let studentData = {}; // Used by teacher { studentId: { name, answers: {} } }
+        let conn = null; // Student connection object
+        let connections = {}; // Teacher connections object
+        let studentData = {}; // Teacher stored data
         
         let timerInterval;
         let timeLeft = ROUND_TIME;
         let currentLetter = '';
         let isRoundActive = false;
 
-        // --- SOUND EFFECTS ---
         const playSound = (id) => {
             const audio = document.getElementById(id);
-            if(audio) { audio.currentTime = 0; audio.play().catch(e=>console.log("Audio prep:", e)); }
+            if(audio) { audio.currentTime = 0; audio.play().catch(e=>console.log(e)); }
         };
 
-        // --- AUTO-JOIN VIA URL ---
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const pinFromUrl = urlParams.get('pin');
             
+            // If URL has a PIN, auto-assign Student role and fill PIN
             if (pinFromUrl) {
-                // If a PIN is in the URL, go straight to student view
                 selectRole('student');
                 const pinInput = document.getElementById('input-pin');
                 pinInput.value = pinFromUrl;
-                pinInput.disabled = true; // Lock the PIN so they don't break the connection
-                pinInput.classList.add('bg-gray-200', 'cursor-not-allowed');
-                document.getElementById('input-name').focus();
+                pinInput.readOnly = true;
+                pinInput.classList.add('bg-gray-200', 'cursor-not-allowed', 'opacity-80');
             }
         };
 
-        // --- UI NAVIGATION ---
         function selectRole(selectedRole) {
             role = selectedRole;
             document.getElementById('view-role').classList.add('hidden');
@@ -266,23 +298,15 @@
         }
 
         // ==========================================
-        // TEACHER (HOST) LOGIC
+        // TEACHER LOGIC
         // ==========================================
         function initTeacher() {
-            // Generate a random 4 digit PIN
             const pin = Math.floor(1000 + Math.random() * 9000).toString();
+            document.getElementById('display-pin').innerText = pin;
             
-            // Generate Shareable URL based on current hosting (GitHub)
-            const currentUrl = window.location.href.split('?')[0]; 
-            const shareUrl = `${currentUrl}?pin=${pin}`;
-            document.getElementById('share-url').value = shareUrl;
-            
-            // Initialize Real WebRTC Host for Internet
             peer = new Peer(PREFIX + pin);
 
-            peer.on('open', (id) => {
-                console.log('Teacher Room Created. ID: ' + id);
-            });
+            peer.on('open', (id) => console.log('Room Created:', id));
 
             peer.on('connection', (connection) => {
                 const studentId = connection.peer;
@@ -304,29 +328,40 @@
                     renderTeacherBoard();
                 });
             });
-
-            peer.on('error', (err) => {
-                alert('Connection Error: ' + err.type);
-                console.error(err);
-            });
         }
 
-        function copyShareUrl(event) {
-            const copyText = document.getElementById('share-url');
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
+        function copyInviteLink() {
+            const pin = document.getElementById('display-pin').innerText;
+            // Build absolute URL based on current page path
+            const url = window.location.origin + window.location.pathname + '?pin=' + pin;
             
-            const btn = event.currentTarget;
-            const originalHTML = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-            btn.classList.replace('bg-gold', 'bg-green-500');
-            btn.classList.replace('text-navy', 'text-white');
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.classList.replace('bg-green-500', 'bg-gold');
-                btn.classList.replace('text-white', 'text-navy');
-            }, 2000);
+            const btn = document.getElementById('btn-copy');
+            
+            // Clipboard API implementation
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(() => {
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
+                    btn.classList.replace('text-gold', 'text-green-400');
+                    setTimeout(() => {
+                        btn.innerHTML = `<i class="fa-solid fa-link"></i> Copy URL`;
+                        btn.classList.replace('text-green-400', 'text-gold');
+                    }, 2000);
+                });
+            } else {
+                // Fallback for older browsers or non-HTTPS
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
+                    setTimeout(() => btn.innerHTML = `<i class="fa-solid fa-link"></i> Copy URL`, 2000);
+                } catch (err) {
+                    alert("Unable to copy URL automatically.");
+                }
+                document.body.removeChild(textArea);
+            }
         }
 
         function updateConnectedCount() {
@@ -336,25 +371,23 @@
             
             if(count === 0) {
                 document.getElementById('teacher-board').innerHTML = `
-                    <div class="col-span-full text-center py-12 text-gray-400 border-2 border-dashed border-gray-300 rounded-xl">
-                        <i class="fa-solid fa-satellite-dish text-4xl mb-3 animate-pulse"></i>
-                        <p class="uppercase tracking-widest">Waiting for students to connect...</p>
+                    <div class="col-span-full text-center py-16 text-gray-400 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50">
+                        <i class="fa-solid fa-satellite-dish text-5xl mb-4 animate-pulse text-gold"></i>
+                        <p class="uppercase tracking-widest font-bold">Waiting for students to join...</p>
+                        <p class="text-sm mt-2 opacity-70">Share the URL with your students.</p>
                     </div>`;
             }
         }
 
         function handleStudentData(studentId, data) {
             if (data.type === 'JOIN') {
-                // Register student
                 studentData[studentId] = { name: data.name, answers: {} };
                 CATEGORIES.forEach(cat => studentData[studentId].answers[cat] = '');
                 renderTeacherBoard();
             } 
             else if (data.type === 'TYPE') {
-                // Real-time typing sync
                 if (studentData[studentId]) {
                     studentData[studentId].answers[data.category] = data.value;
-                    // Update specific input directly for performance (instead of full re-render)
                     const inputEl = document.getElementById(`teacher-view-${studentId}-${data.category}`);
                     if (inputEl) inputEl.value = data.value;
                 }
@@ -371,22 +404,22 @@
                 let inputsHTML = '';
                 CATEGORIES.forEach(cat => {
                     inputsHTML += `
-                        <div class="flex items-center bg-gray-50 rounded border border-gray-200 overflow-hidden">
+                        <div class="flex items-center bg-gray-50 rounded border border-gray-200 overflow-hidden shadow-sm">
                             <div class="bg-gray-200 text-gray-600 text-[10px] uppercase tracking-wider font-bold w-20 p-2 text-center border-r border-gray-300">
                                 ${cat}
                             </div>
                             <input type="text" id="teacher-view-${studentId}-${cat}" value="${s.answers[cat]}" readonly
                                 class="w-full bg-transparent p-2 text-sm font-semibold text-navy outline-none" placeholder="...">
-                            <div class="w-8 text-center" id="validation-${studentId}-${cat}"></div>
+                            <div class="w-10 text-center flex items-center justify-center" id="validation-${studentId}-${cat}"></div>
                         </div>
                     `;
                 });
 
                 const col = document.createElement('div');
-                col.className = 'bg-white rounded-xl shadow-md border-t-4 border-gold p-4 animate-pop relative';
+                col.className = 'bg-white rounded-xl shadow-md border-t-4 border-gold p-5 animate-pop relative';
                 col.innerHTML = `
-                    <div class="absolute top-0 right-0 bg-gold text-white text-xs px-2 py-1 rounded-bl-lg font-bold">Player</div>
-                    <h3 class="font-bold text-lg text-navy mb-4 border-b pb-2"><i class="fa-solid fa-user-graduate mr-2 text-gold"></i>${s.name}</h3>
+                    <div class="absolute top-0 right-0 bg-[#121212] text-gold text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest">Player</div>
+                    <h3 class="font-serif font-bold text-xl text-navy mb-4 border-b pb-2"><i class="fa-solid fa-user-graduate mr-2 text-gold"></i>${s.name}</h3>
                     <div class="space-y-2">
                         ${inputsHTML}
                     </div>
@@ -398,6 +431,9 @@
         function teacherStartRound() {
             if (Object.keys(connections).length === 0) return;
 
+            // Hide success banner on new round
+            document.getElementById('teacher-success-banner').classList.replace('flex', 'hidden');
+
             // Pick random letter
             currentLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
             document.getElementById('teacher-letter').innerText = currentLetter;
@@ -405,7 +441,6 @@
             // Clear board answers
             Object.keys(studentData).forEach(sid => {
                 CATEGORIES.forEach(cat => studentData[sid].answers[cat] = '');
-                // clear visual validation
                 CATEGORIES.forEach(cat => {
                     const iconEl = document.getElementById(`validation-${sid}-${cat}`);
                     if(iconEl) iconEl.innerHTML = '';
@@ -418,18 +453,15 @@
                 c.send({ type: 'START', letter: currentLetter });
             });
 
-            // Start Timer
             startTimer(true);
             playSound('sfx-bell');
         }
 
         function teacherEndRound() {
-            // Broadcast END to students
-            Object.values(connections).forEach(c => {
-                c.send({ type: 'END' });
-            });
+            // Broadcast END
+            Object.values(connections).forEach(c => c.send({ type: 'END' }));
             
-            // Run basic visual validation (Does it start with the correct letter?)
+            // Run basic validation
             Object.keys(studentData).forEach(sid => {
                 const s = studentData[sid];
                 CATEGORIES.forEach(cat => {
@@ -437,17 +469,26 @@
                     const iconEl = document.getElementById(`validation-${sid}-${cat}`);
                     if (iconEl) {
                         if (val.length > 0 && val.startsWith(currentLetter)) {
-                            iconEl.innerHTML = '<i class="fa-solid fa-check text-green-500"></i>';
+                            iconEl.innerHTML = '<i class="fa-solid fa-check text-green-500 text-lg"></i>';
                         } else if (val.length > 0) {
-                            iconEl.innerHTML = '<i class="fa-solid fa-xmark text-red-500"></i>';
+                            iconEl.innerHTML = '<i class="fa-solid fa-xmark text-red-500 text-lg"></i>';
                         }
                     }
                 });
             });
+
+            // Show Success Banner and smoothly scroll to it
+            const banner = document.getElementById('teacher-success-banner');
+            banner.classList.replace('hidden', 'flex');
+            
+            // Timeout ensures the element is rendered before scrolling
+            setTimeout(() => {
+                banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
 
         // ==========================================
-        // STUDENT (CLIENT) LOGIC
+        // STUDENT LOGIC
         // ==========================================
         function studentConnect() {
             const pin = document.getElementById('input-pin').value.trim();
@@ -462,46 +503,33 @@
 
             msgEl.innerText = "Connecting to classroom...";
             msgEl.className = "text-center text-sm font-bold mt-4 text-gold block";
-            
             document.getElementById('btn-connect').disabled = true;
 
-            // Initialize Real WebRTC Client for Internet
             peer = new Peer();
 
             peer.on('open', (id) => {
-                // Connect to Teacher
                 conn = peer.connect(PREFIX + pin);
 
                 conn.on('open', () => {
-                    // Send Join Data
                     conn.send({ type: 'JOIN', name: name });
                     
-                    // Switch UI
                     document.getElementById('student-setup').classList.add('hidden');
                     document.getElementById('student-arena').classList.replace('hidden', 'flex');
-                    document.getElementById('waiting-screen').classList.replace('hidden', 'block');
+                    document.getElementById('waiting-banner').classList.replace('hidden', 'flex');
                     playSound('sfx-connect');
 
                     renderStudentInputs();
                 });
 
                 conn.on('data', (data) => {
-                    if (data.type === 'START') {
-                        studentStartRound(data.letter);
-                    }
-                    else if (data.type === 'END') {
-                        studentEndRound();
-                    }
+                    if (data.type === 'START') studentStartRound(data.letter);
+                    else if (data.type === 'END') studentEndRound();
                 });
 
-                conn.on('error', (err) => {
-                    showStudentError("Connection dropped.");
-                });
+                conn.on('error', () => showStudentError("Connection dropped."));
             });
 
-            peer.on('error', (err) => {
-                showStudentError("Invalid PIN or connection failed.");
-            });
+            peer.on('error', () => showStudentError("Invalid PIN or connection failed."));
         }
 
         function showStudentError(msg) {
@@ -517,23 +545,21 @@
 
             CATEGORIES.forEach(cat => {
                 const wrapper = document.createElement('div');
-                wrapper.className = "flex items-center gap-2";
+                wrapper.className = "flex items-center gap-3";
                 
                 const label = document.createElement('div');
-                label.className = "w-24 text-xs font-bold text-navy uppercase tracking-wider text-right";
+                label.className = "w-20 text-[11px] font-bold text-gray-500 uppercase tracking-wider text-right";
                 label.innerText = cat;
                 
                 const input = document.createElement('input');
                 input.type = "text";
                 input.id = `input-cat-${cat}`;
-                input.className = "w-full bg-gray-50 border border-gray-300 text-dark rounded focus:ring-2 focus:ring-gold focus:border-gold block p-2 transition-all disabled:bg-gray-200";
-                input.disabled = true; // Disabled until round starts
+                input.className = "w-full bg-gray-50 border border-gray-300 text-navy font-semibold rounded-lg focus:ring-2 focus:ring-gold focus:border-gold block p-3 transition-all disabled:bg-gray-200 disabled:opacity-50";
+                input.disabled = true;
                 
-                // SEND REAL-TIME TYPING TO HOST
+                // Real-time syncing
                 input.addEventListener('input', (e) => {
-                    if (conn && conn.open) {
-                        conn.send({ type: 'TYPE', category: cat, value: e.target.value });
-                    }
+                    if (conn && conn.open) conn.send({ type: 'TYPE', category: cat, value: e.target.value });
                 });
 
                 wrapper.appendChild(label);
@@ -545,18 +571,20 @@
         function studentStartRound(letter) {
             currentLetter = letter;
             document.getElementById('student-letter').innerText = letter;
-            document.getElementById('waiting-screen').classList.replace('block', 'hidden');
             
-            // Enable and clear inputs
+            // Hide banners, show game
+            document.getElementById('waiting-banner').classList.replace('flex', 'hidden');
+            document.getElementById('success-banner').classList.replace('flex', 'hidden');
+            document.getElementById('student-active-game').classList.replace('hidden', 'flex');
+            
+            // Enable inputs
             CATEGORIES.forEach(cat => {
                 const input = document.getElementById(`input-cat-${cat}`);
                 input.value = '';
                 input.disabled = false;
             });
             
-            // Focus first input
             document.getElementById(`input-cat-${CATEGORIES[0]}`).focus();
-
             startTimer(false);
             playSound('sfx-bell');
         }
@@ -567,15 +595,18 @@
             document.getElementById('student-timer').innerText = "0s";
             
             // Disable inputs
-            CATEGORIES.forEach(cat => {
-                document.getElementById(`input-cat-${cat}`).disabled = true;
-            });
+            CATEGORIES.forEach(cat => document.getElementById(`input-cat-${cat}`).disabled = true);
 
-            document.getElementById('waiting-screen').classList.replace('hidden', 'block');
-            document.querySelector('#waiting-screen h3').innerText = "Time is up!";
-            document.querySelector('#waiting-screen p').innerText = "Look at the teacher's screen for results.";
+            // Hide Game, Show Dark Success Banner
+            document.getElementById('student-active-game').classList.replace('flex', 'hidden');
+            const successBanner = document.getElementById('success-banner');
+            successBanner.classList.replace('hidden', 'flex');
+            
+            // Smooth scroll to banner
+            setTimeout(() => {
+                successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
         }
-
 
         // ==========================================
         // SHARED TIMER LOGIC
@@ -589,9 +620,7 @@
             timerDisplay.innerText = timeLeft + 's';
             timerDisplay.classList.remove('text-red-500', 'animate-ping');
 
-            if(isHost) {
-                document.getElementById('btn-start-round').disabled = true;
-            }
+            if(isHost) document.getElementById('btn-start-round').disabled = true;
 
             timerInterval = setInterval(() => {
                 timeLeft--;
