@@ -27,7 +27,8 @@
                         navy: '#0B192C',
                         gold: '#D4AF37',
                         light: '#F8F9FA',
-                        dark: '#121212'
+                        dark: '#121212',
+                        success: '#10B981',
                     },
                     fontFamily: {
                         sans: ['Montserrat', 'sans-serif'],
@@ -73,7 +74,7 @@
 <body class="bg-light text-dark font-sans min-h-screen py-8 px-4 lg:px-8 flex flex-col items-center">
 
     <!-- Main Container -->
-    <main class="w-full max-w-6xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold flex flex-col mb-8 animate-pop">
+    <main class="w-full max-w-7xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold flex flex-col mb-8 animate-pop">
         
         <!-- Classic Header (Dark & Gold) -->
         <header class="bg-[#121212] relative border-b-[6px] border-gold px-8 py-10">
@@ -83,7 +84,7 @@
                 <h1 class="text-4xl md:text-5xl text-gold font-serif tracking-wide mb-4">Stop Trainer</h1>
                 <p class="text-gray-400 font-sans max-w-2xl mx-auto text-md leading-relaxed">
                     Test your quick-thinking vocabulary against the clock.<br/>
-                    <span class="text-white font-semibold">Every word must start with the active letter.</span>
+                    <span class="text-white font-semibold">Earn points for correct words and speed bonuses!</span>
                 </p>
             </div>
         </header>
@@ -131,7 +132,7 @@
                         </div>
                         <div class="text-center">
                             <p class="text-[10px] uppercase text-gray-500 font-bold">Time</p>
-                            <p class="text-3xl font-bold text-navy" id="teacher-timer">75s</p>
+                            <p class="text-3xl font-bold text-navy" id="teacher-timer">135s</p>
                         </div>
                         <div class="text-center">
                             <p class="text-[10px] uppercase text-gray-500 font-bold">Letter</p>
@@ -150,7 +151,7 @@
                         <i class="fa-solid fa-check-double text-4xl text-gold"></i>
                     </div>
                     <h3 class="text-3xl font-serif font-bold text-gold mb-2">Round Complete!</h3>
-                    <p class="text-gray-300 text-sm tracking-widest uppercase font-medium">Let's review the students' answers below.</p>
+                    <p class="text-gray-300 text-sm tracking-widest uppercase font-medium">Final Scores are calculated below.</p>
                 </div>
 
                 <!-- Teacher Live Board (Grid for students) -->
@@ -194,8 +195,8 @@
                     <!-- Waiting Banner -->
                     <div id="waiting-banner" class="flex flex-col items-center justify-center p-10 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold/50 text-center animate-pop w-full mx-auto mt-4">
                         <i class="fa-solid fa-hourglass-half text-5xl text-gold animate-bounce mb-6"></i>
-                        <h2 class="text-2xl font-serif font-bold text-gold mb-2">Waiting for Teacher</h2>
-                        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase">Eyes on the main screen!</p>
+                        <h2 class="text-2xl font-serif font-bold text-gold mb-2" id="wait-title">Waiting for Teacher</h2>
+                        <p class="text-gray-400 text-sm font-medium tracking-widest uppercase" id="wait-desc">Eyes on the main screen!</p>
                     </div>
 
                     <!-- Success Banner (End of Round) -->
@@ -203,9 +204,9 @@
                         <div class="bg-gold/10 p-5 rounded-full mb-6 inline-block">
                             <i class="fa-solid fa-trophy text-6xl text-gold"></i>
                         </div>
-                        <h2 class="text-4xl font-serif font-bold text-gold mb-4">Time's Up!</h2>
+                        <h2 class="text-4xl font-serif font-bold text-gold mb-4">Round Ended</h2>
                         <div class="w-16 h-1 bg-gold mx-auto mb-4 rounded-full"></div>
-                        <p class="text-white text-lg font-medium tracking-wide">Check the main screen to see the results.</p>
+                        <p class="text-white text-lg font-medium tracking-wide">Check the main screen to see your score.</p>
                     </div>
 
                     <!-- Active Game Inputs -->
@@ -213,7 +214,7 @@
                         <div class="bg-[#121212] text-white p-4 rounded-xl shadow-md flex justify-between items-center border-b-[3px] border-gold">
                             <div>
                                 <p class="text-[10px] uppercase text-gray-400 tracking-widest font-bold">Time Limit</p>
-                                <p class="text-3xl font-bold text-gold" id="student-timer">75s</p>
+                                <p class="text-3xl font-bold text-gold" id="student-timer">135s</p>
                             </div>
                             <div class="text-center">
                                 <p class="text-[10px] uppercase text-gray-400 tracking-widest font-bold">Letter</p>
@@ -221,8 +222,16 @@
                             </div>
                         </div>
 
-                        <div id="student-inputs" class="bg-white p-5 rounded-xl shadow-md space-y-4 border border-gray-200">
-                            <!-- Inputs injected dynamically -->
+                        <div class="bg-white p-5 rounded-xl shadow-md border border-gray-200">
+                            <div id="student-inputs" class="space-y-4 mb-6">
+                                <!-- Inputs injected dynamically -->
+                            </div>
+                            
+                            <button id="btn-submit-early" onclick="studentSubmitEarly()" class="w-full bg-gold text-navy font-bold uppercase tracking-wider px-6 py-4 rounded-lg shadow-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-2">
+                                <span>Submit Answers</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                            <p class="text-center text-[10px] text-gray-500 mt-2 font-bold uppercase tracking-widest">Finish early for bonus points!</p>
                         </div>
                     </div>
                 </div>
@@ -234,7 +243,7 @@
     </main>
     
     <!-- Classic Footer -->
-    <footer class="w-full max-w-6xl mx-auto bg-[#121212] py-5 px-8 mt-auto rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
+    <footer class="w-full max-w-7xl mx-auto bg-[#121212] py-5 px-8 mt-auto rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-gold shadow-xl">
         <div class="text-white font-serif font-bold text-lg tracking-widest mb-3 md:mb-0 flex items-center">
             PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
         </div>
@@ -248,15 +257,15 @@
     <audio id="sfx-tick" src="https://assets.mixkit.co/sfx/preview/mixkit-tick-tock-clock-timer-1045.mp3" preload="auto"></audio>
     <audio id="sfx-bell" src="https://assets.mixkit.co/sfx/preview/mixkit-boxing-bell-step-231.mp3" preload="auto"></audio>
     <audio id="sfx-connect" src="https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3" preload="auto"></audio>
+    <audio id="sfx-success" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" preload="auto"></audio>
 
     <script>
         const PREFIX = 'PREMIUM-ENG-';
         const CATEGORIES = ['Name', 'Place', 'Food', 'Object', 'Animal', 'Color'];
         const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVW'.split(''); // Excluded X,Y,Z
-        const ROUND_TIME = 75;
-        const MAX_STUDENTS = 3; // Limite estricto a 3 estudiantes
+        const ROUND_TIME = 135; // 2 minutes and 15 seconds
+        const MAX_STUDENTS = 3; 
 
-        // Servidores STUN de Google para garantizar conexión entre diferentes redes WiFi/Móviles
         const PEER_CONFIG = {
             config: {
                 'iceServers': [
@@ -268,9 +277,9 @@
 
         let role = null;
         let peer = null;
-        let conn = null; // Student connection object
-        let connections = {}; // Teacher connections object
-        let studentData = {}; // Teacher stored data
+        let conn = null; 
+        let connections = {}; 
+        let studentData = {}; 
         
         let timerInterval;
         let timeLeft = ROUND_TIME;
@@ -286,7 +295,6 @@
             const urlParams = new URLSearchParams(window.location.search);
             const pinFromUrl = urlParams.get('pin');
             
-            // If URL has a PIN, auto-assign Student role and fill PIN
             if (pinFromUrl) {
                 selectRole('student');
                 const pinInput = document.getElementById('input-pin');
@@ -319,16 +327,13 @@
 
             peer.on('open', (id) => console.log('Room Created:', id));
 
-            // Auto-reconectar si el profesor pierde señal brevemente
             peer.on('disconnected', () => {
-                console.log('Connection to signaling server lost. Reconnecting...');
                 peer.reconnect();
             });
 
             peer.on('connection', (connection) => {
                 const studentId = connection.peer;
                 
-                // Limitar exactamente a 3 estudiantes
                 if (Object.keys(connections).length >= MAX_STUDENTS && !connections[studentId]) {
                     connection.on('open', () => {
                         connection.send({ type: 'ERROR', message: 'Room is full (Max 3 players).' });
@@ -358,12 +363,9 @@
 
         function copyInviteLink() {
             const pin = document.getElementById('display-pin').innerText;
-            // Build absolute URL based on current page path
             const url = window.location.origin + window.location.pathname + '?pin=' + pin;
-            
             const btn = document.getElementById('btn-copy');
             
-            // Clipboard API implementation
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(url).then(() => {
                     btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
@@ -374,7 +376,6 @@
                     }, 2000);
                 });
             } else {
-                // Fallback for older browsers or non-HTTPS
                 const textArea = document.createElement("textarea");
                 textArea.value = url;
                 document.body.appendChild(textArea);
@@ -383,9 +384,7 @@
                     document.execCommand('copy');
                     btn.innerHTML = `<i class="fa-solid fa-check"></i> Copied!`;
                     setTimeout(() => btn.innerHTML = `<i class="fa-solid fa-link"></i> Copy URL`, 2000);
-                } catch (err) {
-                    alert("Unable to copy URL automatically.");
-                }
+                } catch (err) {}
                 document.body.removeChild(textArea);
             }
         }
@@ -407,7 +406,14 @@
 
         function handleStudentData(studentId, data) {
             if (data.type === 'JOIN') {
-                studentData[studentId] = { name: data.name, answers: {} };
+                studentData[studentId] = { 
+                    name: data.name, 
+                    answers: {}, 
+                    validations: {}, // True/False for scoring
+                    submitted: false, 
+                    timeRemaining: 0, 
+                    finalScore: 0 
+                };
                 CATEGORIES.forEach(cat => studentData[studentId].answers[cat] = '');
                 renderTeacherBoard();
             } 
@@ -418,10 +424,86 @@
                     if (inputEl) inputEl.value = data.value;
                 }
             }
+            else if (data.type === 'SUBMIT') {
+                if (studentData[studentId] && isRoundActive) {
+                    studentData[studentId].submitted = true;
+                    studentData[studentId].timeRemaining = data.timeRemaining;
+                    renderTeacherBoard(); 
+                    
+                    const allSubmitted = Object.values(studentData).every(s => s.submitted);
+                    if (allSubmitted) {
+                        teacherEndRound();
+                    }
+                }
+            }
         }
 
-        function renderTeacherBoard() {
+        // ==========================================
+        // AI SPELLCHECKER ENGINE (Datamuse API)
+        // ==========================================
+        async function validateSpelling(word, category, letter) {
+            const cleanWord = word.trim().toUpperCase().replace(/[^A-Z\s]/g, ''); 
+            
+            // 1. Basic Rule: Must start with correct letter and not be empty
+            if (cleanWord.length < 2 || cleanWord.charAt(0) !== letter) return false;
+            
+            // 2. Names & Places: Too subjective for strict dictionary. Accept if basic rule passes.
+            if (['Name', 'Place'].includes(category)) {
+                return true;
+            }
+
+            // 3. Strict Spelling Check for standard vocabulary via Free API
+            try {
+                const queryWord = cleanWord.toLowerCase();
+                // Datamuse 'sp' checks exact spelling. If mispelled, it returns suggestions.
+                // We check if the exact word we typed is in the returned array.
+                const res = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(queryWord)}&max=1`);
+                const data = await res.json();
+                
+                if (data && data.length > 0) {
+                    // Exact match check
+                    return data[0].word.toLowerCase() === queryWord;
+                }
+                return false;
+            } catch (e) {
+                // If API fails (no internet/blocked), fallback to true to not ruin the game
+                return true; 
+            }
+        }
+
+        // ==========================================
+        // TEACHER MANUAL OVERRIDE
+        // ==========================================
+        function toggleValidation(sid, cat) {
+            if (studentData[sid] && studentData[sid].validations !== undefined) {
+                // Flip the boolean
+                studentData[sid].validations[cat] = !studentData[sid].validations[cat];
+                recalculateScores();
+            }
+        }
+
+        function recalculateScores() {
+            Object.keys(studentData).forEach(sid => {
+                const s = studentData[sid];
+                let wordsCorrect = 0;
+                
+                CATEGORIES.forEach(cat => {
+                    if (s.validations[cat] === true) wordsCorrect++;
+                });
+
+                let timeBonus = s.submitted && wordsCorrect > 0 ? s.timeRemaining : 0;
+                s.finalScore = (wordsCorrect * 10) + timeBonus;
+            });
+
+            renderTeacherBoard(true);
+        }
+
+        function renderTeacherBoard(isEnd = false) {
             const board = document.getElementById('teacher-board');
+            
+            // Si está cargando la IA, no sobrescribimos el HTML completo
+            if(document.getElementById('ai-loading-banner')) return;
+
             board.innerHTML = '';
 
             Object.keys(studentData).forEach(studentId => {
@@ -429,26 +511,75 @@
                 
                 let inputsHTML = '';
                 CATEGORIES.forEach(cat => {
+                    let valIcon = '';
+                    let interactableClass = '';
+                    let onClickAttr = '';
+
+                    if (isEnd) {
+                        interactableClass = 'cursor-pointer hover:bg-gray-200 transition-colors duration-200 group';
+                        onClickAttr = `onclick="toggleValidation('${studentId}', '${cat}')" title="Click to override AI validation"`;
+                        
+                        if (s.validations[cat]) {
+                            valIcon = `<i class="fa-solid fa-check text-success text-lg group-hover:scale-125 transition-transform"></i>`;
+                        } else if (s.answers[cat].trim().length > 0) {
+                            valIcon = `<i class="fa-solid fa-xmark text-red-500 text-lg group-hover:scale-125 transition-transform"></i>`;
+                        } else {
+                            valIcon = `<span class="text-gray-300 font-bold">-</span>`;
+                        }
+                    }
+
                     inputsHTML += `
-                        <div class="flex items-center bg-gray-50 rounded border border-gray-200 overflow-hidden shadow-sm">
+                        <div class="flex items-center bg-gray-50 rounded border border-gray-200 overflow-hidden shadow-sm relative">
                             <div class="bg-gray-200 text-gray-600 text-[10px] uppercase tracking-wider font-bold w-20 p-2 text-center border-r border-gray-300">
                                 ${cat}
                             </div>
                             <input type="text" id="teacher-view-${studentId}-${cat}" value="${s.answers[cat]}" readonly
                                 class="w-full bg-transparent p-2 text-sm font-semibold text-navy outline-none" placeholder="...">
-                            <div class="w-10 text-center flex items-center justify-center" id="validation-${studentId}-${cat}"></div>
+                            <div class="w-12 h-full flex items-center justify-center border-l border-gray-200 ${interactableClass}" ${onClickAttr}>
+                                ${valIcon}
+                            </div>
                         </div>
                     `;
                 });
 
+                let statusBadge = '';
+                if (isEnd) {
+                    statusBadge = `<div class="bg-navy text-gold text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest absolute top-0 right-0 shadow"><i class="fa-solid fa-star mr-1"></i> Final Score</div>`;
+                } else if (s.submitted) {
+                    statusBadge = `<div class="bg-success text-white text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest absolute top-0 right-0 shadow"><i class="fa-solid fa-check-double mr-1"></i> Ready</div>`;
+                } else {
+                    statusBadge = `<div class="bg-gray-300 text-gray-600 text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest absolute top-0 right-0 shadow"><i class="fa-solid fa-pen mr-1"></i> Typing</div>`;
+                }
+
+                let scoreSection = '';
+                if (isEnd) {
+                    scoreSection = `
+                        <div class="mt-4 pt-3 border-t-2 border-gray-100 flex justify-between items-center">
+                            <div class="text-xs font-bold text-gray-500 uppercase tracking-widest">Total Score</div>
+                            <div class="text-3xl font-bold text-gold">${s.finalScore}</div>
+                        </div>
+                        <div class="flex justify-between items-center mt-1">
+                            <div class="text-[9px] text-gray-400 uppercase tracking-wider font-semibold">
+                                <i class="fa-solid fa-hand-pointer mr-1"></i> Click icons to correct AI
+                            </div>
+                            <div class="text-[10px] text-right text-navy font-bold uppercase tracking-wider">
+                                Time Bonus: +${s.submitted ? s.timeRemaining : 0} pts
+                            </div>
+                        </div>
+                    `;
+                }
+
                 const col = document.createElement('div');
-                col.className = 'bg-white rounded-xl shadow-md border-t-4 border-gold p-5 animate-pop relative';
+                col.className = `bg-white rounded-xl shadow-md border-t-[4px] ${isEnd ? 'border-navy' : (s.submitted ? 'border-success' : 'border-gold')} p-5 relative transition-all duration-300`;
                 col.innerHTML = `
-                    <div class="absolute top-0 right-0 bg-[#121212] text-gold text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest">Player</div>
-                    <h3 class="font-serif font-bold text-xl text-navy mb-4 border-b pb-2"><i class="fa-solid fa-user-graduate mr-2 text-gold"></i>${s.name}</h3>
+                    ${statusBadge}
+                    <h3 class="font-serif font-bold text-xl text-navy mb-4 border-b pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-user-graduate ${isEnd ? 'text-navy' : 'text-gold'}"></i> ${s.name}
+                    </h3>
                     <div class="space-y-2">
                         ${inputsHTML}
                     </div>
+                    ${scoreSection}
                 `;
                 board.appendChild(col);
             });
@@ -457,24 +588,20 @@
         function teacherStartRound() {
             if (Object.keys(connections).length === 0) return;
 
-            // Hide success banner on new round
             document.getElementById('teacher-success-banner').classList.replace('flex', 'hidden');
 
-            // Pick random letter
             currentLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
             document.getElementById('teacher-letter').innerText = currentLetter;
             
-            // Clear board answers
             Object.keys(studentData).forEach(sid => {
                 CATEGORIES.forEach(cat => studentData[sid].answers[cat] = '');
-                CATEGORIES.forEach(cat => {
-                    const iconEl = document.getElementById(`validation-${sid}-${cat}`);
-                    if(iconEl) iconEl.innerHTML = '';
-                });
+                studentData[sid].submitted = false;
+                studentData[sid].timeRemaining = 0;
+                studentData[sid].finalScore = 0;
+                studentData[sid].validations = {};
             });
-            renderTeacherBoard();
+            renderTeacherBoard(false);
 
-            // Broadcast to students
             Object.values(connections).forEach(c => {
                 c.send({ type: 'START', letter: currentLetter });
             });
@@ -483,34 +610,48 @@
             playSound('sfx-bell');
         }
 
-        function teacherEndRound() {
-            // Broadcast END
+        async function teacherEndRound() {
+            isRoundActive = false;
+            clearInterval(timerInterval);
+            document.getElementById('teacher-timer').innerText = "0s";
+            document.getElementById('btn-start-round').disabled = true; // Block until calculations done
+            
             Object.values(connections).forEach(c => c.send({ type: 'END' }));
             
-            // Run basic validation
-            Object.keys(studentData).forEach(sid => {
-                const s = studentData[sid];
-                CATEGORIES.forEach(cat => {
-                    const val = s.answers[cat].trim().toUpperCase();
-                    const iconEl = document.getElementById(`validation-${sid}-${cat}`);
-                    if (iconEl) {
-                        if (val.length > 0 && val.startsWith(currentLetter)) {
-                            iconEl.innerHTML = '<i class="fa-solid fa-check text-green-500 text-lg"></i>';
-                        } else if (val.length > 0) {
-                            iconEl.innerHTML = '<i class="fa-solid fa-xmark text-red-500 text-lg"></i>';
-                        }
-                    }
-                });
-            });
+            // 1. Mostrar pantalla de carga de la IA
+            const board = document.getElementById('teacher-board');
+            board.innerHTML = `
+                <div id="ai-loading-banner" class="col-span-full text-center py-16 bg-white rounded-xl shadow border border-gray-200">
+                    <i class="fa-solid fa-robot text-5xl mb-4 animate-bounce text-navy"></i>
+                    <h3 class="text-2xl font-serif font-bold text-gold mb-2">AI Spellchecking...</h3>
+                    <p class="text-sm text-gray-500 uppercase tracking-widest font-bold">Verifying vocabulary in real time</p>
+                </div>
+            `;
 
-            // Show Success Banner and smoothly scroll to it
+            // 2. Correr validaciones asíncronas
+            for (let sid of Object.keys(studentData)) {
+                const s = studentData[sid];
+                for (let cat of CATEGORIES) {
+                    s.validations[cat] = await validateSpelling(s.answers[cat], cat, currentLetter);
+                }
+            }
+
+            // 3. Remover pantalla de carga y mostrar resultados finales
+            const loadingBanner = document.getElementById('ai-loading-banner');
+            if(loadingBanner) loadingBanner.remove();
+
+            recalculateScores();
+            playSound('sfx-success');
+
             const banner = document.getElementById('teacher-success-banner');
             banner.classList.replace('hidden', 'flex');
             
-            // Timeout ensures the element is rendered before scrolling
             setTimeout(() => {
                 banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
+            
+            document.getElementById('btn-start-round').disabled = false;
+            document.getElementById('btn-start-round').innerText = "New Round";
         }
 
         // ==========================================
@@ -534,7 +675,7 @@
             peer = new Peer(PEER_CONFIG);
 
             peer.on('open', (id) => {
-                conn = peer.connect(PREFIX + pin, { reliable: true }); // Garantiza que no se pierdan datos
+                conn = peer.connect(PREFIX + pin, { reliable: true });
 
                 conn.on('open', () => {
                     conn.send({ type: 'JOIN', name: name });
@@ -549,7 +690,7 @@
 
                 conn.on('data', (data) => {
                     if (data.type === 'START') studentStartRound(data.letter);
-                    else if (data.type === 'END') studentEndRound();
+                    else if (data.type === 'END') studentEndRound(false);
                     else if (data.type === 'ERROR') showStudentError(data.message);
                 });
 
@@ -584,7 +725,6 @@
                 input.className = "w-full bg-gray-50 border border-gray-300 text-navy font-semibold rounded-lg focus:ring-2 focus:ring-gold focus:border-gold block p-3 transition-all disabled:bg-gray-200 disabled:opacity-50";
                 input.disabled = true;
                 
-                // Real-time syncing
                 input.addEventListener('input', (e) => {
                     if (conn && conn.open) conn.send({ type: 'TYPE', category: cat, value: e.target.value });
                 });
@@ -599,12 +739,10 @@
             currentLetter = letter;
             document.getElementById('student-letter').innerText = letter;
             
-            // Hide banners, show game
             document.getElementById('waiting-banner').classList.replace('flex', 'hidden');
             document.getElementById('success-banner').classList.replace('flex', 'hidden');
             document.getElementById('student-active-game').classList.replace('hidden', 'flex');
             
-            // Enable inputs
             CATEGORIES.forEach(cat => {
                 const input = document.getElementById(`input-cat-${cat}`);
                 input.value = '';
@@ -616,23 +754,30 @@
             playSound('sfx-bell');
         }
 
-        function studentEndRound() {
+        function studentSubmitEarly() {
+            if (conn && conn.open && isRoundActive) {
+                conn.send({ type: 'SUBMIT', timeRemaining: timeLeft });
+                studentEndRound(true); 
+            }
+        }
+
+        function studentEndRound(submittedEarly = false) {
             isRoundActive = false;
             clearInterval(timerInterval);
-            document.getElementById('student-timer').innerText = "0s";
             
-            // Disable inputs
             CATEGORIES.forEach(cat => document.getElementById(`input-cat-${cat}`).disabled = true);
-
-            // Hide Game, Show Dark Success Banner
             document.getElementById('student-active-game').classList.replace('flex', 'hidden');
-            const successBanner = document.getElementById('success-banner');
-            successBanner.classList.replace('hidden', 'flex');
             
-            // Smooth scroll to banner
-            setTimeout(() => {
-                successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
+            if (submittedEarly) {
+                document.getElementById('wait-title').innerText = "Answers Submitted!";
+                document.getElementById('wait-desc').innerText = "Waiting for other players...";
+                document.getElementById('waiting-banner').classList.replace('hidden', 'flex');
+                setTimeout(() => document.getElementById('waiting-banner').scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+            } else {
+                const successBanner = document.getElementById('success-banner');
+                successBanner.classList.replace('hidden', 'flex');
+                setTimeout(() => successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
+            }
         }
 
         // ==========================================
@@ -664,12 +809,9 @@
                     isRoundActive = false;
                     
                     if (isHost) {
-                        document.getElementById('btn-start-round').disabled = false;
-                        document.getElementById('btn-start-round').innerText = "New Round";
-                        playSound('sfx-bell');
                         teacherEndRound();
                     } else {
-                        studentEndRound();
+                        studentEndRound(false);
                     }
                 }
             }, 1000);
