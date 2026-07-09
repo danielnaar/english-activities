@@ -13,10 +13,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- PeerJS for WebRTC (Direct Browser Connection) -->
+    <!-- PeerJS para WebRTC (Conexión Directa de Navegadores) -->
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome para los Íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -65,7 +65,7 @@
             75% { transform: translateX(-5px); }
         }
 
-        /* Custom Scrollbar */
+        /* Barra de desplazamiento personalizada */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #F8F9FA; }
         ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
@@ -75,15 +75,15 @@
 
     <main class="w-full max-w-7xl mx-auto bg-white shadow-2xl rounded-xl overflow-hidden border-t-[4px] border-gold flex flex-col mb-8 animate-pop">
         
-        <!-- Classic Header (Dark & Gold) -->
+        <!-- Header Clásico (Oscuro & Dorado) -->
         <header class="bg-[#121212] relative border-b-[6px] border-gold px-8 py-10">
             <div class="bg-pattern opacity-20 absolute inset-0 pointer-events-none"></div>
             <div class="relative z-10 text-center flex flex-col items-center">
                 <p class="text-gold uppercase tracking-widest text-sm font-semibold mb-2">Live Multiplayer Arena</p>
                 <div class="flex items-center justify-center gap-3 mb-4">
                     <h1 class="text-4xl md:text-5xl text-gold font-serif tracking-wide">Stop Trainer</h1>
-                    <!-- Version Badge to verify cache update -->
-                    <span class="bg-purple-900 text-white border border-purple-500 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded shadow-lg transform rotate-2">AI Spellcheck V2</span>
+                    <!-- Sello de Versión V3 para garantizar que la caché se haya limpiado -->
+                    <span class="bg-purple-900 text-white border border-purple-500 text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded shadow-lg transform rotate-2">AI Spellcheck V3</span>
                 </div>
                 <p class="text-gray-400 font-sans max-w-2xl mx-auto text-md leading-relaxed">
                     Test your quick-thinking vocabulary against the clock.<br/>
@@ -114,7 +114,7 @@
 
             <div id="view-teacher" class="hidden flex-col h-full animate-pop">
                 
-                <!-- Dashboard Top Bar -->
+                <!-- Barra superior del panel del profesor -->
                 <div class="flex flex-col md:flex-row justify-between items-center bg-white border-2 border-gray-200 p-4 rounded-xl shadow-sm mb-6 gap-4">
                     
                     <div class="flex items-center gap-4 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
@@ -147,7 +147,7 @@
                     </button>
                 </div>
                 
-                <!-- Teacher Success Banner -->
+                <!-- Banner de Éxito del Profesor -->
                 <div id="teacher-success-banner" class="hidden flex-col items-center justify-center p-8 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold mb-6 text-center animate-pop">
                     <div class="bg-gold/10 p-4 rounded-full mb-4 inline-block">
                         <i class="fa-solid fa-check-double text-4xl text-gold"></i>
@@ -156,7 +156,7 @@
                     <p class="text-gray-300 text-sm tracking-widest uppercase font-medium">Final Scores calculated by AI Spellchecker.</p>
                 </div>
 
-                <!-- Teacher Live Board (Grid for students) -->
+                <!-- Pizarra interactiva (Cuadricula para estudiantes) -->
                 <div id="teacher-board" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="col-span-full text-center py-16 text-gray-400 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50">
                         <i class="fa-solid fa-satellite-dish text-5xl mb-4 animate-pulse text-gold"></i>
@@ -168,7 +168,7 @@
 
             <div id="view-student" class="hidden flex-col items-center animate-pop max-w-md mx-auto w-full">
                 
-                <!-- Student Setup (Join Form) -->
+                <!-- Formulario de Ingreso para el Estudiante -->
                 <div id="student-setup" class="w-full bg-white p-6 rounded-xl shadow-lg border-t-[4px] border-gold">
                     <h2 class="font-serif text-2xl font-bold text-navy text-center mb-6">Join the Arena</h2>
                     
@@ -192,14 +192,14 @@
 
                 <div id="student-arena" class="w-full hidden flex-col gap-4">
                     
-                    <!-- Waiting Banner -->
+                    <!-- Banner de Espera -->
                     <div id="waiting-banner" class="flex flex-col items-center justify-center p-10 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold/50 text-center animate-pop w-full mx-auto mt-4">
                         <i class="fa-solid fa-hourglass-half text-5xl text-gold animate-bounce mb-6"></i>
                         <h2 class="text-2xl font-serif font-bold text-gold mb-2" id="wait-title">Waiting for Teacher</h2>
                         <p class="text-gray-400 text-sm font-medium tracking-widest uppercase" id="wait-desc">Eyes on the main screen!</p>
                     </div>
 
-                    <!-- Success Banner (End of Round) -->
+                    <!-- Banner de Éxito para el Estudiante (Fin de Ronda) -->
                     <div id="success-banner" class="hidden flex-col items-center justify-center p-10 bg-[#121212] rounded-xl shadow-lg border-[3px] border-gold text-center animate-pop w-full mx-auto mt-4">
                         <div class="bg-gold/10 p-5 rounded-full mb-6 inline-block">
                             <i class="fa-solid fa-trophy text-6xl text-gold"></i>
@@ -209,7 +209,7 @@
                         <p class="text-white text-lg font-medium tracking-wide">Check the main screen to see your score.</p>
                     </div>
 
-                    <!-- Active Game Inputs -->
+                    <!-- Inputs del Juego Activo -->
                     <div id="student-active-game" class="w-full hidden flex-col gap-4">
                         <div class="bg-[#121212] text-white p-4 rounded-xl shadow-md flex justify-between items-center border-b-[3px] border-gold">
                             <div>
@@ -224,7 +224,7 @@
 
                         <div class="bg-white p-5 rounded-xl shadow-md border border-gray-200">
                             <div id="student-inputs" class="space-y-4 mb-6">
-                                <!-- Inputs injected dynamically -->
+                                <!-- Inputs inyectados dinámicamente aquí -->
                             </div>
                             
                             <button id="btn-submit-early" onclick="studentSubmitEarly()" class="w-full bg-gold text-navy font-bold uppercase tracking-wider px-6 py-4 rounded-lg shadow-lg hover:bg-yellow-500 transition-all flex items-center justify-center gap-2">
@@ -247,25 +247,26 @@
             PREMIUM<span class="font-sans font-light text-gray-400 ml-1 text-sm">ENGLISH</span>
         </div>
         <div class="text-gray-400 text-xs font-sans text-center md:text-right leading-relaxed">
-            Words are verified instantly by <span class="text-gold font-semibold">AI Spellcheck V2</span>.<br>
+            Words are verified instantly by <span class="text-gold font-semibold">AI Spellcheck V3</span>.<br>
             <span class="italic">Multiplayer Edition Framework.</span>
         </div>
     </footer>
 
-    <!-- AUDIO EFFECTS -->
+    <!-- EFECTOS DE SONIDO -->
     <audio id="sfx-tick" src="https://assets.mixkit.co/sfx/preview/mixkit-tick-tock-clock-timer-1045.mp3" preload="auto"></audio>
     <audio id="sfx-bell" src="https://assets.mixkit.co/sfx/preview/mixkit-boxing-bell-step-231.mp3" preload="auto"></audio>
     <audio id="sfx-connect" src="https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3" preload="auto"></audio>
     <audio id="sfx-success" src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3" preload="auto"></audio>
 
     <script>
+        // === CONFIGURACIÓN Y ESTADO ===
         const PREFIX = 'PREMIUM-ENG-';
         const CATEGORIES = ['Name', 'Place', 'Food', 'Object', 'Animal', 'Color'];
-        const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVW'.split(''); // Excluded X,Y,Z
-        const ROUND_TIME = 135; // 2 minutes and 15 seconds
+        const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVW'.split(''); // Se excluyeron X, Y, Z
+        const ROUND_TIME = 135; // EXACTAMENTE 2 minutos y 15 segundos
         const MAX_STUDENTS = 3; 
 
-        // STUN Servers to bypass home network firewalls
+        // Servidores STUN de Google para evadir firewalls caseros
         const PEER_CONFIG = {
             config: {
                 'iceServers': [
@@ -286,11 +287,13 @@
         let currentLetter = '';
         let isRoundActive = false;
 
+        // Reproductor de Audio
         const playSound = (id) => {
             const audio = document.getElementById(id);
             if(audio) { audio.currentTime = 0; audio.play().catch(e=>console.log(e)); }
         };
 
+        // Auto-Asignación mediante URL
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const pinFromUrl = urlParams.get('pin');
@@ -316,13 +319,16 @@
             }
         }
 
+        // ==========================================
+        // LÓGICA DEL PROFESOR (HOST)
+        // ==========================================
         function initTeacher() {
             const pin = Math.floor(1000 + Math.random() * 9000).toString();
             document.getElementById('display-pin').innerText = pin;
             
             peer = new Peer(PREFIX + pin, PEER_CONFIG);
 
-            peer.on('open', (id) => console.log('Room Created:', id));
+            peer.on('open', (id) => console.log('Sala creada:', id));
 
             peer.on('disconnected', () => {
                 peer.reconnect();
@@ -331,6 +337,7 @@
             peer.on('connection', (connection) => {
                 const studentId = connection.peer;
                 
+                // Límite máximo de estudiantes (3)
                 if (Object.keys(connections).length >= MAX_STUDENTS && !connections[studentId]) {
                     connection.on('open', () => {
                         connection.send({ type: 'ERROR', message: 'Room is full (Max 3 players).' });
@@ -403,6 +410,7 @@
 
         function handleStudentData(studentId, data) {
             if (data.type === 'JOIN') {
+                // Registrar al estudiante en la base de datos local
                 studentData[studentId] = { 
                     name: data.name, 
                     answers: {}, 
@@ -418,7 +426,7 @@
                 if (studentData[studentId]) {
                     studentData[studentId].answers[data.category] = data.value;
                     const inputEl = document.getElementById(`teacher-view-${studentId}-${data.category}`);
-                    if (inputEl) inputEl.value = data.value;
+                    if (inputEl) inputEl.value = data.value; // Actualización en tiempo real visual
                 }
             }
             else if (data.type === 'SUBMIT') {
@@ -427,6 +435,7 @@
                     studentData[studentId].timeRemaining = data.timeRemaining;
                     renderTeacherBoard(); 
                     
+                    // Comprobar si TODOS los estudiantes ya enviaron
                     const allSubmitted = Object.values(studentData).every(s => s.submitted);
                     if (allSubmitted) {
                         teacherEndRound();
@@ -435,23 +444,25 @@
             }
         }
 
+        // Motor de Validación Ortográfica con Inteligencia API
         async function validateSpelling(word, category, letter) {
+            if (!word) return false; // Si está vacío, es falso
             const cleanWord = word.trim().toUpperCase().replace(/[^A-Z\s]/g, ''); 
             
-            // Basic Rule: Must start with correct letter and not be empty
+            // Regla Básica: Empezar con la letra correcta y tener más de 1 letra
             if (cleanWord.length < 2 || cleanWord.charAt(0) !== letter) return false;
             
-            // Names & Places are too subjective for a strict dictionary
+            // Nombres y Lugares son subjetivos, se aprueban si cumplen la regla básica
             if (['Name', 'Place'].includes(category)) {
                 return true;
             }
 
-            // Strict Spelling Check via API
+            // Chequeo Ortográfico Estricto en la nube
             try {
                 const queryWord = cleanWord.toLowerCase();
-                // Adding a timeout so it doesn't freeze if API is slow
+                // AbortController previene que el juego se trabe si la API no responde rápido
                 const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 3000); 
+                const timeoutId = setTimeout(() => controller.abort(), 3500); 
                 
                 const res = await fetch(`https://api.datamuse.com/words?sp=${encodeURIComponent(queryWord)}&max=1`, {
                     signal: controller.signal
@@ -465,18 +476,22 @@
                 }
                 return false;
             } catch (e) {
-                // If API fails (no internet/timeout), fallback to true to not ruin the game
+                // Si la red bloquea la API, la validación pasa a True (Profesor corregirá manualmente)
+                console.warn("Spelling Check failed, reverting to manual mode.");
                 return true; 
             }
         }
 
-        function toggleValidation(sid, cat) {
-            if (studentData[sid] && studentData[sid].validations !== undefined) {
+        // Activador Manual para el Profesor (Sobrescribir IA)
+        window.toggleValidation = function(sid, cat) {
+            if (studentData[sid] && studentData[sid].validations) {
+                // Cambia de True a False o viceversa
                 studentData[sid].validations[cat] = !studentData[sid].validations[cat];
                 recalculateScores();
             }
         }
 
+        // Calcula Puntajes Dinámicamente
         function recalculateScores() {
             Object.keys(studentData).forEach(sid => {
                 const s = studentData[sid];
@@ -490,12 +505,14 @@
                 s.finalScore = (wordsCorrect * 10) + timeBonus;
             });
 
-            renderTeacherBoard(true);
+            renderTeacherBoard(true); // Redibujar con los nuevos puntajes
         }
 
+        // Renderizado del Panel del Profesor
         function renderTeacherBoard(isEnd = false) {
             const board = document.getElementById('teacher-board');
             
+            // Bloquea el renderizado parcial si la IA está calculando para evitar fliqueos
             if(document.getElementById('ai-loading-banner')) return;
 
             board.innerHTML = '';
@@ -509,13 +526,14 @@
                     let interactableClass = '';
                     let onClickAttr = '';
 
+                    // Inyectar iconos interactivos y funciones de click si la ronda terminó
                     if (isEnd) {
                         interactableClass = 'cursor-pointer hover:bg-gray-200 transition-colors duration-200 group';
                         onClickAttr = `onclick="toggleValidation('${studentId}', '${cat}')" title="Click to override AI validation"`;
                         
-                        if (s.validations[cat]) {
+                        if (s.validations && s.validations[cat]) {
                             valIcon = `<i class="fa-solid fa-check text-success text-lg group-hover:scale-125 transition-transform"></i>`;
-                        } else if (s.answers[cat].trim().length > 0) {
+                        } else if (s.answers[cat] && s.answers[cat].trim().length > 0) {
                             valIcon = `<i class="fa-solid fa-xmark text-red-500 text-lg group-hover:scale-125 transition-transform"></i>`;
                         } else {
                             valIcon = `<span class="text-gray-300 font-bold">-</span>`;
@@ -527,7 +545,7 @@
                             <div class="bg-gray-200 text-gray-600 text-[10px] uppercase tracking-wider font-bold w-20 p-2 text-center border-r border-gray-300">
                                 ${cat}
                             </div>
-                            <input type="text" id="teacher-view-${studentId}-${cat}" value="${s.answers[cat]}" readonly
+                            <input type="text" id="teacher-view-${studentId}-${cat}" value="${s.answers[cat] || ''}" readonly
                                 class="w-full bg-transparent p-2 text-sm font-semibold text-navy outline-none" placeholder="...">
                             <div class="w-12 h-full flex items-center justify-center border-l border-gray-200 ${interactableClass}" ${onClickAttr}>
                                 ${valIcon}
@@ -536,6 +554,7 @@
                     `;
                 });
 
+                // Etiquetas de Estado
                 let statusBadge = '';
                 if (isEnd) {
                     statusBadge = `<div class="bg-navy text-gold text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest absolute top-0 right-0 shadow"><i class="fa-solid fa-star mr-1"></i> Final Score</div>`;
@@ -545,6 +564,7 @@
                     statusBadge = `<div class="bg-gray-300 text-gray-600 text-[10px] uppercase px-3 py-1 rounded-bl-lg font-bold tracking-widest absolute top-0 right-0 shadow"><i class="fa-solid fa-pen mr-1"></i> Typing</div>`;
                 }
 
+                // Sección de Puntuaciones Finales
                 let scoreSection = '';
                 if (isEnd) {
                     scoreSection = `
@@ -610,8 +630,10 @@
             document.getElementById('teacher-timer').innerText = "0s";
             document.getElementById('btn-start-round').disabled = true; 
             
+            // Avisar a todos los estudiantes que el tiempo se acabó
             Object.values(connections).forEach(c => c.send({ type: 'END' }));
             
+            // Inyectar el banner de carga de la Inteligencia Artificial
             const board = document.getElementById('teacher-board');
             board.innerHTML = `
                 <div id="ai-loading-banner" class="col-span-full text-center py-16 bg-white rounded-xl shadow border border-gray-200">
@@ -621,21 +643,32 @@
                 </div>
             `;
 
-            // Process validations in parallel for maximum speed
-            const validationPromises = [];
-            for (let sid of Object.keys(studentData)) {
-                const s = studentData[sid];
-                for (let cat of CATEGORIES) {
-                    const p = validateSpelling(s.answers[cat], cat, currentLetter)
-                                .then(res => s.validations[cat] = res);
-                    validationPromises.push(p);
+            try {
+                // Escudo Anti-Errores: Procesamos las correcciones en paralelo.
+                // Si alguna falla por falta de internet, se aprueba temporalmente para que el profesor decida.
+                const validationPromises = [];
+                for (let sid of Object.keys(studentData)) {
+                    const s = studentData[sid];
+                    if(!s.validations) s.validations = {};
+                    
+                    for (let cat of CATEGORIES) {
+                        const word = s.answers[cat] || '';
+                        const p = validateSpelling(word, cat, currentLetter)
+                                    .then(res => s.validations[cat] = res)
+                                    .catch(err => s.validations[cat] = true);
+                        validationPromises.push(p);
+                    }
                 }
+                await Promise.all(validationPromises);
+            } catch (error) {
+                console.error("Error crítico en el cálculo de puntajes", error);
             }
-            await Promise.all(validationPromises);
 
+            // Eliminar banner de carga
             const loadingBanner = document.getElementById('ai-loading-banner');
             if(loadingBanner) loadingBanner.remove();
 
+            // Renderizar la tabla de resultados finales
             recalculateScores();
             playSound('sfx-success');
 
@@ -650,6 +683,9 @@
             document.getElementById('btn-start-round').innerText = "New Round";
         }
 
+        // ==========================================
+        // LÓGICA DEL ESTUDIANTE (CLIENTE)
+        // ==========================================
         function studentConnect() {
             const pin = document.getElementById('input-pin').value.trim();
             const name = document.getElementById('input-name').value.trim();
@@ -773,9 +809,12 @@
             }
         }
 
+        // ==========================================
+        // CRONÓMETRO GLOBAL (135 Segundos)
+        // ==========================================
         function startTimer(isHost) {
             clearInterval(timerInterval);
-            timeLeft = ROUND_TIME;
+            timeLeft = ROUND_TIME; // ROUND_TIME está definido globalmente en 135
             isRoundActive = true;
 
             const timerDisplay = document.getElementById(isHost ? 'teacher-timer' : 'student-timer');
