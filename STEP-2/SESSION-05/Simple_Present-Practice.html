@@ -224,9 +224,10 @@
         const iconSuccess = `<svg class="w-6 h-6 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
         const iconError = `<svg class="w-6 h-6 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
 
-        // Smart Normalization: removes punctuation (including apostrophes to prevent strict mismatches), multiple spaces, and forces lowercase.
+        // BULLETPROOF NORMALIZATION: Mantiene SOLO letras y números. 
+        // Elimina todos los apóstrofes (rectos o curvos), puntos, signos y espacios extra.
         const normalizeText = (text) => {
-            return text.toLowerCase().replace(/[.,?'"¡!¿]/g, '').replace(/\s+/g, ' ').trim();
+            return text.toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/\s+/g, ' ').trim();
         };
 
         // 2. Dynamic Rendering
@@ -292,9 +293,6 @@
                     feedbackElement.innerHTML = iconSuccess;
                     feedbackElement.classList.remove('opacity-0');
                     feedbackElement.classList.add('opacity-100');
-                    
-                    // Replace user input with standard formatting (Optional, gives a polished look upon success)
-                    // inputElement.value = item.answers[0]; 
                     
                     correctCount++;
                 } else {
