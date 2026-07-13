@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Around the World - Premium English</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; 
+            --color-accent: #D4AF37;  
+            --color-bg: #F8F9FA;      
+            --color-text: #121212;    
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Option Buttons */
+        .option-btn {
+            transition: all 0.2s ease;
+            border: 1px solid #E5E7EB;
+            background-color: #FFFFFF;
+            color: #4B5563;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--color-accent);
+            background-color: #FDFBF7;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(212, 175, 55, 0.1);
+        }
+        .option-btn.selected {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            border-color: var(--color-primary);
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.2);
+            transform: translateY(0);
+        }
+        .option-btn:disabled { cursor: default; opacity: 0.7; }
+        
+        .blank-space {
+            display: inline-block;
+            min-width: 80px;
+            border-bottom: 2px solid var(--color-accent);
+            text-align: center;
+            padding: 0 0.5rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start min-h-screen">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-6 md:px-12 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE GRAMMAR MODULE
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Around The World <br>
+                <span class="italic font-light text-[#D4AF37] text-2xl md:text-4xl mx-2">Mastering Modal Verbs</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <div class="bg-white/5 border border-white/10 rounded-lg p-5 max-w-3xl mx-auto relative z-10 text-left md:text-center">
+                <p class="text-gray-300 text-sm md:text-base font-medium italic leading-relaxed">
+                    Choose the best modal verb for each global situation. Pay attention to the context (ability, permission, possibility, or prohibition).
+                </p>
+            </div>
+        </header>
+
+        <div class="p-6 md:p-12 bg-gray-50/50">
+            
+            <!-- Cards Container -->
+            <div id="quiz-container" class="space-y-5">
+            </div>
+
+            <!-- Action Controls -->
+            <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-200">
+                <div id="score-display" class="bg-white text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 9
+                </div>
+                
+                <button id="validate-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Check Answers
+                </button>
+                
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                </button>
+            </div>
+
+            <!-- Success Banner -->
+            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                    <p class="text-gray-300 max-w-lg mb-0 leading-relaxed font-medium">
+                        Flawless grammar! You have successfully mastered these complex modal verbs. Spotless grammar is essential for elite corporate communication worldwide.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ESTÁNDAR CORPORATIVO OFICIAL: FOOTER -->
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-6 px-8 mt-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                pre: "<img src='https://flagcdn.com/w80/gl.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='Greenland Flag'> <strong class='text-[#0B192C] font-bold'>Greenland:</strong> It's freezing and remote — you ",
+                post: " see the Northern Lights if the sky is clear.",
+                options: ["may", "can't", "couldn't", "be able to"],
+                answer: "may" // Possibility
+            },
+            {
+                id: 2,
+                pre: "<img src='https://flagcdn.com/w80/it.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='Italy Flag'> <strong class='text-[#0B192C] font-bold'>Venice:</strong> The canals are crowded, but you ",
+                post: " enjoy a peaceful gondola ride.",
+                options: ["can", "may not", "could to", "aren't able to"],
+                answer: "can" // General ability / possibility
+            },
+            {
+                id: 3,
+                pre: "<img src='https://flagcdn.com/w80/eg.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='Egypt Flag'> <strong class='text-[#0B192C] font-bold'>Egypt:</strong> You ",
+                post: " explore ancient pyramids and temples.",
+                options: ["can", "able to", "could to", "may to"],
+                answer: "can" // General option
+            },
+            {
+                id: 4,
+                pre: "<img src='https://flagcdn.com/w80/jp.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='Japan Flag'> <strong class='text-[#0B192C] font-bold'>Japan:</strong> You ",
+                post: " sleep in a capsule hotel — it's small but surprisingly comfortable.",
+                options: ["can", "could to", "are able", "may to"],
+                answer: "can" // General option
+            },
+            {
+                id: 5,
+                pre: "<img src='https://flagcdn.com/w80/us.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='USA Flag'> <strong class='text-[#0B192C] font-bold'>New York:</strong> When I was a kid, I ",
+                post: " play baseball in Central Park every weekend.",
+                options: ["could", "can", "may", "be able to"],
+                answer: "could" // Past ability
+            },
+            {
+                id: 6,
+                pre: "<img src='https://flagcdn.com/w80/fr.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='France Flag'> <strong class='text-[#0B192C] font-bold'>Paris:</strong> If you climb the Eiffel Tower, you ",
+                post: " see the entire city.",
+                options: ["will be able to", "can to", "could", "may to"],
+                answer: "will be able to" // Future ability due to condition
+            },
+            {
+                id: 7,
+                pre: "<img src='https://flagcdn.com/w80/br.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='Brazil Flag'> <strong class='text-[#0B192C] font-bold'>Rio de Janeiro:</strong> It's sunny and full of music — you ",
+                post: " need sunscreen and samba moves to survive!",
+                options: ["may", "can", "could to", "able to"],
+                answer: "may" // Possibility
+            },
+            {
+                id: 8,
+                pre: "<img src='https://flagcdn.com/w80/ae.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='UAE Flag'> <strong class='text-[#0B192C] font-bold'>Dubai:</strong> You ",
+                post: " drink alcohol in public, but you can admire amazing skyscrapers.",
+                options: ["can't", "may", "could", "are able to"],
+                answer: "can't" // Prohibition
+            },
+            {
+                id: 9,
+                pre: "<img src='https://flagcdn.com/w80/aq.png' class='inline-block w-8 h-6 object-cover shadow-sm border border-gray-300 mr-2 -mt-1' alt='Antarctica Flag'> <strong class='text-[#0B192C] font-bold'>Antarctica:</strong> If you're lucky, you ",
+                post: " meet penguins but not many people!",
+                options: ["may", "can't", "couldn't", "are able"],
+                answer: "may" // Possibility
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const validateBtn = document.getElementById('validate-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const scoreDisplay = document.getElementById('score-display');
+        const successBanner = document.getElementById('success-banner');
+
+        let userSelections = {};
+
+        function renderQuiz() {
+            container.innerHTML = questions.map((q, index) => `
+                <div id="card-${q.id}" class="bg-white border border-gray-200 rounded-xl p-5 md:p-6 shadow-sm transition-all duration-300">
+                    
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="flex items-center justify-center w-7 h-7 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-xs shrink-0 shadow-sm mt-0.5">
+                            ${index + 1}
+                        </div>
+                        <p class="text-gray-800 text-base md:text-lg font-medium leading-relaxed">
+                            ${q.pre}<span id="blank-${q.id}" class="blank-space">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>${q.post}
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pl-0 md:pl-11">
+                        ${q.options.map(opt => `
+                            <!-- Using backticks to safely pass words with apostrophes like "can't" -->
+                            <button class="option-btn py-2.5 px-4 rounded-lg font-medium text-sm w-full tracking-wide" 
+                                    onclick="selectOption(${q.id}, \`${opt}\`, this)">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div id="feedback-${q.id}" class="mt-4 pl-11 hidden"></div>
+                </div>
+            `).join('');
+            
+            userSelections = {};
+            updateScoreDisplay(0);
+        }
+
+        window.selectOption = function(questionId, selectedWord, btnElement) {
+            const card = document.getElementById(`card-${questionId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            
+            // UI Button state
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            btnElement.classList.add('selected');
+
+            // UI Blank state
+            const blank = document.getElementById(`blank-${questionId}`);
+            blank.textContent = selectedWord;
+            blank.classList.add('text-[#D4AF37]', 'animate-pop');
+            setTimeout(() => blank.classList.remove('animate-pop'), 300);
+
+            // Logic state
+            userSelections[questionId] = selectedWord;
+            
+            // Reset styles if previously validated
+            card.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300', 'animate-shake');
+            document.getElementById(`feedback-${questionId}`).classList.add('hidden');
+        };
+
+        function validateAnswers() {
+            let correctCount = 0;
+
+            questions.forEach(q => {
+                const card = document.getElementById(`card-${q.id}`);
+                const feedback = document.getElementById(`feedback-${q.id}`);
+                const buttons = card.querySelectorAll('.option-btn');
+                const selected = userSelections[q.id];
+
+                card.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300', 'animate-shake');
+
+                if (selected === q.answer) {
+                    correctCount++;
+                    card.classList.add('bg-green-50', 'border-green-300');
+                    feedback.innerHTML = `<div class="flex items-center text-green-600 text-sm font-bold"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Correct</div>`;
+                    feedback.classList.remove('hidden');
+                    buttons.forEach(btn => btn.disabled = true);
+                } else {
+                    card.classList.add('bg-red-50', 'border-red-300', 'animate-shake');
+                    if(selected) {
+                        feedback.innerHTML = `<div class="flex items-center text-red-500 text-sm font-bold"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Incorrect. Try again.</div>`;
+                    } else {
+                        feedback.innerHTML = `<div class="flex items-center text-yellow-600 text-sm font-bold"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> Please select an answer.</div>`;
+                    }
+                    feedback.classList.remove('hidden');
+                    setTimeout(() => card.classList.remove('animate-shake'), 400);
+                }
+            });
+
+            updateScoreDisplay(correctCount);
+
+            if (correctCount === questions.length) {
+                validateBtn.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                scoreDisplay.classList.remove('bg-white', 'text-gray-500');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            }
+        }
+
+        function updateScoreDisplay(score) {
+            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+        }
+
+        function resetQuiz() {
+            renderQuiz();
+            validateBtn.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            scoreDisplay.classList.add('bg-white', 'text-gray-500');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize App
+        validateBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+        renderQuiz();
+
+    </script>
+</body>
+</html>
