@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forbidden Destinations - Premium English</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; 
+            --color-accent: #D4AF37;  
+            --color-bg: #F8F9FA;      
+            --color-text: #121212;    
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Option Buttons */
+        .option-btn {
+            transition: all 0.2s ease;
+            border: 1px solid #E5E7EB;
+            background-color: #FFFFFF;
+            color: #4B5563;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--color-accent);
+            background-color: #FDFBF7;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(212, 175, 55, 0.1);
+        }
+        
+        /* OVERRIDE HOVER STATE WHEN SELECTED FOR INSTANT FEEDBACK */
+        .option-btn.selected,
+        .option-btn.selected:hover:not(:disabled) {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            border-color: var(--color-primary);
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.2);
+            transform: translateY(0);
+        }
+        
+        .option-btn:disabled { cursor: default; opacity: 0.6; }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start min-h-screen">
+
+    <main class="w-full max-w-6xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <header class="bg-[#0B192C] text-center pt-12 pb-10 px-6 md:px-12 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 font-playfair relative z-10">
+                READING & GRAMMAR MODULE
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-5xl font-playfair font-bold text-white mb-4 leading-tight relative z-10 tracking-wide">
+                Forbidden Destinations <br>
+                <span class="italic font-light text-[#D4AF37] text-xl md:text-3xl mx-2">Grammar in Context</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+        </header>
+
+        <!-- WRAPPER PRINCIPAL QUE VA A DESAPARECER AL GANAR -->
+        <div id="activity-content" class="flex flex-col lg:flex-row bg-gray-50/50 w-full transition-all duration-500">
+            
+            <!-- LEFT COLUMN: Article & Image -->
+            <article class="w-full lg:w-1/2 p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col">
+                
+                <!-- Contenedor ajustado para "abrazar" la imagen perfectamente -->
+                <div class="relative rounded-xl overflow-hidden shadow-md mb-6 w-full flex-shrink-0 bg-gray-100">
+                    <img src="thearch.png" alt="The Arch of Ctesiphon" class="w-full h-64 md:h-72 object-cover block m-0 p-0 border-0">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4">
+                        <p class="text-white text-xs md:text-sm font-medium leading-snug drop-shadow-md">
+                            The Arch of Ctesiphon - The world's largest brick-built arch near Baghdad, Iraq.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="prose prose-sm md:prose-base text-gray-700 leading-relaxed font-medium flex-grow">
+                    <p class="mb-4">
+                        Around the world, travelers sometimes <strong class="text-[#0B192C]">have to</strong> accept that not every amazing place is open to visit. In Iraq, people <strong class="text-[#0B192C]">can't</strong> easily go to the Arch of Ctesiphon, even though it's one of the most impressive ancient structures.
+                    </p>
+                    <p class="mb-4">
+                        In Iran, tourists <strong class="text-[#0B192C]">must</strong> follow strict visa and clothing rules to see places like Isfahan. Those who visit Libya <strong class="text-[#0B192C]">must not</strong> explore freely because some areas remain unsafe.
+                    </p>
+                    <p class="mb-4">
+                        Travelers <strong class="text-[#0B192C]">don't have to</strong> worry about beauty—these countries already have incredible landscapes and monuments—but they <strong class="text-[#0B192C]">need to</strong> think carefully before planning a trip.
+                    </p>
+                    <p>
+                        The Hoggar Mountains in Algeria are spectacular, yet visitors <strong class="text-[#0B192C]">mustn't</strong> go there without special permission. In the Philippines, people <strong class="text-[#0B192C]">need to</strong> avoid parts of Mindanao for security reasons. These destinations remind us that we <strong class="text-[#0B192C]">have to</strong> respect safety rules, even when our curiosity wants to explore.
+                    </p>
+                </div>
+            </article>
+
+            <!-- RIGHT COLUMN: Quiz -->
+            <section class="w-full lg:w-1/2 p-6 md:p-10 flex flex-col bg-white">
+                
+                <h3 class="text-[#0B192C] font-bold uppercase tracking-wider text-sm mb-6 flex items-center border-b border-gray-100 pb-3">
+                    <svg class="w-5 h-5 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    Reading Comprehension
+                </h3>
+
+                <div id="quiz-container" class="space-y-5 flex-grow">
+                    <!-- Questions injected here -->
+                </div>
+
+                <!-- Controls -->
+                <div id="controls-section" class="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div id="score-display" class="bg-gray-50 text-gray-500 border border-gray-200 px-6 py-3 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-sm md:text-base min-w-[140px]">
+                        Score: 0 / 4
+                    </div>
+                    
+                    <button id="validate-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-8 py-3 uppercase tracking-widest font-bold text-sm shadow-md flex items-center justify-center gap-2">
+                        Check Answers
+                    </button>
+                    
+                    <button id="reset-btn" class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] transition-all duration-300 rounded-full px-6 py-3 uppercase tracking-widest font-bold text-sm shadow-sm flex items-center justify-center gap-2">
+                        Reset
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- SUCCESS BANNER (Aparece cuando todo lo demás desaparece) -->
+        <div id="success-banner" class="hidden bg-[#0B192C] py-16 px-6 md:px-14 text-center border-t-[3px] border-[#D4AF37] relative overflow-hidden flex-grow flex flex-col justify-center items-center">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                    <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h2 class="text-4xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-base">
+                    Flawless reading comprehension! Spotless grammar and attention to detail are essential for elite corporate communication worldwide.
+                </p>
+                <button id="banner-reset-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-8 py-3 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ESTÁNDAR CORPORATIVO OFICIAL: FOOTER -->
+    <footer class="w-full max-w-6xl mx-auto bg-[#121212] py-6 px-8 mt-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
+
+    <script>
+        // Opciones mezcladas para evitar que todas las correctas sean la primera
+        const questions = [
+            {
+                id: 1,
+                text: "1. Why do travelers have to be careful?",
+                options: ["Unsafe or restricted", "Too expensive"],
+                answer: "Unsafe or restricted"
+            },
+            {
+                id: 2,
+                text: "2. Tourists must follow rules in Iran.",
+                options: ["False", "True"], // Cambio de orden (Derecha)
+                answer: "True"
+            },
+            {
+                id: 3,
+                text: "3. What do people need to do in Mindanao?",
+                options: ["Get scuba license", "Avoid some zones"], // Cambio de orden (Derecha)
+                answer: "Avoid some zones"
+            },
+            {
+                id: 4,
+                text: '4. Which sentence means "not necessary"?',
+                options: ["Mustn't go there", "Don't have to worry"], // Cambio de orden (Derecha)
+                answer: "Don't have to worry"
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const validateBtn = document.getElementById('validate-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const bannerResetBtn = document.getElementById('banner-reset-btn');
+        const scoreDisplay = document.getElementById('score-display');
+        const successBanner = document.getElementById('success-banner');
+        const activityContent = document.getElementById('activity-content');
+
+        let userSelections = {};
+
+        function renderQuiz() {
+            container.innerHTML = questions.map((q) => `
+                <div id="card-${q.id}" class="bg-gray-50/50 border border-gray-200 rounded-lg p-4 shadow-sm transition-all duration-300">
+                    <p class="text-[#0B192C] font-medium text-sm md:text-base mb-3 leading-snug">
+                        ${q.text}
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        ${q.options.map(opt => `
+                            <button class="option-btn py-2 px-3 rounded-md font-medium text-xs md:text-sm tracking-wide text-center" 
+                                    onclick="selectOption(${q.id}, \`${opt.replace(/'/g, "\\'")}\`, this)">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div id="feedback-${q.id}" class="mt-3 hidden"></div>
+                </div>
+            `).join('');
+            
+            userSelections = {};
+            updateScoreDisplay(0);
+        }
+
+        window.selectOption = function(questionId, selectedAnswer, btnElement) {
+            const card = document.getElementById(`card-${questionId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            btnElement.classList.add('selected');
+
+            userSelections[questionId] = selectedAnswer;
+            
+            card.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300', 'animate-shake');
+            document.getElementById(`feedback-${questionId}`).classList.add('hidden');
+        };
+
+        function validateAnswers() {
+            let correctCount = 0;
+
+            questions.forEach(q => {
+                const card = document.getElementById(`card-${q.id}`);
+                const feedback = document.getElementById(`feedback-${q.id}`);
+                const buttons = card.querySelectorAll('.option-btn');
+                const selected = userSelections[q.id];
+
+                card.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300', 'animate-shake');
+
+                if (selected === q.answer) {
+                    correctCount++;
+                    card.classList.add('bg-green-50', 'border-green-300');
+                    feedback.innerHTML = `<div class="flex items-center justify-center text-green-600 text-xs font-bold"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Correct</div>`;
+                    feedback.classList.remove('hidden');
+                    buttons.forEach(btn => btn.disabled = true);
+                } else {
+                    card.classList.add('bg-red-50', 'border-red-300', 'animate-shake');
+                    if(selected) {
+                        feedback.innerHTML = `<div class="flex items-center justify-center text-red-500 text-xs font-bold"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Incorrect</div>`;
+                    } else {
+                        feedback.innerHTML = `<div class="flex items-center justify-center text-yellow-600 text-xs font-bold"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> Select an answer</div>`;
+                    }
+                    feedback.classList.remove('hidden');
+                    setTimeout(() => card.classList.remove('animate-shake'), 400);
+                }
+            });
+
+            updateScoreDisplay(correctCount);
+
+            if (correctCount === questions.length) {
+                // Ocultamos todo el contenedor principal (Lectura + Quiz) al ganar
+                activityContent.classList.add('hidden');
+                
+                // Mostramos el banner de éxito
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            }
+        }
+
+        function updateScoreDisplay(score) {
+            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+            if(score === questions.length) {
+                scoreDisplay.classList.remove('bg-gray-50', 'text-gray-500');
+                scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            }
+        }
+
+        function resetQuiz() {
+            renderQuiz();
+            
+            // Restauramos el contenedor principal al reiniciar
+            activityContent.classList.remove('hidden');
+            
+            // Ocultamos el banner
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            scoreDisplay.classList.add('bg-gray-50', 'text-gray-500');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize Listeners
+        validateBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+        bannerResetBtn.addEventListener('click', resetQuiz);
+        
+        // Start App
+        renderQuiz();
+
+    </script>
+</body>
+</html>
