@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situational Advice - Premium English</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; 
+            --color-accent: #D4AF37;  
+            --color-bg: #F8F9FA;      
+            --color-text: #121212;    
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Option Buttons */
+        .option-btn {
+            transition: all 0.2s ease;
+            border: 1px solid #E5E7EB;
+            background-color: #FFFFFF;
+            color: #4B5563;
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--color-accent);
+            background-color: #FDFBF7;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(212, 175, 55, 0.1);
+        }
+        
+        /* OVERRIDE HOVER STATE WHEN SELECTED FOR INSTANT FEEDBACK */
+        .option-btn.selected,
+        .option-btn.selected:hover:not(:disabled) {
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            border-color: var(--color-primary);
+            font-weight: 600;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.2);
+            transform: translateY(0);
+        }
+        
+        .option-btn:disabled { cursor: default; opacity: 0.6; }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start min-h-screen">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-6 md:px-12 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE LOGIC MODULE
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Situational Advice <br>
+                <span class="italic font-light text-[#D4AF37] text-2xl md:text-4xl mx-2">Logical Modals</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <div class="bg-white/5 border border-white/10 rounded-lg p-5 max-w-3xl mx-auto relative z-10 text-left md:text-center">
+                <p class="text-gray-300 text-sm md:text-base font-medium italic leading-relaxed">
+                    Read the situation carefully and choose the most logical advice. Pay attention to meaning: some options might be grammatically correct but logically absurd!
+                </p>
+            </div>
+        </header>
+
+        <div class="p-6 md:p-12 bg-gray-50/50">
+            
+            <div id="quiz-container" class="space-y-6">
+                <!-- Questions injected here via JS -->
+            </div>
+
+            <div id="controls-section" class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-200">
+                <div id="score-display" class="bg-white text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 10
+                </div>
+                
+                <button id="validate-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Check Answers
+                </button>
+                
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                </button>
+            </div>
+
+        </div>
+
+        <div id="success-banner" class="hidden bg-[#0B192C] p-10 md:p-14 text-center border-t-[3px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-5 border border-[#D4AF37]/30">
+                    <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-3">Exceptional Precision</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-sm md:text-base">
+                    Flawless logic! You have successfully mastered these obligation verbs in real-world contexts. Spotless grammar and sharp logic are essential for elite corporate communication.
+                </p>
+                <!-- Compact Yellow Reset Button -->
+                <button id="banner-reset-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-8 py-2.5 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-5 px-8 mt-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0">
+            <span class="font-playfair font-bold text-white text-[20px] tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-[2px]">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                id: 1,
+                situation: "I forgot my umbrella and it's raining hard!",
+                options: [
+                    "You must not buy any umbrella.",
+                    "You don't have to go out at all.",
+                    "You need to buy a cheap one at the station."
+                ],
+                answer: "You need to buy a cheap one at the station."
+            },
+            {
+                id: 2,
+                situation: "I am feeling really tired these days.",
+                options: [
+                    "You must not sleep anymore.",
+                    "You have to keep working harder.",
+                    "You need to take a short vacation or rest more."
+                ],
+                answer: "You need to take a short vacation or rest more."
+            },
+            {
+                id: 3,
+                situation: "My phone battery is dead again!",
+                options: [
+                    "You don't need to care about it.",
+                    "You must bring a charger next time.",
+                    "You don't have to use your phone again."
+                ],
+                answer: "You must bring a charger next time."
+            },
+            {
+                id: 4,
+                situation: "I ate too much cake. I feel sick now.",
+                options: [
+                    "You have to eat more cake.",
+                    "You must drink some water and lie down for a bit.",
+                    "You do not need to stop eating cake."
+                ],
+                answer: "You must drink some water and lie down for a bit."
+            },
+            {
+                id: 5,
+                situation: "I cannot find my passport before the flight!",
+                options: [
+                    "You must check your travel bag immediately.",
+                    "You do not need to take it.",
+                    "You have to cancel everything now."
+                ],
+                answer: "You must check your travel bag immediately."
+            },
+            {
+                id: 6,
+                situation: "My friend borrows my clothes and never returns them.",
+                options: [
+                    "You must give her more clothes.",
+                    "You do not have to lend them anymore.",
+                    "You have to stop seeing your friend."
+                ],
+                answer: "You do not have to lend them anymore."
+            },
+            {
+                id: 7,
+                situation: "I am taking an important exam tomorrow.",
+                options: [
+                    "You have to review your notes tonight.",
+                    "You do not need to think about it.",
+                    "You must not study at all."
+                ],
+                answer: "You have to review your notes tonight."
+            },
+            {
+                id: 8,
+                situation: "I am coughing a lot and cannot stop.",
+                options: [
+                    "You do not have to see anyone.",
+                    "You need to see a doctor as soon as possible.",
+                    "You must eat more candy."
+                ],
+                answer: "You need to see a doctor as soon as possible."
+            },
+            {
+                id: 9,
+                situation: "My parents are angry because I came home late again.",
+                options: [
+                    "You have to move out immediately.",
+                    "You do not need to say sorry.",
+                    "You must apologize to them."
+                ],
+                answer: "You must apologize to them."
+            },
+            {
+                id: 10,
+                situation: "I am going to Canada in winter but I do not have warm clothes.",
+                options: [
+                    "You need to buy a good coat before your trip.",
+                    "You must not wear warm clothes.",
+                    "You do not have to take anything."
+                ],
+                answer: "You need to buy a good coat before your trip."
+            }
+        ];
+
+        const container = document.getElementById('quiz-container');
+        const validateBtn = document.getElementById('validate-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const bannerResetBtn = document.getElementById('banner-reset-btn');
+        const scoreDisplay = document.getElementById('score-display');
+        const successBanner = document.getElementById('success-banner');
+        const controlsSection = document.getElementById('controls-section');
+
+        let userSelections = {};
+
+        function renderQuiz() {
+            container.innerHTML = questions.map((q, index) => `
+                <div id="card-${q.id}" class="bg-white border border-gray-200 rounded-xl p-5 md:p-6 shadow-sm transition-all duration-300">
+                    
+                    <div class="flex items-start gap-4 mb-5">
+                        <div class="flex items-center justify-center w-7 h-7 rounded-full bg-[#0B192C] text-[#D4AF37] font-bold text-xs shrink-0 shadow-sm mt-0.5">
+                            ${index + 1}
+                        </div>
+                        <div class="bg-[#F8F9FA] px-4 py-3 rounded-lg border-l-4 border-[#0B192C] w-full">
+                            <p class="text-[#0B192C] text-base md:text-lg font-medium italic">
+                                "${q.situation}"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3 pl-0 md:pl-11">
+                        ${q.options.map(opt => `
+                            <button class="option-btn py-3 px-5 rounded-lg font-medium text-sm md:text-base text-left tracking-wide w-full" 
+                                    onclick="selectOption(${q.id}, \`${opt.replace(/'/g, "\\'")}\`, this)">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <div id="feedback-${q.id}" class="mt-4 pl-11 hidden"></div>
+                </div>
+            `).join('');
+            
+            userSelections = {};
+            updateScoreDisplay(0);
+        }
+
+        window.selectOption = function(questionId, selectedSentence, btnElement) {
+            const card = document.getElementById(`card-${questionId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            btnElement.classList.add('selected');
+
+            userSelections[questionId] = selectedSentence;
+            
+            card.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300', 'animate-shake');
+            document.getElementById(`feedback-${questionId}`).classList.add('hidden');
+        };
+
+        function validateAnswers() {
+            let correctCount = 0;
+
+            questions.forEach(q => {
+                const card = document.getElementById(`card-${q.id}`);
+                const feedback = document.getElementById(`feedback-${q.id}`);
+                const buttons = card.querySelectorAll('.option-btn');
+                const selected = userSelections[q.id];
+
+                card.classList.remove('bg-red-50', 'border-red-300', 'bg-green-50', 'border-green-300', 'animate-shake');
+
+                if (selected === q.answer) {
+                    correctCount++;
+                    card.classList.add('bg-green-50', 'border-green-300');
+                    feedback.innerHTML = `<div class="flex items-center text-green-600 text-sm font-bold"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Logical & Correct</div>`;
+                    feedback.classList.remove('hidden');
+                    buttons.forEach(btn => btn.disabled = true);
+                } else {
+                    card.classList.add('bg-red-50', 'border-red-300', 'animate-shake');
+                    if(selected) {
+                        feedback.innerHTML = `<div class="flex items-center text-red-500 text-sm font-bold"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg> Incorrect advice. Try again.</div>`;
+                    } else {
+                        feedback.innerHTML = `<div class="flex items-center text-yellow-600 text-sm font-bold"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg> Please select an advice.</div>`;
+                    }
+                    feedback.classList.remove('hidden');
+                    setTimeout(() => card.classList.remove('animate-shake'), 400);
+                }
+            });
+
+            updateScoreDisplay(correctCount);
+
+            if (correctCount === questions.length) {
+                // Hide bottom controls
+                controlsSection.classList.add('hidden');
+                
+                // Show Success Banner (Full width anchor)
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            }
+        }
+
+        function updateScoreDisplay(score) {
+            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+        }
+
+        function resetQuiz() {
+            renderQuiz();
+            
+            controlsSection.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialize Listeners
+        validateBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', resetQuiz);
+        bannerResetBtn.addEventListener('click', resetQuiz);
+        
+        // Start Render
+        renderQuiz();
+
+    </script>
+</body>
+</html>
