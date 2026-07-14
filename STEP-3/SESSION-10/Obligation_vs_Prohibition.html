@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obligation vs Prohibition - Premium English</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; 
+            --color-accent: #D4AF37;  
+            --color-bg: #F8F9FA;      
+            --color-text: #121212;    
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Draggable Item Styles */
+        .drag-item {
+            cursor: pointer; /* SOLUCIÓN DEFINITIVA: Usa la mano clásica con bordes negros, evitando el bug de Windows */
+            user-select: none;
+            -webkit-user-select: none;
+            transform: translateZ(0); 
+            -webkit-transform: translateZ(0);
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .drag-item:active { transform: scale(0.98); } /* Pequeño efecto de hundimiento al hacer clic */
+        
+        .drag-item.selected-for-move {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+            transform: translateY(-2px);
+            background-color: #FDFBF7;
+        }
+
+        .drag-item.is-dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+
+        /* DISEÑO PREMIUM DE TARJETAS EN ZONA OSCURA */
+        #obligation-zone .drag-item,
+        #prohibition-zone .drag-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #F8F9FA; 
+            border-color: rgba(212, 175, 55, 0.4); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        #obligation-zone .drag-item:hover,
+        #prohibition-zone .drag-item:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: #D4AF37;
+        }
+
+        /* Validaciones en Zona Oscura */
+        #obligation-zone .drag-item.valid-correct,
+        #prohibition-zone .drag-item.valid-correct {
+            background-color: rgba(16, 185, 129, 0.15); 
+            border-color: #10B981;
+            color: #A7F3D0; 
+        }
+
+        #obligation-zone .drag-item.valid-incorrect,
+        #prohibition-zone .drag-item.valid-incorrect {
+            background-color: rgba(239, 68, 68, 0.15); 
+            border-color: #EF4444;
+            color: #FECACA; 
+        }
+
+        /* Drop Zone Styles */
+        .drop-zone {
+            min-height: 200px;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.drag-over {
+            background-color: rgba(212, 175, 55, 0.05);
+            border-color: var(--color-accent);
+        }
+        .drop-zone.selectable-zone {
+            cursor: pointer;
+        }
+        .drop-zone.selectable-zone:hover {
+            background-color: rgba(212, 175, 55, 0.02);
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start min-h-screen">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col relative z-10">
+        
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-6 md:px-12 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE LOGIC MODULE
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-6 leading-tight relative z-10 tracking-wide">
+                Obligation vs Prohibition <br>
+                <span class="italic font-light text-[#D4AF37] text-2xl md:text-4xl mx-2">Categorizing Context</span>
+            </h1>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <div class="bg-white/5 border border-white/10 rounded-lg p-5 max-w-3xl mx-auto relative z-10 text-left md:text-center">
+                <p class="text-gray-300 text-sm md:text-base font-medium italic leading-relaxed">
+                    <strong class="text-white">Pro Tip for Mobile:</strong> You can drag the sentences, or simply <strong class="text-[#D4AF37]">tap a sentence</strong> and then <strong class="text-[#D4AF37]">tap the box</strong> where it belongs.
+                </p>
+            </div>
+        </header>
+
+        <div id="activity-area" class="p-6 md:p-10 bg-gray-50/50 flex flex-col flex-grow">
+            
+            <!-- Word Bank -->
+            <div class="mb-10 relative">
+                <h3 class="text-[#0B192C] font-bold uppercase tracking-wider text-sm mb-4 flex items-center">
+                    <svg class="w-5 h-5 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    Sentence Bank
+                </h3>
+                
+                <!-- NEW DESIGN FOR BANK: Bandeja hundida con estilo -->
+                <div class="bg-slate-100 rounded-xl shadow-[inset_0_4px_6px_rgba(0,0,0,0.05)] border border-slate-300 p-2 md:p-3 relative overflow-hidden">
+                    <div class="absolute inset-0 opacity-[0.04] pointer-events-none bg-pattern"></div>
+                    <div id="bank-zone" class="drop-zone bg-white/60 border-2 border-dashed border-slate-400/70 rounded-lg p-5 flex flex-wrap gap-3 justify-center content-start min-h-[160px] relative z-10 transition-colors duration-300" data-zone="bank">
+                        <!-- Items injected by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+                
+                <!-- Obligation Zone -->
+                <div class="flex flex-col h-full rounded-xl overflow-hidden border border-white/10 border-t-[4px] border-t-[#D4AF37] shadow-2xl relative bg-gradient-to-br from-[#0B192C] via-[#11223A] to-[#1A2D4C]">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none bg-pattern"></div>
+                    
+                    <div class="bg-black/30 text-white text-center py-4 border-b border-[#D4AF37]/20 flex items-center justify-center h-16 relative z-10">
+                        <h2 class="font-playfair text-xl md:text-2xl font-bold tracking-widest text-[#D4AF37]">OBLIGATION</h2>
+                    </div>
+                    
+                    <!-- WRAPPER SEGURO: Mantiene la marca de agua a salvo del JavaScript -->
+                    <div class="relative flex-grow flex flex-col">
+                        <!-- Marca de Agua Permanente -->
+                        <svg class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 text-white opacity-15 pointer-events-none z-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        
+                        <!-- Drop Zone real -->
+                        <div id="obligation-zone" class="drop-zone p-6 flex flex-col gap-3 h-full relative z-10 min-h-[250px]" data-zone="obligation">
+                            <!-- Items dropped here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prohibition Zone -->
+                <div class="flex flex-col h-full rounded-xl overflow-hidden border border-white/10 border-t-[4px] border-t-[#D4AF37] shadow-2xl relative bg-gradient-to-br from-[#0B192C] via-[#11223A] to-[#1A2D4C]">
+                    <div class="absolute inset-0 opacity-10 pointer-events-none bg-pattern"></div>
+                    
+                    <div class="bg-black/30 text-white text-center py-4 border-b border-[#D4AF37]/20 flex items-center justify-center h-16 relative z-10">
+                        <h2 class="font-playfair text-xl md:text-2xl font-bold tracking-widest text-[#D4AF37]">PROHIBITION</h2>
+                    </div>
+                    
+                    <!-- WRAPPER SEGURO: Mantiene la marca de agua a salvo del JavaScript -->
+                    <div class="relative flex-grow flex flex-col">
+                        <!-- Marca de Agua Permanente -->
+                        <svg class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 text-white opacity-15 pointer-events-none z-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg>
+                        
+                        <!-- Drop Zone real -->
+                        <div id="prohibition-zone" class="drop-zone p-6 flex flex-col gap-3 h-full relative z-10 min-h-[250px]" data-zone="prohibition">
+                            <!-- Items dropped here -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <div id="controls-section" class="mt-auto flex flex-col sm:flex-row items-center justify-center gap-5 pt-8 border-t border-gray-200">
+                <div id="score-display" class="bg-white text-gray-500 border border-gray-200 px-8 py-4 rounded-full font-bold shadow-sm transition-colors duration-300 flex items-center justify-center text-lg min-w-[160px]">
+                    Score: 0 / 10
+                </div>
+                
+                <button id="validate-btn" class="bg-[#0B192C] text-[#D4AF37] hover:bg-[#152744] hover:shadow-lg transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold shadow-md flex items-center justify-center gap-3">
+                    Check Answers
+                </button>
+                
+                <button id="reset-btn" class="bg-white border-2 border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-[#0B192C] hover:border-[#0B192C] transition-all duration-300 rounded-full px-10 py-4 uppercase tracking-widest font-bold shadow-sm flex items-center justify-center gap-3">
+                    Reset
+                </button>
+            </div>
+        </div>
+
+        <div id="success-banner" class="hidden bg-[#0B192C] p-10 md:p-14 text-center border-t-[3px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-5 border border-[#D4AF37]/30">
+                    <svg class="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-3">Exceptional Precision</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-sm md:text-base">
+                    Flawless logic! You successfully categorized these strict rules. Knowing when something is mandatory versus prohibited is essential for elite corporate communication.
+                </p>
+                <button id="banner-reset-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-8 py-2.5 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-6 px-8 mt-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl relative z-0">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
+
+    <script>
+        const sentences = [
+            { id: 's1', text: "You must tidy up your room.", type: "obligation" },
+            { id: 's2', text: "You must do your homework.", type: "obligation" },
+            { id: 's3', text: "You must be home on time.", type: "obligation" },
+            { id: 's4', text: "You mustn't play loud music.", type: "prohibition" },
+            { id: 's5', text: "You mustn't annoy your little sister.", type: "prohibition" },
+            { id: 's6', text: "You mustn't smoke.", type: "prohibition" },
+            { id: 's7', text: "You mustn't play with fire.", type: "prohibition" },
+            { id: 's8', text: "You mustn't cheat on a test.", type: "prohibition" },
+            { id: 's9', text: "You must help in the house.", type: "obligation" },
+            { id: 's10', text: "You mustn't bite your nails.", type: "prohibition" }
+        ];
+
+        const bankZone = document.getElementById('bank-zone');
+        const zones = document.querySelectorAll('.drop-zone');
+        const validateBtn = document.getElementById('validate-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const bannerResetBtn = document.getElementById('banner-reset-btn');
+        const scoreDisplay = document.getElementById('score-display');
+        const successBanner = document.getElementById('success-banner');
+        const activityArea = document.getElementById('activity-area');
+
+        let selectedItemForClickMove = null;
+
+        // Initialize Activity
+        function initActivity() {
+            // Shuffle sentences
+            const shuffled = [...sentences].sort(() => Math.random() - 0.5);
+            
+            bankZone.innerHTML = '';
+            document.getElementById('obligation-zone').innerHTML = '';
+            document.getElementById('prohibition-zone').innerHTML = '';
+
+            shuffled.forEach(item => {
+                const el = document.createElement('div');
+                // Añadido 'h-fit' para forzar a la tarjeta a usar solo su altura natural
+                el.className = 'drag-item bg-white border border-gray-300 text-[#0B192C] font-medium py-2 px-4 rounded-lg shadow-sm text-sm h-fit';
+                el.draggable = true;
+                el.id = item.id;
+                el.dataset.type = item.type;
+                el.textContent = item.text;
+
+                // Drag Events (Desktop)
+                el.addEventListener('dragstart', handleDragStart);
+                el.addEventListener('dragend', handleDragEnd);
+
+                // Click Events (Mobile Fallback)
+                el.addEventListener('click', handleItemClick);
+
+                bankZone.appendChild(el);
+            });
+
+            updateScoreDisplay(0);
+            
+            activityArea.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            scoreDisplay.classList.add('bg-white', 'text-gray-500');
+            scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
+            
+            selectedItemForClickMove = null;
+            zones.forEach(z => z.classList.remove('selectable-zone'));
+        }
+
+        // --- Drag and Drop Handlers (Desktop) ---
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.id);
+            setTimeout(() => e.target.classList.add('is-dragging'), 0);
+            
+            // Clear click selection if they decide to drag instead
+            if (selectedItemForClickMove) {
+                selectedItemForClickMove.classList.remove('selected-for-move');
+                selectedItemForClickMove = null;
+                zones.forEach(z => z.classList.remove('selectable-zone'));
+            }
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('is-dragging');
+        }
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault(); // Necessary to allow dropping
+                zone.classList.add('drag-over');
+            });
+
+            zone.addEventListener('dragleave', e => {
+                zone.classList.remove('drag-over');
+            });
+
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+                const id = e.dataTransfer.getData('text/plain');
+                const draggableElement = document.getElementById(id);
+                if (draggableElement) {
+                    // Reset validation styles when moved
+                    resetValidationStyles(draggableElement);
+                    zone.appendChild(draggableElement);
+                }
+            });
+
+            // Mobile click-to-drop handler
+            zone.addEventListener('click', () => {
+                if (selectedItemForClickMove && zone.classList.contains('selectable-zone')) {
+                    resetValidationStyles(selectedItemForClickMove);
+                    zone.appendChild(selectedItemForClickMove);
+                    
+                    // Deselect
+                    selectedItemForClickMove.classList.remove('selected-for-move');
+                    selectedItemForClickMove = null;
+                    zones.forEach(z => z.classList.remove('selectable-zone'));
+                }
+            });
+        });
+
+        // --- Click-to-Move Handlers (Mobile) ---
+        function handleItemClick(e) {
+            const item = e.target;
+            
+            // If already selected, deselect
+            if (selectedItemForClickMove === item) {
+                item.classList.remove('selected-for-move');
+                selectedItemForClickMove = null;
+                zones.forEach(z => z.classList.remove('selectable-zone'));
+                return;
+            }
+
+            // Deselect previous
+            if (selectedItemForClickMove) {
+                selectedItemForClickMove.classList.remove('selected-for-move');
+            }
+
+            // Select new
+            selectedItemForClickMove = item;
+            item.classList.add('selected-for-move');
+            
+            // Make zones look selectable
+            zones.forEach(z => z.classList.add('selectable-zone'));
+        }
+
+        // --- Validation Logic ---
+        function resetValidationStyles(el) {
+            el.classList.remove('valid-correct', 'valid-incorrect', 'animate-shake');
+            // Remove legacy light-mode classes just in case they were cached
+            el.classList.remove('bg-green-50', 'border-green-400', 'text-green-800', 'bg-red-50', 'border-red-400', 'text-red-800');
+        }
+
+        function validateAnswers() {
+            let correctCount = 0;
+            const allItems = document.querySelectorAll('.drag-item');
+            
+            allItems.forEach(item => {
+                const parentZone = item.parentElement.dataset.zone;
+                const correctType = item.dataset.type;
+                
+                resetValidationStyles(item);
+
+                if (parentZone === 'bank') {
+                    // Item not placed yet
+                    return; 
+                }
+
+                if (parentZone === correctType) {
+                    correctCount++;
+                    item.classList.add('valid-correct');
+                } else {
+                    item.classList.add('valid-incorrect', 'animate-shake');
+                    setTimeout(() => item.classList.remove('animate-shake'), 400);
+                }
+            });
+
+            updateScoreDisplay(correctCount);
+
+            if (correctCount === sentences.length) {
+                // Success
+                activityArea.classList.add('hidden');
+                successBanner.classList.remove('hidden');
+                successBanner.classList.add('animate-pop');
+                
+                setTimeout(() => {
+                    successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            }
+        }
+
+        function updateScoreDisplay(score) {
+            scoreDisplay.textContent = `Score: ${score} / ${sentences.length}`;
+        }
+
+        // Event Listeners
+        validateBtn.addEventListener('click', validateAnswers);
+        resetBtn.addEventListener('click', initActivity);
+        bannerResetBtn.addEventListener('click', initActivity);
+
+        // Start
+        initActivity();
+
+    </script>
+</body>
+</html>
