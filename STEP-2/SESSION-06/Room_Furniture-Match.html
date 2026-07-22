@@ -95,9 +95,10 @@
         }
     </style>
 </head>
-<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start text-[#121212] min-h-screen bg-[#F8F9FA]">
 
-    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+    <!-- MAIN WRAPPER (TARJETA BLANCA PRINCIPAL) -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col mb-10">
         
         <!-- Header -->
         <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
@@ -118,15 +119,14 @@
             </p>
         </header>
 
-        <div class="p-6 md:p-10">
+        <!-- ACTIVITY CONTENT WRAPPER -->
+        <div id="activity-content" class="p-6 md:p-10 transition-all duration-500">
             
             <!-- Visual Map Section -->
             <section class="mb-12">
                 <div class="bg-gray-50 p-4 rounded-xl shadow-inner border border-gray-200">
                     <div class="relative rounded-lg overflow-hidden border-2 border-[#0B192C]/10 group flex items-center justify-center bg-white min-h-[300px] md:min-h-[450px]">
-                        
                         <img src="room.jpeg" alt="Room Layout Map" class="w-full object-contain max-h-[550px]">
-                        
                     </div>
                 </div>
             </section>
@@ -164,37 +164,39 @@
                 </div>
 
             </section>
-
-            <!-- Success Banner -->
-            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
-                
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
-                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
-                    <p class="text-gray-300 max-w-lg mb-0 leading-relaxed font-medium">
-                        You have successfully identified all 20 elements in the room. A robust vocabulary is the foundation of articulate and precise description.
-                    </p>
-                </div>
-            </div>
-
         </div>
 
-        <!-- Footer -->
-        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
-            <div class="mb-3 md:mb-0">
-                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
-                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
+        <!-- Success Banner -->
+        <div id="success-banner" class="hidden bg-[#0B192C] py-16 px-6 md:px-14 text-center border-t-[3px] border-[#D4AF37] relative overflow-hidden flex-grow flex flex-col justify-center items-center">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                    <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-base">
+                    You have successfully identified all 20 elements in the room. A robust vocabulary is the foundation of articulate and precise description.
+                </p>
+                <button id="banner-reset-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-8 py-2.5 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
             </div>
-            <div class="italic text-[#D4AF37]">
-                Excellence, exclusivity, and guaranteed results.
-            </div>
-        </footer>
+        </div>
 
     </main>
+
+    <!-- ESTÁNDAR CORPORATIVO OFICIAL: FOOTER SEPARADO FÍSICAMENTE -->
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-5 px-8 mb-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
 
     <!-- Vanilla JS Logic -->
     <script>
@@ -204,21 +206,21 @@
         const optionsBank = [
             "Bed",
             "Birdcage",
-            "Ceiling lamp",
+            "Camera",
+            "Chandelier",
             "Curtains",
             "Dresser",
-            "Fish picture",
+            "Fish tank",
             "Globe",
             "Green kids' chair",
-            "Green kids' chair (second)",
             "Green kids' table",
             "Guitar",
-            "Nightstand",
+            "Nightstand / Bedside",
             "Picture on the wall",
             "Radio / boombox",
             "Slippers",
             "Table lamp",
-            "Toys on the shelf", // Shortened slightly for UI fit, but clear enough
+            "Toys on the shelf",
             "Wall shelf",
             "Wardrobe",
             "Window"
@@ -227,32 +229,34 @@
         // Quiz Data - Note: Ensure these matches exactly string-for-string with the optionsBank
         const quizData = [
             { id: 1, answer: "Picture on the wall" },
-            { id: 2, answer: "Wall shelf" },
-            { id: 3, answer: "Toys on the shelf" },
-            { id: 4, answer: "Curtains" },
-            { id: 5, answer: "Window" },
-            { id: 6, answer: "Nightstand" },
-            { id: 7, answer: "Slippers" },
-            { id: 8, answer: "Bed" },
+            { id: 2, answer: "Globe" },
+            { id: 3, answer: "Chandelier" },
+            { id: 4, answer: "Wardrobe" },
+            { id: 5, answer: "Bed" },
+            { id: 6, answer: "Table lamp" },
+            { id: 7, answer: "Nightstand / Bedside" },
+            { id: 8, answer: "Slippers" },
             { id: 9, answer: "Guitar" },
             { id: 10, answer: "Green kids' chair" },
             { id: 11, answer: "Green kids' table" },
-            { id: 12, answer: "Globe" },
-            { id: 13, answer: "Fish picture" },
-            { id: 14, answer: "Wardrobe" },
+            { id: 12, answer: "Toys on the shelf" },
+            { id: 13, answer: "Fish tank" },
+            { id: 14, answer: "Curtains" },
             { id: 15, answer: "Radio / boombox" },
-            { id: 16, answer: "Dresser" },
+            { id: 16, answer: "Camera" },
             { id: 17, answer: "Birdcage" },
-            { id: 18, answer: "Green kids' chair (second)" },
-            { id: 19, answer: "Ceiling lamp" },
-            { id: 20, answer: "Table lamp" }
+            { id: 18, answer: "Dresser" },
+            { id: 19, answer: "Window" },
+            { id: 20, answer: "Wall shelf" }
         ];
 
         const container = document.getElementById('quiz-container');
         const checkBtn = document.getElementById('check-btn');
         const resetBtn = document.getElementById('reset-btn');
+        const bannerResetBtn = document.getElementById('banner-reset-btn');
         const successBanner = document.getElementById('success-banner');
         const scoreDisplay = document.getElementById('score-display');
+        const activityContent = document.getElementById('activity-content');
 
         const iconSuccess = `<svg class="w-5 h-5 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
         const iconError = `<svg class="w-5 h-5 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
@@ -337,7 +341,8 @@
                 scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
                 scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
                 
-                checkBtn.classList.add('hidden');
+                // Hide activity content and show success banner
+                activityContent.classList.add('hidden');
                 successBanner.classList.remove('hidden');
                 successBanner.classList.add('animate-pop');
                 
@@ -358,7 +363,8 @@
             scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
             scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
             
-            checkBtn.classList.remove('hidden');
+            // Show activity content and hide success banner
+            activityContent.classList.remove('hidden');
             successBanner.classList.add('hidden');
             successBanner.classList.remove('animate-pop');
             
@@ -369,6 +375,7 @@
         renderQuiz();
         checkBtn.addEventListener('click', validateAnswers);
         resetBtn.addEventListener('click', resetQuiz);
+        bannerResetBtn.addEventListener('click', resetQuiz);
 
     </script>
 </body>
