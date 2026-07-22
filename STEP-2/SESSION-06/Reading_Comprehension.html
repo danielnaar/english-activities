@@ -13,7 +13,6 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Config & Custom CSS -->
     <style>
         :root {
             --color-primary: #0B192C; /* Azul Noche Premium */
@@ -106,9 +105,10 @@
         }
     </style>
 </head>
-<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex justify-center text-[#121212] min-h-screen items-start bg-[#F8F9FA]">
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start text-[#121212] min-h-screen bg-[#F8F9FA]">
 
-    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+    <!-- MAIN WRAPPER (TARJETA BLANCA PRINCIPAL) -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col mb-10">
         
         <!-- Header -->
         <header class="bg-[#0B192C] text-center pt-16 pb-12 px-8 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
@@ -129,7 +129,7 @@
             </p>
         </header>
 
-        <div class="p-6 md:p-10">
+        <div id="activity-content" class="p-6 md:p-10 transition-all duration-500">
             
             <!-- The Reading Text -->
             <section class="mb-14 max-w-4xl mx-auto">
@@ -289,36 +289,39 @@
                 </button>
             </div>
 
-            <!-- Success Banner -->
-            <div id="success-banner" class="hidden mt-12 bg-[#0B192C] rounded-xl p-8 md:p-12 text-center border-[1px] border-[#D4AF37] shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
-                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
-                
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
-                        <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
-                    <p class="text-gray-300 max-w-lg mb-0 leading-relaxed font-medium">
-                        You have successfully extracted all critical information from the text. Analytical reading is a fundamental skill for high-level executives.
-                    </p>
-                </div>
-            </div>
+        </div> <!-- END ACTIVITY CONTENT -->
 
+        <!-- Success Banner -->
+        <div id="success-banner" class="hidden bg-[#0B192C] py-16 px-6 md:px-14 text-center border-t-[3px] border-[#D4AF37] relative overflow-hidden flex-grow flex flex-col justify-center items-center">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                    <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Precision</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-base">
+                    You have successfully extracted all critical information from the text. Analytical reading is a fundamental skill for high-level executives.
+                </p>
+                <button id="banner-reset-btn" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-8 py-2.5 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
+            </div>
         </div>
 
-        <!-- Footer -->
-        <footer class="bg-[#121212] py-6 px-8 flex flex-col md:flex-row justify-between items-center text-[13px]">
-            <div class="mb-3 md:mb-0">
-                <span class="font-bold text-white tracking-wide uppercase">PREMIUM ENGLISH</span> 
-                <span class="text-gray-400 font-light ml-1">| Executive Mastery</span>
-            </div>
-            <div class="italic text-[#D4AF37]">
-                Excellence, exclusivity, and guaranteed results.
-            </div>
-        </footer>
+    </main> <!-- FIN DE LA TARJETA BLANCA PRINCIPAL -->
 
-    </main>
+    <!-- ESTÁNDAR CORPORATIVO OFICIAL: FOOTER SEPARADO FÍSICAMENTE DE LA ACTIVIDAD -->
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-5 px-8 mb-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
 
     <!-- Vanilla JS Logic -->
     <script>
@@ -341,10 +344,11 @@
             "Houses of Parliament", "Oxford Street"
         ];
 
+        // CORRECCIÓN PEDAGÓGICA APLICADA: Buckingham Palace ha sido añadido al listado de Juliana.
         const partBData = [
             { person: "Felipe", answers: ["Buckingham Palace", "Thames cruise"] },
             { person: "Carmen", answers: ["Houses of Parliament", "Trafalgar Square", "Covent Garden", "Thames cruise"] },
-            { person: "Juliana", answers: ["Harrods", "Oxford Street", "Thames cruise"] },
+            { person: "Juliana", answers: ["Harrods", "Oxford Street", "Thames cruise", "Buckingham Palace"] },
             { person: "Leo", answers: ["Covent Garden", "Thames cruise"] }
         ];
 
@@ -354,6 +358,8 @@
         const resetBtn = document.getElementById('reset-btn');
         const successBanner = document.getElementById('success-banner');
         const scoreDisplay = document.getElementById('score-display');
+        const activityContent = document.getElementById('activity-content');
+        const bannerResetBtn = document.getElementById('banner-reset-btn');
 
         const iconSuccess = `<svg class="w-5 h-5 text-[#10B981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
         const iconError = `<svg class="w-5 h-5 text-[#EF4444]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`;
@@ -521,7 +527,7 @@
                 scoreDisplay.classList.remove('bg-gray-100', 'text-gray-500', 'border-gray-200');
                 scoreDisplay.classList.add('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
                 
-                checkBtn.classList.add('hidden');
+                activityContent.classList.add('hidden');
                 successBanner.classList.remove('hidden');
                 successBanner.classList.add('animate-pop');
                 
@@ -543,7 +549,7 @@
             scoreDisplay.classList.add('bg-gray-100', 'text-gray-500', 'border-gray-200');
             scoreDisplay.classList.remove('bg-[#0B192C]', 'text-[#D4AF37]', 'border-[#0B192C]');
             
-            checkBtn.classList.remove('hidden');
+            activityContent.classList.remove('hidden');
             successBanner.classList.add('hidden');
             successBanner.classList.remove('animate-pop');
             
@@ -553,8 +559,10 @@
         // Initialize
         renderPartA();
         renderPartB();
+
         checkBtn.addEventListener('click', validateAnswers);
         resetBtn.addEventListener('click', resetQuiz);
+        bannerResetBtn.addEventListener('click', resetQuiz);
 
     </script>
 </body>
