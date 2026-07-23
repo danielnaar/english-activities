@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of Homes - Premium Reading</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --color-primary: #0B192C; 
+            --color-accent: #D4AF37;  
+            --color-bg: #F8F9FA;      
+            --color-text: #121212;    
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Decorative Background Pattern */
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* Animations */
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Card Hover Effects */
+        .reading-card {
+            transition: all 0.3s ease;
+        }
+        .reading-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(11, 25, 44, 0.1), 0 10px 10px -5px rgba(11, 25, 44, 0.04);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        /* Image styling for missing images */
+        .img-fallback {
+            background-color: #E5E7EB;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .img-fallback::after {
+            content: "Image Area";
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Discussion Cards */
+        .discussion-card {
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+        
+        .discussion-card:hover:not(.discussed) {
+            border-color: var(--color-accent);
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .discussion-card.discussed {
+            background-color: var(--color-accent) !important;
+            border-color: var(--color-accent) !important;
+            transform: translateY(0) !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .discussion-card.discussed .question-text {
+            color: var(--color-primary) !important;
+            font-weight: 600;
+        }
+
+        .discussion-card.discussed .question-number {
+            background-color: var(--color-primary) !important;
+            color: var(--color-accent) !important;
+            border-color: transparent !important;
+        }
+    </style>
+</head>
+<body class="antialiased py-6 sm:py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start text-[#121212] min-h-screen bg-[#F8F9FA]">
+
+    <!-- MAIN WRAPPER -->
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <!-- Header -->
+        <header class="bg-[#0B192C] text-center pt-14 pb-12 px-6 border-b-[6px] border-[#D4AF37] relative overflow-hidden shrink-0">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-4 font-playfair relative z-10">
+                EXECUTIVE READING & SPEAKING MODULE
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-5xl font-playfair font-bold text-white mb-4 leading-tight relative z-10 tracking-wide">
+                Homes Around the World
+            </h1>
+            <h2 class="italic font-light text-[#D4AF37] text-xl md:text-2xl mb-8 relative z-10">
+                Discovering Diversity in Living Spaces
+            </h2>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Read about different types of homes. Pay attention to how they are described using <strong class="text-[#D4AF37] font-semibold">comparative and superlative</strong> adjectives.
+            </p>
+        </header>
+
+        <!-- WRAPPER PARA EL CONTENIDO (LECTURA + PREGUNTAS) -->
+        <div id="activity-content" class="flex flex-col flex-grow transition-all duration-500">
+            
+            <!-- PART 1: READING -->
+            <div class="p-6 md:p-10 bg-gray-50/50">
+                
+                <!-- Item 1: City Apartment -->
+                <article class="reading-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-8 flex flex-col md:flex-row md:h-[280px] lg:h-[300px]">
+                    <div class="w-full md:w-2/5 h-56 md:h-full shrink-0 bg-gray-200 overflow-hidden relative">
+                        <img src="cityapt.jpg" alt="Apartment in the city" class="w-full h-full object-cover" onerror="this.parentElement.classList.add('img-fallback'); this.style.display='none';">
+                        <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-sm shadow-md">1</div>
+                    </div>
+                    <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="font-playfair text-2xl font-bold text-[#0B192C] mb-3">Apartment in the City</h3>
+                        <p class="text-gray-700 leading-relaxed text-[15px]">
+                            City apartments are usually <strong class="text-[#D4AF37] font-semibold">smaller</strong> than houses, but they are <strong class="text-[#D4AF37] font-semibold">more convenient</strong> for people who love energy and activity. Apartments are often modern, comfortable, and safe, though sometimes a bit noisy or crowded. Living in a city apartment can be <strong class="text-[#D4AF37] font-semibold">more expensive</strong> than living in the countryside, but it's also <strong class="text-[#D4AF37] font-semibold">closer</strong> to work, cafés, and entertainment.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Item 2: Country House -->
+                <article class="reading-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-8 flex flex-col md:flex-row-reverse md:h-[280px] lg:h-[300px]">
+                    <div class="w-full md:w-2/5 h-56 md:h-full shrink-0 bg-gray-200 overflow-hidden relative">
+                        <img src="countryhouse.jpg" alt="Country House" class="w-full h-full object-cover" onerror="this.parentElement.classList.add('img-fallback'); this.style.display='none';">
+                        <div class="absolute top-4 right-4 md:left-4 md:right-auto w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-sm shadow-md">2</div>
+                    </div>
+                    <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="font-playfair text-2xl font-bold text-[#0B192C] mb-3">Country House</h3>
+                        <p class="text-gray-700 leading-relaxed text-[15px]">
+                            A country house is usually <strong class="text-[#D4AF37] font-semibold">larger</strong> and <strong class="text-[#D4AF37] font-semibold">more peaceful</strong> than any city apartment. The air feels <strong class="text-[#D4AF37] font-semibold">fresher</strong>, and life moves <strong class="text-[#D4AF37] font-semibold">slower</strong>. These homes are often cosy, surrounded by green hills or wide fields. Although life there can be <strong class="text-[#D4AF37] font-semibold">quieter</strong>, it may be <strong class="text-[#D4AF37] font-semibold">less convenient</strong> because stores and schools are <strong class="text-[#D4AF37] font-semibold">farther</strong> away.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Item 3: Beach House -->
+                <article class="reading-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-8 flex flex-col md:flex-row md:h-[280px] lg:h-[300px]">
+                    <div class="w-full md:w-2/5 h-56 md:h-full shrink-0 bg-gray-200 overflow-hidden relative">
+                        <img src="beachhouse.jpg" alt="Beach House" class="w-full h-full object-cover" onerror="this.parentElement.classList.add('img-fallback'); this.style.display='none';">
+                        <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-sm shadow-md">3</div>
+                    </div>
+                    <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="font-playfair text-2xl font-bold text-[#0B192C] mb-3">Beach House</h3>
+                        <p class="text-gray-700 leading-relaxed text-[15px]">
+                            A beach house is one of <strong class="text-[#D4AF37] font-semibold">the most relaxing</strong> places to live. The sound of the waves is <strong class="text-[#D4AF37] font-semibold">softer</strong> than city traffic, and sunsets are <strong class="text-[#D4AF37] font-semibold">more unforgettable</strong>. Beach houses are often bright, airy, and open. However, they can also be <strong class="text-[#D4AF37] font-semibold">more fragile</strong> against strong winds and salt air, so they require <strong class="text-[#D4AF37] font-semibold">more</strong> maintenance.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Item 4: Mountain Cabin -->
+                <article class="reading-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm mb-8 flex flex-col md:flex-row-reverse md:h-[280px] lg:h-[300px]">
+                    <div class="w-full md:w-2/5 h-56 md:h-full shrink-0 bg-gray-200 overflow-hidden relative">
+                        <img src="mountaincabin.jpg" alt="Mountain Cabin" class="w-full h-full object-cover" onerror="this.parentElement.classList.add('img-fallback'); this.style.display='none';">
+                        <div class="absolute top-4 right-4 md:left-4 md:right-auto w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-sm shadow-md">4</div>
+                    </div>
+                    <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="font-playfair text-2xl font-bold text-[#0B192C] mb-3">Mountain Cabin</h3>
+                        <p class="text-gray-700 leading-relaxed text-[15px]">
+                            Mountain cabins are usually <strong class="text-[#D4AF37] font-semibold">smaller</strong> but <strong class="text-[#D4AF37] font-semibold">cosier</strong> than other homes. They are <strong class="text-[#D4AF37] font-semibold">warmer</strong> inside, especially with a fireplace. Life there feels <strong class="text-[#D4AF37] font-semibold">simpler</strong> and <strong class="text-[#D4AF37] font-semibold">more peaceful</strong>. The view is always amazing—snow, pine trees, and silence make it a perfect place to rest.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Item 5: Tiny House -->
+                <article class="reading-card bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm flex flex-col md:flex-row md:h-[280px] lg:h-[300px]">
+                    <div class="w-full md:w-2/5 h-56 md:h-full shrink-0 bg-gray-200 overflow-hidden relative">
+                        <img src="tinyhouse.jpg" alt="Tiny House" class="w-full h-full object-cover" onerror="this.parentElement.classList.add('img-fallback'); this.style.display='none';">
+                        <div class="absolute top-4 left-4 w-8 h-8 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold text-sm shadow-md">5</div>
+                    </div>
+                    <div class="w-full md:w-3/5 p-6 md:p-8 flex flex-col justify-center">
+                        <h3 class="font-playfair text-2xl font-bold text-[#0B192C] mb-3">Tiny House</h3>
+                        <p class="text-gray-700 leading-relaxed text-[15px]">
+                            Tiny houses are becoming <strong class="text-[#D4AF37] font-semibold">more popular</strong> because they are <strong class="text-[#D4AF37] font-semibold">cheaper</strong>, <strong class="text-[#D4AF37] font-semibold">simpler</strong>, and <strong class="text-[#D4AF37] font-semibold">more eco-friendly</strong>. They prove that "<strong class="text-[#D4AF37] font-semibold">less</strong> can be <strong class="text-[#D4AF37] font-semibold">more</strong>". Even though space is limited, clever design makes them comfortable and unique. A tiny home can be as special as a mansion—just <strong class="text-[#D4AF37] font-semibold">smaller</strong> and <strong class="text-[#D4AF37] font-semibold">smarter</strong>.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- PART 2: CONVERSATION & EXPRESSION -->
+            <div class="bg-[#0B192C] relative overflow-hidden border-t-[3px] border-[#D4AF37] flex flex-col flex-grow">
+                <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+                
+                <div class="p-8 md:p-12 relative z-10 flex flex-col h-full">
+                    <!-- Title -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-white/10 pb-6 mb-8 gap-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-[#D4AF37] text-[#0B192C] flex items-center justify-center font-bold mr-4 shadow-sm shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                            </div>
+                            <h2 class="font-playfair text-2xl md:text-3xl font-bold text-white tracking-wide">My Dream Home</h2>
+                        </div>
+                        <span class="text-xs font-bold text-gray-400 bg-white/5 border border-white/10 px-4 py-2 rounded-full uppercase tracking-widest text-center">Conversation & Expression</span>
+                    </div>
+
+                    <!-- Visual Reference Gallery (Images Enzlarged) -->
+                    <div class="mb-10">
+                        <p class="text-[#D4AF37] uppercase tracking-widest text-[11px] font-bold mb-4 text-center md:text-left">Visual Memory Bank</p>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8">
+                            <!-- City -->
+                            <div class="flex flex-col items-center group cursor-default">
+                                <div class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-[3px] border-white/20 group-hover:border-[#D4AF37] transition-all duration-300 mb-3 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
+                                    <img src="cityapt.jpg" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                </div>
+                                <span class="text-gray-400 group-hover:text-white transition-colors text-xs uppercase tracking-wider font-semibold">City</span>
+                            </div>
+                            <!-- Country -->
+                            <div class="flex flex-col items-center group cursor-default">
+                                <div class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-[3px] border-white/20 group-hover:border-[#D4AF37] transition-all duration-300 mb-3 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
+                                    <img src="countryhouse.jpg" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                </div>
+                                <span class="text-gray-400 group-hover:text-white transition-colors text-xs uppercase tracking-wider font-semibold">Country</span>
+                            </div>
+                            <!-- Beach -->
+                            <div class="flex flex-col items-center group cursor-default">
+                                <div class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-[3px] border-white/20 group-hover:border-[#D4AF37] transition-all duration-300 mb-3 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
+                                    <img src="beachhouse.jpg" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                </div>
+                                <span class="text-gray-400 group-hover:text-white transition-colors text-xs uppercase tracking-wider font-semibold">Beach</span>
+                            </div>
+                            <!-- Mountain -->
+                            <div class="flex flex-col items-center group cursor-default">
+                                <div class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-[3px] border-white/20 group-hover:border-[#D4AF37] transition-all duration-300 mb-3 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
+                                    <img src="mountaincabin.jpg" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                </div>
+                                <span class="text-gray-400 group-hover:text-white transition-colors text-xs uppercase tracking-wider font-semibold">Mountain</span>
+                            </div>
+                            <!-- Tiny -->
+                            <div class="flex flex-col items-center group cursor-default">
+                                <div class="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-[3px] border-white/20 group-hover:border-[#D4AF37] transition-all duration-300 mb-3 shadow-lg group-hover:shadow-xl group-hover:-translate-y-1">
+                                    <img src="tinyhouse.jpg" class="w-full h-full object-cover" onerror="this.style.display='none'">
+                                </div>
+                                <span class="text-gray-400 group-hover:text-white transition-colors text-xs uppercase tracking-wider font-semibold">Tiny</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discussion Questions -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        
+                        <!-- Question 1 -->
+                        <button class="discussion-card w-full text-left p-5 rounded-xl flex items-start gap-4" onclick="toggleDiscussion(this)">
+                            <div class="question-number flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold shrink-0 transition-colors">
+                                1
+                            </div>
+                            <div class="flex-grow">
+                                <span class="question-text text-gray-200 text-base font-medium leading-relaxed transition-colors block mb-1">
+                                    Which of these five homes is your absolute favorite?
+                                </span>
+                                <span class="text-gray-500 text-xs italic block">Use adjectives to explain why.</span>
+                            </div>
+                            <div class="ml-auto opacity-0 checkmark transition-opacity shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-[#0B192C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </button>
+
+                        <!-- Question 2 -->
+                        <button class="discussion-card w-full text-left p-5 rounded-xl flex items-start gap-4" onclick="toggleDiscussion(this)">
+                            <div class="question-number flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold shrink-0 transition-colors">
+                                2
+                            </div>
+                            <div class="flex-grow">
+                                <span class="question-text text-gray-200 text-base font-medium leading-relaxed transition-colors block mb-1">
+                                    Which home would you definitely <strong class="font-bold underline">not</strong> like to live in?
+                                </span>
+                                <span class="text-gray-500 text-xs italic block">Explain your reasons.</span>
+                            </div>
+                            <div class="ml-auto opacity-0 checkmark transition-opacity shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-[#0B192C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </button>
+
+                        <!-- Question 3 -->
+                        <button class="discussion-card w-full text-left p-5 rounded-xl flex items-start gap-4" onclick="toggleDiscussion(this)">
+                            <div class="question-number flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold shrink-0 transition-colors">
+                                3
+                            </div>
+                            <div class="flex-grow">
+                                <span class="question-text text-gray-200 text-base font-medium leading-relaxed transition-colors block mb-1">
+                                    Think about your ultimate "Dream Home".
+                                </span>
+                                <span class="text-gray-500 text-xs italic block">What makes it better than the ones listed here?</span>
+                            </div>
+                            <div class="ml-auto opacity-0 checkmark transition-opacity shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-[#0B192C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </button>
+
+                        <!-- Question 4 -->
+                        <button class="discussion-card w-full text-left p-5 rounded-xl flex items-start gap-4" onclick="toggleDiscussion(this)">
+                            <div class="question-number flex items-center justify-center w-8 h-8 rounded-full bg-white/10 text-white border border-white/20 text-xs font-bold shrink-0 transition-colors">
+                                4
+                            </div>
+                            <div class="flex-grow">
+                                <span class="question-text text-gray-200 text-base font-medium leading-relaxed transition-colors block mb-1">
+                                    If you had to choose between the Beach House and the Mountain Cabin for a one-year stay...
+                                </span>
+                                <span class="text-gray-500 text-xs italic block">Which would you pick?</span>
+                            </div>
+                            <div class="ml-auto opacity-0 checkmark transition-opacity shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-[#0B192C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUCCESS BANNER -->
+        <div id="success-banner" class="hidden bg-[#0B192C] py-16 px-6 md:px-14 text-center relative overflow-hidden flex-grow flex flex-col justify-center items-center border-t-[3px] border-[#D4AF37]">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                    <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Comprehension & Communication</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-base">
+                    Brilliant discourse! The ability to express opinions clearly and confidently is the hallmark of professional fluency.
+                </p>
+                <button onclick="resetActivity()" class="bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-8 py-2.5 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ESTÁNDAR CORPORATIVO OFICIAL: FOOTER SEPARADO FÍSICAMENTE -->
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-5 px-8 mt-10 mb-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
+
+    <!-- JS for Interaction -->
+    <script>
+        function toggleDiscussion(cardElement) {
+            // Toggle the 'discussed' class
+            cardElement.classList.toggle('discussed');
+            
+            // Handle the checkmark visibility
+            const checkmark = cardElement.querySelector('.checkmark');
+            if (cardElement.classList.contains('discussed')) {
+                checkmark.classList.remove('opacity-0');
+                checkmark.classList.add('opacity-100');
+            } else {
+                checkmark.classList.add('opacity-0');
+                checkmark.classList.remove('opacity-100');
+            }
+
+            // Check if all are discussed
+            checkCompletion();
+        }
+
+        function checkCompletion() {
+            const totalCards = document.querySelectorAll('.discussion-card').length;
+            const discussedCards = document.querySelectorAll('.discussion-card.discussed').length;
+            
+            // If all cards have been clicked, conclude the session
+            if (totalCards > 0 && discussedCards === totalCards) {
+                // Slight delay to allow the last click animation to finish
+                setTimeout(concludeSession, 500); 
+            }
+        }
+
+        function concludeSession() {
+            document.getElementById('activity-content').classList.add('hidden');
+            const banner = document.getElementById('success-banner');
+            banner.classList.remove('hidden');
+            banner.classList.add('animate-pop');
+            
+            setTimeout(() => {
+                banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 150);
+        }
+
+        function resetActivity() {
+            // Uncheck all cards
+            document.querySelectorAll('.discussion-card').forEach(card => {
+                card.classList.remove('discussed');
+                card.querySelector('.checkmark').classList.add('opacity-0');
+                card.querySelector('.checkmark').classList.remove('opacity-100');
+            });
+            
+            // Hide banner and show activity
+            document.getElementById('activity-content').classList.remove('hidden');
+            const banner = document.getElementById('success-banner');
+            banner.classList.add('hidden');
+            banner.classList.remove('animate-pop');
+            
+            // Scroll to top
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
