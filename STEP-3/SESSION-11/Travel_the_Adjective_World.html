@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel the Adjective World - Premium English</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #0B192C; 
+            --color-accent: #D4AF37;  
+            --color-bg: #F8F9FA;      
+            --color-text: #121212;    
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        h1, h2, h3, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08) 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+        .animate-shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop { animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        /* Option Buttons */
+        .option-btn {
+            transition: all 0.3s ease;
+            border: 2px solid #E5E7EB;
+            background-color: #FFFFFF;
+            color: #0B192C;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--color-accent);
+            background-color: #FDFBF7;
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px -2px rgba(212, 175, 55, 0.15);
+        }
+        
+        /* Discussion Cards for Stage 2 */
+        .discussion-card {
+            transition: all 0.2s ease;
+            border: 1px solid #E5E7EB;
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+        
+        .discussion-card:hover:not(.discussed) {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(212, 175, 55, 0.1);
+        }
+
+        .discussion-card.discussed {
+            background-color: var(--color-primary) !important;
+            border-color: var(--color-primary) !important;
+            transform: translateY(0) !important;
+            box-shadow: 0 4px 6px -1px rgba(11, 25, 44, 0.2) !important;
+        }
+
+        .discussion-card.discussed .question-text {
+            color: var(--color-accent) !important;
+        }
+
+        .discussion-card.discussed .question-number {
+            background-color: rgba(212, 175, 55, 0.1) !important;
+            color: var(--color-accent) !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+        }
+    </style>
+</head>
+<body class="antialiased py-10 px-2 sm:px-6 lg:px-8 flex flex-col items-center justify-start min-h-screen">
+
+    <main class="w-full max-w-5xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-200 border-t-[6px] border-t-[#D4AF37] mx-auto flex flex-col">
+        
+        <header class="bg-[#0B192C] text-center pt-16 pb-12 px-6 md:px-12 border-b-[6px] border-[#D4AF37] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+            
+            <p class="text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 font-playfair relative z-10">
+                EXECUTIVE VOCABULARY MODULE
+            </p>
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-playfair font-bold text-white mb-4 leading-tight relative z-10 tracking-wide">
+                Travel the Adjective World
+            </h1>
+            <h2 class="italic font-light text-[#D4AF37] text-xl md:text-3xl mb-8 relative z-10">
+                Describing Places & Destinations
+            </h2>
+            
+            <div class="w-24 h-px bg-white/20 mx-auto mb-6 relative z-10"></div>
+            
+            <p class="text-white/90 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+                Enhance your descriptive vocabulary through active conversation. Complete the three stages below by discussing the prompts with your instructor.
+            </p>
+        </header>
+
+        <div id="activity-content" class="flex flex-col w-full transition-all duration-500">
+            
+            <!-- STAGE 1: ADJECTIVE QUEST -->
+            <section class="p-6 md:p-12 border-b border-gray-200 bg-gray-50/50">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold mr-4 shadow-sm shrink-0">1</div>
+                    <div>
+                        <h2 class="font-playfair text-2xl md:text-3xl font-bold text-[#0B192C]">Adjective Quest</h2>
+                        <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest mt-1">Pick the best match</p>
+                    </div>
+                </div>
+
+                <div id="stage1-container" class="flex flex-col items-center justify-center w-full min-h-[220px]">
+                    <!-- Cards injected via JS -->
+                </div>
+            </section>
+
+            <!-- STAGE 2: GUESS THE PLACE -->
+            <section class="p-6 md:p-12 border-b border-gray-200 bg-white">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 rounded-full bg-[#0B192C] text-[#D4AF37] flex items-center justify-center font-bold mr-4 shadow-sm shrink-0">2</div>
+                    <div>
+                        <h2 class="font-playfair text-2xl md:text-3xl font-bold text-[#0B192C]">Guess the Place</h2>
+                        <p class="text-gray-500 text-sm font-semibold uppercase tracking-widest mt-1">Select the Match</p>
+                    </div>
+                </div>
+
+                <p class="text-gray-600 mb-8 font-medium italic border-l-4 border-[#D4AF37] pl-4 bg-gray-50 py-2 rounded-r-lg">Read these descriptions and select the correct famous Colombian destination.</p>
+
+                <div id="stage2-container" class="flex flex-col gap-6">
+                    <!-- Cards injected via JS -->
+                </div>
+            </section>
+
+            <!-- STAGE 3: BUILD YOUR DREAM PLACE -->
+            <section class="p-6 md:p-10 bg-[#0B192C] relative overflow-hidden flex flex-col items-center">
+                <div class="absolute inset-0 opacity-5 pointer-events-none bg-pattern"></div>
+                
+                <div class="flex items-center mb-8 relative z-10 w-full justify-center md:justify-start">
+                    <div class="w-10 h-10 rounded-full bg-[#D4AF37] text-[#0B192C] flex items-center justify-center font-bold mr-4 shadow-sm shrink-0">3</div>
+                    <div>
+                        <h2 class="font-playfair text-2xl md:text-3xl font-bold text-white">Your Dream Place</h2>
+                        <p class="text-[#D4AF37] text-sm font-semibold uppercase tracking-widest mt-1">Final Speaking Challenge</p>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-8 max-w-2xl w-full text-center mb-10 shadow-sm relative z-10">
+                    <svg class="w-12 h-12 text-[#D4AF37] mx-auto mb-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                    <p class="text-white text-lg md:text-xl font-medium leading-relaxed mb-4">
+                        Speak out loud: Create your own dream destination describing it to your instructor using at least <strong class="text-[#D4AF37]">2 or 3 adjectives</strong>.
+                    </p>
+                    <p class="text-gray-400 italic text-sm">Example: "My dream place is a peaceful and cosy beach town..."</p>
+                </div>
+
+                <div class="relative flex flex-col items-center">
+                    <button id="conclude-btn" class="relative z-10 bg-[#D4AF37] text-[#0B192C] hover:bg-[#FBE58F] transition-all duration-300 rounded-full px-12 py-4 uppercase tracking-widest font-bold text-sm shadow-md flex items-center justify-center gap-3 opacity-50 cursor-not-allowed">
+                        Conclude Session
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </button>
+                    <p id="conclude-feedback" class="text-red-400 text-xs font-bold mt-3 absolute -bottom-6 opacity-0 transition-opacity duration-300 whitespace-nowrap">Please complete Stage 1 and Stage 2 first.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- SUCCESS BANNER -->
+        <div id="success-banner" class="hidden bg-[#0B192C] py-16 px-6 md:px-14 text-center border-t-[3px] border-[#D4AF37] relative overflow-hidden flex-grow flex flex-col justify-center items-center">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#D4AF37] opacity-10 rounded-full blur-3xl"></div>
+            
+            <div class="relative z-10 flex flex-col items-center">
+                <div class="w-20 h-20 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 border border-[#D4AF37]/30">
+                    <svg class="w-10 h-10 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <h2 class="text-4xl font-playfair text-[#D4AF37] font-bold mb-4">Exceptional Articulation</h2>
+                <p class="text-gray-300 max-w-lg mb-8 leading-relaxed font-medium text-base">
+                    Brilliant discourse! The ability to use precise adjectives elevates your descriptions from basic to highly professional and engaging.
+                </p>
+                <button id="reset-btn" class="bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300 rounded-full px-8 py-2.5 uppercase tracking-widest font-bold text-xs shadow-md">
+                    Reset Activity
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- CORPORATE FOOTER -->
+    <footer class="w-full max-w-5xl mx-auto bg-[#121212] py-6 px-8 mt-10 rounded-xl flex flex-col md:flex-row justify-between items-center border-t-[3px] border-[#D4AF37] shadow-xl">
+        <div class="flex items-center mb-3 md:mb-0 mt-0.5">
+            <span class="font-playfair text-[22px] font-bold text-white tracking-wide">PREMIUM</span>
+            <span class="font-medium text-gray-400 text-[13px] tracking-[0.2em] ml-2 mt-0.5">ENGLISH</span>
+        </div>
+        <div class="text-[#D4AF37] text-[11px] font-bold tracking-[0.25em] uppercase text-center md:text-right mt-1 md:mt-0">
+            MASTERY THROUGH EXCELLENCE
+        </div>
+    </footer>
+
+    <script>
+        // Data for Stage 1
+        const stage1Data = [
+            {
+                id: 1,
+                prompt: "A place where you can completely relax and feel calm.",
+                options: ["Peaceful", "Crowded", "Narrow"],
+                answer: "Peaceful"
+            },
+            {
+                id: 2,
+                prompt: "A place that has hundreds of years of history and old architecture.",
+                options: ["Modern", "Ancient", "Noisy"],
+                answer: "Ancient"
+            },
+            {
+                id: 3,
+                prompt: "A place that is small, warm, and very comfortable to stay in.",
+                options: ["Dangerous", "Cosy", "Unforgettable"],
+                answer: "Cosy"
+            }
+        ];
+
+        // Data for Stage 2
+        const stage2Data = [
+            {
+                id: 'A',
+                prompt: "It's a historic and noisy city on the coast, full of tourists, street food, and old walls.",
+                options: ["Santa Marta", "Cartagena", "Barranquilla"],
+                answer: "Cartagena"
+            },
+            {
+                id: 'B',
+                prompt: "It's a peaceful and beautiful town in the mountains, famous for its coffee and very tall palm trees.",
+                options: ["Medellín", "Villa de Leyva", "Salento"],
+                answer: "Salento"
+            },
+            {
+                id: 'C',
+                prompt: "It's a crowded, massive city with a lot of traffic, but very popular for business, museums, and cold weather.",
+                options: ["Bogotá", "Cali", "Bucaramanga"],
+                answer: "Bogotá"
+            }
+        ];
+
+        let currentQIndex = 0;
+        let isStage1Complete = false;
+        let stage2Status = { A: false, B: false, C: false };
+
+        const stage1Container = document.getElementById('stage1-container');
+        const stage2Container = document.getElementById('stage2-container');
+        const activityContent = document.getElementById('activity-content');
+        const successBanner = document.getElementById('success-banner');
+        const concludeBtn = document.getElementById('conclude-btn');
+        const concludeFeedback = document.getElementById('conclude-feedback');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Render Stage 1
+        function renderStage1() {
+            stage1Container.innerHTML = '';
+            const q = stage1Data[currentQIndex];
+
+            stage1Container.innerHTML = `
+                <div id="card-s1-${q.id}" class="bg-white border border-gray-200 border-t-[4px] border-t-[#D4AF37] rounded-2xl p-8 md:p-10 shadow-xl transition-all duration-500 flex flex-col w-full animate-pop">
+                    <span class="text-[11px] font-bold text-[#D4AF37] uppercase tracking-widest mb-4 text-center">Question ${currentQIndex + 1} of ${stage1Data.length}</span>
+                    <p class="text-[#0B192C] font-medium text-lg md:text-xl italic mb-10 leading-relaxed text-center">
+                        "${q.prompt}"
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-auto">
+                        ${q.options.map(opt => `
+                            <button class="option-btn py-4 px-4 rounded-xl font-semibold text-sm md:text-base tracking-wide text-center w-full" 
+                                    onclick="selectOption(${q.id}, '${opt}', this)">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // If completed, keep the correct answer highlighted
+            if (isStage1Complete) {
+                const card = document.getElementById(`card-s1-${q.id}`);
+                const buttons = card.querySelectorAll('.option-btn');
+                buttons.forEach(b => {
+                    if (b.innerText.trim() === q.answer) {
+                        b.classList.add('bg-[#F0FDF4]', 'border-[#10B981]', 'text-[#10B981]');
+                    }
+                    b.disabled = true;
+                });
+            }
+        }
+
+        // Handle Stage 1 Selection
+        window.selectOption = function(questionId, selectedWord, btnElement) {
+            if (isStage1Complete) return;
+
+            const card = document.getElementById(`card-s1-${questionId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            const questionData = stage1Data.find(q => q.id === questionId);
+
+            // Remove styles from all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-[#F0FDF4]', 'border-[#10B981]', 'text-[#10B981]', 'bg-[#FEF2F2]', 'border-[#EF4444]', 'text-[#EF4444]');
+            });
+
+            // Apply feedback
+            if (selectedWord === questionData.answer) {
+                btnElement.classList.add('bg-[#F0FDF4]', 'border-[#10B981]', 'text-[#10B981]');
+                card.classList.remove('animate-shake');
+                
+                // Disable all buttons temporarily
+                buttons.forEach(btn => btn.disabled = true);
+
+                if (currentQIndex < stage1Data.length - 1) {
+                    setTimeout(() => {
+                        currentQIndex++;
+                        renderStage1();
+                    }, 800);
+                } else {
+                    isStage1Complete = true;
+                    checkCompletionStatus();
+                }
+            } else {
+                btnElement.classList.add('bg-[#FEF2F2]', 'border-[#EF4444]', 'text-[#EF4444]');
+                card.classList.add('animate-shake');
+                setTimeout(() => card.classList.remove('animate-shake'), 400);
+            }
+        };
+
+        // Render Stage 2
+        function renderStage2() {
+            stage2Container.innerHTML = '';
+            
+            stage2Data.forEach(q => {
+                const isCompleted = stage2Status[q.id];
+                
+                let buttonsHtml = q.options.map(opt => `
+                    <button class="option-btn py-3 px-4 rounded-lg font-semibold text-sm md:text-base tracking-wide text-center w-full ${isCompleted && opt === q.answer ? 'bg-[#F0FDF4] border-[#10B981] text-[#10B981]' : ''}" 
+                            ${isCompleted ? 'disabled' : ''}
+                            onclick="selectOptionS2('${q.id}', '${opt}', this)">
+                        ${opt}
+                    </button>
+                `).join('');
+
+                stage2Container.innerHTML += `
+                    <div id="card-s2-${q.id}" class="bg-[#F8F9FA] border-y border-r border-gray-200 ${isCompleted ? 'border-l-[4px] border-l-[#10B981]' : 'border-l-[4px] border-l-[#0B192C]'} rounded-xl p-6 md:p-8 shadow-md transition-all duration-300">
+                        <div class="flex items-start gap-4 mb-6">
+                            <div class="flex items-center justify-center w-8 h-8 rounded-full ${isCompleted ? 'bg-[#10B981] text-white' : 'bg-[#0B192C] text-[#D4AF37]'} font-bold shrink-0 mt-0.5 transition-colors shadow-sm">
+                                ${q.id}
+                            </div>
+                            <span class="text-[#0B192C] text-lg md:text-xl font-medium leading-relaxed italic">
+                                "${q.prompt}"
+                            </span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pl-0 sm:pl-12">
+                            ${buttonsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Handle Stage 2 Selection
+        window.selectOptionS2 = function(questionId, selectedWord, btnElement) {
+            if (stage2Status[questionId]) return;
+
+            const card = document.getElementById(`card-s2-${questionId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            const questionData = stage2Data.find(q => q.id === questionId);
+            const iconBadge = card.querySelector('.rounded-full');
+
+            // Remove styles from all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-[#F0FDF4]', 'border-[#10B981]', 'text-[#10B981]', 'bg-[#FEF2F2]', 'border-[#EF4444]', 'text-[#EF4444]');
+            });
+
+            // Apply feedback
+            if (selectedWord === questionData.answer) {
+                btnElement.classList.add('bg-[#F0FDF4]', 'border-[#10B981]', 'text-[#10B981]');
+                card.classList.remove('animate-shake');
+                card.classList.add('border-[#10B981]');
+                iconBadge.classList.replace('bg-gray-100', 'bg-[#10B981]');
+                iconBadge.classList.replace('text-gray-500', 'text-white');
+                
+                // Disable all buttons
+                buttons.forEach(btn => btn.disabled = true);
+                
+                stage2Status[questionId] = true;
+                checkCompletionStatus();
+            } else {
+                btnElement.classList.add('bg-[#FEF2F2]', 'border-[#EF4444]', 'text-[#EF4444]');
+                card.classList.add('animate-shake');
+                setTimeout(() => card.classList.remove('animate-shake'), 400);
+            }
+        };
+
+        function checkCompletionStatus() {
+            const stage2Complete = Object.values(stage2Status).every(status => status === true);
+            
+            if (isStage1Complete && stage2Complete) {
+                concludeBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                concludeBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Complete Session
+        function concludeSession() {
+            const stage2Complete = Object.values(stage2Status).every(status => status === true);
+            
+            if (!isStage1Complete || !stage2Complete) {
+                // Shake incomplete sections
+                if (!isStage1Complete) {
+                    stage1Container.classList.add('animate-shake');
+                    setTimeout(() => stage1Container.classList.remove('animate-shake'), 400);
+                }
+                if (!stage2Complete) {
+                    stage2Container.classList.add('animate-shake');
+                    setTimeout(() => stage2Container.classList.remove('animate-shake'), 400);
+                }
+                
+                // Show warning message
+                concludeFeedback.classList.remove('opacity-0');
+                setTimeout(() => concludeFeedback.classList.add('opacity-0'), 3000);
+                return;
+            }
+
+            activityContent.classList.add('hidden');
+            successBanner.classList.remove('hidden');
+            successBanner.classList.add('animate-pop');
+            
+            setTimeout(() => {
+                successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        }
+
+        // Reset Activity
+        function resetActivity() {
+            currentQIndex = 0;
+            isStage1Complete = false;
+            stage2Status = { A: false, B: false, C: false };
+            
+            renderStage1();
+            renderStage2();
+            
+            checkCompletionStatus();
+
+            activityContent.classList.remove('hidden');
+            successBanner.classList.add('hidden');
+            successBanner.classList.remove('animate-pop');
+            
+            document.querySelector('header').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialization
+        concludeBtn.addEventListener('click', concludeSession);
+        resetBtn.addEventListener('click', resetActivity);
+        renderStage1();
+        renderStage2();
+        checkCompletionStatus();
+
+    </script>
+</body>
+</html>
